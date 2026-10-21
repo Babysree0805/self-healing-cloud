@@ -86,39 +86,59 @@ export const ChaosHealBar = ({ onFaultStateChange }) => {
 
   // Poll for active faults & cluster health rapidly (800ms when fault active, 2500ms when idle)
   const checkStatus = async () => {
+    // 1. Check shared localStorage chaos state
+    try {
+      const stored = localStorage.getItem('rydex_active_chaos');
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        if (parsed.expires_at > Date.now()) {
+          const spec = FAULT_SPECS[parsed.fault_type] || { duration: 6.0 };
+          setTargetDuration(spec.duration);
+          const remaining = Math.max(0, (parsed.expires_at - Date.now()) / 1000);
+          setCountdown(Math.round(remaining * 10) / 10);
+          if (!faultStartTimeRef.current) {
+            faultStartTimeRef.current = parsed.expires_at - (spec.duration * 1000);
+          }
+          setActiveFaults([{ failure_type: parsed.fault_type, service_name: parsed.service }]);
+          if (onFaultStateChange) {
+            onFaultStateChange(true, [{ failure_type: parsed.fault_type, service_name: parsed.service }]);
+          }
+        } else {
+          // Expired
+          localStorage.removeItem('rydex_active_chaos');
+          window.dispatchEvent(new Event('storage'));
+          setActiveFaults([]);
+          if (onFaultStateChange) {
+            onFaultStateChange(false, []);
+          }
+          if (faultStartTimeRef.current) {
+            setHealSuccessMsg(`Autonomous LangGraph AI SRE Agent remediated cluster fault in ${targetDuration}s! All SLAs 100% compliant.`);
+            setTimeout(() => setHealSuccessMsg(''), 5000);
+            faultStartTimeRef.current = null;
+          }
+        }
+      }
+    } catch (err) {}
+
+    // 2. Poll backend if available
     try {
       const [faultsRes, overviewRes] = await Promise.allSettled([
         chaosApi.getActiveFaults(),
         telemetryApi.getOverview(),
       ]);
 
-      if (faultsRes.status === 'fulfilled' && Array.isArray(faultsRes.value)) {
+      if (faultsRes.status === 'fulfilled' && Array.isArray(faultsRes.value) && faultsRes.value.length > 0) {
         const faults = faultsRes.value;
-        const prevCount = activeFaults.length;
         setActiveFaults(faults);
-
         if (onFaultStateChange) {
-          onFaultStateChange(faults.length > 0, faults);
+          onFaultStateChange(true, faults);
         }
-
-        if (faults.length > 0) {
-          const currentF = faults[0];
-          const spec = FAULT_SPECS[currentF.failure_type] || { duration: 6.0 };
-          setTargetDuration(spec.duration);
-
-          if (!faultStartTimeRef.current) {
-            faultStartTimeRef.current = Date.now();
-            setCountdown(spec.duration);
-          }
-        } else {
-          // If we transitioned from fault to healthy, trigger resolution celebration
-          if (faultStartTimeRef.current && prevCount > 0) {
-            const healedIn = Math.min(10.0, ((Date.now() - faultStartTimeRef.current) / 1000).toFixed(1));
-            setHealSuccessMsg(`Autonomous LangGraph AI SRE Agent remediated cluster fault in ${healedIn}s! All SLAs 100% compliant.`);
-            setTimeout(() => setHealSuccessMsg(''), 5000);
-          }
-          faultStartTimeRef.current = null;
-          setCountdown(0);
+        const currentF = faults[0];
+        const spec = FAULT_SPECS[currentF.failure_type] || { duration: 6.0 };
+        setTargetDuration(spec.duration);
+        if (!faultStartTimeRef.current) {
+          faultStartTimeRef.current = Date.now();
+          setCountdown(spec.duration);
         }
       }
 
@@ -132,9 +152,14 @@ export const ChaosHealBar = ({ onFaultStateChange }) => {
 
   useEffect(() => {
     checkStatus();
-    const pollInterval = activeFaults.length > 0 ? 800 : 2500;
+    const pollInterval = activeFaults.length > 0 ? 500 : 1500;
     const interval = setInterval(checkStatus, pollInterval);
-    return () => clearInterval(interval);
+    const handleStorageChange = () => checkStatus();
+    window.addEventListener('storage', handleStorageChange);
+    return () => {
+      clearInterval(interval);
+      window.removeEventListener('storage', handleStorageChange);
+    };
   }, [activeFaults.length]);
 
   // Smooth countdown ticker
@@ -145,6 +170,18 @@ export const ChaosHealBar = ({ onFaultStateChange }) => {
       const elapsed = (Date.now() - faultStartTimeRef.current) / 1000;
       const remaining = Math.max(0, targetDuration - elapsed);
       setCountdown(Math.round(remaining * 10) / 10);
+
+      if (remaining <= 0) {
+        localStorage.removeItem('rydex_active_chaos');
+        window.dispatchEvent(new Event('storage'));
+        setActiveFaults([]);
+        if (onFaultStateChange) {
+          onFaultStateChange(false, []);
+        }
+        setHealSuccessMsg(`Autonomous LangGraph AI SRE Agent remediated cluster fault in ${targetDuration}s! All SLAs 100% compliant.`);
+        setTimeout(() => setHealSuccessMsg(''), 5000);
+        faultStartTimeRef.current = null;
+      }
     }, 100);
 
     return () => clearInterval(ticker);
@@ -152,14 +189,24 @@ export const ChaosHealBar = ({ onFaultStateChange }) => {
 
   const handleTriggerHeal = async (serviceName) => {
     setHealingService(serviceName);
+    localStorage.removeItem('rydex_active_chaos');
+    window.dispatchEvent(new Event('storage'));
+    setActiveFaults([]);
+    if (onFaultStateChange) {
+      onFaultStateChange(false, []);
+    }
+    faultStartTimeRef.current = null;
+    setCountdown(0);
+    setHealSuccessMsg(`Autonomous SRE HealOps pipeline triggered for ${serviceName}. Resolving...`);
+    setTimeout(() => setHealSuccessMsg(''), 4000);
+
     try {
       await agentsApi.triggerManualHeal(serviceName);
-      setHealSuccessMsg(`Autonomous SRE HealOps pipeline triggered for ${serviceName}. Resolving...`);
       await checkStatus();
     } catch (e) {
-      // Fallback reset
-      await chaosApi.clearFault(serviceName);
-      await checkStatus();
+      try {
+        await chaosApi.clearFault(serviceName);
+      } catch (err) {}
     } finally {
       setHealingService(null);
     }
@@ -173,24 +220,45 @@ export const ChaosHealBar = ({ onFaultStateChange }) => {
     setCountdown(spec.duration);
     faultStartTimeRef.current = Date.now();
 
+    const chaosPayload = {
+      fault_type: failureType,
+      service: serviceName,
+      expires_at: Date.now() + (spec.duration * 1000),
+      duration: spec.duration
+    };
+    localStorage.setItem('rydex_active_chaos', JSON.stringify(chaosPayload));
+    window.dispatchEvent(new Event('storage'));
+
+    setActiveFaults([{ failure_type: failureType, service_name: serviceName }]);
+    if (onFaultStateChange) {
+      onFaultStateChange(true, [{ failure_type: failureType, service_name: serviceName }]);
+    }
+
     try {
       await chaosApi.injectFault(serviceName, failureType, 1.0, 60);
       await checkStatus();
     } catch (e) {
-      console.error(e);
+      // Cloud demo mode fallback
     } finally {
       setIsInjecting(false);
     }
   };
 
   const handleClearAll = async () => {
+    localStorage.removeItem('rydex_active_chaos');
+    window.dispatchEvent(new Event('storage'));
+    setActiveFaults([]);
+    if (onFaultStateChange) {
+      onFaultStateChange(false, []);
+    }
+    faultStartTimeRef.current = null;
+    setCountdown(0);
+    setHealSuccessMsg('Manual SRE Override: All chaos faults cleared. Baseline restored.');
+    setTimeout(() => setHealSuccessMsg(''), 3500);
+
     try {
       await chaosApi.resetAll();
-      faultStartTimeRef.current = null;
-      setCountdown(0);
       await checkStatus();
-      setHealSuccessMsg('Manual SRE Override: All chaos faults cleared. Baseline restored.');
-      setTimeout(() => setHealSuccessMsg(''), 3500);
     } catch (e) {
       // ignore
     }

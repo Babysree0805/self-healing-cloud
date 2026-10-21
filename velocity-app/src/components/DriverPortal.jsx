@@ -79,6 +79,8 @@ export const DriverPortal = ({ driverUser, faultActive, activeFaults = [], onHea
   const [otpError, setOtpError] = useState('');
   const [cashoutNotice, setCashoutNotice] = useState('');
   const [dutyError, setDutyError] = useState('');
+  const [cashoutError, setCashoutError] = useState('');
+  const [activeChaosInfo, setActiveChaosInfo] = useState(null);
 
   // Fetch initial driver stats
   useEffect(() => {
@@ -113,19 +115,24 @@ export const DriverPortal = ({ driverUser, faultActive, activeFaults = [], onHea
     const targetStatus = !isOnline;
 
     // Check if Crash GPS fault is actively running on driver-service
-    const activeChaos = localStorage.getItem('rydex_active_chaos');
     let isCrashActive = faultActive;
-    if (activeChaos) {
-      try {
-        const parsed = JSON.parse(activeChaos);
-        if (parsed.expires_at > Date.now() && (parsed.fault_type === 'SERVICE_CRASH' || parsed.fault_type === 'NETWORK_PARTITION')) {
-          isCrashActive = true;
-        }
-      } catch (err) {}
+    if (activeChaosInfo && (activeChaosInfo.fault_type === 'SERVICE_CRASH' || activeChaosInfo.fault_type === 'NETWORK_PARTITION')) {
+      isCrashActive = true;
+    } else {
+      const activeChaos = localStorage.getItem('rydex_active_chaos');
+      if (activeChaos) {
+        try {
+          const parsed = JSON.parse(activeChaos);
+          if (parsed.expires_at > Date.now() && (parsed.fault_type === 'SERVICE_CRASH' || parsed.fault_type === 'NETWORK_PARTITION')) {
+            isCrashActive = true;
+          }
+        } catch (err) {}
+      }
     }
 
     if (isCrashActive) {
-      setDutyError("503 Service Unavailable: Pod for 'driver-service' in CrashLoopBackOff (SIGSEGV Exit Code 137). Autonomous SRE restarting container...");
+      const remaining = activeChaosInfo?.remaining || 6;
+      setDutyError(`503 Service Unavailable: Pod for 'driver-service' in CrashLoopBackOff (SIGSEGV Exit Code 137). Autonomous SRE restarting container (${remaining}s remaining)...`);
       setDutyLoading(false);
       setIsOnline(false);
       return;
@@ -344,65 +351,100 @@ export const DriverPortal = ({ driverUser, faultActive, activeFaults = [], onHea
     setOtpError('');
   };
 
-  // Auto-clear dutyError when autonomous healing completes or if it was a spurious 404
+  // Continuously sync active chaos fault from localStorage, storage events, and props
   useEffect(() => {
-    if (!dutyError) return;
+    const updateActiveChaos = () => {
+      // 1. Check shared localStorage chaos state
+      try {
+        const stored = localStorage.getItem('rydex_active_chaos');
+        if (stored) {
+          const parsed = JSON.parse(stored);
+          const remainingSec = (parsed.expires_at - Date.now()) / 1000;
+          if (remainingSec > 0) {
+            setActiveChaosInfo({
+              fault_type: parsed.fault_type,
+              service: parsed.service,
+              remaining: Math.max(1, Math.ceil(remainingSec)),
+              remainingExact: Math.max(0, Math.round(remainingSec * 10) / 10)
+            });
+            return;
+          } else {
+            // Expired! Clean up
+            localStorage.removeItem('rydex_active_chaos');
+            window.dispatchEvent(new Event('storage'));
+          }
+        }
+      } catch (e) {}
 
-    if (dutyError.includes('404') || dutyError.includes('status code')) {
-      setDutyError('');
-      return;
-    }
-
-    const checkHealed = setInterval(() => {
-      const activeChaos = localStorage.getItem('rydex_active_chaos');
-      if (!activeChaos) {
-        setDutyError('');
-        setCashoutNotice('✓ [AUTONOMOUS SRE RECOVERY COMPLETED] Pod restored & verified healthy.');
-        setTimeout(() => setCashoutNotice(''), 4000);
-        clearInterval(checkHealed);
+      // 2. Check activeFaults prop
+      if (activeFaults && activeFaults.length > 0) {
+        const f = activeFaults[0];
+        setActiveChaosInfo({
+          fault_type: f.failure_type,
+          service: f.service_name,
+          remaining: 6,
+          remainingExact: 6.0
+        });
         return;
       }
-      try {
-        const parsed = JSON.parse(activeChaos);
-        if (parsed.expires_at <= Date.now()) {
-          setDutyError('');
-          setCashoutNotice('✓ [AUTONOMOUS SRE RECOVERY COMPLETED] Pod restored & verified healthy.');
-          setTimeout(() => setCashoutNotice(''), 4000);
-          clearInterval(checkHealed);
-        }
-      } catch (e) {
-        setDutyError('');
-        clearInterval(checkHealed);
-      }
-    }, 500);
 
-    return () => clearInterval(checkHealed);
-  }, [dutyError]);
+      // 3. Clear active chaos if healed and display recovery message
+      setActiveChaosInfo((prev) => {
+        if (prev) {
+          setCashoutError('');
+          setDutyError('');
+          setCashoutNotice('✓ [AUTONOMOUS SRE RECOVERY COMPLETED] Pod restored & verified healthy. Instant Cashout unblocked.');
+          setTimeout(() => setCashoutNotice(''), 5000);
+        }
+        return null;
+      });
+    };
+
+    updateActiveChaos();
+    const interval = setInterval(updateActiveChaos, 200);
+    const handleStorage = () => updateActiveChaos();
+    window.addEventListener('storage', handleStorage);
+
+    return () => {
+      clearInterval(interval);
+      window.removeEventListener('storage', handleStorage);
+    };
+  }, [activeFaults, faultActive]);
 
   const handleInstantCashout = async () => {
     setDutyError('');
+    setCashoutError('');
 
     // Check if Memory Leak or DB fault is currently active on trip-service
-    const activeChaos = localStorage.getItem('rydex_active_chaos');
-    if (activeChaos) {
+    let currentChaos = activeChaosInfo;
+    if (!currentChaos) {
       try {
-        const parsed = JSON.parse(activeChaos);
-        if (parsed.expires_at > Date.now()) {
-          if (parsed.fault_type === 'MEMORY_LEAK') {
-            const remaining = Math.max(1, Math.ceil((parsed.expires_at - Date.now()) / 1000));
-            setDutyError(`500 Internal Server Error: Pod for 'trip-service' OOMKilled (Exit Code 137). Unbounded heap memory leak. Autonomous SRE Canary Rollback in progress (${remaining}s remaining)...`);
-            return;
-          }
-          if (parsed.fault_type === 'DB_BOTTLENECK') {
-            const remaining = Math.max(1, Math.ceil((parsed.expires_at - Date.now()) / 1000));
-            setDutyError(`500 Internal Server Error: Database Lock Contention on 'trips' table. Connection pool exhausted (max 100 reached). Payout settlement blocked. Autonomous SRE recycling pool (${remaining}s remaining)...`);
-            return;
+        const stored = localStorage.getItem('rydex_active_chaos');
+        if (stored) {
+          const parsed = JSON.parse(stored);
+          if (parsed.expires_at > Date.now()) {
+            currentChaos = {
+              fault_type: parsed.fault_type,
+              remaining: Math.max(1, Math.ceil((parsed.expires_at - Date.now()) / 1000))
+            };
           }
         }
-      } catch (err) {}
+      } catch (e) {}
+    }
+
+    if (currentChaos && (currentChaos.fault_type === 'MEMORY_LEAK' || currentChaos.fault_type === 'DB_BOTTLENECK')) {
+      const isMem = currentChaos.fault_type === 'MEMORY_LEAK';
+      const errMsg = isMem
+        ? `500 Internal Server Error: Pod for 'trip-service' OOMKilled (Exit Code 137). Unbounded heap memory leak. Autonomous SRE Canary Rollback in progress (${currentChaos.remaining}s remaining)...`
+        : `500 Internal Server Error: Database Lock Contention on 'trips' table. Connection pool exhausted (max 100 reached). Payout settlement blocked. Autonomous SRE recycling pool (${currentChaos.remaining}s remaining)...`;
+      
+      setCashoutError(errMsg);
+      setDutyError(errMsg);
+      return; // STRICT RETURN: Cashout is 100% BLOCKED while fault is active!
     }
 
     const balance = captainStats?.wallet_balance || 0;
+    if (balance <= 0) return;
     setCashoutNotice(`₹${balance.toFixed(2)} transferred to Bank A/C (HDFC **4921) via IMPS!`);
     setTimeout(() => setCashoutNotice(''), 4500);
     setCaptainStats((prev) => ({ ...prev, wallet_balance: 0 }));
@@ -877,22 +919,62 @@ export const DriverPortal = ({ driverUser, faultActive, activeFaults = [], onHea
         </div>
 
         {/* Footer Wallet & Instant Cashout */}
-        <div className="pt-3 border-t border-white/10 flex items-center justify-between text-xs font-mono">
-          <div className="flex items-center gap-2">
-            <Wallet className="w-4 h-4 text-[#FFDE00]" />
-            <div>
-              <div className="text-[10px] text-slate-400">Balance</div>
-              <div className="font-bold text-white">₹{(captainStats?.wallet_balance || 0).toFixed(2)}</div>
+        <div className="pt-3 border-t border-white/10 space-y-2 font-mono">
+          {/* Real-time cashout error banner directly above the button */}
+          {cashoutError && (
+            <div className="p-2.5 rounded-xl bg-red-950/90 border border-red-600 text-xs text-red-200 animate-in fade-in space-y-1">
+              <div className="flex items-center gap-1.5 font-bold text-red-400">
+                <AlertTriangle className="w-4 h-4 text-red-400 animate-pulse shrink-0" />
+                <span>CASHOUT SETTLEMENT BLOCKED (SLA HEALING ACTIVE)</span>
+              </div>
+              <div className="text-[11px] text-red-300 leading-relaxed">{cashoutError}</div>
+              <div className="text-[10px] text-amber-300 font-semibold pt-0.5">
+                ⏳ Autonomous SRE Canary Rollback in progress ({activeChaosInfo?.remaining || 1}s remaining)...
+              </div>
             </div>
-          </div>
+          )}
 
-          <button
-            onClick={handleInstantCashout}
-            disabled={(captainStats?.wallet_balance || 0) <= 0}
-            className="px-3.5 py-1.5 rounded-xl bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-400 border border-emerald-500/40 font-bold transition-all disabled:opacity-50"
-          >
-            Instant Cashout
-          </button>
+          {/* Cashout Notice Banner */}
+          {cashoutNotice && (
+            <div className="p-2 rounded-xl bg-emerald-950/90 border border-emerald-500 text-emerald-300 text-xs flex items-center gap-2 animate-in fade-in">
+              <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+              <span>{cashoutNotice}</span>
+            </div>
+          )}
+
+          <div className="flex items-center justify-between text-xs">
+            <div className="flex items-center gap-2">
+              <Wallet className="w-4 h-4 text-[#FFDE00]" />
+              <div>
+                <div className="text-[10px] text-slate-400">Balance</div>
+                <div className="font-bold text-white">₹{(captainStats?.wallet_balance || 0).toFixed(2)}</div>
+              </div>
+            </div>
+
+            <button
+              onClick={handleInstantCashout}
+              disabled={(captainStats?.wallet_balance || 0) <= 0}
+              className={`px-3.5 py-1.5 rounded-xl font-bold transition-all text-xs flex items-center gap-1.5 ${
+                activeChaosInfo && (activeChaosInfo.fault_type === 'MEMORY_LEAK' || activeChaosInfo.fault_type === 'DB_BOTTLENECK')
+                  ? 'bg-rose-600/30 text-rose-300 border border-rose-500/50 hover:bg-rose-600/40 animate-pulse'
+                  : 'bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-400 border border-emerald-500/40 disabled:opacity-50'
+              }`}
+            >
+              {activeChaosInfo && activeChaosInfo.fault_type === 'MEMORY_LEAK' ? (
+                <>
+                  <AlertTriangle className="w-3.5 h-3.5 text-rose-400 shrink-0" />
+                  <span>Blocked: OOMKilled ({activeChaosInfo.remaining}s)</span>
+                </>
+              ) : activeChaosInfo && activeChaosInfo.fault_type === 'DB_BOTTLENECK' ? (
+                <>
+                  <AlertTriangle className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+                  <span>Blocked: DB Lock ({activeChaosInfo.remaining}s)</span>
+                </>
+              ) : (
+                <span>Instant Cashout</span>
+              )}
+            </button>
+          </div>
         </div>
       </div>
 

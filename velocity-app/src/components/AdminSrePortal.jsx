@@ -217,6 +217,7 @@ export const AdminSrePortal = () => {
       expires_at: Date.now() + (spec.duration * 1000),
       duration: spec.duration
     }));
+    window.dispatchEvent(new Event('storage'));
 
     // Update pod state for targeted service
     setPods(prev => prev.map(p => {
@@ -259,6 +260,7 @@ export const AdminSrePortal = () => {
           setPods(curr => curr.map(p => ({ ...p, status: 'Running', health: 100 })));
           setAgentStep('healed');
           localStorage.removeItem('rydex_active_chaos');
+          window.dispatchEvent(new Event('storage'));
 
           const nowStr = new Date().toLocaleTimeString();
           setIncidents(prevList => prevList.map(inc => {
