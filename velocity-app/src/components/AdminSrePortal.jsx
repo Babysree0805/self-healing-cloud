@@ -1,92 +1,106 @@
 import React, { useState, useEffect } from 'react';
 import {
-  Server,
   Activity,
+  Server,
   Cpu,
-  ShieldCheck,
-  AlertTriangle,
-  Flame,
-  RotateCcw,
-  RefreshCw,
-  Terminal,
   Layers,
-  ArrowRight,
-  CheckCircle2,
+  ArrowUpRight,
+  TrendingUp,
+  RefreshCw,
   Zap,
-  Radio,
+  AlertTriangle,
+  ShieldCheck,
+  CheckCircle2,
+  Terminal,
   Clock,
+  Flame,
+  ArrowRight,
   Database,
-  ExternalLink,
+  Radio,
+  FileText,
+  Search,
   Sliders,
-  WifiOff
+  Settings
 } from 'lucide-react';
 
-export const FAULT_DEFINITIONS = {
+export const FAULT_DETAILS = {
   CPU_SPIKE: {
     service: 'pricing-service',
-    label: '⚡ CPU Core Saturation',
-    shortLabel: 'CPU Spike',
+    port: 8005,
+    name: '⚡ CPU Core Saturation',
+    shortName: 'CPU Spike',
     duration: 4.2,
-    complexity: 'EASY',
-    action: 'HPA CPU CFS Quota Optimization',
-    impact: 'Passenger: Fare estimate 504 Timeout | Driver: Surge pricing throttled',
-    kubectlCmd: 'kubectl top pod pricing-service-pod && kubectl scale --replicas=2 deploy/pricing-deployment',
-    color: 'from-amber-500/20 to-orange-500/20 border-amber-500/50 text-amber-300'
+    symptom: '504 Gateway Timeout on dynamic fare calculation. CPU CFS quota > 95%.',
+    rca: 'RCA Agent identified O(N^2) recursive surge pricing matchmaking thread contention during peak hour demand.',
+    plan: 'Horizontal Pod Autoscaler (HPA) rebalances compute quota and scales deployment from 1 to 2 replicas.',
+    kubectl: 'kubectl scale deployment pricing-deployment --replicas=2 -n ride-hailing-system',
+    validation: 'Pricing latency normalized to 38ms. CFS throttle dropped to 0%. HTTP 200 OK.',
+    stageTimeline: { monitoring: 0.8, anomaly: 1.6, rca: 2.6, planner: 3.4, execution: 4.2 }
   },
   TRAFFIC_OVERLOAD: {
     service: 'ride-service',
-    label: '🚦 Traffic Overload',
-    shortLabel: 'Traffic Surge',
+    port: 8002,
+    name: '🚦 Ingress Traffic Surge',
+    shortName: 'Traffic Overload',
     duration: 5.5,
-    complexity: 'EASY-MED',
-    action: 'Ingress Rate Limiter & HPA Scale Replicas (1 -> 3)',
-    impact: 'Passenger: Bike Taxi blocked (429 Rate Limit) | Auto & Cab allowed',
-    kubectlCmd: 'kubectl scale deployment ride-deployment --replicas=3 -n ride-hailing-system',
-    color: 'from-orange-500/20 to-amber-500/20 border-orange-500/50 text-orange-300'
+    symptom: '429 Too Many Requests on Bike Taxi dispatch queue (>1,200 RPS burst).',
+    rca: 'Ingress Envoy rate-limiter triggered on Bike Taxi route; Auto & Cab traffic isolated and preserved.',
+    plan: 'Autonomous SRE triggers Horizontal Pod Autoscaling (HPA 1 -> 3 replicas) and flushes queue buffers.',
+    kubectl: 'kubectl scale deployment ride-deployment --replicas=3 -n ride-hailing-system',
+    validation: 'Replica count scaled to 3. Ingress buffer drain complete. 100% dispatch requests passing.',
+    stageTimeline: { monitoring: 1.0, anomaly: 2.0, rca: 3.2, planner: 4.4, execution: 5.5 }
   },
   SERVICE_CRASH: {
     service: 'driver-service',
-    label: '💥 Container CrashLoopBackOff',
-    shortLabel: 'Crash GPS',
+    port: 8003,
+    name: '💥 Container CrashLoopBackOff',
+    shortName: 'Crash GPS',
     duration: 7.0,
-    complexity: 'MEDIUM',
-    action: 'Kubernetes Pod Delete & Container Restart',
-    impact: 'Passenger: Live GPS radar offline | Driver: Duty toggle 503 CrashLoop',
-    kubectlCmd: 'kubectl delete pod driver-service-pod-990 --grace-period=0 -n ride-hailing-system',
-    color: 'from-rose-500/20 to-red-500/20 border-rose-500/50 text-rose-300'
+    symptom: '503 Service Unavailable on live GPS driver radar. Liveness probe failed 3 consecutive checks.',
+    rca: 'Null pointer exception on unhandled missing driver telemetry packet in worker thread caused SIGSEGV exit.',
+    plan: 'Kubernetes pod force termination triggers clean container rebuild from Docker registry image.',
+    kubectl: 'kubectl delete pod driver-service-pod-990 --grace-period=0 -n ride-hailing-system',
+    validation: 'Pod scheduled on worker node 2. Container liveness & readiness probes returned 200 OK.',
+    stageTimeline: { monitoring: 1.2, anomaly: 2.5, rca: 4.0, planner: 5.5, execution: 7.0 }
   },
   NETWORK_PARTITION: {
     service: 'location-service',
-    label: '🌐 Network Partition (Packet Loss)',
-    shortLabel: 'Net Partition',
+    port: 8006,
+    name: '🌐 Network Partition (Packet Loss)',
+    shortName: 'Net Partition',
     duration: 8.2,
-    complexity: 'MED-COMPLEX',
-    action: 'Envoy Ingress Route Reset & Socket Remount',
-    impact: 'Passenger: Dispatch packet drop (45%) | Driver: Fleet telemetry 504',
-    kubectlCmd: 'kubectl rollout restart daemonset/envoy-proxy-network -n ride-hailing-system',
-    color: 'from-purple-500/20 to-indigo-500/20 border-purple-500/50 text-purple-300'
+    symptom: '45% packet drop on driver geolocation WebSocket stream. Connection timeouts (504).',
+    rca: 'Envoy service mesh sidecar routing table desynchronized on worker node 2 overlay network.',
+    plan: 'Rolling restart of Envoy proxy daemonset and automatic route table re-synchronization.',
+    kubectl: 'kubectl rollout restart daemonset/envoy-proxy-network -n ride-hailing-system',
+    validation: 'Overlay network socket remounted. Packet loss reduced to 0.02%. Telemetry latency 42ms.',
+    stageTimeline: { monitoring: 1.5, anomaly: 3.2, rca: 5.0, planner: 6.8, execution: 8.2 }
   },
   DB_BOTTLENECK: {
     service: 'auth-service',
-    label: '🔒 PostgreSQL Lock Contention',
-    shortLabel: 'DB Lock',
+    port: 8001,
+    name: '🔒 PostgreSQL Lock Contention',
+    shortName: 'DB Lock',
     duration: 9.4,
-    complexity: 'COMPLEX',
-    action: 'PostgreSQL Lock Purge & Connection Pool Recycled',
-    impact: 'Passenger & Driver: Login blocked (500 Internal Error) | Pool exhausted',
-    kubectlCmd: 'kubectl exec -it postgres-0 -- pkill -u postgres -f "idle in transaction"',
-    color: 'from-yellow-500/20 to-amber-500/20 border-yellow-500/50 text-yellow-300'
+    symptom: '500 Internal Server Error: Connection pool exhausted (max_connections=100 reached). Logins blocked.',
+    rca: 'Orphaned transaction locks on relational users table holding open idle database sessions.',
+    plan: 'Autonomous SRE kills orphaned backend PIDs, resets connection pooler, and clears table contention.',
+    kubectl: 'kubectl exec -it postgres-0 -- pkill -u postgres -f "idle in transaction"',
+    validation: 'Active DB connections restored to 14/100. Auth authentication latency normalized to 28ms.',
+    stageTimeline: { monitoring: 1.8, anomaly: 3.8, rca: 5.8, planner: 7.8, execution: 9.4 }
   },
   MEMORY_LEAK: {
     service: 'trip-service',
-    label: '🧠 Unbounded Heap Memory Leak (OOM)',
-    shortLabel: 'Memory Leak',
+    port: 8004,
+    name: '🧠 Unbounded Heap Memory Leak',
+    shortName: 'Memory Leak',
     duration: 10.0,
-    complexity: 'COMPLEX',
-    action: 'Canary Rollback to v1.1.9-stable & Cache Purge',
-    impact: 'Driver: Instant cashout payout aborted (500 OOMKilled Exit Code 137)',
-    kubectlCmd: 'kubectl rollout undo deployment/trip-deployment -n ride-hailing-system',
-    color: 'from-pink-500/20 to-rose-500/20 border-pink-500/50 text-pink-300'
+    symptom: 'Pod OOMKilled (Exit Code 137). Memory usage reached 512MB cgroup container limit.',
+    rca: 'Unbounded in-memory active trip object cache holding uncollected heap references.',
+    plan: 'Canary automated rollback to stable revision v1.1.9-stable and cache eviction cycle purge.',
+    kubectl: 'kubectl rollout undo deployment/trip-deployment -n ride-hailing-system',
+    validation: 'Deployment rolled back to revision 1 (v1.1.9-stable). Memory stable at 128MB. Payouts nominal.',
+    stageTimeline: { monitoring: 2.0, anomaly: 4.2, rca: 6.5, planner: 8.5, execution: 10.0 }
   }
 };
 
@@ -102,33 +116,41 @@ const BASE_PODS = [
 ];
 
 export const AdminSrePortal = () => {
+  const [activeNav, setActiveNav] = useState('overview'); // 'overview' | 'microservices' | 'incidents' | 'rca' | 'chaos' | 'kb'
   const [pods, setPods] = useState(BASE_PODS);
   const [activeFault, setActiveFault] = useState(null);
   const [countdown, setCountdown] = useState(0);
-  const [agentStep, setAgentStep] = useState('IDLE');
-  const [logs, setLogs] = useState([
-    { time: '22:15:00', level: 'INFO', msg: 'Kubernetes GKE cluster state synchronized: 8/8 pods Ready in namespace "ride-hailing-system".' },
-    { time: '22:15:02', level: 'INFO', msg: 'Horizontal Pod Autoscaler (HPA) telemetry monitoring loop active. Target CPU: 75%.' },
-    { time: '22:15:05', level: 'INFO', msg: 'LangGraph Autonomous SRE Agent initialized. Zero active anomalies.' },
-  ]);
+  const [activeAgentStage, setActiveAgentStage] = useState('monitoring'); // 'monitoring' | 'anomaly' | 'rca' | 'planner' | 'execution' | 'validation' | 'healed'
+  const [activeReasoning, setActiveReasoning] = useState({
+    title: 'Prometheus & OpenTelemetry Ingress Monitoring',
+    detail: 'All 8 microservices report healthy synthetic HTTP probes and nominal p99 latencies (SLA 42ms). Zero active anomalies.',
+    command: 'kubectl get pods -n ride-hailing-system -o wide',
+    agentName: 'Monitoring Agent'
+  });
 
   // Inject chaos on targeted microservice
-  const injectFault = (faultKey) => {
-    const spec = FAULT_DEFINITIONS[faultKey];
+  const handleInjectFault = (faultKey) => {
+    const spec = FAULT_DETAILS[faultKey];
     if (!spec) return;
 
     setActiveFault({ key: faultKey, ...spec });
     setCountdown(spec.duration);
-    setAgentStep('ANOMALY');
+    setActiveAgentStage('anomaly');
+    setActiveReasoning({
+      title: `Anomaly Detected on ${spec.service}`,
+      detail: spec.symptom,
+      command: `kubectl top pod ${spec.service}-pod`,
+      agentName: 'Anomaly Agent'
+    });
 
-    // Share fault state via localStorage so Passenger/Driver portals react immediately!
+    // Save to shared localStorage for live multi-page cross-talk
     localStorage.setItem('rydex_active_chaos', JSON.stringify({
       fault_type: faultKey,
       service: spec.service,
       expires_at: Date.now() + (spec.duration * 1000)
     }));
 
-    // Update pod state for the targeted service
+    // Update pod status for targeted service
     setPods(prev => prev.map(p => {
       if (p.service === spec.service) {
         let newStatus = 'Degraded';
@@ -142,399 +164,747 @@ export const AdminSrePortal = () => {
       }
       return p;
     }));
-
-    const now = new Date().toLocaleTimeString();
-    setLogs(prev => [
-      { time: now, level: 'CRITICAL', msg: `[FAULT DETECTED] ${spec.label} on service "${spec.service}". Triggering SRE agent.` },
-      { time: now, level: 'WARN', msg: `[RCA ROOT CAUSE] ${spec.impact}` },
-      { time: now, level: 'ACTION', msg: `[REMEDIATION] ${spec.kubectlCmd}` },
-      ...prev.slice(0, 10)
-    ]);
-
-    // Progressive agent flow steps
-    setTimeout(() => setAgentStep('RCA'), 800);
-    setTimeout(() => setAgentStep('PLANNER'), 1800);
-    setTimeout(() => setAgentStep('EXECUTION'), 2800);
   };
 
-  // Countdown timer and autonomous self-healing recovery
+  // Live Agent Stage Progression & Countdown
   useEffect(() => {
-    if (countdown <= 0) {
-      if (activeFault) {
-        // Pod healed back to Running
-        setPods(prev => prev.map(p => ({ ...p, status: 'Running' })));
-        setAgentStep('VALIDATED');
-        localStorage.removeItem('rydex_active_chaos');
+    if (!activeFault || countdown <= 0) return;
 
-        const now = new Date().toLocaleTimeString();
-        setLogs(prev => [
-          { time: now, level: 'SUCCESS', msg: `[AUTONOMOUSLY HEALED] SRE Agent verified ${activeFault.service} healthy. Restored in ${activeFault.duration}s.` },
-          ...prev.slice(0, 10)
-        ]);
-        setActiveFault(null);
-        setTimeout(() => setAgentStep('IDLE'), 2500);
-      }
-      return;
+    const elapsed = activeFault.duration - countdown;
+    const timeline = activeFault.stageTimeline;
+
+    if (elapsed >= timeline.execution) {
+      setActiveAgentStage('validation');
+      setActiveReasoning({
+        title: `Validation Agent: Health Check Passed (200 OK)`,
+        detail: activeFault.validation,
+        command: `kubectl rollout status deployment/${activeFault.service.replace('-service', '-deployment')}`,
+        agentName: 'Validation Agent'
+      });
+    } else if (elapsed >= timeline.planner) {
+      setActiveAgentStage('execution');
+      setActiveReasoning({
+        title: `Execution Agent: Applying Kubectl Remediation`,
+        detail: `Executing autonomous cloud action: ${activeFault.plan}`,
+        command: activeFault.kubectl,
+        agentName: 'Execution Agent'
+      });
+    } else if (elapsed >= timeline.rca) {
+      setActiveAgentStage('planner');
+      setActiveReasoning({
+        title: `Recovery Planner: Remediation Strategy Selected`,
+        detail: activeFault.plan,
+        command: `cat /etc/sre-playbooks/${activeFault.key.toLowerCase()}.yaml`,
+        agentName: 'Recovery Planner'
+      });
+    } else if (elapsed >= timeline.anomaly) {
+      setActiveAgentStage('rca');
+      setActiveReasoning({
+        title: `Root Cause Agent: Trace Graph Diagnosed`,
+        detail: activeFault.rca,
+        command: `kubectl logs ${activeFault.service}-pod --tail=50`,
+        agentName: 'Root Cause Agent'
+      });
     }
 
-    const timer = setInterval(() => {
-      setCountdown(prev => Math.max(0, Math.round((prev - 0.2) * 10) / 10));
+    const t = setInterval(() => {
+      setCountdown((prev) => {
+        const next = Math.max(0, Math.round((prev - 0.2) * 10) / 10);
+        if (next === 0) {
+          // 100% FIXED & HEALED
+          setPods(curr => curr.map(p => ({ ...p, status: 'Running' })));
+          setActiveAgentStage('healed');
+          localStorage.removeItem('rydex_active_chaos');
+
+          setActiveReasoning({
+            title: `Autonomous Self-Healing Completed in ${activeFault.duration}s!`,
+            detail: `All 8 Kubernetes microservices nominal. Root cause resolved and validated with zero human intervention.`,
+            command: 'kubectl get pods -n ride-hailing-system',
+            agentName: 'SRE State Engine'
+          });
+
+          setTimeout(() => {
+            setActiveFault(null);
+            setActiveAgentStage('monitoring');
+            setActiveReasoning({
+              title: 'Prometheus & OpenTelemetry Ingress Monitoring',
+              detail: 'All 8 microservices report healthy synthetic HTTP probes and nominal p99 latencies (SLA 42ms). Zero active anomalies.',
+              command: 'kubectl get pods -n ride-hailing-system -o wide',
+              agentName: 'Monitoring Agent'
+            });
+          }, 3500);
+        }
+        return next;
+      });
     }, 200);
 
-    return () => clearInterval(timer);
+    return () => clearInterval(t);
   }, [countdown, activeFault]);
 
   return (
-    <div className="h-full w-full overflow-y-auto bg-[#070A0F] text-slate-100 p-3 sm:p-5 md:p-6 space-y-5 pb-28 font-sans">
-      {/* Header Banner */}
-      <div className="glass-card p-4 rounded-2xl border border-white/10 shadow-2xl flex flex-col md:flex-row md:items-center justify-between gap-4">
-        <div className="flex items-center gap-3">
-          <div className="w-11 h-11 rounded-2xl bg-[#FFDE00] text-black flex items-center justify-center font-black text-xl shadow-[0_0_20px_rgba(255,222,0,0.4)] shrink-0">
-            ⚡
+    <div className="flex h-full w-full overflow-hidden bg-[#0A0D14] text-slate-100 font-sans select-none">
+      {/* Left Sidebar (Exact layout from Image 3) */}
+      <aside className="w-56 md:w-64 bg-[#080B11] border-r border-white/10 flex flex-col shrink-0">
+        <div className="p-4 border-b border-white/10">
+          <div className="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-400">
+            Operations & Telemetry
           </div>
+        </div>
+
+        {/* Sidebar Nav Items */}
+        <nav className="p-2 space-y-1 font-mono text-xs flex-1">
+          <button
+            onClick={() => setActiveNav('overview')}
+            className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-left transition-all ${
+              activeNav === 'overview'
+                ? 'bg-blue-600/20 text-blue-400 font-bold border border-blue-500/30'
+                : 'text-slate-400 hover:text-white hover:bg-white/5'
+            }`}
+          >
+            <Layers className="w-4 h-4" />
+            <span>Overview Dashboard</span>
+          </button>
+
+          <button
+            onClick={() => setActiveNav('microservices')}
+            className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-left transition-all ${
+              activeNav === 'microservices'
+                ? 'bg-blue-600/20 text-blue-400 font-bold border border-blue-500/30'
+                : 'text-slate-400 hover:text-white hover:bg-white/5'
+            }`}
+          >
+            <Server className="w-4 h-4" />
+            <span>Microservice Monitor</span>
+          </button>
+
+          <button
+            onClick={() => setActiveNav('incidents')}
+            className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-left transition-all ${
+              activeNav === 'incidents'
+                ? 'bg-blue-600/20 text-blue-400 font-bold border border-blue-500/30'
+                : 'text-slate-400 hover:text-white hover:bg-white/5'
+            }`}
+          >
+            <AlertTriangle className="w-4 h-4" />
+            <span>Incident Management</span>
+          </button>
+
+          <button
+            onClick={() => setActiveNav('rca')}
+            className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-left transition-all ${
+              activeNav === 'rca'
+                ? 'bg-blue-600/20 text-blue-400 font-bold border border-blue-500/30'
+                : 'text-slate-400 hover:text-white hover:bg-white/5'
+            }`}
+          >
+            <Search className="w-4 h-4" />
+            <span>Agent Reasoning Flow</span>
+          </button>
+
+          <button
+            onClick={() => setActiveNav('chaos')}
+            className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-left transition-all ${
+              activeNav === 'chaos'
+                ? 'bg-blue-600/20 text-blue-400 font-bold border border-blue-500/30'
+                : 'text-slate-400 hover:text-white hover:bg-white/5'
+            }`}
+          >
+            <Flame className="w-4 h-4" />
+            <span>Chaos Simulation Lab</span>
+          </button>
+
+          <button
+            onClick={() => setActiveNav('kb')}
+            className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-left transition-all ${
+              activeNav === 'kb'
+                ? 'bg-blue-600/20 text-blue-400 font-bold border border-blue-500/30'
+                : 'text-slate-400 hover:text-white hover:bg-white/5'
+            }`}
+          >
+            <FileText className="w-4 h-4" />
+            <span>SRE Knowledge Base</span>
+          </button>
+        </nav>
+
+        {/* Target Workload Footer (Exact from Image 3) */}
+        <div className="p-3 m-2 rounded-xl bg-white/5 border border-white/10 font-mono">
+          <div className="flex items-center justify-between text-[10px] text-slate-400">
+            <span>TARGET WORKLOAD</span>
+            <span className="text-emerald-400 font-bold">8 SERVICES</span>
+          </div>
+          <div className="text-[11px] font-bold text-white mt-1">
+            Ride-Hailing Cloud Microservices
+          </div>
+          <div className="text-[9px] text-slate-400 mt-1 leading-tight">
+            Auth, Ride, Driver, Trip, Pricing, Location, Notification & Gateway
+          </div>
+        </div>
+      </aside>
+
+      {/* Main Operations Content Area */}
+      <main className="flex-1 overflow-y-auto p-4 md:p-6 space-y-6 pb-28">
+        {/* Header & Status Indicator (Image 3) */}
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <div className="flex items-center gap-2">
-              <h1 className="text-lg md:text-xl font-black text-white tracking-wide">
-                SRE Operations Command Center
-              </h1>
-              <span className="px-2 py-0.5 rounded-md text-[10px] font-mono font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">
-                GKE PRODUCTION
+            <h1 className="text-xl font-bold text-white tracking-tight flex items-center gap-2.5">
+              <span>Cluster Operations Overview</span>
+              <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-950 text-emerald-400 border border-emerald-800">
+                AUTONOMOUS HEALING ACTIVE
               </span>
-            </div>
+            </h1>
             <p className="text-xs text-slate-400 font-mono mt-0.5">
-              Autonomous Self-Healing Kubernetes Infrastructure for Rydex Microservices
+              Real-time telemetry, Kubernetes pod runtime status, and AI SRE agent state
             </p>
           </div>
-        </div>
 
-        {/* Navigation Switchers to Passenger & Driver */}
-        <div className="flex items-center gap-2 shrink-0">
-          <button
-            onClick={() => (window.location.hash = 'passenger')}
-            className="px-3 py-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-mono font-bold text-amber-300 hover:text-white transition-all flex items-center gap-1.5 shadow-md active:scale-95"
-          >
-            <span>Passenger App</span>
-            <ArrowRight className="w-3.5 h-3.5" />
-          </button>
-          <button
-            onClick={() => (window.location.hash = 'driver')}
-            className="px-3 py-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-mono font-bold text-emerald-400 hover:text-white transition-all flex items-center gap-1.5 shadow-md active:scale-95"
-          >
-            <span>Captain App</span>
-            <ArrowRight className="w-3.5 h-3.5" />
-          </button>
-        </div>
-      </div>
-
-      {/* Cluster Overview Metric Cards */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 font-mono">
-        <div className="p-4 rounded-2xl bg-[#0F1420] border border-white/10 shadow-lg">
-          <div className="flex items-center justify-between text-xs text-slate-400">
-            <span>CLUSTER HEALTH</span>
-            <Activity className="w-4 h-4 text-emerald-400" />
-          </div>
-          <div className="text-2xl font-black text-white mt-2">
-            {activeFault ? '87.5%' : '100%'}
-          </div>
-          <div className="text-[10px] text-emerald-400 mt-1 flex items-center gap-1">
-            <span className={`w-2 h-2 rounded-full ${activeFault ? 'bg-amber-400 animate-ping' : 'bg-emerald-400'}`} />
-            <span>{activeFault ? 'Self-Healing Active' : 'All Systems Nominal'}</span>
+          <div className="flex items-center gap-2 shrink-0">
+            <button
+              onClick={() => {
+                setPods([...BASE_PODS]);
+                setActiveFault(null);
+                setCountdown(0);
+                setActiveAgentStage('monitoring');
+              }}
+              className="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:border-slate-500 text-xs font-mono text-slate-300 flex items-center gap-1.5 transition-colors"
+            >
+              <RefreshCw className="w-3.5 h-3.5" />
+              <span>Refresh Telemetry</span>
+            </button>
+            <button
+              onClick={() => (window.location.hash = 'passenger')}
+              className="px-3 py-1.5 rounded-lg bg-amber-500/20 border border-amber-500/40 text-amber-300 hover:text-white text-xs font-mono font-bold flex items-center gap-1"
+            >
+              <span>Passenger App</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </button>
+            <button
+              onClick={() => (window.location.hash = 'driver')}
+              className="px-3 py-1.5 rounded-lg bg-emerald-500/20 border border-emerald-500/40 text-emerald-400 hover:text-white text-xs font-mono font-bold flex items-center gap-1"
+            >
+              <span>Captain App</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </button>
           </div>
         </div>
 
-        <div className="p-4 rounded-2xl bg-[#0F1420] border border-white/10 shadow-lg">
-          <div className="flex items-center justify-between text-xs text-slate-400">
-            <span>K8S PODS RUNNING</span>
-            <Server className="w-4 h-4 text-blue-400" />
-          </div>
-          <div className="text-2xl font-black text-white mt-2">
-            {activeFault ? '7 / 8 Ready' : '8 / 8 Ready'}
-          </div>
-          <div className="text-[10px] text-slate-400 mt-1">
-            3 Worker Nodes (us-central1)
-          </div>
-        </div>
-
-        <div className="p-4 rounded-2xl bg-[#0F1420] border border-white/10 shadow-lg">
-          <div className="flex items-center justify-between text-xs text-slate-400">
-            <span>AUTONOMOUS MTTR</span>
-            <Clock className="w-4 h-4 text-amber-400" />
-          </div>
-          <div className="text-2xl font-black text-amber-300 mt-2">6.4s</div>
-          <div className="text-[10px] text-slate-400 mt-1">
-            Target SLA: &lt; 15s (Zero Downtime)
-          </div>
-        </div>
-
-        <div className="p-4 rounded-2xl bg-[#0F1420] border border-white/10 shadow-lg">
-          <div className="flex items-center justify-between text-xs text-slate-400">
-            <span>SRE AGENT</span>
-            <ShieldCheck className="w-4 h-4 text-purple-400" />
-          </div>
-          <div className="text-2xl font-black text-purple-300 mt-2">LangGraph</div>
-          <div className="text-[10px] text-emerald-400 mt-1">
-            Autonomous Multi-Agent Loop
-          </div>
-        </div>
-      </div>
-
-      {/* Active Incident Countdown Banner */}
-      {activeFault && (
-        <div className="p-4 rounded-2xl bg-amber-950/70 border border-amber-500/70 font-mono shadow-2xl animate-in fade-in duration-200">
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-3">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center shrink-0">
-                <AlertTriangle className="w-5 h-5 animate-bounce" />
+        {/* Top 4 Metrics Row (Image 3) */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 font-mono">
+          {/* Card 1: Health Index */}
+          <div className="p-4 rounded-xl bg-[#0F1420] border border-white/10 shadow-lg relative">
+            <div className="flex items-center justify-between text-xs text-slate-400">
+              <span>CLUSTER HEALTH INDEX</span>
+              <div className="w-7 h-7 rounded-lg bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400">
+                <Activity className="w-4 h-4" />
               </div>
-              <div>
-                <div className="text-sm font-bold text-amber-200 flex items-center gap-2">
-                  <span>{activeFault.label}</span>
-                  <span className="text-[11px] px-2 py-0.5 rounded bg-black/40 text-amber-300 border border-amber-500/30">
-                    TARGET: {activeFault.service}
-                  </span>
+            </div>
+            <div className="text-2xl font-black text-white mt-2">
+              {activeFault ? '87.5%' : '100%'}
+            </div>
+            <div className="flex items-center justify-between text-[10px] mt-2">
+              <span className="text-slate-400">
+                {activeFault ? '7/8 Services Nominal' : '8/8 Services Nominal'}
+              </span>
+              <span className={`px-1.5 py-0.5 rounded text-[9px] font-bold ${
+                activeFault ? 'bg-amber-500/20 text-amber-300' : 'bg-emerald-500/20 text-emerald-400'
+              }`}>
+                {activeFault ? '↗ DEGRADED' : '↗ OPTIMAL'}
+              </span>
+            </div>
+          </div>
+
+          {/* Card 2: Active Pods */}
+          <div className="p-4 rounded-xl bg-[#0F1420] border border-white/10 shadow-lg relative">
+            <div className="flex items-center justify-between text-xs text-slate-400">
+              <span>ACTIVE KUBERNETES PODS</span>
+              <div className="w-7 h-7 rounded-lg bg-blue-500/10 border border-blue-500/30 flex items-center justify-center text-blue-400">
+                <Layers className="w-4 h-4" />
+              </div>
+            </div>
+            <div className="text-2xl font-black text-white mt-2">
+              {activeFault?.key === 'TRAFFIC_OVERLOAD' ? '10 Pods' : '8 Pods'}
+            </div>
+            <div className="flex items-center justify-between text-[10px] mt-2">
+              <span className="text-slate-400">ALL Deployments Running</span>
+              <span className="text-blue-400 font-bold">↘ 100% Scheduled</span>
+            </div>
+          </div>
+
+          {/* Card 3: CPU Load */}
+          <div className="p-4 rounded-xl bg-[#0F1420] border border-white/10 shadow-lg relative">
+            <div className="flex items-center justify-between text-xs text-slate-400">
+              <span>AVERAGE CPU LOAD</span>
+              <div className="w-7 h-7 rounded-lg bg-blue-500/10 border border-blue-500/30 flex items-center justify-center text-blue-400">
+                <Cpu className="w-4 h-4" />
+              </div>
+            </div>
+            <div className="text-2xl font-black text-white mt-2">
+              {activeFault?.key === 'CPU_SPIKE' ? '98.4%' : '18.5%'}
+            </div>
+            <div className="flex items-center justify-between text-[10px] mt-2">
+              <span className="text-slate-400">Cluster Core Utilization</span>
+              <span className={`font-bold ${activeFault?.key === 'CPU_SPIKE' ? 'text-rose-400' : 'text-blue-400'}`}>
+                {activeFault?.key === 'CPU_SPIKE' ? '↗ High Compute' : '↗ Normal'}
+              </span>
+            </div>
+          </div>
+
+          {/* Card 4: Throughput & Latency */}
+          <div className="p-4 rounded-xl bg-[#0F1420] border border-white/10 shadow-lg relative">
+            <div className="flex items-center justify-between text-xs text-slate-400">
+              <span>THROUGHPUT & LATENCY</span>
+              <div className="w-7 h-7 rounded-lg bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400">
+                <TrendingUp className="w-4 h-4" />
+              </div>
+            </div>
+            <div className="text-2xl font-black text-white mt-2">
+              420 <span className="text-sm font-normal text-slate-400">RPS</span>
+            </div>
+            <div className="flex items-center justify-between text-[10px] mt-2">
+              <span className="text-slate-400">Avg Latency: 45ms</span>
+              <span className="text-emerald-400 font-bold">↗ SLA Compliant</span>
+            </div>
+          </div>
+        </div>
+
+        {/* LangGraph Multi-Agent Orchestration Flow (Exact from Image 3) */}
+        <div className="p-5 rounded-xl bg-[#0F1420] border border-white/10 shadow-lg space-y-4 font-mono">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <span className="text-xs font-bold text-white uppercase tracking-wider">
+                LangGraph Multi-Agent Orchestration Flow
+              </span>
+              <span className="text-[10px] px-2 py-0.5 rounded bg-blue-950 text-blue-300 border border-blue-800 font-semibold">
+                COMPILED STATE GRAPH
+              </span>
+            </div>
+            <span className="text-[11px] text-slate-400">Active State Engine</span>
+          </div>
+
+          {/* The 7 Agent Cards (Image 3) */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-2.5">
+            {/* Agent 1 */}
+            <div className={`p-3 rounded-xl border transition-all text-center relative ${
+              activeAgentStage === 'monitoring'
+                ? 'bg-blue-600/20 border-blue-500 shadow-[0_0_15px_rgba(59,130,246,0.3)]'
+                : 'bg-white/5 border-white/10 text-slate-400'
+            }`}>
+              {activeAgentStage === 'monitoring' && (
+                <div className="text-[9px] font-bold text-blue-400 uppercase tracking-widest mb-1 animate-pulse">
+                  ACTIVE
                 </div>
-                <div className="text-xs text-amber-300/80 mt-1">
-                  Impact: {activeFault.impact}
+              )}
+              <div className="w-8 h-8 mx-auto rounded-lg bg-blue-500/10 flex items-center justify-center text-blue-400 mb-1">
+                <Activity className="w-4 h-4" />
+              </div>
+              <div className="font-bold text-xs text-white">Monitoring Agent</div>
+              <div className="text-[10px] text-slate-400 mt-0.5">Prometheus & Ingress</div>
+            </div>
+
+            {/* Agent 2 */}
+            <div className={`p-3 rounded-xl border transition-all text-center relative ${
+              activeAgentStage === 'anomaly'
+                ? 'bg-rose-600/20 border-rose-500 shadow-[0_0_15px_rgba(244,63,94,0.3)] animate-pulse'
+                : 'bg-white/5 border-white/10 text-slate-400'
+            }`}>
+              {activeAgentStage === 'anomaly' && (
+                <div className="text-[9px] font-bold text-rose-400 uppercase tracking-widest mb-1 animate-ping">
+                  BREACH
                 </div>
+              )}
+              <div className="w-8 h-8 mx-auto rounded-lg bg-rose-500/10 flex items-center justify-center text-rose-400 mb-1">
+                <AlertTriangle className="w-4 h-4" />
+              </div>
+              <div className="font-bold text-xs text-white">Anomaly Agent</div>
+              <div className="text-[10px] text-slate-400 mt-0.5">Z-Score & Pattern Match</div>
+            </div>
+
+            {/* Agent 3 */}
+            <div className={`p-3 rounded-xl border transition-all text-center relative ${
+              activeAgentStage === 'rca'
+                ? 'bg-amber-600/20 border-amber-500 shadow-[0_0_15px_rgba(245,158,11,0.3)] animate-pulse'
+                : 'bg-white/5 border-white/10 text-slate-400'
+            }`}>
+              {activeAgentStage === 'rca' && (
+                <div className="text-[9px] font-bold text-amber-400 uppercase tracking-widest mb-1">
+                  REASONING
+                </div>
+              )}
+              <div className="w-8 h-8 mx-auto rounded-lg bg-amber-500/10 flex items-center justify-center text-amber-400 mb-1">
+                <Search className="w-4 h-4" />
+              </div>
+              <div className="font-bold text-xs text-white">Root Cause Agent</div>
+              <div className="text-[10px] text-slate-400 mt-0.5">Dependency & Trace Graph</div>
+            </div>
+
+            {/* Agent 4 */}
+            <div className={`p-3 rounded-xl border transition-all text-center relative ${
+              activeAgentStage === 'planner'
+                ? 'bg-purple-600/20 border-purple-500 shadow-[0_0_15px_rgba(168,85,247,0.3)] animate-pulse'
+                : 'bg-white/5 border-white/10 text-slate-400'
+            }`}>
+              {activeAgentStage === 'planner' && (
+                <div className="text-[9px] font-bold text-purple-400 uppercase tracking-widest mb-1">
+                  PLANNING
+                </div>
+              )}
+              <div className="w-8 h-8 mx-auto rounded-lg bg-purple-500/10 flex items-center justify-center text-purple-400 mb-1">
+                <Sliders className="w-4 h-4" />
+              </div>
+              <div className="font-bold text-xs text-white">Recovery Planner</div>
+              <div className="text-[10px] text-slate-400 mt-0.5">Strategy & K8s Command</div>
+            </div>
+
+            {/* Agent 5 */}
+            <div className={`p-3 rounded-xl border transition-all text-center relative ${
+              activeAgentStage === 'execution'
+                ? 'bg-indigo-600/20 border-indigo-500 shadow-[0_0_15px_rgba(99,102,241,0.3)] animate-pulse'
+                : 'bg-white/5 border-white/10 text-slate-400'
+            }`}>
+              {activeAgentStage === 'execution' && (
+                <div className="text-[9px] font-bold text-indigo-400 uppercase tracking-widest mb-1">
+                  EXECUTING
+                </div>
+              )}
+              <div className="w-8 h-8 mx-auto rounded-lg bg-indigo-500/10 flex items-center justify-center text-indigo-400 mb-1">
+                <Terminal className="w-4 h-4" />
+              </div>
+              <div className="font-bold text-xs text-white">Execution Agent</div>
+              <div className="text-[10px] text-slate-400 mt-0.5">Kubectl Action Controller</div>
+            </div>
+
+            {/* Agent 6 */}
+            <div className={`p-3 rounded-xl border transition-all text-center relative ${
+              activeAgentStage === 'validation' || activeAgentStage === 'healed'
+                ? 'bg-emerald-600/20 border-emerald-500 shadow-[0_0_15px_rgba(16,185,129,0.3)]'
+                : 'bg-white/5 border-white/10 text-slate-400'
+            }`}>
+              {(activeAgentStage === 'validation' || activeAgentStage === 'healed') && (
+                <div className="text-[9px] font-bold text-emerald-400 uppercase tracking-widest mb-1">
+                  VERIFIED
+                </div>
+              )}
+              <div className="w-8 h-8 mx-auto rounded-lg bg-emerald-500/10 flex items-center justify-center text-emerald-400 mb-1">
+                <CheckCircle2 className="w-4 h-4" />
+              </div>
+              <div className="font-bold text-xs text-white">Validation Agent</div>
+              <div className="text-[10px] text-slate-400 mt-0.5">Health Probe & SLA Check</div>
+            </div>
+
+            {/* Agent 7 */}
+            <div className="p-3 rounded-xl border border-white/10 bg-white/5 text-center text-slate-400">
+              <div className="w-8 h-8 mx-auto rounded-lg bg-slate-500/10 flex items-center justify-center text-slate-300 mb-1">
+                <Database className="w-4 h-4" />
+              </div>
+              <div className="font-bold text-xs text-white">Knowledge Base</div>
+              <div className="text-[10px] text-slate-400 mt-0.5">Playbook Memory & State</div>
+            </div>
+          </div>
+
+          {/* LIVE AGENT REASONING & RCA PANEL (Explicit User Request!) */}
+          <div className="p-4 rounded-xl bg-[#080C14] border border-blue-500/30 space-y-2 mt-3 animate-in fade-in duration-150">
+            <div className="flex items-center justify-between text-xs">
+              <div className="flex items-center gap-2">
+                <span className="w-2.5 h-2.5 rounded-full bg-blue-400 animate-ping" />
+                <span className="font-bold text-blue-400 uppercase tracking-wider text-[11px]">
+                  LIVE RCA & SRE REASONING CONSOLE [{activeReasoning.agentName}]
+                </span>
+              </div>
+              {countdown > 0 && (
+                <span className="text-[10px] px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/40 font-bold">
+                  AUTONOMOUS HEALING: {countdown.toFixed(1)}s REMAINING
+                </span>
+              )}
+            </div>
+
+            <div className="space-y-1.5 text-xs text-slate-300 font-mono">
+              <div className="text-white font-bold text-sm flex items-center gap-2">
+                <span>{activeReasoning.title}</span>
+              </div>
+              <p className="text-[12px] text-slate-300 leading-relaxed">
+                {activeReasoning.detail}
+              </p>
+              <div className="flex items-center gap-2 pt-1 text-[11px] text-emerald-400 bg-black/40 px-3 py-1.5 rounded-lg border border-white/5 font-mono">
+                <Terminal className="w-3.5 h-3.5 shrink-0 text-slate-400" />
+                <span className="truncate">{activeReasoning.command}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Charts Row (Exact from Image 3: CPU & Memory Telemetry + Ingress RPS) */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 font-mono">
+          {/* Chart 1: Cluster CPU & Memory Telemetry (%) */}
+          <div className="p-5 rounded-xl bg-[#0F1420] border border-white/10 space-y-4">
+            <div className="flex items-center justify-between">
+              <h3 className="text-xs font-bold uppercase tracking-wider text-slate-300">
+                Cluster CPU & Memory Telemetry (%)
+              </h3>
+              <div className="flex items-center gap-3 text-[11px]">
+                <span className="flex items-center gap-1 text-blue-400">
+                  <span className="w-2 h-2 rounded-full bg-blue-500" /> CPU
+                </span>
+                <span className="flex items-center gap-1 text-indigo-400">
+                  <span className="w-2 h-2 rounded-full bg-indigo-500" /> Memory
+                </span>
               </div>
             </div>
 
-            <div className="flex items-center gap-4 shrink-0">
-              <div className="text-right">
-                <div className="text-[10px] text-amber-400 uppercase font-bold">Autonomous Healing In</div>
-                <div className="text-2xl font-black text-amber-200">{countdown.toFixed(1)}s</div>
-              </div>
-              <div className="w-28 bg-black/40 h-3 rounded-full overflow-hidden p-0.5 border border-amber-500/30">
-                <div
-                  className="bg-amber-400 h-full rounded-full transition-all duration-200"
-                  style={{ width: `${(countdown / activeFault.duration) * 100}%` }}
+            {/* High-fidelity SVG Wave Chart */}
+            <div className="h-48 w-full relative">
+              <svg className="w-full h-full overflow-visible" viewBox="0 0 500 180" preserveAspectRatio="none">
+                <defs>
+                  <linearGradient id="cpuGradient" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stopColor="#3B82F6" stopOpacity="0.4" />
+                    <stop offset="100%" stopColor="#3B82F6" stopOpacity="0.0" />
+                  </linearGradient>
+                  <linearGradient id="memGradient" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stopColor="#6366F1" stopOpacity="0.3" />
+                    <stop offset="100%" stopColor="#6366F1" stopOpacity="0.0" />
+                  </linearGradient>
+                </defs>
+
+                {/* Grid Lines */}
+                <line x1="0" y1="36" x2="500" y2="36" stroke="#1F2937" strokeDasharray="3 3" />
+                <line x1="0" y1="72" x2="500" y2="72" stroke="#1F2937" strokeDasharray="3 3" />
+                <line x1="0" y1="108" x2="500" y2="108" stroke="#1F2937" strokeDasharray="3 3" />
+                <line x1="0" y1="144" x2="500" y2="144" stroke="#1F2937" strokeDasharray="3 3" />
+
+                {/* Memory Curve */}
+                <path
+                  d="M0,130 Q100,125 200,132 T350,128 T500,130 L500,180 L0,180 Z"
+                  fill="url(#memGradient)"
                 />
+                <path
+                  d="M0,130 Q100,125 200,132 T350,128 T500,130"
+                  fill="none"
+                  stroke="#6366F1"
+                  strokeWidth="2"
+                />
+
+                {/* CPU Curve (Surges up if CPU Spike active) */}
+                <path
+                  d={
+                    activeFault?.key === 'CPU_SPIKE'
+                      ? "M0,140 Q100,135 250,20 T400,25 T500,30 L500,180 L0,180 Z"
+                      : "M0,140 Q100,135 200,142 T350,136 T500,138 L500,180 L0,180 Z"
+                  }
+                  fill="url(#cpuGradient)"
+                  className="transition-all duration-500"
+                />
+                <path
+                  d={
+                    activeFault?.key === 'CPU_SPIKE'
+                      ? "M0,140 Q100,135 250,20 T400,25 T500,30"
+                      : "M0,140 Q100,135 200,142 T350,136 T500,138"
+                  }
+                  fill="none"
+                  stroke="#3B82F6"
+                  strokeWidth="2.5"
+                  className="transition-all duration-500"
+                />
+              </svg>
+
+              {/* X Axis Timestamps */}
+              <div className="flex items-center justify-between text-[10px] text-slate-500 pt-2 font-mono">
+                <span>10:00</span>
+                <span>10:05</span>
+                <span>10:10</span>
+                <span>10:15</span>
+                <span>10:20</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Chart 2: API Ingress Throughput (RPS) */}
+          <div className="p-5 rounded-xl bg-[#0F1420] border border-white/10 space-y-4">
+            <div className="flex items-center justify-between">
+              <h3 className="text-xs font-bold uppercase tracking-wider text-slate-300">
+                API Ingress Throughput (RPS)
+              </h3>
+              <span className="text-[11px] text-emerald-400">OpenTelemetry Gateway</span>
+            </div>
+
+            {/* High-fidelity SVG Ingress Wave */}
+            <div className="h-48 w-full relative">
+              <svg className="w-full h-full overflow-visible" viewBox="0 0 500 180" preserveAspectRatio="none">
+                <defs>
+                  <linearGradient id="reqGradient" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stopColor="#10B981" stopOpacity="0.4" />
+                    <stop offset="100%" stopColor="#10B981" stopOpacity="0.0" />
+                  </linearGradient>
+                </defs>
+
+                {/* Grid Lines */}
+                <line x1="0" y1="36" x2="500" y2="36" stroke="#1F2937" strokeDasharray="3 3" />
+                <line x1="0" y1="72" x2="500" y2="72" stroke="#1F2937" strokeDasharray="3 3" />
+                <line x1="0" y1="108" x2="500" y2="108" stroke="#1F2937" strokeDasharray="3 3" />
+                <line x1="0" y1="144" x2="500" y2="144" stroke="#1F2937" strokeDasharray="3 3" />
+
+                {/* Ingress Wave */}
+                <path
+                  d={
+                    activeFault?.key === 'TRAFFIC_OVERLOAD'
+                      ? "M0,100 Q120,95 240,15 T380,20 T500,25 L500,180 L0,180 Z"
+                      : "M0,95 Q120,88 240,94 T380,90 T500,92 L500,180 L0,180 Z"
+                  }
+                  fill="url(#reqGradient)"
+                  className="transition-all duration-500"
+                />
+                <path
+                  d={
+                    activeFault?.key === 'TRAFFIC_OVERLOAD'
+                      ? "M0,100 Q120,95 240,15 T380,20 T500,25"
+                      : "M0,95 Q120,88 240,94 T380,90 T500,92"
+                  }
+                  fill="none"
+                  stroke="#10B981"
+                  strokeWidth="2.5"
+                  className="transition-all duration-500"
+                />
+              </svg>
+
+              {/* X Axis Timestamps */}
+              <div className="flex items-center justify-between text-[10px] text-slate-500 pt-2 font-mono">
+                <span>10:00</span>
+                <span>10:05</span>
+                <span>10:10</span>
+                <span>10:15</span>
+                <span>10:20</span>
               </div>
             </div>
           </div>
         </div>
-      )}
 
-      {/* LangGraph Multi-Agent SRE Pipeline */}
-      <div className="p-4 rounded-2xl bg-[#0F1420] border border-white/10 shadow-lg space-y-3 font-mono">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <ShieldCheck className="w-4 h-4 text-purple-400" />
-            <h2 className="text-xs font-bold text-white uppercase tracking-wider">
-              Autonomous SRE Agent Healing Pipeline
-            </h2>
-          </div>
-          <span className="text-[10px] text-slate-400">LangGraph State Machine</span>
-        </div>
-
-        <div className="grid grid-cols-2 sm:grid-cols-5 gap-2 text-center text-xs">
-          <div className={`p-2.5 rounded-xl border transition-all ${
-            agentStep !== 'IDLE' ? 'bg-blue-500/20 border-blue-400 text-blue-200 font-bold' : 'bg-white/5 border-white/10 text-slate-400'
-          }`}>
-            <div className="text-[10px] text-slate-400">STAGE 1</div>
-            <div className="mt-0.5">Telemetry Monitor</div>
+        {/* Chaos Engineering Fault Injection Lab (6 Fault Types) */}
+        <div className="p-5 rounded-xl bg-[#0F1420] border border-white/10 space-y-4 font-mono">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <Flame className="w-4 h-4 text-rose-400" />
+              <h2 className="text-xs font-bold text-white uppercase tracking-wider">
+                Chaos Simulation Lab (Inject Failures & Observe Live Healing)
+              </h2>
+            </div>
+            <span className="text-[10px] text-slate-400">Click to inject failure into targeted service</span>
           </div>
 
-          <div className={`p-2.5 rounded-xl border transition-all ${
-            agentStep === 'ANOMALY' ? 'bg-rose-500/30 border-rose-400 text-rose-200 font-bold animate-pulse' :
-            agentStep !== 'IDLE' ? 'bg-rose-500/20 border-rose-500/40 text-rose-300' : 'bg-white/5 border-white/10 text-slate-400'
-          }`}>
-            <div className="text-[10px] text-slate-400">STAGE 2</div>
-            <div className="mt-0.5">Anomaly Detected</div>
-          </div>
-
-          <div className={`p-2.5 rounded-xl border transition-all ${
-            agentStep === 'RCA' ? 'bg-amber-500/30 border-amber-400 text-amber-200 font-bold animate-pulse' :
-            ['PLANNER', 'EXECUTION', 'VALIDATED'].includes(agentStep) ? 'bg-amber-500/20 border-amber-500/40 text-amber-300' : 'bg-white/5 border-white/10 text-slate-400'
-          }`}>
-            <div className="text-[10px] text-slate-400">STAGE 3</div>
-            <div className="mt-0.5">Root Cause (RCA)</div>
-          </div>
-
-          <div className={`p-2.5 rounded-xl border transition-all ${
-            agentStep === 'PLANNER' ? 'bg-purple-500/30 border-purple-400 text-purple-200 font-bold animate-pulse' :
-            ['EXECUTION', 'VALIDATED'].includes(agentStep) ? 'bg-purple-500/20 border-purple-500/40 text-purple-300' : 'bg-white/5 border-white/10 text-slate-400'
-          }`}>
-            <div className="text-[10px] text-slate-400">STAGE 4</div>
-            <div className="mt-0.5">Remediation Plan</div>
-          </div>
-
-          <div className={`col-span-2 sm:col-span-1 p-2.5 rounded-xl border transition-all ${
-            agentStep === 'EXECUTION' ? 'bg-emerald-500/30 border-emerald-400 text-emerald-200 font-bold animate-pulse' :
-            agentStep === 'VALIDATED' ? 'bg-emerald-500/20 border-emerald-500/50 text-emerald-300 font-bold' : 'bg-white/5 border-white/10 text-slate-400'
-          }`}>
-            <div className="text-[10px] text-slate-400">STAGE 5</div>
-            <div className="mt-0.5">Kubectl Restored ✓</div>
-          </div>
-        </div>
-      </div>
-
-      {/* Chaos Injection Lab — ALL 6 FAULTS WITH INDIVIDUAL SERVICE TARGETS */}
-      <div className="p-4 rounded-2xl bg-[#0F1420] border border-white/10 shadow-lg space-y-3 font-mono">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <Flame className="w-4 h-4 text-rose-400" />
-            <h2 className="text-xs font-bold text-white uppercase tracking-wider">
-              Chaos Engineering Fault Injection Lab (6 Fault Types)
-            </h2>
-          </div>
-          <span className="text-[10px] text-slate-400">Click any failure to test self-healing</span>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-          {Object.entries(FAULT_DEFINITIONS).map(([key, spec]) => {
-            const isThisActive = activeFault?.key === key;
-            return (
-              <div
-                key={key}
-                className={`p-3.5 rounded-xl border transition-all flex flex-col justify-between gap-2.5 ${
-                  isThisActive
-                    ? 'bg-amber-500/20 border-amber-400 shadow-[0_0_20px_rgba(251,191,36,0.3)]'
-                    : 'bg-white/5 hover:bg-white/10 border-white/10'
-                }`}
-              >
-                <div>
-                  <div className="flex items-center justify-between">
-                    <span className="font-bold text-xs text-white flex items-center gap-1.5">
-                      {spec.shortLabel}
-                    </span>
-                    <span className="text-[10px] px-1.5 py-0.5 rounded bg-black/40 text-amber-300 border border-white/10">
-                      Heals: {spec.duration}s
-                    </span>
-                  </div>
-
-                  <div className="text-[11px] text-blue-300 font-mono mt-1">
-                    Target: <span className="underline font-bold">{spec.service}</span>
-                  </div>
-
-                  <div className="text-[10px] text-slate-400 mt-1 leading-tight">
-                    {spec.impact}
-                  </div>
-                </div>
-
-                <button
-                  onClick={() => injectFault(key)}
-                  disabled={countdown > 0}
-                  className={`w-full py-1.5 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 shadow ${
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+            {Object.entries(FAULT_DETAILS).map(([key, spec]) => {
+              const isThisActive = activeFault?.key === key;
+              return (
+                <div
+                  key={key}
+                  className={`p-3.5 rounded-xl border transition-all flex flex-col justify-between gap-2.5 ${
                     isThisActive
-                      ? 'bg-amber-400 text-black animate-pulse'
-                      : 'bg-white/10 hover:bg-white/20 text-white active:scale-95 disabled:opacity-40'
+                      ? 'bg-amber-500/20 border-amber-400 shadow-[0_0_20px_rgba(251,191,36,0.3)]'
+                      : 'bg-white/5 hover:bg-white/10 border-white/10'
                   }`}
                 >
-                  <Flame className="w-3.5 h-3.5 text-rose-400" />
-                  <span>{isThisActive ? `Healing (${countdown.toFixed(1)}s)...` : `Simulate ${spec.shortLabel}`}</span>
-                </button>
-              </div>
-            );
-          })}
-        </div>
-      </div>
+                  <div>
+                    <div className="flex items-center justify-between">
+                      <span className="font-bold text-xs text-white">
+                        {spec.name}
+                      </span>
+                      <span className="text-[10px] px-1.5 py-0.5 rounded bg-black/40 text-amber-300 border border-white/10">
+                        Heals: {spec.duration}s
+                      </span>
+                    </div>
 
-      {/* Complete Kubernetes Pods Table — ALL 8 PODS FULLY VISIBLE */}
-      <div className="p-4 rounded-2xl bg-[#0F1420] border border-white/10 shadow-lg space-y-3 font-mono">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <Server className="w-4 h-4 text-blue-400" />
-            <h2 className="text-xs font-bold text-white uppercase tracking-wider">
-              Kubernetes Pod Orchestration (kubectl get pods -n ride-hailing-system)
-            </h2>
-          </div>
-          <span className="text-[10px] text-slate-400">Total: {pods.length} Microservices</span>
-        </div>
+                    <div className="text-[11px] text-blue-300 mt-1">
+                      Target: <span className="underline font-bold">{spec.service} (:{spec.port})</span>
+                    </div>
 
-        <div className="overflow-x-auto rounded-xl border border-white/10">
-          <table className="w-full text-xs text-left">
-            <thead className="text-[10px] text-slate-400 uppercase bg-white/5 border-b border-white/10">
-              <tr>
-                <th className="py-2.5 px-3">Pod Name</th>
-                <th className="py-2.5 px-3">Microservice</th>
-                <th className="py-2.5 px-3">Status</th>
-                <th className="py-2.5 px-3">Node</th>
-                <th className="py-2.5 px-3">Cluster IP</th>
-                <th className="py-2.5 px-3">CPU</th>
-                <th className="py-2.5 px-3">Memory</th>
-                <th className="py-2.5 px-3 text-right">Restarts</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-white/5 font-mono text-xs">
-              {pods.map((p) => {
-                const isFailed = p.status !== 'Running';
-                return (
-                  <tr
-                    key={p.pod_name}
-                    className={`transition-colors ${
-                      isFailed ? 'bg-rose-950/40 text-rose-200' : 'hover:bg-white/5 text-slate-300'
+                    <div className="text-[10px] text-slate-400 mt-1 leading-tight">
+                      {spec.symptom}
+                    </div>
+                  </div>
+
+                  <button
+                    onClick={() => handleInjectFault(key)}
+                    disabled={countdown > 0}
+                    className={`w-full py-2 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 shadow ${
+                      isThisActive
+                        ? 'bg-amber-400 text-black animate-pulse'
+                        : 'bg-white/10 hover:bg-white/20 text-white active:scale-95 disabled:opacity-40'
                     }`}
                   >
-                    <td className="py-2.5 px-3 font-bold text-white flex items-center gap-2">
-                      <span className={`w-2 h-2 rounded-full ${isFailed ? 'bg-rose-400 animate-ping' : 'bg-emerald-400'}`} />
-                      <span>{p.pod_name}</span>
-                    </td>
-                    <td className="py-2.5 px-3 font-bold text-blue-300">
-                      {p.service} <span className="text-[10px] text-slate-500">(:{p.port})</span>
-                    </td>
-                    <td className="py-2.5 px-3">
-                      <span
-                        className={`px-2 py-0.5 rounded-full text-[10px] font-bold inline-flex items-center gap-1 ${
-                          isFailed
-                            ? 'bg-rose-500/20 text-rose-300 border border-rose-500/40 animate-pulse'
-                            : 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40'
-                        }`}
-                      >
-                        {p.status}
-                      </span>
-                    </td>
-                    <td className="py-2.5 px-3 text-slate-400">{p.node}</td>
-                    <td className="py-2.5 px-3 text-slate-400">{p.ip}</td>
-                    <td className="py-2.5 px-3 text-slate-300">{p.cpu}</td>
-                    <td className="py-2.5 px-3 text-slate-300">{p.mem}</td>
-                    <td className="py-2.5 px-3 text-right font-bold text-amber-400">
-                      {p.restarts}
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      {/* SRE Agent Audit Terminal Logs */}
-      <div className="p-4 rounded-2xl bg-[#0F1420] border border-white/10 shadow-lg space-y-2 font-mono text-xs">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <Terminal className="w-4 h-4 text-emerald-400" />
-            <h2 className="text-xs font-bold text-white uppercase tracking-wider">
-              Autonomous SRE Agent Audit Log Stream
-            </h2>
+                    <Flame className="w-3.5 h-3.5 text-rose-400" />
+                    <span>{isThisActive ? `Self-Healing in ${countdown.toFixed(1)}s...` : `Simulate ${spec.shortName}`}</span>
+                  </button>
+                </div>
+              );
+            })}
           </div>
-          <span className="text-[10px] text-slate-500">Live Remediation Telemetry</span>
         </div>
 
-        <div className="bg-[#05070B] p-3 rounded-xl border border-white/5 space-y-1.5 max-h-48 overflow-y-auto">
-          {logs.map((l, i) => (
-            <div key={i} className="flex items-start gap-2 text-[11px] font-mono leading-relaxed">
-              <span className="text-slate-500 shrink-0">[{l.time}]</span>
-              <span
-                className={`px-1 rounded text-[9px] font-bold shrink-0 ${
-                  l.level === 'CRITICAL'
-                    ? 'bg-rose-500/20 text-rose-300'
-                    : l.level === 'WARN'
-                    ? 'bg-amber-500/20 text-amber-300'
-                    : l.level === 'ACTION'
-                    ? 'bg-purple-500/20 text-purple-300'
-                    : l.level === 'SUCCESS'
-                    ? 'bg-emerald-500/20 text-emerald-300'
-                    : 'bg-blue-500/20 text-blue-300'
-                }`}
-              >
-                {l.level}
-              </span>
-              <span className="text-slate-300">{l.msg}</span>
+        {/* Kubernetes Pods Orchestration (kubectl get pods) */}
+        <div className="p-5 rounded-xl bg-[#0F1420] border border-white/10 space-y-3 font-mono">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <Server className="w-4 h-4 text-blue-400" />
+              <h2 className="text-xs font-bold text-white uppercase tracking-wider">
+                Kubernetes Pod Orchestration (kubectl get pods -n ride-hailing-system)
+              </h2>
             </div>
-          ))}
+            <span className="text-[10px] text-slate-400">Total: {pods.length} Microservices</span>
+          </div>
+
+          <div className="overflow-x-auto rounded-xl border border-white/10">
+            <table className="w-full text-xs text-left">
+              <thead className="text-[10px] text-slate-400 uppercase bg-white/5 border-b border-white/10">
+                <tr>
+                  <th className="py-2.5 px-3">Pod Name</th>
+                  <th className="py-2.5 px-3">Microservice</th>
+                  <th className="py-2.5 px-3">Status</th>
+                  <th className="py-2.5 px-3">Node</th>
+                  <th className="py-2.5 px-3">Cluster IP</th>
+                  <th className="py-2.5 px-3">CPU</th>
+                  <th className="py-2.5 px-3">Memory</th>
+                  <th className="py-2.5 px-3 text-right">Restarts</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-white/5 font-mono text-xs">
+                {pods.map((p) => {
+                  const isFailed = p.status !== 'Running';
+                  return (
+                    <tr
+                      key={p.pod_name}
+                      className={`transition-colors ${
+                        isFailed ? 'bg-rose-950/40 text-rose-200' : 'hover:bg-white/5 text-slate-300'
+                      }`}
+                    >
+                      <td className="py-2.5 px-3 font-bold text-white flex items-center gap-2">
+                        <span className={`w-2 h-2 rounded-full ${isFailed ? 'bg-rose-400 animate-ping' : 'bg-emerald-400'}`} />
+                        <span>{p.pod_name}</span>
+                      </td>
+                      <td className="py-2.5 px-3 font-bold text-blue-300">
+                        {p.service} <span className="text-[10px] text-slate-500">(:{p.port})</span>
+                      </td>
+                      <td className="py-2.5 px-3">
+                        <span
+                          className={`px-2 py-0.5 rounded-full text-[10px] font-bold inline-flex items-center gap-1 ${
+                            isFailed
+                              ? 'bg-rose-500/20 text-rose-300 border border-rose-500/40 animate-pulse'
+                              : 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40'
+                          }`}
+                        >
+                          {p.status}
+                        </span>
+                      </td>
+                      <td className="py-2.5 px-3 text-slate-400">{p.node}</td>
+                      <td className="py-2.5 px-3 text-slate-400">{p.ip}</td>
+                      <td className="py-2.5 px-3 text-slate-300">{p.cpu}</td>
+                      <td className="py-2.5 px-3 text-slate-300">{p.mem}</td>
+                      <td className="py-2.5 px-3 text-right font-bold text-amber-400">
+                        {p.restarts}
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
         </div>
-      </div>
+      </main>
     </div>
   );
 };

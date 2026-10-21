@@ -111,27 +111,35 @@ export const DriverPortal = ({ driverUser, faultActive, activeFaults = [], onHea
     setDutyLoading(true);
     setDutyError('');
     const targetStatus = !isOnline;
+
+    // Check if Crash GPS fault is actively running on driver-service
+    const activeChaos = localStorage.getItem('rydex_active_chaos');
+    let isCrashActive = faultActive;
+    if (activeChaos) {
+      try {
+        const parsed = JSON.parse(activeChaos);
+        if (parsed.expires_at > Date.now() && (parsed.fault_type === 'SERVICE_CRASH' || parsed.fault_type === 'NETWORK_PARTITION')) {
+          isCrashActive = true;
+        }
+      } catch (err) {}
+    }
+
+    if (isCrashActive) {
+      setDutyError("503 Service Unavailable: Pod for 'driver-service' in CrashLoopBackOff (SIGSEGV Exit Code 137). Autonomous SRE restarting container...");
+      setDutyLoading(false);
+      setIsOnline(false);
+      return;
+    }
+
     try {
       await driverApi.setDuty(selectedCaptainId, targetStatus);
-      setIsOnline(targetStatus);
-      if (targetStatus) {
-        await locationApi.updateCoords({
-          entity_id: selectedCaptainId,
-          entity_type: 'DRIVER',
-          lat: 12.9716,
-          lng: 77.5946,
-          speed_kmh: 0,
-          heading: 90
-        });
-      }
     } catch (e) {
-      const errMsg = e.response?.data?.detail || e.message || '503 Service Unavailable: Pod for driver-service in CrashLoopBackOff.';
-      setDutyError(errMsg);
-      // Keep captain offline if error occurred
-      setIsOnline(false);
-    } finally {
-      setDutyLoading(false);
+      // Standalone Vercel cloud demo: proceed online smoothly unless a real fault was injected!
+      console.warn('Backend offline or 404 — driver duty toggled in Cloud Demo Mode');
     }
+
+    setIsOnline(targetStatus);
+    setDutyLoading(false);
   };
 
   // REAL PASSENGER RIDE MATCHING: Poll pending rides from backend
