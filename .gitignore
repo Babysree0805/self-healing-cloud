@@ -5,6 +5,10 @@
 **/.vite/
 package-lock.json
 
+# Exception: backend/static must be committed for HuggingFace deployment
+!backend/static/
+!backend/static/**
+
 # Python & Virtual Environments
 **/__pycache__/
 *.py[cod]

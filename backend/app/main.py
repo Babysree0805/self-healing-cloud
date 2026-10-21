@@ -1,8 +1,11 @@
 import asyncio
 import logging
+import os
 from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 from datetime import datetime, timezone
 import uuid
 
@@ -211,6 +214,16 @@ app.include_router(kb_router, prefix=settings.API_V1_STR)
 app.include_router(k8s_router, prefix=settings.API_V1_STR)
 app.include_router(stream_router, prefix=settings.API_V1_STR)
 
+# Serve built React frontends as static files (for HuggingFace / cloud deployment)
+_rydex_static = os.path.join(os.path.dirname(__file__), "..", "static", "rydex-app")
+_sre_static   = os.path.join(os.path.dirname(__file__), "..", "static", "sre-dashboard")
+
+if os.path.exists(_rydex_static):
+    app.mount("/app", StaticFiles(directory=_rydex_static, html=True), name="rydex-app")
+
+if os.path.exists(_sre_static):
+    app.mount("/sre", StaticFiles(directory=_sre_static, html=True), name="sre-dashboard")
+
 @app.get("/")
 def root():
     return {
@@ -218,7 +231,11 @@ def root():
         "status": "ONLINE",
         "version": settings.PROJECT_VERSION,
         "docs_url": "/docs",
+        "rydex_app": "/app/",
+        "sre_dashboard": "/sre/",
         "metrics_url": f"{settings.API_V1_STR}/metrics",
         "telemetry_overview": f"{settings.API_V1_STR}/telemetry/overview",
+        "k8s_pods": f"{settings.API_V1_STR}/k8s/pods",
+        "cluster_health": f"{settings.API_V1_STR}/k8s/cluster/health",
         "live_stream": f"{settings.API_V1_STR}/stream/events"
     }
