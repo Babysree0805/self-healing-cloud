@@ -233,16 +233,18 @@ export const App = () => {
         </div>
       </header>
 
-      {/* SRE Chaos Detection & Autonomous HealOps Bar */}
-      <ChaosHealBar
-        onFaultStateChange={(isActive, faults) => {
-          setFaultActive(isActive);
-          setActiveFaults(faults);
-        }}
-      />
+      {/* SRE Chaos Detection & Autonomous HealOps Bar (shown on Passenger & Driver pages) */}
+      {activeView !== 'ADMIN' && (
+        <ChaosHealBar
+          onFaultStateChange={(isActive, faults) => {
+            setFaultActive(isActive);
+            setActiveFaults(faults);
+          }}
+        />
+      )}
 
       {/* Main View Area: Render RydexLoginPage, PassengerPortal, DriverPortal, or AdminSrePortal */}
-      <main className="flex-1 overflow-hidden relative">
+      <main className="flex-1 overflow-y-auto relative">
         <ErrorBoundary>
           {activeView === 'LOGIN' ? (
             <RydexLoginPage onLoginSuccess={handleLoginSuccess} />
