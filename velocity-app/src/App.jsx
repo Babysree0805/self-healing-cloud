@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { PassengerPortal } from './components/PassengerPortal';
 import { DriverPortal } from './components/DriverPortal';
+import { AdminSrePortal } from './components/AdminSrePortal';
 import { RydexLoginPage } from './components/RydexLoginPage';
 import { ChaosHealBar } from './components/ChaosHealBar';
 import { ErrorBoundary } from './components/ErrorBoundary';
@@ -12,18 +13,20 @@ import {
   User,
   Bike,
   Sparkles,
+  ShieldAlert,
 } from 'lucide-react';
 
 export const App = () => {
-  // Navigation View State: 'PASSENGER' | 'DRIVER' | 'LOGIN'
+  // Navigation View State: 'PASSENGER' | 'DRIVER' | 'ADMIN' | 'LOGIN'
   const [activeView, setActiveView] = useState(() => {
     const hash = window.location.hash.toLowerCase();
     if (hash.includes('login')) return 'LOGIN';
     if (hash.includes('driver')) return 'DRIVER';
+    if (hash.includes('admin') || hash.includes('sre')) return 'ADMIN';
     return 'PASSENGER';
   });
 
-  // Separate Logins: Passenger vs Driver
+  // Separate Logins: Passenger vs Driver vs Admin
   const [passengerUser, setPassengerUser] = useState(() => {
     const saved = localStorage.getItem('rydex_passenger_user');
     return saved ? JSON.parse(saved) : { username: 'priya_sharma', name: 'Priya Sharma', role: 'passenger' };
@@ -32,6 +35,11 @@ export const App = () => {
   const [driverUser, setDriverUser] = useState(() => {
     const saved = localStorage.getItem('rydex_driver_user');
     return saved ? JSON.parse(saved) : { driver_id: 'DRV-001', name: 'Ramesh Gowda', role: 'driver', vehicle: 'Yamaha FZ-S' };
+  });
+
+  const [adminUser, setAdminUser] = useState(() => {
+    const saved = localStorage.getItem('rydex_admin_user');
+    return saved ? JSON.parse(saved) : { username: 'admin', name: 'SRE Lead (Admin)', role: 'admin' };
   });
 
   // Dropdown & Modal States
@@ -47,6 +55,7 @@ export const App = () => {
       const hash = window.location.hash.toLowerCase();
       if (hash.includes('login')) setActiveView('LOGIN');
       else if (hash.includes('driver')) setActiveView('DRIVER');
+      else if (hash.includes('admin') || hash.includes('sre')) setActiveView('ADMIN');
       else setActiveView('PASSENGER');
       setUserDropdownOpen(false);
     };
@@ -73,6 +82,9 @@ export const App = () => {
     } else if (activeView === 'DRIVER') {
       localStorage.removeItem('rydex_driver_user');
       setDriverUser(null);
+    } else if (activeView === 'ADMIN') {
+      localStorage.removeItem('rydex_admin_user');
+      setAdminUser(null);
     }
     window.location.hash = 'login';
   };
@@ -84,6 +96,9 @@ export const App = () => {
     } else if (role === 'DRIVER') {
       setDriverUser(userObj);
       setActiveView('DRIVER');
+    } else if (role === 'ADMIN') {
+      setAdminUser(userObj);
+      setActiveView('ADMIN');
     }
   };
 
@@ -95,6 +110,13 @@ export const App = () => {
           roleLabel: 'Captain Pro',
           avatar: '🛵',
           avatarBg: 'bg-[#FFDE00] text-black',
+        }
+      : activeView === 'ADMIN'
+      ? {
+          name: adminUser?.name || 'SRE Lead (Admin)',
+          roleLabel: 'SRE Ops Admin',
+          avatar: '🛡️',
+          avatarBg: 'bg-blue-600 text-white',
         }
       : {
           name: passengerUser?.name || passengerUser?.username || 'Priya Sharma',
@@ -121,7 +143,7 @@ export const App = () => {
             <div className="flex items-center gap-2">
               <span className="text-xl font-black tracking-wider text-white">RYDEX</span>
               <span className="text-[9px] font-mono px-1.5 py-0.5 rounded bg-white/5 border border-white/10 text-slate-400 uppercase font-semibold">
-                {activeView === 'DRIVER' ? 'CAPTAIN' : activeView === 'LOGIN' ? 'CLOUD' : 'RIDER'}
+                {activeView === 'DRIVER' ? 'CAPTAIN' : activeView === 'ADMIN' ? 'SRE OPS' : activeView === 'LOGIN' ? 'CLOUD' : 'RIDER'}
               </span>
             </div>
           </div>
@@ -219,7 +241,7 @@ export const App = () => {
         }}
       />
 
-      {/* Main View Area: Render RydexLoginPage, PassengerPortal, or DriverPortal */}
+      {/* Main View Area: Render RydexLoginPage, PassengerPortal, DriverPortal, or AdminSrePortal */}
       <main className="flex-1 overflow-hidden relative">
         <ErrorBoundary>
           {activeView === 'LOGIN' ? (
@@ -234,13 +256,15 @@ export const App = () => {
               isHistoryOpen={isHistoryOpen}
               setIsHistoryOpen={setIsHistoryOpen}
             />
-          ) : (
+          ) : activeView === 'DRIVER' ? (
             <DriverPortal
               driverUser={driverUser}
               faultActive={faultActive}
               activeFaults={activeFaults}
               onHealFault={() => setFaultActive(false)}
             />
+          ) : (
+            <AdminSrePortal />
           )}
         </ErrorBoundary>
       </main>

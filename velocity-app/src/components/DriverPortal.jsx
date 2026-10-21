@@ -170,7 +170,33 @@ export const DriverPortal = ({ driverUser, faultActive, activeFaults = [], onHea
           }
         }
       } catch (err) {
-        // quiet fallback
+        // Cloud Demo Mode: check shared local storage for real-time ride matching across tabs
+        const localRideStr = localStorage.getItem('rydex_active_ride');
+        if (localRideStr) {
+          try {
+            const localRide = JSON.parse(localRideStr);
+            if (localRide.status === 'REQUESTED' && localRide.ride_id !== incomingOrder?.ride_id) {
+              setIncomingOrder({
+                ride_id: localRide.ride_id,
+                orderId: localRide.ride_id,
+                type: localRide.ride_type || 'BIKE',
+                typeLabel: localRide.ride_type === 'AUTO' ? 'Rydex Auto' : (localRide.ride_type === 'PARCEL' ? 'Rydex Parcel' : 'Rydex Bike Taxi'),
+                icon: localRide.ride_type === 'AUTO' ? '🛺' : (localRide.ride_type === 'PARCEL' ? '📦' : '🛵'),
+                customerName: 'Priya Sharma (Rider)',
+                customerRating: 4.94,
+                pickupAddress: localRide.pickup_location?.address || 'MG Road Metro Station, Bengaluru',
+                dropoffAddress: localRide.dropoff_location?.address || 'Koramangala Sony Signal, Bengaluru',
+                pickupDistanceKm: 0.8,
+                pickupTimeMins: 3,
+                tripDistanceKm: 4.8,
+                estimatedEarnings: localRide.fare || 78.0,
+                paymentMode: 'UPI',
+                otp: '4821',
+              });
+              setCountdown(15);
+            }
+          } catch (e) {}
+        }
       }
     };
 
@@ -204,6 +230,16 @@ export const DriverPortal = ({ driverUser, faultActive, activeFaults = [], onHea
       }
     } catch (e) {
       console.warn('Accept ride API error, proceeding locally:', e.message);
+    }
+
+    // Sync status to local storage for multi-tab cloud demo
+    const localRideStr = localStorage.getItem('rydex_active_ride');
+    if (localRideStr) {
+      try {
+        const parsed = JSON.parse(localRideStr);
+        parsed.status = 'DRIVER_ASSIGNED';
+        localStorage.setItem('rydex_active_ride', JSON.stringify(parsed));
+      } catch (err) {}
     }
 
     setActiveTrip({
@@ -271,6 +307,16 @@ export const DriverPortal = ({ driverUser, faultActive, activeFaults = [], onHea
         setDutyError(errMsg);
         return;
       }
+    }
+
+    // Sync status to local storage for multi-tab cloud demo
+    const localRideStr = localStorage.getItem('rydex_active_ride');
+    if (localRideStr) {
+      try {
+        const parsed = JSON.parse(localRideStr);
+        parsed.status = 'COMPLETED';
+        localStorage.setItem('rydex_active_ride', JSON.stringify(parsed));
+      } catch (err) {}
     }
 
     setCaptainStats((prev) => ({
