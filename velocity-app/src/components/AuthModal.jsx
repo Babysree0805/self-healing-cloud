@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { authApi } from '../services/api';
-import { X, Lock, User, Mail, ArrowRight, Sparkles } from 'lucide-react';
+import { X, Lock, User, Mail, ArrowRight, Zap } from 'lucide-react';
 
 export const AuthModal = ({ isOpen, onClose, onAuthSuccess }) => {
   const [isSignUp, setIsSignUp] = useState(false);
@@ -49,79 +49,79 @@ export const AuthModal = ({ isOpen, onClose, onAuthSuccess }) => {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-in fade-in duration-200">
-      <div className="glass-card w-full max-w-sm rounded-3xl p-6 border border-white/10 shadow-2xl relative space-y-5">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-xs">
+      <div className="bg-white w-full max-w-sm rounded-2xl p-6 border border-slate-200 shadow-xl relative space-y-4">
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 text-slate-400 hover:text-white p-1 rounded-lg"
+          className="absolute top-4 right-4 text-slate-400 hover:text-slate-700 p-1 rounded-lg"
         >
           <X className="w-5 h-5" />
         </button>
 
         {/* Brand Header */}
         <div className="text-center space-y-1">
-          <div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-[#FFDE00] text-black text-2xl font-black mb-2 shadow-lg">
-            ⚡
+          <div className="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-emerald-100 text-emerald-800 mb-1 border border-emerald-200">
+            <Zap className="w-5 h-5" />
           </div>
-          <h2 className="text-xl font-black text-white">
-            {isSignUp ? 'Create Velocity Account' : 'Welcome to Velocity'}
+          <h2 className="text-base font-bold text-slate-900">
+            {isSignUp ? 'Create Rydex Account' : 'Sign in to Rydex'}
           </h2>
-          <p className="text-xs text-slate-400">
-            {isSignUp ? 'Sign up for lightning fast city rides' : 'Sign in to book bike taxis, autos & cabs'}
+          <p className="text-xs text-slate-500">
+            {isSignUp ? 'Sign up for fast city mobility' : 'Access your bookings and Captain dashboard'}
           </p>
         </div>
 
         {error && (
-          <div className="p-3 rounded-xl bg-red-950/80 border border-red-800 text-xs text-red-300 font-mono">
+          <div className="p-3 rounded-lg bg-rose-50 border border-rose-200 text-xs text-rose-800 font-mono">
             {error}
           </div>
         )}
 
         {/* Form */}
-        <form onSubmit={handleSubmit} className="space-y-3.5 text-xs font-mono">
+        <form onSubmit={handleSubmit} className="space-y-3 text-xs font-mono">
           <div>
-            <label className="text-slate-400 text-[10px] uppercase font-bold tracking-wider">Username</label>
+            <label className="text-slate-500 text-[10px] uppercase font-semibold">Username</label>
             <div className="relative mt-1">
-              <User className="w-4 h-4 text-slate-500 absolute left-3 top-3" />
+              <User className="w-4 h-4 text-slate-400 absolute left-3 top-2.5" />
               <input
                 type="text"
                 required
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 placeholder="e.g. rahul_sharma"
-                className="w-full bg-slate-900 border border-white/10 rounded-xl pl-9 pr-3 py-2.5 text-white placeholder-slate-600 focus:outline-none focus:border-[#FFDE00]"
+                className="w-full bg-slate-50 border border-slate-300 rounded-lg pl-9 pr-3 py-2 text-slate-900 placeholder-slate-400 focus:outline-none focus:border-emerald-500"
               />
             </div>
           </div>
 
           {isSignUp && (
             <div>
-              <label className="text-slate-400 text-[10px] uppercase font-bold tracking-wider">Email</label>
+              <label className="text-slate-500 text-[10px] uppercase font-semibold">Email</label>
               <div className="relative mt-1">
-                <Mail className="w-4 h-4 text-slate-500 absolute left-3 top-3" />
+                <Mail className="w-4 h-4 text-slate-400 absolute left-3 top-2.5" />
                 <input
                   type="email"
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="rahul@example.com"
-                  className="w-full bg-slate-900 border border-white/10 rounded-xl pl-9 pr-3 py-2.5 text-white placeholder-slate-600 focus:outline-none focus:border-[#FFDE00]"
+                  className="w-full bg-slate-50 border border-slate-300 rounded-lg pl-9 pr-3 py-2 text-slate-900 placeholder-slate-400 focus:outline-none focus:border-emerald-500"
                 />
               </div>
             </div>
           )}
 
           <div>
-            <label className="text-slate-400 text-[10px] uppercase font-bold tracking-wider">Password</label>
+            <label className="text-slate-500 text-[10px] uppercase font-semibold">Password</label>
             <div className="relative mt-1">
-              <Lock className="w-4 h-4 text-slate-500 absolute left-3 top-3" />
+              <Lock className="w-4 h-4 text-slate-400 absolute left-3 top-2.5" />
               <input
                 type="password"
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••"
-                className="w-full bg-slate-900 border border-white/10 rounded-xl pl-9 pr-3 py-2.5 text-white placeholder-slate-600 focus:outline-none focus:border-[#FFDE00]"
+                className="w-full bg-slate-50 border border-slate-300 rounded-lg pl-9 pr-3 py-2 text-slate-900 placeholder-slate-400 focus:outline-none focus:border-emerald-500"
               />
             </div>
           </div>
@@ -129,7 +129,7 @@ export const AuthModal = ({ isOpen, onClose, onAuthSuccess }) => {
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-3.5 px-4 rounded-xl bg-[#FFDE00] hover:bg-[#ffe633] text-black font-sans font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all shadow-lg active:scale-95 mt-2"
+            className="w-full py-2.5 px-4 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-sans font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all shadow-xs active:scale-95 mt-2"
           >
             {loading ? 'Authenticating...' : isSignUp ? 'Sign Up' : 'Sign In'}
             <ArrowRight className="w-4 h-4" />
@@ -137,32 +137,32 @@ export const AuthModal = ({ isOpen, onClose, onAuthSuccess }) => {
         </form>
 
         {/* Quick Demo Switch */}
-        <div className="pt-2 border-t border-white/10 text-center space-y-2">
-          <div className="text-[10px] font-mono text-slate-500 uppercase tracking-wider">
+        <div className="pt-2 border-t border-slate-100 text-center space-y-1.5">
+          <div className="text-[10px] font-mono text-slate-400 uppercase tracking-wider">
             Quick 1-Click Demo Login
           </div>
           <div className="flex gap-2">
             <button
               onClick={() => handleQuickDemo('priya_sharma')}
-              className="flex-1 py-1.5 px-2 rounded-lg bg-white/5 hover:bg-white/10 text-slate-300 text-[11px] font-mono border border-white/5 transition-all"
+              className="flex-1 py-1 px-2 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-700 text-[11px] font-mono border border-slate-200 transition-all font-medium"
             >
-              👩 Priya S
+              Priya S (Rider)
             </button>
             <button
               onClick={() => handleQuickDemo('rahul_verma')}
-              className="flex-1 py-1.5 px-2 rounded-lg bg-white/5 hover:bg-white/10 text-slate-300 text-[11px] font-mono border border-white/5 transition-all"
+              className="flex-1 py-1 px-2 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-700 text-[11px] font-mono border border-slate-200 transition-all font-medium"
             >
-              👨 Rahul V
+              Rahul V (Driver)
             </button>
           </div>
         </div>
 
         {/* Switch Mode Toggle */}
-        <div className="text-center text-xs text-slate-400 pt-1">
+        <div className="text-center text-xs text-slate-500 pt-0.5">
           {isSignUp ? 'Already have an account?' : "Don't have an account?"}{' '}
           <button
             onClick={() => setIsSignUp(!isSignUp)}
-            className="text-[#FFDE00] font-bold hover:underline"
+            className="text-emerald-700 font-bold hover:underline"
           >
             {isSignUp ? 'Sign In' : 'Sign Up'}
           </button>

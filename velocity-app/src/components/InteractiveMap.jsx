@@ -200,22 +200,8 @@ export const InteractiveMap = ({
         {/* Nearby Available Captains on Map */}
         {nearbyCaptains.map((cap) => (
           <g key={cap.id} transform={`translate(${cap.x}, ${cap.y}) rotate(${cap.heading})`}>
-            <circle r="10" fill="#121824" stroke="#FFDE00" strokeWidth="1.5" />
-            {cap.type === 'BIKE' && (
-              <text x="0" y="3" textAnchor="middle" fontSize="9" fill="#FFDE00" fontWeight="bold">
-                🛵
-              </text>
-            )}
-            {cap.type === 'AUTO' && (
-              <text x="0" y="3" textAnchor="middle" fontSize="9" fill="#10B981" fontWeight="bold">
-                🛺
-              </text>
-            )}
-            {(cap.type === 'CAB_ECONOMY' || cap.type === 'CAB_PREMIUM') && (
-              <text x="0" y="3" textAnchor="middle" fontSize="9" fill="#38BDF8" fontWeight="bold">
-                🚗
-              </text>
-            )}
+            <circle r="8" fill="#FFFFFF" stroke="#10B981" strokeWidth="2" />
+            <circle r="3" fill="#059669" />
           </g>
         ))}
 
@@ -223,15 +209,13 @@ export const InteractiveMap = ({
         {activeRide && (
           <g transform={`translate(${capX}, ${capY})`}>
             {/* Halo pulse */}
-            <circle r="24" fill="url(#captainHalo)" className="animate-pulse" />
-            <circle r="13" fill="#FFDE00" stroke="#000" strokeWidth="2" />
-            <text x="0" y="4" textAnchor="middle" fontSize="11" fill="#000" fontWeight="bold">
-              {rideType === 'BIKE' ? '🛵' : rideType === 'AUTO' ? '🛺' : '🚗'}
-            </text>
+            <circle r="20" fill="url(#captainHalo)" className="animate-pulse" />
+            <circle r="11" fill="#059669" stroke="#FFFFFF" strokeWidth="2" />
+            <circle r="4" fill="#FFFFFF" />
             {/* Captain Name tag callout */}
-            <g transform="translate(0, -22)">
-              <rect x="-35" y="-12" width="70" height="15" rx="3" fill="#121824" stroke="#FFDE00" strokeWidth="1" />
-              <text x="0" y="-2" textAnchor="middle" fontSize="8" fill="#FFDE00" fontWeight="bold">
+            <g transform="translate(0, -20)">
+              <rect x="-35" y="-12" width="70" height="15" rx="3" fill="#FFFFFF" stroke="#10B981" strokeWidth="1" />
+              <text x="0" y="-2" textAnchor="middle" fontSize="8" fill="#065F46" fontWeight="bold">
                 Captain Arriving
               </text>
             </g>

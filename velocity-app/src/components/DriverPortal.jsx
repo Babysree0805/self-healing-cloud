@@ -141,7 +141,6 @@ export const DriverPortal = ({ driverUser, faultActive, activeFaults = [], onHea
     try {
       await driverApi.setDuty(selectedCaptainId, targetStatus);
     } catch (e) {
-      // Standalone Vercel cloud demo: proceed online smoothly unless a real fault was injected!
       console.warn('Backend offline or 404 — driver duty toggled in Cloud Demo Mode');
     }
 
@@ -161,15 +160,13 @@ export const DriverPortal = ({ driverUser, faultActive, activeFaults = [], onHea
         if (!isSubscribed) return;
 
         if (Array.isArray(pending) && pending.length > 0) {
-          // Find the latest pending ride matching allowed services
           const matched = pending.find((r) => allowedServices[r.ride_type] ?? true);
           if (matched && matched.ride_id !== incomingOrder?.ride_id) {
             setIncomingOrder({
               ride_id: matched.ride_id,
               orderId: matched.ride_id,
               type: matched.ride_type,
-              typeLabel: matched.ride_type === 'BIKE' ? 'Rydex Bike Taxi' : (matched.ride_type === 'AUTO' ? 'Rydex Auto' : 'Rydex Parcel'),
-              icon: matched.ride_type === 'BIKE' ? '🛵' : (matched.ride_type === 'AUTO' ? '🛺' : '📦'),
+              typeLabel: matched.ride_type === 'BIKE' ? 'Rydex Bike' : (matched.ride_type === 'AUTO' ? 'Rydex Auto' : 'Rydex Parcel'),
               customerName: matched.rider_id === 'priya_sharma' ? 'Priya Sharma' : (matched.rider_id || 'Rydex Passenger'),
               customerRating: 4.94,
               pickupAddress: matched.pickup_address || 'MG Road Metro Station, Bengaluru',
@@ -195,8 +192,7 @@ export const DriverPortal = ({ driverUser, faultActive, activeFaults = [], onHea
                 ride_id: localRide.ride_id,
                 orderId: localRide.ride_id,
                 type: localRide.ride_type || 'BIKE',
-                typeLabel: localRide.ride_type === 'AUTO' ? 'Rydex Auto' : (localRide.ride_type === 'PARCEL' ? 'Rydex Parcel' : 'Rydex Bike Taxi'),
-                icon: localRide.ride_type === 'AUTO' ? '🛺' : (localRide.ride_type === 'PARCEL' ? '📦' : '🛵'),
+                typeLabel: localRide.ride_type === 'AUTO' ? 'Rydex Auto' : (localRide.ride_type === 'PARCEL' ? 'Rydex Parcel' : 'Rydex Bike'),
                 customerName: 'Priya Sharma (Rider)',
                 customerRating: 4.94,
                 pickupAddress: localRide.pickup_location?.address || 'MG Road Metro Station, Bengaluru',
@@ -369,7 +365,6 @@ export const DriverPortal = ({ driverUser, faultActive, activeFaults = [], onHea
             });
             return;
           } else {
-            // Expired! Clean up
             localStorage.removeItem('rydex_active_chaos');
             window.dispatchEvent(new Event('storage'));
           }
@@ -393,7 +388,7 @@ export const DriverPortal = ({ driverUser, faultActive, activeFaults = [], onHea
         if (prev) {
           setCashoutError('');
           setDutyError('');
-          setCashoutNotice('✓ [AUTONOMOUS SRE RECOVERY COMPLETED] Pod restored & verified healthy. Instant Cashout unblocked.');
+          setCashoutNotice('Autonomous SRE Recovery Completed: Pod restored & healthy. Instant Cashout unblocked.');
           setTimeout(() => setCashoutNotice(''), 5000);
         }
         return null;
@@ -445,7 +440,7 @@ export const DriverPortal = ({ driverUser, faultActive, activeFaults = [], onHea
 
     const balance = captainStats?.wallet_balance || 0;
     if (balance <= 0) return;
-    setCashoutNotice(`₹${balance.toFixed(2)} transferred to Bank A/C (HDFC **4921) via IMPS!`);
+    setCashoutNotice(`₹${balance.toFixed(2)} transferred to Bank A/C (HDFC **4921) via IMPS.`);
     setTimeout(() => setCashoutNotice(''), 4500);
     setCaptainStats((prev) => ({ ...prev, wallet_balance: 0 }));
   };
@@ -461,7 +456,6 @@ export const DriverPortal = ({ driverUser, faultActive, activeFaults = [], onHea
         payment_method: 'UPI',
       });
     } catch (e) {
-      // Standalone Vercel fallback: create local ride in localStorage
       const demoRide = {
         ride_id: `RYD-${Math.floor(1000 + Math.random() * 9000)}`,
         status: 'REQUESTED',
@@ -477,35 +471,33 @@ export const DriverPortal = ({ driverUser, faultActive, activeFaults = [], onHea
   };
 
   return (
-    <div className="flex-1 flex flex-col lg:flex-row relative overflow-hidden h-full bg-[#0B0F17] text-slate-100">
+    <div className="flex-1 flex flex-col lg:flex-row relative overflow-hidden h-full bg-[#F8FAF9] text-slate-900">
       {/* Left Column: Captain Status, Orders & Active Trip Cockpit */}
-      <div className="w-full lg:w-[460px] xl:w-[500px] h-full overflow-y-auto glass-card border-r border-white/10 flex flex-col justify-between shrink-0 p-5 md:p-6 space-y-6 z-20 shadow-2xl">
+      <div className="w-full lg:w-[460px] xl:w-[500px] h-full overflow-y-auto bg-white border-r border-slate-200/90 flex flex-col justify-between shrink-0 p-5 md:p-6 space-y-6 z-20 shadow-xs">
         <div className="space-y-6">
           {/* Captain Header Card */}
-          <div className="p-4 rounded-2xl bg-slate-900/80 border border-white/10 relative overflow-hidden">
+          <div className="p-4 rounded-xl bg-slate-50/90 border border-slate-200 relative overflow-hidden">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3.5">
                 <div className="relative">
-                  <div className="w-13 h-13 rounded-full bg-gradient-to-tr from-[#FFDE00] to-amber-500 p-0.5">
-                    <div className="w-12 h-12 rounded-full bg-black flex items-center justify-center font-black text-lg text-[#FFDE00]">
-                      {captainStats?.name?.charAt(0) || 'C'}
-                    </div>
+                  <div className="w-12 h-12 rounded-xl bg-emerald-100 border border-emerald-200 flex items-center justify-center font-bold text-base text-emerald-800">
+                    {captainStats?.name?.charAt(0) || 'C'}
                   </div>
-                  <div className="absolute -bottom-1 -right-1 px-1.5 py-0.5 rounded-full bg-emerald-500 text-[9px] font-bold text-black flex items-center gap-0.5 shadow">
-                    <Star className="w-2.5 h-2.5 fill-black" />
+                  <div className="absolute -bottom-1 -right-1 px-1.5 py-0.2 rounded bg-white text-[9px] font-bold text-slate-700 border border-slate-200 flex items-center gap-0.5 shadow-xs">
+                    <Star className="w-2.5 h-2.5 fill-amber-400 text-amber-400" />
                     <span>{captainStats?.rating || 4.92}</span>
                   </div>
                 </div>
 
                 <div>
                   <div className="flex items-center gap-2">
-                    <h2 className="text-base font-bold text-white">{captainStats?.name || 'Captain Ramesh'}</h2>
-                    <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-[#FFDE00] text-black font-extrabold">
-                      CAPTAIN PRO
+                    <h2 className="text-sm font-bold text-slate-900">{captainStats?.name || 'Captain Ramesh'}</h2>
+                    <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-50 text-emerald-800 border border-emerald-200 font-semibold">
+                      VERIFIED
                     </span>
                   </div>
-                  <div className="text-xs text-slate-300 mt-0.5">{captainStats?.vehicle || 'Yamaha FZ-S'}</div>
-                  <div className="text-[11px] font-mono text-slate-400 font-semibold">{captainStats?.plate || 'KA 05 EK 4821'}</div>
+                  <div className="text-xs text-slate-500 mt-0.5">{captainStats?.vehicle || 'Yamaha FZ-S'}</div>
+                  <div className="text-[11px] font-mono text-slate-400 font-medium">{captainStats?.plate || 'KA 05 EK 4821'}</div>
                 </div>
               </div>
 
@@ -513,29 +505,29 @@ export const DriverPortal = ({ driverUser, faultActive, activeFaults = [], onHea
               <button
                 onClick={handleToggleDuty}
                 disabled={dutyLoading}
-                className={`py-2 px-4 rounded-xl font-mono text-xs font-bold flex items-center gap-2 transition-all shadow-lg ${
+                className={`py-2 px-3.5 rounded-lg font-mono text-xs font-semibold flex items-center gap-2 transition-all ${
                   isOnline
-                    ? 'bg-emerald-500 text-black shadow-emerald-500/20'
-                    : 'bg-slate-800 text-slate-400 border border-white/10'
+                    ? 'bg-emerald-600 text-white hover:bg-emerald-700 shadow-xs'
+                    : 'bg-slate-100 text-slate-600 border border-slate-200 hover:bg-slate-200'
                 }`}
               >
-                <div className={`w-2.5 h-2.5 rounded-full ${isOnline ? 'bg-black animate-ping' : 'bg-slate-500'}`} />
+                <div className={`w-2 h-2 rounded-full ${isOnline ? 'bg-white' : 'bg-slate-400'}`} />
                 <span>{isOnline ? 'ON DUTY' : 'OFFLINE'}</span>
               </button>
             </div>
 
             {/* Duty or Cashout Error Banner */}
             {dutyError && (
-              <div className="mt-3 p-3 rounded-xl bg-red-950/90 border border-red-700 text-xs font-mono text-red-200 space-y-1 animate-in fade-in">
-                <div className="flex items-center gap-2 font-bold text-red-400">
-                  <AlertTriangle className="w-4 h-4 shrink-0 text-red-400 animate-pulse" />
-                  <span>CAPTAIN OPERATION REJECTED</span>
+              <div className="mt-3 p-3 rounded-lg bg-rose-50 border border-rose-200 text-xs font-mono text-rose-800 space-y-1">
+                <div className="flex items-center gap-2 font-semibold text-rose-900">
+                  <AlertTriangle className="w-4 h-4 shrink-0 text-rose-600" />
+                  <span>Captain Operation Rejected</span>
                 </div>
-                <div className="text-[11px] text-red-300 leading-relaxed">
+                <div className="text-[11px] text-rose-700 leading-relaxed">
                   {dutyError}
                 </div>
-                <div className="pt-1 text-[10px] text-amber-300 flex items-center gap-1.5 font-semibold">
-                  <span className="w-2 h-2 rounded-full bg-amber-400 animate-ping shrink-0" />
+                <div className="pt-1 text-[10px] text-rose-600 flex items-center gap-1.5 font-medium">
+                  <Clock className="w-3 h-3 text-rose-500" />
                   <span>Autonomous SRE agent is restoring cluster service (auto-heals in &le; 10s)...</span>
                 </div>
               </div>
@@ -543,8 +535,8 @@ export const DriverPortal = ({ driverUser, faultActive, activeFaults = [], onHea
 
             {/* Cashout Notice Banner */}
             {cashoutNotice && (
-              <div className="mt-3 p-2.5 rounded-xl bg-emerald-950/80 border border-emerald-500 text-emerald-300 text-xs font-mono flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+              <div className="mt-3 p-2.5 rounded-lg bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-mono flex items-center gap-2">
+                <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
                 <span>{cashoutNotice}</span>
               </div>
             )}
@@ -552,31 +544,31 @@ export const DriverPortal = ({ driverUser, faultActive, activeFaults = [], onHea
 
           {/* Daily vs Monthly Analytics Toggle */}
           <div className="flex items-center justify-between pt-1">
-            <span className="text-[11px] font-mono font-bold text-slate-300 uppercase tracking-wider flex items-center gap-1.5">
-              <TrendingUp className="w-3.5 h-3.5 text-[#FFDE00]" />
+            <span className="text-xs font-semibold text-slate-700 flex items-center gap-1.5">
+              <TrendingUp className="w-3.5 h-3.5 text-emerald-600" />
               <span>Earnings & Rides</span>
             </span>
 
-            <div className="flex items-center p-0.5 rounded-xl bg-slate-900 border border-white/10 text-[10px] font-mono">
+            <div className="flex items-center p-0.5 rounded-lg bg-slate-100 border border-slate-200 text-[10px] font-mono">
               <button
                 onClick={() => setStatsPeriod('DAILY')}
-                className={`px-2.5 py-1 rounded-lg font-bold transition-all ${
+                className={`px-2.5 py-1 rounded-md font-medium transition-all ${
                   statsPeriod === 'DAILY'
-                    ? 'bg-[#FFDE00] text-black shadow-md font-extrabold'
-                    : 'text-slate-400 hover:text-white'
+                    ? 'bg-white text-emerald-800 shadow-xs font-bold border border-slate-200'
+                    : 'text-slate-500 hover:text-slate-800'
                 }`}
               >
-                ☀️ Today (Daily)
+                Today (Daily)
               </button>
               <button
                 onClick={() => setStatsPeriod('MONTHLY')}
-                className={`px-2.5 py-1 rounded-lg font-bold transition-all ${
+                className={`px-2.5 py-1 rounded-md font-medium transition-all ${
                   statsPeriod === 'MONTHLY'
-                    ? 'bg-[#FFDE00] text-black shadow-md font-extrabold'
-                    : 'text-slate-400 hover:text-white'
+                    ? 'bg-white text-emerald-800 shadow-xs font-bold border border-slate-200'
+                    : 'text-slate-500 hover:text-slate-800'
                 }`}
               >
-                🗓️ This Month
+                This Month
               </button>
             </div>
           </div>
@@ -584,67 +576,67 @@ export const DriverPortal = ({ driverUser, faultActive, activeFaults = [], onHea
           {/* Quick Metrics Bar (Daily vs Monthly View) */}
           {statsPeriod === 'DAILY' ? (
             <div className="grid grid-cols-4 gap-2 text-center font-mono text-xs">
-              <div className="p-2.5 rounded-xl bg-white/5 border border-white/5">
-                <div className="text-[10px] text-slate-400 uppercase">Today Revenue</div>
-                <div className="text-sm font-bold text-[#FFDE00] mt-0.5">₹{(captainStats?.today_earnings || 0).toLocaleString()}</div>
+              <div className="p-2.5 rounded-xl bg-slate-50 border border-slate-200/80">
+                <div className="text-[10px] text-slate-500 uppercase font-medium">Revenue</div>
+                <div className="text-sm font-bold text-emerald-700 mt-0.5">₹{(captainStats?.today_earnings || 0).toLocaleString()}</div>
               </div>
 
-              <div className="p-2.5 rounded-xl bg-white/5 border border-white/5">
-                <div className="text-[10px] text-slate-400 uppercase">Rides Accepted</div>
-                <div className="text-sm font-bold text-white mt-0.5">{captainStats?.today_accepted_rides || 14}</div>
+              <div className="p-2.5 rounded-xl bg-slate-50 border border-slate-200/80">
+                <div className="text-[10px] text-slate-500 uppercase font-medium">Accepted</div>
+                <div className="text-sm font-bold text-slate-800 mt-0.5">{captainStats?.today_accepted_rides || 14}</div>
               </div>
 
-              <div className="p-2.5 rounded-xl bg-white/5 border border-white/5">
-                <div className="text-[10px] text-slate-400 uppercase">Acceptance</div>
-                <div className="text-sm font-bold text-emerald-400 mt-0.5">{captainStats?.today_acceptance_rate || 98.4}%</div>
+              <div className="p-2.5 rounded-xl bg-slate-50 border border-slate-200/80">
+                <div className="text-[10px] text-slate-500 uppercase font-medium">Rate</div>
+                <div className="text-sm font-bold text-emerald-700 mt-0.5">{captainStats?.today_acceptance_rate || 98.4}%</div>
               </div>
 
-              <div className="p-2.5 rounded-xl bg-white/5 border border-white/5">
-                <div className="text-[10px] text-slate-400 uppercase">Hours Active</div>
-                <div className="text-sm font-bold text-slate-300 mt-0.5">{captainStats?.today_duty_hours || 6.5}h</div>
+              <div className="p-2.5 rounded-xl bg-slate-50 border border-slate-200/80">
+                <div className="text-[10px] text-slate-500 uppercase font-medium">Hours</div>
+                <div className="text-sm font-bold text-slate-700 mt-0.5">{captainStats?.today_duty_hours || 6.5}h</div>
               </div>
             </div>
           ) : (
             <div className="grid grid-cols-4 gap-2 text-center font-mono text-xs">
-              <div className="p-2.5 rounded-xl bg-white/5 border border-white/5">
-                <div className="text-[10px] text-slate-400 uppercase">Month Revenue</div>
-                <div className="text-sm font-bold text-[#FFDE00] mt-0.5">₹{(captainStats?.monthly_earnings || 0).toLocaleString()}</div>
+              <div className="p-2.5 rounded-xl bg-slate-50 border border-slate-200/80">
+                <div className="text-[10px] text-slate-500 uppercase font-medium">Revenue</div>
+                <div className="text-sm font-bold text-emerald-700 mt-0.5">₹{(captainStats?.monthly_earnings || 0).toLocaleString()}</div>
               </div>
 
-              <div className="p-2.5 rounded-xl bg-white/5 border border-white/5">
-                <div className="text-[10px] text-slate-400 uppercase">Month Accepted</div>
-                <div className="text-sm font-bold text-white mt-0.5">{captainStats?.monthly_accepted_rides || 348}</div>
+              <div className="p-2.5 rounded-xl bg-slate-50 border border-slate-200/80">
+                <div className="text-[10px] text-slate-500 uppercase font-medium">Accepted</div>
+                <div className="text-sm font-bold text-slate-800 mt-0.5">{captainStats?.monthly_accepted_rides || 348}</div>
               </div>
 
-              <div className="p-2.5 rounded-xl bg-white/5 border border-white/5">
-                <div className="text-[10px] text-slate-400 uppercase">Monthly Rate</div>
-                <div className="text-sm font-bold text-emerald-400 mt-0.5">{captainStats?.monthly_acceptance_rate || 97.8}%</div>
+              <div className="p-2.5 rounded-xl bg-slate-50 border border-slate-200/80">
+                <div className="text-[10px] text-slate-500 uppercase font-medium">Rate</div>
+                <div className="text-sm font-bold text-emerald-700 mt-0.5">{captainStats?.monthly_acceptance_rate || 97.8}%</div>
               </div>
 
-              <div className="p-2.5 rounded-xl bg-white/5 border border-white/5">
-                <div className="text-[10px] text-slate-400 uppercase">Duty Days</div>
-                <div className="text-sm font-bold text-slate-300 mt-0.5">{captainStats?.monthly_duty_days || 24}d</div>
+              <div className="p-2.5 rounded-xl bg-slate-50 border border-slate-200/80">
+                <div className="text-[10px] text-slate-500 uppercase font-medium">Days</div>
+                <div className="text-sm font-bold text-slate-700 mt-0.5">{captainStats?.monthly_duty_days || 24}d</div>
               </div>
             </div>
           )}
 
           {/* Incentive Progress Target */}
-          <div className="p-3.5 rounded-2xl bg-gradient-to-r from-amber-500/10 to-[#FFDE00]/10 border border-[#FFDE00]/20 space-y-2">
+          <div className="p-3.5 rounded-xl bg-emerald-50/60 border border-emerald-200/80 space-y-2">
             <div className="flex items-center justify-between text-xs font-mono">
-              <span className="flex items-center gap-1.5 text-[#FFDE00] font-bold">
-                <Award className="w-4 h-4" />
+              <span className="flex items-center gap-1.5 text-emerald-900 font-semibold">
+                <Award className="w-4 h-4 text-emerald-700" />
                 <span>{statsPeriod === 'DAILY' ? 'Daily Incentive Target' : 'Monthly Milestone Target'}</span>
               </span>
-              <span className="text-white font-bold">
+              <span className="text-slate-800 font-bold">
                 {statsPeriod === 'DAILY'
                   ? `${captainStats?.today_trips || 14} / ${captainStats?.today_incentive_target || 15} Trips`
                   : `${captainStats?.monthly_trips || 348} / 380 Trips`}
               </span>
             </div>
 
-            <div className="w-full h-2 rounded-full bg-slate-800 overflow-hidden">
+            <div className="w-full h-1.5 rounded-full bg-slate-200 overflow-hidden">
               <div
-                className="h-full rounded-full bg-gradient-to-r from-amber-400 to-[#FFDE00] transition-all"
+                className="h-full rounded-full bg-emerald-600 transition-all"
                 style={{
                   width: `${
                     statsPeriod === 'DAILY'
@@ -655,13 +647,13 @@ export const DriverPortal = ({ driverUser, faultActive, activeFaults = [], onHea
               />
             </div>
 
-            <div className="flex items-center justify-between text-[11px] font-mono text-slate-400">
+            <div className="flex items-center justify-between text-[11px] font-mono text-slate-500">
               <span>
                 {statsPeriod === 'DAILY'
                   ? `Complete ${Math.max(0, (captainStats?.today_incentive_target || 15) - (captainStats?.today_trips || 14))} more rides today`
                   : `${Math.max(0, 380 - (captainStats?.monthly_trips || 348))} rides to monthly milestone bonus`}
               </span>
-              <span className="text-emerald-400 font-semibold">
+              <span className="text-emerald-700 font-semibold">
                 {statsPeriod === 'DAILY' ? `+₹${captainStats?.today_incentive_bonus || 300} Cash Bonus` : `+₹${captainStats?.monthly_incentive_bonus || 3800} Bonus`}
               </span>
             </div>
@@ -669,38 +661,40 @@ export const DriverPortal = ({ driverUser, faultActive, activeFaults = [], onHea
 
           {/* ACTIVE TRIP COCKPIT OR WAITING RADAR */}
           {activeTrip ? (
-            <div className="p-5 rounded-2xl bg-[#131B2A] border border-[#FFDE00]/30 shadow-2xl space-y-4 animate-in fade-in slide-in-from-bottom-2 duration-200">
+            <div className="p-4 rounded-xl bg-white border border-emerald-300 shadow-sm space-y-4">
               {/* Trip Phase Header */}
-              <div className="flex items-center justify-between border-b border-white/10 pb-3">
+              <div className="flex items-center justify-between border-b border-slate-100 pb-3">
                 <div className="flex items-center gap-2">
-                  <span className="text-xl">{activeTrip?.icon || '🛵'}</span>
+                  <div className="w-8 h-8 rounded-lg bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-700">
+                    {activeTrip?.type === 'AUTO' ? <Car className="w-4 h-4" /> : activeTrip?.type === 'PARCEL' ? <Package className="w-4 h-4" /> : <Bike className="w-4 h-4" />}
+                  </div>
                   <div>
-                    <div className="text-xs font-mono font-bold text-[#FFDE00] uppercase tracking-wider">
+                    <div className="text-[10px] font-mono font-bold text-emerald-800 uppercase tracking-wider">
                       {activeTrip.step === 'EN_ROUTE_PICKUP' && 'Phase 1: Head to Pickup'}
                       {activeTrip.step === 'ARRIVED_PICKUP' && 'Phase 2: At Pickup Spot'}
                       {activeTrip.step === 'IN_TRANSIT' && 'Phase 3: Trip in Progress'}
                       {activeTrip.step === 'PAYMENT_COLLECTION' && 'Phase 4: Collect Payment'}
                     </div>
-                    <div className="text-sm font-bold text-white mt-0.5">{activeTrip?.typeLabel || 'Rydex Ride'}</div>
+                    <div className="text-xs font-bold text-slate-800 mt-0.5">{activeTrip?.typeLabel || 'Rydex Ride'}</div>
                   </div>
                 </div>
 
                 <div className="text-right font-mono">
                   <div className="text-[10px] text-slate-400">Earnings</div>
-                  <div className="text-base font-bold text-emerald-400">₹{activeTrip?.estimatedEarnings || activeTrip?.estimated_fare || 78}</div>
+                  <div className="text-sm font-bold text-emerald-700">₹{activeTrip?.estimatedEarnings || activeTrip?.estimated_fare || 78}</div>
                 </div>
               </div>
 
               {/* Customer Info Card */}
-              <div className="flex items-center justify-between bg-slate-900/60 p-3 rounded-xl border border-white/5">
+              <div className="flex items-center justify-between bg-slate-50 p-3 rounded-lg border border-slate-200">
                 <div className="flex items-center gap-2.5">
-                  <div className="w-9 h-9 rounded-full bg-slate-800 flex items-center justify-center font-bold text-xs text-white">
+                  <div className="w-8 h-8 rounded-full bg-slate-200 flex items-center justify-center font-bold text-xs text-slate-700">
                     {(activeTrip?.customerName || 'Passenger').charAt(0)}
                   </div>
                   <div>
-                    <div className="text-xs font-bold text-white">{activeTrip?.customerName || 'Priya Sharma'}</div>
-                    <div className="text-[10px] font-mono text-slate-400 flex items-center gap-1">
-                      <Star className="w-3 h-3 text-[#FFDE00] fill-[#FFDE00]" />
+                    <div className="text-xs font-bold text-slate-900">{activeTrip?.customerName || 'Priya Sharma'}</div>
+                    <div className="text-[10px] font-mono text-slate-500 flex items-center gap-1">
+                      <Star className="w-3 h-3 text-amber-500 fill-amber-500" />
                       <span>{activeTrip?.customerRating || 4.9}</span> &bull; <span>{activeTrip?.paymentMode || 'UPI'}</span>
                     </div>
                   </div>
@@ -709,14 +703,14 @@ export const DriverPortal = ({ driverUser, faultActive, activeFaults = [], onHea
                 <div className="flex items-center gap-1.5">
                   <button
                     onClick={() => alert(`Calling customer ${activeTrip?.customerName || 'Passenger'}: +91 98450 91823`)}
-                    className="p-2 rounded-xl bg-white/5 hover:bg-[#FFDE00] hover:text-black text-slate-200 border border-white/10 transition-all"
+                    className="p-2 rounded-lg bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 transition-all shadow-xs"
                     title="Call Customer"
                   >
                     <Phone className="w-3.5 h-3.5" />
                   </button>
                   <button
                     onClick={() => alert(`Chat with ${activeTrip?.customerName || 'Passenger'}`)}
-                    className="p-2 rounded-xl bg-white/5 hover:bg-[#FFDE00] hover:text-black text-slate-200 border border-white/10 transition-all"
+                    className="p-2 rounded-lg bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 transition-all shadow-xs"
                     title="Chat"
                   >
                     <MessageSquare className="w-3.5 h-3.5" />
@@ -725,19 +719,19 @@ export const DriverPortal = ({ driverUser, faultActive, activeFaults = [], onHea
               </div>
 
               {/* Location Route */}
-              <div className="space-y-2 font-mono text-xs p-3 rounded-xl bg-slate-900/40 border border-white/5">
-                <div className="flex items-start gap-2 text-slate-300">
-                  <MapPin className="w-3.5 h-3.5 text-emerald-400 shrink-0 mt-0.5" />
+              <div className="space-y-2 font-mono text-xs p-3 rounded-lg bg-slate-50 border border-slate-200">
+                <div className="flex items-start gap-2 text-slate-700">
+                  <MapPin className="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5" />
                   <div>
-                    <span className="text-[10px] text-slate-500 uppercase block">Pickup</span>
-                    <span className="font-semibold">{activeTrip?.pickupAddress || activeTrip?.pickup_address || 'Pickup Point'}</span>
+                    <span className="text-[10px] text-slate-400 uppercase block font-semibold">Pickup</span>
+                    <span className="font-medium text-slate-800">{activeTrip?.pickupAddress || activeTrip?.pickup_address || 'Pickup Point'}</span>
                   </div>
                 </div>
-                <div className="border-t border-white/5 pt-2 flex items-start gap-2 text-slate-300">
-                  <Navigation className="w-3.5 h-3.5 text-red-400 shrink-0 mt-0.5" />
+                <div className="border-t border-slate-200/70 pt-2 flex items-start gap-2 text-slate-700">
+                  <Navigation className="w-3.5 h-3.5 text-rose-500 shrink-0 mt-0.5" />
                   <div>
-                    <span className="text-[10px] text-slate-500 uppercase block">Drop</span>
-                    <span className="font-semibold">{activeTrip?.dropoffAddress || activeTrip?.dropoff_address || 'Dropoff Point'}</span>
+                    <span className="text-[10px] text-slate-400 uppercase block font-semibold">Drop</span>
+                    <span className="font-medium text-slate-800">{activeTrip?.dropoffAddress || activeTrip?.dropoff_address || 'Dropoff Point'}</span>
                   </div>
                 </div>
               </div>
@@ -745,13 +739,13 @@ export const DriverPortal = ({ driverUser, faultActive, activeFaults = [], onHea
               {/* Action Stages */}
               {activeTrip.step === 'EN_ROUTE_PICKUP' && (
                 <div className="space-y-2 pt-1">
-                  <div className="flex items-center justify-between text-xs font-mono text-slate-400">
+                  <div className="flex items-center justify-between text-xs font-mono text-slate-500">
                     <span>Pickup Navigation:</span>
-                    <span className="text-white font-bold">{activeTrip?.pickupDistanceKm || 0.8} km (~3 mins)</span>
+                    <span className="text-slate-800 font-bold">{activeTrip?.pickupDistanceKm || 0.8} km (~3 mins)</span>
                   </div>
                   <button
                     onClick={handleArrivedAtPickup}
-                    className="w-full py-3.5 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-black font-extrabold text-xs tracking-wider uppercase transition-all shadow-lg active:scale-98 flex items-center justify-center gap-2"
+                    className="w-full py-3 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs tracking-wider uppercase transition-all shadow-xs flex items-center justify-center gap-2"
                   >
                     <CheckCircle2 className="w-4 h-4" />
                     <span>I Have Arrived At Pickup</span>
@@ -761,12 +755,12 @@ export const DriverPortal = ({ driverUser, faultActive, activeFaults = [], onHea
 
               {activeTrip.step === 'ARRIVED_PICKUP' && (
                 <div className="space-y-3 pt-1">
-                  <div className="p-3 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs font-mono">
+                  <div className="p-3 rounded-lg bg-amber-50 border border-amber-200 text-amber-900 text-xs font-mono">
                     Ask passenger for their 4-digit Start OTP before beginning ride.
                   </div>
 
                   <div className="space-y-1">
-                    <label className="text-[11px] font-mono text-slate-400 uppercase font-semibold">
+                    <label className="text-[11px] font-mono text-slate-500 uppercase font-semibold">
                       Enter Passenger Start OTP
                     </label>
                     <div className="flex gap-2">
@@ -776,40 +770,40 @@ export const DriverPortal = ({ driverUser, faultActive, activeFaults = [], onHea
                         value={enteredOtp}
                         onChange={(e) => setEnteredOtp(e.target.value)}
                         placeholder={`e.g. ${activeTrip?.otp || '4821'}`}
-                        className="flex-1 px-4 py-2.5 rounded-xl bg-slate-800 border border-white/10 text-center font-mono text-lg font-bold text-white focus:outline-none focus:border-[#FFDE00]"
+                        className="flex-1 px-4 py-2 rounded-lg bg-slate-50 border border-slate-300 text-center font-mono text-base font-bold text-slate-900 focus:outline-none focus:border-emerald-500"
                       />
                       <button
                         onClick={handleVerifyOtpAndStart}
-                        className="px-5 py-2.5 rounded-xl bg-[#FFDE00] text-black font-bold text-xs yellow-glow"
+                        className="px-5 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs shadow-xs"
                       >
                         Start Trip
                       </button>
                     </div>
-                    {otpError && <div className="text-[11px] font-mono text-red-400 mt-1">{otpError}</div>}
+                    {otpError && <div className="text-[11px] font-mono text-rose-600 mt-1">{otpError}</div>}
                   </div>
                 </div>
               )}
 
               {activeTrip.step === 'IN_TRANSIT' && (
                 <div className="space-y-3 pt-1">
-                  <div className="p-3 rounded-xl bg-slate-900 border border-white/10 grid grid-cols-3 gap-2 text-center font-mono">
+                  <div className="p-3 rounded-lg bg-slate-50 border border-slate-200 grid grid-cols-3 gap-2 text-center font-mono">
                     <div>
-                      <div className="text-[10px] text-slate-500">SPEED</div>
-                      <div className="text-base font-bold text-white">42 km/h</div>
+                      <div className="text-[10px] text-slate-400">SPEED</div>
+                      <div className="text-sm font-bold text-slate-800">42 km/h</div>
                     </div>
                     <div>
-                      <div className="text-[10px] text-slate-500">REMAINING</div>
-                      <div className="text-base font-bold text-[#FFDE00]">{activeTrip?.tripDistanceKm || 4.8} km</div>
+                      <div className="text-[10px] text-slate-400">REMAINING</div>
+                      <div className="text-sm font-bold text-emerald-700">{activeTrip?.tripDistanceKm || 4.8} km</div>
                     </div>
                     <div>
-                      <div className="text-[10px] text-slate-500">ETA</div>
-                      <div className="text-base font-bold text-emerald-400">~12 min</div>
+                      <div className="text-[10px] text-slate-400">ETA</div>
+                      <div className="text-sm font-bold text-slate-800">~12 min</div>
                     </div>
                   </div>
 
                   <button
                     onClick={handleCompleteTrip}
-                    className="w-full py-3.5 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-black font-extrabold text-xs tracking-wider uppercase transition-all shadow-lg active:scale-98 flex items-center justify-center gap-2"
+                    className="w-full py-3 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs tracking-wider uppercase transition-all shadow-xs flex items-center justify-center gap-2"
                   >
                     <CheckCircle2 className="w-4 h-4" />
                     <span>Reached Destination &bull; Complete Ride</span>
@@ -819,18 +813,18 @@ export const DriverPortal = ({ driverUser, faultActive, activeFaults = [], onHea
 
               {activeTrip.step === 'PAYMENT_COLLECTION' && (
                 <div className="space-y-4 pt-1 text-center font-mono">
-                  <div className="w-14 h-14 mx-auto rounded-full bg-emerald-500/20 border border-emerald-500 flex items-center justify-center text-emerald-400">
-                    <CheckCircle2 className="w-8 h-8" />
+                  <div className="w-12 h-12 mx-auto rounded-full bg-emerald-50 border border-emerald-300 flex items-center justify-center text-emerald-600">
+                    <CheckCircle2 className="w-6 h-6" />
                   </div>
                   <div>
                     <div className="text-xs text-slate-400 uppercase">Collect Cash / QR Payment</div>
-                    <div className="text-2xl font-black text-[#FFDE00] mt-1">₹{activeTrip?.estimatedEarnings || activeTrip?.estimated_fare || 78}</div>
-                    <div className="text-[11px] text-emerald-400 mt-1">Earnings added to today's payout</div>
+                    <div className="text-2xl font-bold text-slate-900 mt-1">₹{activeTrip?.estimatedEarnings || activeTrip?.estimated_fare || 78}</div>
+                    <div className="text-[11px] text-emerald-700 mt-1 font-medium">Earnings added to today's payout</div>
                   </div>
 
                   <button
                     onClick={handleFinishPaymentAndClose}
-                    className="w-full py-3 rounded-xl bg-[#FFDE00] text-black font-bold text-xs yellow-glow"
+                    className="w-full py-2.5 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs shadow-xs"
                   >
                     Finish & Ready for Next Ride
                   </button>
@@ -840,19 +834,18 @@ export const DriverPortal = ({ driverUser, faultActive, activeFaults = [], onHea
           ) : (
             <>
               {/* Waiting for Orders Live Beacon */}
-              <div className="p-6 rounded-2xl bg-slate-900/60 border border-white/10 text-center space-y-4 relative">
-                <div className="relative w-16 h-16 mx-auto flex items-center justify-center">
-                  <div className="absolute inset-0 rounded-full border-2 border-[#FFDE00]/40 animate-ping" />
-                  <div className="w-12 h-12 rounded-full bg-[#FFDE00]/20 border border-[#FFDE00] flex items-center justify-center text-[#FFDE00]">
-                    <Radio className="w-6 h-6 animate-pulse" />
+              <div className="p-6 rounded-xl bg-slate-50/70 border border-slate-200 text-center space-y-3.5 relative">
+                <div className="relative w-14 h-14 mx-auto flex items-center justify-center">
+                  <div className="w-12 h-12 rounded-full bg-emerald-100 border border-emerald-300 flex items-center justify-center text-emerald-700">
+                    <Radio className="w-6 h-6" />
                   </div>
                 </div>
 
                 <div>
-                  <h3 className="text-sm font-bold text-white">
+                  <h3 className="text-sm font-bold text-slate-900">
                     {isOnline ? 'Scanning Bengaluru Mobility Grid' : 'You are currently Offline'}
                   </h3>
-                  <p className="text-xs text-slate-400 font-mono mt-1">
+                  <p className="text-xs text-slate-500 font-mono mt-1 leading-relaxed">
                     {isOnline
                       ? 'GPS active & connected. When a passenger books on Rydex, their ride will appear here for you to accept.'
                       : 'Switch duty to ON to start receiving ride requests.'}
@@ -862,10 +855,10 @@ export const DriverPortal = ({ driverUser, faultActive, activeFaults = [], onHea
                 {isOnline && (
                   <button
                     onClick={handleSimulatePassengerRequest}
-                    className="mt-2 px-3 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 text-[#FFDE00] border border-[#FFDE00]/30 text-[11px] font-mono font-bold transition-all flex items-center gap-1.5 mx-auto"
+                    className="mt-1 px-3 py-1.5 rounded-lg bg-white hover:bg-slate-100 text-emerald-800 border border-slate-200 text-[11px] font-mono font-semibold transition-all flex items-center gap-1.5 mx-auto shadow-xs"
                     title="Simulate a passenger booking without switching tabs"
                   >
-                    <Sparkles className="w-3.5 h-3.5 text-[#FFDE00]" />
+                    <Sparkles className="w-3.5 h-3.5 text-emerald-600" />
                     <span>Quick Passenger Booking Test</span>
                   </button>
                 )}
@@ -873,43 +866,43 @@ export const DriverPortal = ({ driverUser, faultActive, activeFaults = [], onHea
 
               {/* Service Modes Accepted */}
               <div className="space-y-2">
-                <div className="text-[10px] font-mono text-slate-400 uppercase font-bold tracking-wider">
+                <div className="text-[10px] font-mono text-slate-400 uppercase font-semibold tracking-wider">
                   Service Preferences
                 </div>
                 <div className="grid grid-cols-3 gap-2">
                   <button
                     onClick={() => setAllowedServices({ ...allowedServices, BIKE: !allowedServices.BIKE })}
-                    className={`p-2.5 rounded-xl border text-xs font-mono font-bold flex flex-col items-center gap-1 transition-all ${
+                    className={`p-2.5 rounded-lg border text-xs font-mono font-medium flex flex-col items-center gap-1.5 transition-all ${
                       allowedServices.BIKE
-                        ? 'bg-[#FFDE00]/15 border-[#FFDE00] text-[#FFDE00]'
-                        : 'bg-white/5 border-white/5 text-slate-500'
+                        ? 'bg-emerald-50 border-emerald-300 text-emerald-900 shadow-xs'
+                        : 'bg-white border-slate-200 text-slate-400'
                     }`}
                   >
-                    <span className="text-base">🛵</span>
+                    <Bike className="w-4 h-4 text-emerald-700" />
                     <span>Bike Rides</span>
                   </button>
 
                   <button
                     onClick={() => setAllowedServices({ ...allowedServices, AUTO: !allowedServices.AUTO })}
-                    className={`p-2.5 rounded-xl border text-xs font-mono font-bold flex flex-col items-center gap-1 transition-all ${
+                    className={`p-2.5 rounded-lg border text-xs font-mono font-medium flex flex-col items-center gap-1.5 transition-all ${
                       allowedServices.AUTO
-                        ? 'bg-[#FFDE00]/15 border-[#FFDE00] text-[#FFDE00]'
-                        : 'bg-white/5 border-white/5 text-slate-500'
+                        ? 'bg-emerald-50 border-emerald-300 text-emerald-900 shadow-xs'
+                        : 'bg-white border-slate-200 text-slate-400'
                     }`}
                   >
-                    <span className="text-base">🛺</span>
+                    <Car className="w-4 h-4 text-emerald-700" />
                     <span>Auto</span>
                   </button>
 
                   <button
                     onClick={() => setAllowedServices({ ...allowedServices, PARCEL: !allowedServices.PARCEL })}
-                    className={`p-2.5 rounded-xl border text-xs font-mono font-bold flex flex-col items-center gap-1 transition-all ${
+                    className={`p-2.5 rounded-lg border text-xs font-mono font-medium flex flex-col items-center gap-1.5 transition-all ${
                       allowedServices.PARCEL
-                        ? 'bg-[#FFDE00]/15 border-[#FFDE00] text-[#FFDE00]'
-                        : 'bg-white/5 border-white/5 text-slate-500'
+                        ? 'bg-emerald-50 border-emerald-300 text-emerald-900 shadow-xs'
+                        : 'bg-white border-slate-200 text-slate-400'
                     }`}
                   >
-                    <span className="text-base">📦</span>
+                    <Package className="w-4 h-4 text-emerald-700" />
                     <span>Parcel</span>
                   </button>
                 </div>
@@ -919,55 +912,56 @@ export const DriverPortal = ({ driverUser, faultActive, activeFaults = [], onHea
         </div>
 
         {/* Footer Wallet & Instant Cashout */}
-        <div className="pt-3 border-t border-white/10 space-y-2 font-mono">
+        <div className="pt-3 border-t border-slate-200 space-y-2 font-mono">
           {/* Real-time cashout error banner directly above the button */}
           {cashoutError && (
-            <div className="p-2.5 rounded-xl bg-red-950/90 border border-red-600 text-xs text-red-200 animate-in fade-in space-y-1">
-              <div className="flex items-center gap-1.5 font-bold text-red-400">
-                <AlertTriangle className="w-4 h-4 text-red-400 animate-pulse shrink-0" />
-                <span>CASHOUT SETTLEMENT BLOCKED (SLA HEALING ACTIVE)</span>
+            <div className="p-2.5 rounded-lg bg-rose-50 border border-rose-200 text-xs text-rose-800 space-y-1">
+              <div className="flex items-center gap-1.5 font-bold text-rose-900">
+                <AlertTriangle className="w-4 h-4 text-rose-600 shrink-0" />
+                <span>Cashout Settlement Blocked (SLA Healing Active)</span>
               </div>
-              <div className="text-[11px] text-red-300 leading-relaxed">{cashoutError}</div>
-              <div className="text-[10px] text-amber-300 font-semibold pt-0.5">
-                ⏳ Autonomous SRE Canary Rollback in progress ({activeChaosInfo?.remaining || 1}s remaining)...
+              <div className="text-[11px] text-rose-700 leading-relaxed">{cashoutError}</div>
+              <div className="text-[10px] text-amber-800 font-semibold pt-0.5 flex items-center gap-1">
+                <Clock className="w-3 h-3 text-amber-600" />
+                <span>Autonomous SRE Canary Rollback in progress ({activeChaosInfo?.remaining || 1}s remaining)...</span>
               </div>
             </div>
           )}
 
           {/* Cashout Notice Banner */}
           {cashoutNotice && (
-            <div className="p-2 rounded-xl bg-emerald-950/90 border border-emerald-500 text-emerald-300 text-xs flex items-center gap-2 animate-in fade-in">
-              <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+            <div className="p-2 rounded-lg bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs flex items-center gap-2">
+              <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
               <span>{cashoutNotice}</span>
             </div>
           )}
 
           <div className="flex items-center justify-between text-xs">
             <div className="flex items-center gap-2">
-              <Wallet className="w-4 h-4 text-[#FFDE00]" />
+              <Wallet className="w-4 h-4 text-emerald-700" />
               <div>
                 <div className="text-[10px] text-slate-400">Balance</div>
-                <div className="font-bold text-white">₹{(captainStats?.wallet_balance || 0).toFixed(2)}</div>
+                <div className="font-bold text-slate-900">₹{(captainStats?.wallet_balance || 0).toFixed(2)}</div>
               </div>
             </div>
 
             <button
               onClick={handleInstantCashout}
               disabled={(captainStats?.wallet_balance || 0) <= 0}
-              className={`px-3.5 py-1.5 rounded-xl font-bold transition-all text-xs flex items-center gap-1.5 ${
+              className={`px-3.5 py-1.5 rounded-lg font-semibold transition-all text-xs flex items-center gap-1.5 shadow-xs ${
                 activeChaosInfo && (activeChaosInfo.fault_type === 'MEMORY_LEAK' || activeChaosInfo.fault_type === 'DB_BOTTLENECK')
-                  ? 'bg-rose-600/30 text-rose-300 border border-rose-500/50 hover:bg-rose-600/40 animate-pulse'
-                  : 'bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-400 border border-emerald-500/40 disabled:opacity-50'
+                  ? 'bg-rose-50 text-rose-800 border border-rose-300 hover:bg-rose-100'
+                  : 'bg-emerald-600 hover:bg-emerald-700 text-white disabled:opacity-50'
               }`}
             >
               {activeChaosInfo && activeChaosInfo.fault_type === 'MEMORY_LEAK' ? (
                 <>
-                  <AlertTriangle className="w-3.5 h-3.5 text-rose-400 shrink-0" />
+                  <AlertTriangle className="w-3.5 h-3.5 text-rose-600 shrink-0" />
                   <span>Blocked: OOMKilled ({activeChaosInfo.remaining}s)</span>
                 </>
               ) : activeChaosInfo && activeChaosInfo.fault_type === 'DB_BOTTLENECK' ? (
                 <>
-                  <AlertTriangle className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+                  <AlertTriangle className="w-3.5 h-3.5 text-amber-600 shrink-0" />
                   <span>Blocked: DB Lock ({activeChaosInfo.remaining}s)</span>
                 </>
               ) : (
@@ -981,22 +975,22 @@ export const DriverPortal = ({ driverUser, faultActive, activeFaults = [], onHea
       {/* Right Column: Surge Map & Incoming Dispatch Overlay */}
       <div className="flex-1 h-full relative flex flex-col">
         {/* Top Surge Hotspots Ribbon */}
-        <div className="h-12 border-b border-white/10 bg-slate-900/90 px-6 flex items-center justify-between text-xs font-mono shrink-0 z-10">
-          <div className="flex items-center gap-2 text-amber-400 font-bold">
-            <TrendingUp className="w-4 h-4" />
+        <div className="h-11 border-b border-slate-200 bg-white px-6 flex items-center justify-between text-xs font-mono shrink-0 z-10">
+          <div className="flex items-center gap-2 text-slate-700 font-semibold">
+            <TrendingUp className="w-4 h-4 text-emerald-600" />
             <span>High Surge Zones:</span>
           </div>
 
-          <div className="flex items-center gap-4 text-[11px] overflow-x-auto">
-            <span className="text-slate-300">Outer Ring Road: <strong className="text-[#FFDE00]">1.4x</strong></span>
-            <span className="text-slate-300">Koramangala: <strong className="text-[#FFDE00]">1.35x</strong></span>
-            <span className="text-slate-300">Indiranagar: <strong className="text-[#FFDE00]">1.25x</strong></span>
-            <span className="text-slate-300">Whitefield: <strong className="text-[#FFDE00]">1.3x</strong></span>
+          <div className="flex items-center gap-4 text-[11px] overflow-x-auto text-slate-600">
+            <span>Outer Ring Road: <strong className="text-emerald-700">1.4x</strong></span>
+            <span>Koramangala: <strong className="text-emerald-700">1.35x</strong></span>
+            <span>Indiranagar: <strong className="text-emerald-700">1.25x</strong></span>
+            <span>Whitefield: <strong className="text-emerald-700">1.3x</strong></span>
           </div>
         </div>
 
         {/* Visual Map Area with RealTimeMap */}
-        <div className="flex-1 relative bg-[#0c101a] overflow-hidden">
+        <div className="flex-1 relative bg-slate-100 overflow-hidden">
           <RealTimeMap
             mode="DRIVER"
             pickupLocation={activeTrip ? (activeTrip.pickupAddress || activeTrip.pickup_address) : 'Indiranagar 100ft Road'}
@@ -1010,59 +1004,59 @@ export const DriverPortal = ({ driverUser, faultActive, activeFaults = [], onHea
 
           {/* INCOMING DISPATCH MODAL OVERLAY */}
           {incomingOrder && (
-            <div className="absolute inset-0 bg-black/70 backdrop-blur-sm z-30 flex items-center justify-center p-4 animate-in fade-in zoom-in-95 duration-200">
-              <div className="glass-card w-full max-w-md rounded-3xl p-6 border-2 border-[#FFDE00] shadow-[0_0_40px_rgba(255,222,0,0.3)] space-y-5">
+            <div className="absolute inset-0 bg-slate-900/40 backdrop-blur-xs z-30 flex items-center justify-center p-4">
+              <div className="bg-white w-full max-w-md rounded-2xl p-6 border border-slate-200 shadow-xl space-y-5">
                 {/* Header & Countdown */}
-                <div className="flex items-center justify-between border-b border-white/10 pb-4">
+                <div className="flex items-center justify-between border-b border-slate-100 pb-4">
                   <div className="flex items-center gap-3">
-                    <div className="w-12 h-12 rounded-2xl bg-[#FFDE00] text-black text-2xl flex items-center justify-center shadow-lg font-black">
-                      {incomingOrder.icon || '🛵'}
+                    <div className="w-10 h-10 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-700 flex items-center justify-center font-bold">
+                      {incomingOrder.type === 'AUTO' ? <Car className="w-5 h-5" /> : incomingOrder.type === 'PARCEL' ? <Package className="w-5 h-5" /> : <Bike className="w-5 h-5" />}
                     </div>
                     <div>
-                      <div className="text-[10px] font-mono text-[#FFDE00] font-extrabold uppercase tracking-wider">
-                        New Passenger Request!
+                      <div className="text-[10px] font-mono text-emerald-800 font-bold uppercase tracking-wider">
+                        New Passenger Request
                       </div>
-                      <h3 className="text-base font-bold text-white mt-0.5">{incomingOrder.typeLabel}</h3>
+                      <h3 className="text-sm font-bold text-slate-900 mt-0.5">{incomingOrder.typeLabel}</h3>
                     </div>
                   </div>
 
                   {/* Countdown Circle */}
-                  <div className="w-11 h-11 rounded-full border-2 border-[#FFDE00] flex items-center justify-center font-mono font-black text-lg text-[#FFDE00] animate-pulse">
+                  <div className="w-9 h-9 rounded-full border-2 border-emerald-500 flex items-center justify-center font-mono font-bold text-sm text-emerald-700">
                     {countdown}
                   </div>
                 </div>
 
                 {/* Earnings Highlight */}
-                <div className="p-4 rounded-2xl bg-slate-900/90 border border-white/10 flex items-center justify-between font-mono">
+                <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-between font-mono">
                   <div>
                     <div className="text-[10px] text-slate-400 uppercase">Estimated Earnings</div>
-                    <div className="text-2xl font-black text-emerald-400">₹{incomingOrder.estimatedEarnings}</div>
+                    <div className="text-xl font-bold text-emerald-700">₹{incomingOrder.estimatedEarnings}</div>
                   </div>
                   <div className="text-right">
                     <div className="text-[10px] text-slate-400 uppercase">Trip Distance</div>
-                    <div className="text-sm font-bold text-white">{incomingOrder.tripDistanceKm} km</div>
+                    <div className="text-sm font-bold text-slate-800">{incomingOrder.tripDistanceKm} km</div>
                   </div>
                 </div>
 
                 {/* Route Details */}
-                <div className="space-y-2.5 font-mono text-xs">
+                <div className="space-y-2 font-mono text-xs">
                   <div className="flex items-start gap-2.5">
-                    <div className="w-5 h-5 rounded-full bg-emerald-500/20 border border-emerald-500 flex items-center justify-center text-emerald-400 shrink-0 text-[10px]">
+                    <div className="w-5 h-5 rounded-full bg-emerald-100 border border-emerald-300 flex items-center justify-center text-emerald-700 shrink-0 text-[10px] font-bold">
                       A
                     </div>
                     <div>
                       <div className="text-slate-400 text-[10px]">PASSENGER: {incomingOrder.customerName} ({incomingOrder.pickupDistanceKm} km away)</div>
-                      <div className="text-white font-medium text-xs mt-0.5">{incomingOrder.pickupAddress}</div>
+                      <div className="text-slate-800 font-medium text-xs mt-0.5">{incomingOrder.pickupAddress}</div>
                     </div>
                   </div>
 
                   <div className="flex items-start gap-2.5">
-                    <div className="w-5 h-5 rounded-full bg-red-500/20 border border-red-500 flex items-center justify-center text-red-400 shrink-0 text-[10px]">
+                    <div className="w-5 h-5 rounded-full bg-rose-100 border border-rose-300 flex items-center justify-center text-rose-700 shrink-0 text-[10px] font-bold">
                       B
                     </div>
                     <div>
                       <div className="text-slate-400 text-[10px]">DESTINATION</div>
-                      <div className="text-white font-medium text-xs mt-0.5">{incomingOrder.dropoffAddress}</div>
+                      <div className="text-slate-800 font-medium text-xs mt-0.5">{incomingOrder.dropoffAddress}</div>
                     </div>
                   </div>
                 </div>
@@ -1071,17 +1065,17 @@ export const DriverPortal = ({ driverUser, faultActive, activeFaults = [], onHea
                 <div className="grid grid-cols-2 gap-3 pt-2">
                   <button
                     onClick={handleDeclineOrder}
-                    className="py-3 px-4 rounded-xl bg-white/5 hover:bg-white/10 text-slate-300 font-semibold text-xs border border-white/10 transition-all flex items-center justify-center gap-1.5"
+                    className="py-2.5 px-4 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-xs border border-slate-200 transition-all flex items-center justify-center gap-1.5"
                   >
-                    <XCircle className="w-4 h-4 text-red-400" />
+                    <XCircle className="w-4 h-4 text-slate-500" />
                     <span>Decline</span>
                   </button>
 
                   <button
                     onClick={handleAcceptOrder}
-                    className="py-3 px-4 rounded-xl bg-[#FFDE00] hover:bg-[#ffe633] text-black font-extrabold text-xs yellow-glow shadow-lg transition-all flex items-center justify-center gap-1.5 active:scale-95"
+                    className="py-2.5 px-4 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs shadow-xs transition-all flex items-center justify-center gap-1.5 active:scale-95"
                   >
-                    <CheckCircle2 className="w-4 h-4 stroke-[2.5]" />
+                    <CheckCircle2 className="w-4 h-4" />
                     <span>ACCEPT ORDER</span>
                   </button>
                 </div>

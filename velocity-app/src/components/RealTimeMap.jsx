@@ -11,6 +11,8 @@ import {
   Crosshair,
   TrendingUp,
   AlertTriangle,
+  Bike,
+  Car,
 } from 'lucide-react';
 
 // Bangalore Coordinates Database (16+ major hubs)
@@ -38,7 +40,6 @@ function generateRouteWaypoints(start, end, steps = 12) {
   const points = [];
   for (let i = 0; i <= steps; i++) {
     const t = i / steps;
-    // Add slight realistic road curvature
     const curve = Math.sin(t * Math.PI) * 0.003;
     const lat = start[0] + (end[0] - start[0]) * t + curve;
     const lng = start[1] + (end[1] - start[1]) * t - curve * 0.5;
@@ -68,18 +69,18 @@ export const RealTimeMap = ({
   const routeGroupRef = useRef(null);
   const surgeGroupRef = useRef(null);
 
-  const [mapStyle, setMapStyle] = useState('DARK'); // 'DARK' | 'VOYAGER'
+  const [mapStyle, setMapStyle] = useState('VOYAGER'); // Default clean light cartography
   const [gpsLocked, setGpsLocked] = useState(true);
 
   // Active captain live coordinates (Ramesh Gowda near MG Road)
   const [captainCoords, setCaptainCoords] = useState([12.9716, 77.5946]);
 
-  // Dynamic nearby roaming captains
+  // Dynamic nearby roaming captains (clean, no emojis)
   const [roamingDrivers, setRoamingDrivers] = useState([
-    { id: 'DRV-001', type: 'BIKE', icon: '🛵', lat: 12.9716, lng: 77.5946, heading: 45, name: 'Captain Ramesh' },
-    { id: 'DRV-002', type: 'AUTO', icon: '🛺', lat: 12.9690, lng: 77.6120, heading: 280, name: 'Captain Manjunath' },
-    { id: 'DRV-003', type: 'PARCEL', icon: '📦', lat: 12.9720, lng: 77.6040, heading: 180, name: 'Captain Sunil' },
-    { id: 'DRV-007', type: 'CAB_ECONOMY', icon: '🚗', lat: 12.9810, lng: 77.6150, heading: 90, name: 'Captain Deepak' },
+    { id: 'DRV-001', type: 'BIKE', lat: 12.9716, lng: 77.5946, heading: 45, name: 'Captain Ramesh' },
+    { id: 'DRV-002', type: 'AUTO', lat: 12.9690, lng: 77.6120, heading: 280, name: 'Captain Manjunath' },
+    { id: 'DRV-003', type: 'PARCEL', lat: 12.9720, lng: 77.6040, heading: 180, name: 'Captain Sunil' },
+    { id: 'DRV-007', type: 'CAB_ECONOMY', lat: 12.9810, lng: 77.6150, heading: 90, name: 'Captain Deepak' },
   ]);
 
   // Initial Map Setup
@@ -125,7 +126,7 @@ export const RealTimeMap = ({
     const isNetworkOrCrash = Array.isArray(activeFaults) && activeFaults.some(
       (f) => f.failure_type === 'SERVICE_CRASH' || f.failure_type === 'NETWORK_PARTITION'
     );
-    if (isNetworkOrCrash) return; // Freeze roaming if network partition or driver crash
+    if (isNetworkOrCrash) return;
 
     const interval = setInterval(() => {
       setRoamingDrivers((prev) =>
@@ -151,24 +152,24 @@ export const RealTimeMap = ({
     surgeGroupRef.current.clearLayers();
 
     const surgeZones = [
-      { name: 'Koramangala 1.35x', coords: [12.9352, 77.6245], radius: 1400, color: '#FFDE00', surge: '1.35x' },
-      { name: 'Outer Ring Road 1.4x', coords: [12.9260, 77.6833], radius: 1600, color: '#F59E0B', surge: '1.40x' },
-      { name: 'Indiranagar 1.25x', coords: [12.9784, 77.6408], radius: 1200, color: '#10B981', surge: '1.25x' },
+      { name: 'Koramangala 1.35x', coords: [12.9352, 77.6245], radius: 1400, color: '#10B981', surge: '1.35x' },
+      { name: 'Outer Ring Road 1.4x', coords: [12.9260, 77.6833], radius: 1600, color: '#059669', surge: '1.40x' },
+      { name: 'Indiranagar 1.25x', coords: [12.9784, 77.6408], radius: 1200, color: '#34D399', surge: '1.25x' },
     ];
 
     surgeZones.forEach((z) => {
       const circle = L.circle(z.coords, {
         color: z.color,
         fillColor: z.color,
-        fillOpacity: 0.12,
+        fillOpacity: 0.10,
         weight: 1.5,
         dashArray: '4, 4',
       });
 
-      circle.bindTooltip(`⚡ ${z.name}`, {
+      circle.bindTooltip(`${z.name}`, {
         permanent: false,
         direction: 'center',
-        className: 'surge-tooltip font-mono text-[10px] bg-slate-900 text-yellow-300 border border-yellow-500/30 px-2 py-0.5 rounded shadow',
+        className: 'surge-tooltip font-mono text-[10px] bg-white text-emerald-800 border border-emerald-200 px-2 py-0.5 rounded shadow-sm',
       });
 
       surgeGroupRef.current.addLayer(circle);
@@ -205,14 +206,14 @@ export const RealTimeMap = ({
       className: 'custom-map-marker',
       html: `
         <div style="position: relative; display: flex; align-items: center; justify-content: center;">
-          <div style="position: absolute; width: 34px; height: 34px; border-radius: 50%; background: rgba(16, 185, 129, 0.25); border: 1.5px solid #10B981; animation: ping 2s infinite;"></div>
-          <div style="width: 22px; height: 22px; border-radius: 50%; background: #10B981; border: 3px solid #0B0F17; box-shadow: 0 0 15px #10B981; display: flex; align-items: center; justify-content: center; color: black; font-weight: 900; font-size: 11px;">
+          <div style="position: absolute; width: 32px; height: 32px; border-radius: 50%; background: rgba(16, 185, 129, 0.2); border: 1.5px solid #10B981;"></div>
+          <div style="width: 20px; height: 20px; border-radius: 50%; background: #10B981; border: 2px solid #FFFFFF; box-shadow: 0 1px 4px rgba(0,0,0,0.2); display: flex; align-items: center; justify-content: center; color: white; font-weight: 800; font-size: 10px; font-family: monospace;">
             A
           </div>
         </div>
       `,
-      iconSize: [34, 34],
-      iconAnchor: [17, 17],
+      iconSize: [32, 32],
+      iconAnchor: [16, 16],
     });
     const pickupMarker = L.marker(startPoint, { icon: pickupIcon }).bindPopup(
       `<div class="font-mono text-xs"><strong>Passenger Pickup:</strong><br/>${typeof pickupLocation === 'string' ? pickupLocation : 'Pickup Location'}</div>`
@@ -224,14 +225,14 @@ export const RealTimeMap = ({
       className: 'custom-map-marker',
       html: `
         <div style="position: relative; display: flex; align-items: center; justify-content: center;">
-          <div style="position: absolute; width: 34px; height: 34px; border-radius: 50%; background: rgba(239, 68, 68, 0.25); border: 1.5px solid #EF4444;"></div>
-          <div style="width: 22px; height: 22px; border-radius: 50%; background: #EF4444; border: 3px solid #0B0F17; box-shadow: 0 0 15px #EF4444; display: flex; align-items: center; justify-content: center; color: white; font-weight: 900; font-size: 11px;">
+          <div style="position: absolute; width: 32px; height: 32px; border-radius: 50%; background: rgba(239, 68, 68, 0.2); border: 1.5px solid #EF4444;"></div>
+          <div style="width: 20px; height: 20px; border-radius: 50%; background: #EF4444; border: 2px solid #FFFFFF; box-shadow: 0 1px 4px rgba(0,0,0,0.2); display: flex; align-items: center; justify-content: center; color: white; font-weight: 800; font-size: 10px; font-family: monospace;">
             B
           </div>
         </div>
       `,
-      iconSize: [34, 34],
-      iconAnchor: [17, 17],
+      iconSize: [32, 32],
+      iconAnchor: [16, 16],
     });
     const dropoffMarker = L.marker(endPoint, { icon: dropoffIcon }).bindPopup(
       `<div class="font-mono text-xs"><strong>Drop Destination:</strong><br/>${typeof dropoffLocation === 'string' ? dropoffLocation : 'Dropoff Location'}</div>`
@@ -241,12 +242,12 @@ export const RealTimeMap = ({
     // 3. Draw Route Polyline
     const waypoints = generateRouteWaypoints(startPoint, endPoint);
     const routeLine = L.polyline(waypoints, {
-      color: '#FFDE00',
-      weight: 5,
-      opacity: 0.9,
+      color: '#059669',
+      weight: 4,
+      opacity: 0.85,
       lineCap: 'round',
       lineJoin: 'round',
-      dashArray: activeRide || activeTrip ? null : '8, 8',
+      dashArray: activeRide || activeTrip ? null : '6, 6',
     });
     routeGroupRef.current.addLayer(routeLine);
 
@@ -259,39 +260,39 @@ export const RealTimeMap = ({
         className: 'captain-matched-marker',
         html: `
           <div style="position: relative; cursor: pointer; display: flex; flex-direction: column; align-items: center;">
-            <div style="position: absolute; width: 40px; height: 40px; border-radius: 50%; background: rgba(255, 222, 0, 0.35); border: 2px solid #FFDE00; animation: ping 1.8s infinite;"></div>
-            <div style="width: 32px; height: 32px; border-radius: 50%; background: #0B0F17; border: 2px solid #FFDE00; box-shadow: 0 0 18px rgba(255, 222, 0, 0.8); display: flex; align-items: center; justify-content: center; font-size: 16px;">
-              🛵
+            <div style="position: absolute; width: 36px; height: 36px; border-radius: 50%; background: rgba(16, 185, 129, 0.25); border: 1.5px solid #10B981;"></div>
+            <div style="width: 26px; height: 26px; border-radius: 50%; background: #059669; border: 2px solid #FFFFFF; box-shadow: 0 2px 8px rgba(0,0,0,0.2); display: flex; align-items: center; justify-content: center; color: white;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="18.5" cy="17.5" r="3.5"/><circle cx="5.5" cy="17.5" r="3.5"/><circle cx="15" cy="5" r="1"/><path d="M12 17.5V14l-3-3 4-3 2 3h2"/></svg>
             </div>
-            <div style="margin-top: 4px; background: rgba(0,0,0,0.9); color: #FFDE00; border: 1px solid rgba(255,222,0,0.5); border-radius: 4px; padding: 1px 6px; font-family: monospace; font-size: 9px; font-weight: bold; white-space: nowrap; box-shadow: 0 2px 6px rgba(0,0,0,0.5);">
+            <div style="margin-top: 3px; background: #FFFFFF; color: #065F46; border: 1px solid #A7F3D0; border-radius: 4px; padding: 1px 6px; font-family: monospace; font-size: 9px; font-weight: 700; white-space: nowrap; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
               ${captainName} (${captainVehicle.split(' ')[0]})
             </div>
           </div>
         `,
-        iconSize: [40, 50],
-        iconAnchor: [20, 25],
+        iconSize: [36, 46],
+        iconAnchor: [18, 23],
       });
       const capMarker = L.marker(captainCoords, { icon: capIcon }).bindPopup(
         `<div class="font-mono text-xs"><strong>Assigned Captain:</strong><br/>${captainName}<br/>${captainVehicle}</div>`
       );
       markersGroupRef.current.addLayer(capMarker);
     } else {
-      // Draw nearby roaming captains
+      // Draw nearby roaming captains with clean SVG marker
       roamingDrivers.forEach((drv) => {
         const driverIcon = L.divIcon({
           className: 'roaming-driver-icon',
           html: `
-            <div style="transform: rotate(${drv.heading}deg); transition: transform 0.8s ease-out; position: relative;">
-              <div style="width: 30px; height: 30px; border-radius: 50%; background: #121824; border: 2px solid #FFDE00; box-shadow: 0 0 12px rgba(255, 222, 0, 0.5); display: flex; align-items: center; justify-content: center; font-size: 15px;">
-                ${drv.icon}
+            <div style="position: relative; display: flex; flex-direction: column; align-items: center;">
+              <div style="width: 22px; height: 22px; border-radius: 50%; background: #FFFFFF; border: 2px solid #10B981; box-shadow: 0 1px 4px rgba(0,0,0,0.15); display: flex; align-items: center; justify-content: center; color: #059669;">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="18.5" cy="17.5" r="3.5"/><circle cx="5.5" cy="17.5" r="3.5"/><circle cx="15" cy="5" r="1"/><path d="M12 17.5V14l-3-3 4-3 2 3h2"/></svg>
               </div>
-              <div style="position: absolute; top: -14px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.85); color: #FFDE00; border: 1px solid rgba(255,222,0,0.3); border-radius: 4px; padding: 1px 4px; font-family: monospace; font-size: 8px; font-weight: bold; white-space: nowrap;">
+              <div style="margin-top: 2px; background: #FFFFFF; color: #0F172A; border: 1px solid #E2E8F0; border-radius: 3px; padding: 0px 4px; font-family: monospace; font-size: 8px; font-weight: 600; white-space: nowrap; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">
                 ${drv.name.split(' ')[1] || drv.name}
               </div>
             </div>
           `,
-          iconSize: [30, 30],
-          iconAnchor: [15, 15],
+          iconSize: [24, 30],
+          iconAnchor: [12, 15],
         });
 
         const m = L.marker([drv.lat, drv.lng], { icon: driverIcon });
@@ -299,20 +300,18 @@ export const RealTimeMap = ({
       });
     }
 
-    // Fit Bounds cleanly
     if (gpsLocked) {
       const bounds = L.latLngBounds([startPoint, endPoint]);
       map.fitBounds(bounds, { padding: [60, 60], maxZoom: 14 });
     }
   }, [pickupLocation, dropoffLocation, activeRide, activeTrip, roamingDrivers, captainCoords, gpsLocked]);
 
-  // Check if map-relevant fault is active (only SERVICE_CRASH or NETWORK_PARTITION)
   const mapSpecificFault = Array.isArray(activeFaults)
     ? activeFaults.find((f) => f.failure_type === 'SERVICE_CRASH' || f.failure_type === 'NETWORK_PARTITION')
     : null;
 
   return (
-    <div className={`relative w-full h-full min-h-[500px] bg-[#0c101a] overflow-hidden select-none ${mapStyle === 'DARK' ? 'rydex-dark-map' : 'rydex-light-map'}`}>
+    <div className={`relative w-full h-full min-h-[500px] bg-slate-100 overflow-hidden select-none ${mapStyle === 'DARK' ? 'rydex-dark-map' : 'rydex-light-map'}`}>
       <style>{`
         .rydex-dark-map .leaflet-tile-pane {
           filter: invert(100%) hue-rotate(180deg) brightness(85%) contrast(105%) saturate(60%) !important;
@@ -321,7 +320,7 @@ export const RealTimeMap = ({
           filter: none !important;
         }
         .leaflet-container {
-          background-color: #0B0F17 !important;
+          background-color: #F8FAF9 !important;
         }
         .leaflet-tile {
           image-rendering: auto;
@@ -333,22 +332,22 @@ export const RealTimeMap = ({
 
       {/* Top Floating Telemetry & Map Controls */}
       <div className="absolute top-4 left-4 z-10 flex flex-wrap items-center gap-2">
-        <div className="glass-card px-3 py-1.5 rounded-xl border border-white/10 flex items-center gap-2 text-xs font-mono shadow-xl backdrop-blur-md">
-          <span className={`w-2 h-2 rounded-full ${mapSpecificFault ? 'bg-red-500 animate-ping' : 'bg-emerald-400 animate-pulse'}`} />
-          <span className="text-white font-bold">Bangalore Live Grid</span>
-          <span className="text-slate-400">&bull;</span>
-          <span className="text-[#FFDE00] font-semibold">{roamingDrivers.length} Captains Online</span>
+        <div className="bg-white/95 px-3 py-1.5 rounded-lg border border-slate-200 flex items-center gap-2 text-xs font-mono shadow-xs backdrop-blur-xs">
+          <span className={`w-2 h-2 rounded-full ${mapSpecificFault ? 'bg-rose-500 animate-ping' : 'bg-emerald-500'}`} />
+          <span className="text-slate-800 font-semibold">Bengaluru Mobility Grid</span>
+          <span className="text-slate-300">&bull;</span>
+          <span className="text-emerald-700 font-medium">{roamingDrivers.length} Captains Active</span>
           {activeRide && (
             <>
-              <span className="text-slate-400">&bull;</span>
-              <span className="text-emerald-400 font-semibold">Matched Trip Active</span>
+              <span className="text-slate-300">&bull;</span>
+              <span className="text-emerald-700 font-medium">Matched Trip Active</span>
             </>
           )}
         </div>
 
         {mapSpecificFault && (
-          <div className="glass-card px-2.5 py-1.5 rounded-xl border border-red-500/50 bg-red-950/80 items-center gap-1.5 text-[11px] font-mono text-red-300 flex animate-pulse">
-            <AlertTriangle className="w-3.5 h-3.5 text-red-400 shrink-0" />
+          <div className="px-2.5 py-1.5 rounded-lg border border-rose-300 bg-rose-50 items-center gap-1.5 text-[11px] font-mono text-rose-800 flex shadow-xs">
+            <AlertTriangle className="w-3.5 h-3.5 text-rose-600 shrink-0" />
             <span>
               {mapSpecificFault.failure_type === 'SERVICE_CRASH' ? 'GPS Socket CrashLoop (7s heal)' : 'Dispatch 45% Packet Drop (8.2s heal)'}
             </span>
@@ -357,14 +356,14 @@ export const RealTimeMap = ({
       </div>
 
       {/* Right Map Action Buttons */}
-      <div className="absolute top-4 right-4 z-10 flex flex-col gap-2">
+      <div className="absolute top-4 right-4 z-10 flex flex-col gap-1.5">
         {/* Toggle Dark / Light Map Style */}
         <button
           onClick={() => setMapStyle((s) => (s === 'DARK' ? 'VOYAGER' : 'DARK'))}
-          className="p-2.5 rounded-xl glass-card hover:bg-white/10 text-slate-200 border border-white/10 transition-all shadow-xl"
-          title={`Switch to ${mapStyle === 'DARK' ? 'Light Cartography' : 'Dark Cyberpunk'}`}
+          className="p-2 rounded-lg bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 transition-all shadow-xs"
+          title={`Switch to ${mapStyle === 'DARK' ? 'Light Cartography' : 'Night Map'}`}
         >
-          <Layers className="w-4 h-4 text-[#FFDE00]" />
+          <Layers className="w-4 h-4 text-slate-600" />
         </button>
 
         {/* Recenter / Lock GPS */}
@@ -378,16 +377,16 @@ export const RealTimeMap = ({
               mapInstanceRef.current.fitBounds(bounds, { padding: [60, 60] });
             }
           }}
-          className="p-2.5 rounded-xl glass-card hover:bg-white/10 text-slate-200 border border-white/10 transition-all shadow-xl"
+          className="p-2 rounded-lg bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 transition-all shadow-xs"
           title="Recenter Map Bounds"
         >
-          <Crosshair className="w-4 h-4 text-emerald-400" />
+          <Crosshair className="w-4 h-4 text-emerald-600" />
         </button>
 
         {/* Zoom In */}
         <button
           onClick={() => mapInstanceRef.current && mapInstanceRef.current.zoomIn()}
-          className="p-2.5 rounded-xl glass-card hover:bg-white/10 text-slate-200 border border-white/10 transition-all shadow-xl text-xs font-bold font-mono"
+          className="p-2 rounded-lg bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 transition-all shadow-xs text-xs font-bold font-mono"
         >
           +
         </button>
@@ -395,14 +394,14 @@ export const RealTimeMap = ({
         {/* Zoom Out */}
         <button
           onClick={() => mapInstanceRef.current && mapInstanceRef.current.zoomOut()}
-          className="p-2.5 rounded-xl glass-card hover:bg-white/10 text-slate-200 border border-white/10 transition-all shadow-xl text-xs font-bold font-mono"
+          className="p-2 rounded-lg bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 transition-all shadow-xs text-xs font-bold font-mono"
         >
           -
         </button>
       </div>
 
       {/* Bottom Floating Map Scale & Attribution */}
-      <div className="absolute bottom-2 left-4 z-10 text-[9px] font-mono text-slate-500">
+      <div className="absolute bottom-2 left-4 z-10 text-[9px] font-mono text-slate-400">
         OpenStreetMap &bull; Rydex Autonomous Mobility Grid &bull; Bengaluru
       </div>
     </div>

@@ -30,7 +30,7 @@ export const FAULT_SPECS_EXPANDED = {
     key: 'DB_BOTTLENECK',
     service: 'auth-service',
     port: 8001,
-    name: '🔒 PostgreSQL Lock Contention',
+    name: 'PostgreSQL Lock Contention',
     shortName: 'DB Lock',
     duration: 9.4,
     complexity: 'COMPLEX',
@@ -48,7 +48,7 @@ export const FAULT_SPECS_EXPANDED = {
     key: 'TRAFFIC_OVERLOAD',
     service: 'ride-service',
     port: 8002,
-    name: '🚦 Ingress Traffic Surge',
+    name: 'Ingress Traffic Surge',
     shortName: 'Traffic Surge',
     duration: 5.5,
     complexity: 'EASY-MED',
@@ -66,7 +66,7 @@ export const FAULT_SPECS_EXPANDED = {
     key: 'SERVICE_CRASH',
     service: 'driver-service',
     port: 8003,
-    name: '💥 Container CrashLoopBackOff',
+    name: 'Container CrashLoopBackOff',
     shortName: 'Crash GPS',
     duration: 7.0,
     complexity: 'MEDIUM',
@@ -84,7 +84,7 @@ export const FAULT_SPECS_EXPANDED = {
     key: 'CPU_SPIKE',
     service: 'pricing-service',
     port: 8005,
-    name: '⚡ CPU Core Saturation',
+    name: 'CPU Core Saturation',
     shortName: 'CPU Spike',
     duration: 4.2,
     complexity: 'EASY',
@@ -102,7 +102,7 @@ export const FAULT_SPECS_EXPANDED = {
     key: 'NETWORK_PARTITION',
     service: 'location-service',
     port: 8006,
-    name: '🌐 Network Partition (Packet Loss)',
+    name: 'Network Partition (Packet Loss)',
     shortName: 'Net Partition',
     duration: 8.2,
     complexity: 'MED-COMPLEX',
@@ -120,7 +120,7 @@ export const FAULT_SPECS_EXPANDED = {
     key: 'MEMORY_LEAK',
     service: 'trip-service',
     port: 8004,
-    name: '🧠 Unbounded Heap Memory Leak',
+    name: 'Unbounded Heap Memory Leak',
     shortName: 'Memory Leak',
     duration: 10.0,
     complexity: 'COMPLEX',
@@ -141,7 +141,7 @@ export const RCA_PIPELINE_DETAILS = {
     faultKey: 'MEMORY_LEAK',
     service: 'trip-service',
     port: 8004,
-    title: '🧠 Trip Service Unbounded Heap Memory Leak (OOMKilled)',
+    title: 'Trip Service Unbounded Heap Memory Leak (OOMKilled)',
     sla: 10.0,
     steps: [
       {
@@ -240,7 +240,7 @@ export const RCA_PIPELINE_DETAILS = {
     faultKey: 'DB_BOTTLENECK',
     service: 'auth-service',
     port: 8001,
-    title: '🔒 PostgreSQL Relational Lock Contention & Pool Exhaustion',
+    title: 'PostgreSQL Relational Lock Contention & Pool Exhaustion',
     sla: 9.4,
     steps: [
       {
@@ -339,7 +339,7 @@ export const RCA_PIPELINE_DETAILS = {
     faultKey: 'TRAFFIC_OVERLOAD',
     service: 'ride-service',
     port: 8002,
-    title: '🚦 Ingress Traffic Surge & Bike Taxi Rate Limit (429)',
+    title: 'Ingress Traffic Surge & Bike Taxi Rate Limit (429)',
     sla: 5.5,
     steps: [
       {
@@ -437,7 +437,7 @@ export const RCA_PIPELINE_DETAILS = {
     faultKey: 'SERVICE_CRASH',
     service: 'driver-service',
     port: 8003,
-    title: '💥 Driver Service Container CrashLoopBackOff (SIGSEGV)',
+    title: 'Driver Service Container CrashLoopBackOff (SIGSEGV)',
     sla: 7.0,
     steps: [
       {
@@ -533,7 +533,7 @@ export const RCA_PIPELINE_DETAILS = {
     faultKey: 'CPU_SPIKE',
     service: 'pricing-service',
     port: 8005,
-    title: '⚡ Pricing Service CPU Core Saturation (98.4%)',
+    title: 'Pricing Service CPU Core Saturation (98.4%)',
     sla: 4.2,
     steps: [
       {
@@ -626,7 +626,7 @@ export const RCA_PIPELINE_DETAILS = {
     faultKey: 'NETWORK_PARTITION',
     service: 'location-service',
     port: 8006,
-    title: '🌐 Location Service Network Partition & 45% Packet Drop',
+    title: 'Location Service Network Partition & 45% Packet Drop',
     sla: 8.2,
     steps: [
       {
@@ -881,11 +881,11 @@ export const AdminSrePortal = () => {
   }, [countdown, activeFault]);
 
   return (
-    <div className="flex h-full w-full overflow-hidden bg-[#0A0D14] text-slate-100 font-sans select-none">
-      {/* Left Sidebar (Image 3 Navigation) */}
-      <aside className="w-56 md:w-64 bg-[#080B11] border-r border-white/10 flex flex-col shrink-0">
-        <div className="p-4 border-b border-white/10">
-          <div className="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-400">
+    <div className="flex h-full w-full overflow-hidden bg-[#F8FAF9] text-slate-800 font-sans select-none">
+      {/* Left Sidebar */}
+      <aside className="w-56 md:w-64 bg-white border-r border-slate-200 flex flex-col shrink-0">
+        <div className="p-4 border-b border-slate-100">
+          <div className="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-500">
             Operations & Telemetry
           </div>
         </div>
@@ -896,11 +896,11 @@ export const AdminSrePortal = () => {
             onClick={() => setActiveNav('overview')}
             className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-left transition-all ${
               activeNav === 'overview'
-                ? 'bg-blue-600/20 text-blue-400 font-bold border border-blue-500/30'
-                : 'text-slate-400 hover:text-white hover:bg-white/5'
+                ? 'bg-emerald-50 text-emerald-800 font-semibold border border-emerald-200 shadow-xs'
+                : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
             }`}
           >
-            <Layers className="w-4 h-4" />
+            <Layers className="w-4 h-4 text-emerald-700" />
             <span>Overview Dashboard</span>
           </button>
 
@@ -908,11 +908,11 @@ export const AdminSrePortal = () => {
             onClick={() => setActiveNav('microservices')}
             className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-left transition-all ${
               activeNav === 'microservices'
-                ? 'bg-blue-600/20 text-blue-400 font-bold border border-blue-500/30'
-                : 'text-slate-400 hover:text-white hover:bg-white/5'
+                ? 'bg-emerald-50 text-emerald-800 font-semibold border border-emerald-200 shadow-xs'
+                : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
             }`}
           >
-            <Server className="w-4 h-4" />
+            <Server className="w-4 h-4 text-emerald-700" />
             <span>Microservice Monitor</span>
           </button>
 
@@ -920,11 +920,11 @@ export const AdminSrePortal = () => {
             onClick={() => setActiveNav('incidents')}
             className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-left transition-all ${
               activeNav === 'incidents'
-                ? 'bg-blue-600/20 text-blue-400 font-bold border border-blue-500/30'
-                : 'text-slate-400 hover:text-white hover:bg-white/5'
+                ? 'bg-emerald-50 text-emerald-800 font-semibold border border-emerald-200 shadow-xs'
+                : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
             }`}
           >
-            <AlertTriangle className="w-4 h-4" />
+            <AlertTriangle className="w-4 h-4 text-emerald-700" />
             <span>Incident Management</span>
           </button>
 
@@ -932,16 +932,16 @@ export const AdminSrePortal = () => {
             onClick={() => setActiveNav('rca')}
             className={`w-full flex items-center justify-between px-3 py-2 rounded-xl text-left transition-all ${
               activeNav === 'rca'
-                ? 'bg-blue-600/20 text-blue-400 font-bold border border-blue-500/30 shadow-[0_0_15px_rgba(59,130,246,0.2)]'
-                : 'text-slate-400 hover:text-white hover:bg-white/5'
+                ? 'bg-emerald-50 text-emerald-800 font-semibold border border-emerald-200 shadow-xs'
+                : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
             }`}
           >
             <div className="flex items-center gap-2.5">
-              <Search className="w-4 h-4 text-amber-400" />
+              <Search className="w-4 h-4 text-emerald-700" />
               <span>Root Cause Analysis (RCA)</span>
             </div>
             {activeFault && (
-              <span className="text-[9px] px-1.5 py-0.5 rounded bg-amber-500/30 text-amber-300 font-bold animate-pulse">
+              <span className="text-[9px] px-1.5 py-0.5 rounded bg-rose-100 text-rose-700 border border-rose-300 font-bold animate-pulse">
                 LIVE
               </span>
             )}
@@ -951,11 +951,11 @@ export const AdminSrePortal = () => {
             onClick={() => setActiveNav('chaos')}
             className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-left transition-all ${
               activeNav === 'chaos'
-                ? 'bg-blue-600/20 text-blue-400 font-bold border border-blue-500/30'
-                : 'text-slate-400 hover:text-white hover:bg-white/5'
+                ? 'bg-emerald-50 text-emerald-800 font-semibold border border-emerald-200 shadow-xs'
+                : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
             }`}
           >
-            <Flame className="w-4 h-4" />
+            <Flame className="w-4 h-4 text-emerald-700" />
             <span>Chaos Simulation Lab</span>
           </button>
 
@@ -963,42 +963,42 @@ export const AdminSrePortal = () => {
             onClick={() => setActiveNav('kb')}
             className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-left transition-all ${
               activeNav === 'kb'
-                ? 'bg-blue-600/20 text-blue-400 font-bold border border-blue-500/30'
-                : 'text-slate-400 hover:text-white hover:bg-white/5'
+                ? 'bg-emerald-50 text-emerald-800 font-semibold border border-emerald-200 shadow-xs'
+                : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
             }`}
           >
-            <FileText className="w-4 h-4" />
+            <FileText className="w-4 h-4 text-emerald-700" />
             <span>SRE Knowledge Base</span>
           </button>
         </nav>
 
         {/* Target Workload Widget */}
-        <div className="p-3 m-2 rounded-xl bg-white/5 border border-white/10 font-mono">
-          <div className="flex items-center justify-between text-[10px] text-slate-400">
+        <div className="p-3 m-2 rounded-xl bg-emerald-50/50 border border-emerald-100 font-mono">
+          <div className="flex items-center justify-between text-[10px] text-slate-500">
             <span>TARGET WORKLOAD</span>
-            <span className="text-emerald-400 font-bold">8 SERVICES</span>
+            <span className="text-emerald-700 font-bold">8 SERVICES</span>
           </div>
-          <div className="text-[11px] font-bold text-white mt-1">
+          <div className="text-[11px] font-bold text-slate-900 mt-1">
             Ride-Hailing Cloud Microservices
           </div>
-          <div className="text-[9px] text-slate-400 mt-1 leading-tight">
+          <div className="text-[9px] text-slate-500 mt-1 leading-tight">
             Auth, Ride, Driver, Trip, Pricing, Location, Notification & Gateway
           </div>
         </div>
       </aside>
 
       {/* Main Operations Content Area */}
-      <main className="flex-1 overflow-y-auto p-4 md:p-6 space-y-6 pb-28">
+      <main className="flex-1 overflow-y-auto p-4 md:p-6 space-y-6 pb-28 bg-[#F8FAF9]">
         {/* Top Header */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <h1 className="text-xl font-bold text-white tracking-tight flex items-center gap-2.5">
+            <h1 className="text-xl font-bold text-slate-900 tracking-tight flex items-center gap-2.5">
               <span>Cluster Operations Overview</span>
-              <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-950 text-emerald-400 border border-emerald-800">
+              <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 font-semibold">
                 AUTONOMOUS HEALING ACTIVE
               </span>
             </h1>
-            <p className="text-xs text-slate-400 font-mono mt-0.5">
+            <p className="text-xs text-slate-500 font-mono mt-0.5">
               Real-time telemetry, Kubernetes pod runtime status, and AI SRE agent state
             </p>
           </div>
@@ -1011,21 +1011,21 @@ export const AdminSrePortal = () => {
                 setCountdown(0);
                 setAgentStep('monitoring');
               }}
-              className="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 hover:border-slate-500 text-xs font-mono text-slate-300 flex items-center gap-1.5 transition-colors"
+              className="px-3 py-1.5 rounded-lg bg-white border border-slate-200 hover:bg-slate-50 text-xs font-mono text-slate-700 flex items-center gap-1.5 transition-colors shadow-xs"
             >
               <RefreshCw className="w-3.5 h-3.5" />
               <span>Refresh Telemetry</span>
             </button>
             <button
               onClick={() => (window.location.hash = 'passenger')}
-              className="px-3 py-1.5 rounded-lg bg-amber-500/20 border border-amber-500/40 text-amber-300 hover:text-white text-xs font-mono font-bold flex items-center gap-1"
+              className="px-3.5 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-white text-xs font-mono font-semibold flex items-center gap-1 shadow-xs transition-all"
             >
               <span>Passenger App</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </button>
             <button
               onClick={() => (window.location.hash = 'driver')}
-              className="px-3 py-1.5 rounded-lg bg-emerald-500/20 border border-emerald-500/40 text-emerald-400 hover:text-white text-xs font-mono font-bold flex items-center gap-1"
+              className="px-3.5 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-mono font-semibold flex items-center gap-1 shadow-xs transition-all"
             >
               <span>Captain App</span>
               <ArrowRight className="w-3.5 h-3.5" />
@@ -1035,71 +1035,71 @@ export const AdminSrePortal = () => {
 
         {/* 4 Overview Metric Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 font-mono">
-          <div className="p-4 rounded-xl bg-[#0F1420] border border-white/10 shadow-lg">
-            <div className="flex items-center justify-between text-xs text-slate-400">
+          <div className="p-4 rounded-xl bg-white border border-slate-200/90 shadow-xs">
+            <div className="flex items-center justify-between text-xs text-slate-500">
               <span>CLUSTER HEALTH INDEX</span>
-              <div className="w-7 h-7 rounded-lg bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400">
+              <div className="w-7 h-7 rounded-lg bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-700">
                 <Activity className="w-4 h-4" />
               </div>
             </div>
-            <div className="text-2xl font-black text-white mt-2">
+            <div className="text-2xl font-bold text-slate-900 mt-2 font-sans">
               {activeFault ? '87.5%' : '100%'}
             </div>
             <div className="flex items-center justify-between text-[10px] mt-2">
-              <span className="text-slate-400">{activeFault ? '7/8 Services Nominal' : '8/8 Services Nominal'}</span>
-              <span className={`px-1.5 py-0.5 rounded text-[9px] font-bold ${activeFault ? 'bg-amber-500/20 text-amber-300' : 'bg-emerald-500/20 text-emerald-400'}`}>
-                {activeFault ? '↗ DEGRADED' : '↗ OPTIMAL'}
+              <span className="text-slate-500">{activeFault ? '7/8 Services Nominal' : '8/8 Services Nominal'}</span>
+              <span className={`px-1.5 py-0.5 rounded text-[9px] font-semibold ${activeFault ? 'bg-amber-50 text-amber-800 border border-amber-200' : 'bg-emerald-50 text-emerald-700 border border-emerald-200'}`}>
+                {activeFault ? 'DEGRADED' : 'OPTIMAL'}
               </span>
             </div>
           </div>
 
-          <div className="p-4 rounded-xl bg-[#0F1420] border border-white/10 shadow-lg">
-            <div className="flex items-center justify-between text-xs text-slate-400">
+          <div className="p-4 rounded-xl bg-white border border-slate-200/90 shadow-xs">
+            <div className="flex items-center justify-between text-xs text-slate-500">
               <span>ACTIVE KUBERNETES PODS</span>
-              <div className="w-7 h-7 rounded-lg bg-blue-500/10 border border-blue-500/30 flex items-center justify-center text-blue-400">
+              <div className="w-7 h-7 rounded-lg bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-700">
                 <Layers className="w-4 h-4" />
               </div>
             </div>
-            <div className="text-2xl font-black text-white mt-2">
+            <div className="text-2xl font-bold text-slate-900 mt-2 font-sans">
               {activeFault?.key === 'TRAFFIC_OVERLOAD' ? '10 Pods' : '8 Pods'}
             </div>
             <div className="flex items-center justify-between text-[10px] mt-2">
-              <span className="text-slate-400">ALL Deployments Running</span>
-              <span className="text-blue-400 font-bold">↘ 100% Scheduled</span>
+              <span className="text-slate-500">ALL Deployments Running</span>
+              <span className="text-emerald-700 font-semibold">100% Scheduled</span>
             </div>
           </div>
 
-          <div className="p-4 rounded-xl bg-[#0F1420] border border-white/10 shadow-lg">
-            <div className="flex items-center justify-between text-xs text-slate-400">
+          <div className="p-4 rounded-xl bg-white border border-slate-200/90 shadow-xs">
+            <div className="flex items-center justify-between text-xs text-slate-500">
               <span>AVERAGE CPU LOAD</span>
-              <div className="w-7 h-7 rounded-lg bg-blue-500/10 border border-blue-500/30 flex items-center justify-center text-blue-400">
+              <div className="w-7 h-7 rounded-lg bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-700">
                 <Cpu className="w-4 h-4" />
               </div>
             </div>
-            <div className="text-2xl font-black text-white mt-2">
+            <div className="text-2xl font-bold text-slate-900 mt-2 font-sans">
               {activeFault?.key === 'CPU_SPIKE' ? '98.4%' : '18.5%'}
             </div>
             <div className="flex items-center justify-between text-[10px] mt-2">
-              <span className="text-slate-400">Cluster Core Utilization</span>
-              <span className={`font-bold ${activeFault?.key === 'CPU_SPIKE' ? 'text-rose-400' : 'text-blue-400'}`}>
-                {activeFault?.key === 'CPU_SPIKE' ? '↗ High Compute' : '↗ Normal'}
+              <span className="text-slate-500">Cluster Core Utilization</span>
+              <span className={`font-semibold ${activeFault?.key === 'CPU_SPIKE' ? 'text-rose-700' : 'text-emerald-700'}`}>
+                {activeFault?.key === 'CPU_SPIKE' ? 'High Compute' : 'Normal'}
               </span>
             </div>
           </div>
 
-          <div className="p-4 rounded-xl bg-[#0F1420] border border-white/10 shadow-lg">
-            <div className="flex items-center justify-between text-xs text-slate-400">
+          <div className="p-4 rounded-xl bg-white border border-slate-200/90 shadow-xs">
+            <div className="flex items-center justify-between text-xs text-slate-500">
               <span>THROUGHPUT & LATENCY</span>
-              <div className="w-7 h-7 rounded-lg bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400">
+              <div className="w-7 h-7 rounded-lg bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-700">
                 <TrendingUp className="w-4 h-4" />
               </div>
             </div>
-            <div className="text-2xl font-black text-white mt-2">
-              420 <span className="text-sm font-normal text-slate-400">RPS</span>
+            <div className="text-2xl font-bold text-slate-900 mt-2 font-sans">
+              420 <span className="text-sm font-normal text-slate-500">RPS</span>
             </div>
             <div className="flex items-center justify-between text-[10px] mt-2">
-              <span className="text-slate-400">Avg Latency: 45ms</span>
-              <span className="text-emerald-400 font-bold">↗ SLA Compliant</span>
+              <span className="text-slate-500">Avg Latency: 45ms</span>
+              <span className="text-emerald-700 font-semibold">SLA Compliant</span>
             </div>
           </div>
         </div>
@@ -1108,111 +1108,111 @@ export const AdminSrePortal = () => {
         {activeNav === 'overview' && (
           <div className="space-y-6">
             {/* LangGraph 7-Node State Graph */}
-            <div className="p-5 rounded-xl bg-[#0F1420] border border-white/10 shadow-lg space-y-4 font-mono">
+            <div className="p-5 rounded-xl bg-white border border-slate-200 shadow-xs space-y-4 font-mono">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <span className="text-xs font-bold text-white uppercase tracking-wider">
+                  <span className="text-xs font-bold text-slate-900 uppercase tracking-wider">
                     LangGraph Multi-Agent Orchestration Flow
                   </span>
-                  <span className="text-[10px] px-2 py-0.5 rounded bg-blue-950 text-blue-300 border border-blue-800 font-semibold">
+                  <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 font-semibold">
                     COMPILED STATE GRAPH
                   </span>
                 </div>
-                <span className="text-[11px] text-slate-400">Active State Engine</span>
+                <span className="text-[11px] text-slate-500">Active State Engine</span>
               </div>
 
               {/* 7 Agent Cards */}
               <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-2.5">
-                <div className={`p-3 rounded-xl border text-center relative ${agentStep === 'monitoring' ? 'bg-blue-600/20 border-blue-500 shadow-[0_0_15px_rgba(59,130,246,0.3)]' : 'bg-white/5 border-white/10 text-slate-400'}`}>
-                  {agentStep === 'monitoring' && <div className="text-[9px] font-bold text-blue-400 uppercase tracking-widest mb-1 animate-pulse">ACTIVE</div>}
-                  <Activity className="w-5 h-5 mx-auto text-blue-400 mb-1" />
-                  <div className="font-bold text-xs text-white">Monitoring Agent</div>
-                  <div className="text-[10px] text-slate-400 mt-0.5">Prometheus & Ingress</div>
+                <div className={`p-3 rounded-xl border text-center relative transition-all ${agentStep === 'monitoring' ? 'bg-emerald-50 border-emerald-500 text-emerald-900 ring-2 ring-emerald-500/20' : 'bg-slate-50 border-slate-200 text-slate-600'}`}>
+                  {agentStep === 'monitoring' && <div className="text-[9px] font-bold text-emerald-700 uppercase tracking-widest mb-1">ACTIVE</div>}
+                  <Activity className="w-5 h-5 mx-auto text-emerald-600 mb-1" />
+                  <div className="font-bold text-xs text-slate-900">Monitoring Agent</div>
+                  <div className="text-[10px] text-slate-500 mt-0.5">Prometheus Ingress</div>
                 </div>
 
-                <div className={`p-3 rounded-xl border text-center relative ${agentStep === 'anomaly' ? 'bg-rose-600/20 border-rose-500 shadow-[0_0_15px_rgba(244,63,94,0.3)] animate-pulse' : 'bg-white/5 border-white/10 text-slate-400'}`}>
-                  {agentStep === 'anomaly' && <div className="text-[9px] font-bold text-rose-400 uppercase tracking-widest mb-1 animate-ping">BREACH</div>}
-                  <AlertTriangle className="w-5 h-5 mx-auto text-rose-400 mb-1" />
-                  <div className="font-bold text-xs text-white">Anomaly Agent</div>
-                  <div className="text-[10px] text-slate-400 mt-0.5">Z-Score & Pattern Match</div>
+                <div className={`p-3 rounded-xl border text-center relative transition-all ${agentStep === 'anomaly' ? 'bg-rose-50 border-rose-400 text-rose-900 ring-2 ring-rose-500/20 animate-pulse' : 'bg-slate-50 border-slate-200 text-slate-600'}`}>
+                  {agentStep === 'anomaly' && <div className="text-[9px] font-bold text-rose-700 uppercase tracking-widest mb-1">BREACH</div>}
+                  <AlertTriangle className="w-5 h-5 mx-auto text-rose-600 mb-1" />
+                  <div className="font-bold text-xs text-slate-900">Anomaly Agent</div>
+                  <div className="text-[10px] text-slate-500 mt-0.5">Z-Score & Variance</div>
                 </div>
 
-                <div className={`p-3 rounded-xl border text-center relative ${agentStep === 'rca' ? 'bg-amber-600/20 border-amber-500 shadow-[0_0_15px_rgba(245,158,11,0.3)] animate-pulse' : 'bg-white/5 border-white/10 text-slate-400'}`}>
-                  {agentStep === 'rca' && <div className="text-[9px] font-bold text-amber-400 uppercase tracking-widest mb-1">REASONING</div>}
-                  <Search className="w-5 h-5 mx-auto text-amber-400 mb-1" />
-                  <div className="font-bold text-xs text-white">Root Cause Agent</div>
-                  <div className="text-[10px] text-slate-400 mt-0.5">Dependency & Trace Graph</div>
+                <div className={`p-3 rounded-xl border text-center relative transition-all ${agentStep === 'rca' ? 'bg-amber-50 border-amber-400 text-amber-900 ring-2 ring-amber-500/20 animate-pulse' : 'bg-slate-50 border-slate-200 text-slate-600'}`}>
+                  {agentStep === 'rca' && <div className="text-[9px] font-bold text-amber-700 uppercase tracking-widest mb-1">REASONING</div>}
+                  <Search className="w-5 h-5 mx-auto text-amber-600 mb-1" />
+                  <div className="font-bold text-xs text-slate-900">Root Cause Agent</div>
+                  <div className="text-[10px] text-slate-500 mt-0.5">Trace Dependency DAG</div>
                 </div>
 
-                <div className={`p-3 rounded-xl border text-center relative ${agentStep === 'planner' ? 'bg-purple-600/20 border-purple-500 shadow-[0_0_15px_rgba(168,85,247,0.3)] animate-pulse' : 'bg-white/5 border-white/10 text-slate-400'}`}>
-                  {agentStep === 'planner' && <div className="text-[9px] font-bold text-purple-400 uppercase tracking-widest mb-1">PLANNING</div>}
-                  <Sliders className="w-5 h-5 mx-auto text-purple-400 mb-1" />
-                  <div className="font-bold text-xs text-white">Recovery Planner</div>
-                  <div className="text-[10px] text-slate-400 mt-0.5">Strategy & K8s Command</div>
+                <div className={`p-3 rounded-xl border text-center relative transition-all ${agentStep === 'planner' ? 'bg-purple-50 border-purple-400 text-purple-900 ring-2 ring-purple-500/20 animate-pulse' : 'bg-slate-50 border-slate-200 text-slate-600'}`}>
+                  {agentStep === 'planner' && <div className="text-[9px] font-bold text-purple-700 uppercase tracking-widest mb-1">PLANNING</div>}
+                  <Sliders className="w-5 h-5 mx-auto text-purple-600 mb-1" />
+                  <div className="font-bold text-xs text-slate-900">Recovery Planner</div>
+                  <div className="text-[10px] text-slate-500 mt-0.5">Strategy & Playbook</div>
                 </div>
 
-                <div className={`p-3 rounded-xl border text-center relative ${agentStep === 'execution' ? 'bg-indigo-600/20 border-indigo-500 shadow-[0_0_15px_rgba(99,102,241,0.3)] animate-pulse' : 'bg-white/5 border-white/10 text-slate-400'}`}>
-                  {agentStep === 'execution' && <div className="text-[9px] font-bold text-indigo-400 uppercase tracking-widest mb-1">EXECUTING</div>}
-                  <Terminal className="w-5 h-5 mx-auto text-indigo-400 mb-1" />
-                  <div className="font-bold text-xs text-white">Execution Agent</div>
-                  <div className="text-[10px] text-slate-400 mt-0.5">Kubectl Action Controller</div>
+                <div className={`p-3 rounded-xl border text-center relative transition-all ${agentStep === 'execution' ? 'bg-blue-50 border-blue-400 text-blue-900 ring-2 ring-blue-500/20 animate-pulse' : 'bg-slate-50 border-slate-200 text-slate-600'}`}>
+                  {agentStep === 'execution' && <div className="text-[9px] font-bold text-blue-700 uppercase tracking-widest mb-1">EXECUTING</div>}
+                  <Terminal className="w-5 h-5 mx-auto text-blue-600 mb-1" />
+                  <div className="font-bold text-xs text-slate-900">Execution Agent</div>
+                  <div className="text-[10px] text-slate-500 mt-0.5">Kubectl Controller</div>
                 </div>
 
-                <div className={`p-3 rounded-xl border text-center relative ${agentStep === 'validation' || agentStep === 'healed' ? 'bg-emerald-600/20 border-emerald-500 shadow-[0_0_15px_rgba(16,185,129,0.3)]' : 'bg-white/5 border-white/10 text-slate-400'}`}>
-                  {(agentStep === 'validation' || agentStep === 'healed') && <div className="text-[9px] font-bold text-emerald-400 uppercase tracking-widest mb-1">VERIFIED</div>}
-                  <CheckCircle2 className="w-5 h-5 mx-auto text-emerald-400 mb-1" />
-                  <div className="font-bold text-xs text-white">Validation Agent</div>
-                  <div className="text-[10px] text-slate-400 mt-0.5">Health Probe & SLA Check</div>
+                <div className={`p-3 rounded-xl border text-center relative transition-all ${agentStep === 'validation' || agentStep === 'healed' ? 'bg-emerald-50 border-emerald-500 text-emerald-900' : 'bg-slate-50 border-slate-200 text-slate-600'}`}>
+                  {(agentStep === 'validation' || agentStep === 'healed') && <div className="text-[9px] font-bold text-emerald-700 uppercase tracking-widest mb-1">VERIFIED</div>}
+                  <CheckCircle2 className="w-5 h-5 mx-auto text-emerald-600 mb-1" />
+                  <div className="font-bold text-xs text-slate-900">Validation Agent</div>
+                  <div className="text-[10px] text-slate-500 mt-0.5">Health Probe Check</div>
                 </div>
 
-                <div className="p-3 rounded-xl border border-white/10 bg-white/5 text-center text-slate-400">
-                  <Database className="w-5 h-5 mx-auto text-slate-300 mb-1" />
-                  <div className="font-bold text-xs text-white">Knowledge Base</div>
-                  <div className="text-[10px] text-slate-400 mt-0.5">Playbook Memory & State</div>
+                <div className="p-3 rounded-xl border border-slate-200 bg-slate-50 text-center text-slate-600">
+                  <Database className="w-5 h-5 mx-auto text-slate-500 mb-1" />
+                  <div className="font-bold text-xs text-slate-900">Knowledge Base</div>
+                  <div className="text-[10px] text-slate-500 mt-0.5">Reinforced Memory</div>
                 </div>
               </div>
             </div>
 
             {/* SVG Telemetry Charts */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 font-mono">
-              <div className="p-5 rounded-xl bg-[#0F1420] border border-white/10 space-y-4">
-                <div className="flex items-center justify-between text-xs font-bold uppercase tracking-wider text-slate-300">
+              <div className="p-5 rounded-xl bg-white border border-slate-200 shadow-xs space-y-4">
+                <div className="flex items-center justify-between text-xs font-bold uppercase tracking-wider text-slate-700">
                   <span>Cluster CPU & Memory Telemetry (%)</span>
                   <div className="flex items-center gap-3 text-[11px]">
-                    <span className="text-blue-400">● CPU</span>
-                    <span className="text-indigo-400">● Memory</span>
+                    <span className="text-emerald-700 font-semibold">● CPU</span>
+                    <span className="text-slate-500 font-semibold">● Memory</span>
                   </div>
                 </div>
                 <div className="h-44 w-full relative">
                   <svg className="w-full h-full" viewBox="0 0 500 160" preserveAspectRatio="none">
-                    <line x1="0" y1="40" x2="500" y2="40" stroke="#1F2937" strokeDasharray="3 3" />
-                    <line x1="0" y1="80" x2="500" y2="80" stroke="#1F2937" strokeDasharray="3 3" />
-                    <line x1="0" y1="120" x2="500" y2="120" stroke="#1F2937" strokeDasharray="3 3" />
-                    <path d="M0,110 Q100,105 200,112 T350,108 T500,110 L500,160 L0,160 Z" fill="#6366F1" fillOpacity="0.25" />
-                    <path d="M0,110 Q100,105 200,112 T350,108 T500,110" fill="none" stroke="#6366F1" strokeWidth="2" />
-                    <path d={activeFault?.key === 'CPU_SPIKE' ? "M0,120 Q100,115 250,15 T400,20 T500,25 L500,160 L0,160 Z" : "M0,120 Q100,115 200,122 T350,116 T500,118 L500,160 L0,160 Z"} fill="#3B82F6" fillOpacity="0.3" className="transition-all duration-500" />
-                    <path d={activeFault?.key === 'CPU_SPIKE' ? "M0,120 Q100,115 250,15 T400,20 T500,25" : "M0,120 Q100,115 200,122 T350,116 T500,118"} fill="none" stroke="#3B82F6" strokeWidth="2.5" className="transition-all duration-500" />
+                    <line x1="0" y1="40" x2="500" y2="40" stroke="#F1F5F9" strokeDasharray="3 3" />
+                    <line x1="0" y1="80" x2="500" y2="80" stroke="#F1F5F9" strokeDasharray="3 3" />
+                    <line x1="0" y1="120" x2="500" y2="120" stroke="#F1F5F9" strokeDasharray="3 3" />
+                    <path d="M0,110 Q100,105 200,112 T350,108 T500,110 L500,160 L0,160 Z" fill="#E2E8F0" fillOpacity="0.5" />
+                    <path d="M0,110 Q100,105 200,112 T350,108 T500,110" fill="none" stroke="#94A3B8" strokeWidth="2" />
+                    <path d={activeFault?.key === 'CPU_SPIKE' ? "M0,120 Q100,115 250,15 T400,20 T500,25 L500,160 L0,160 Z" : "M0,120 Q100,115 200,122 T350,116 T500,118 L500,160 L0,160 Z"} fill="#D1FAE5" fillOpacity="0.6" className="transition-all duration-500" />
+                    <path d={activeFault?.key === 'CPU_SPIKE' ? "M0,120 Q100,115 250,15 T400,20 T500,25" : "M0,120 Q100,115 200,122 T350,116 T500,118"} fill="none" stroke="#059669" strokeWidth="2.5" className="transition-all duration-500" />
                   </svg>
-                  <div className="flex justify-between text-[10px] text-slate-500 font-mono mt-1">
+                  <div className="flex justify-between text-[10px] text-slate-400 font-mono mt-1">
                     <span>10:00</span><span>10:05</span><span>10:10</span><span>10:15</span><span>10:20</span>
                   </div>
                 </div>
               </div>
 
-              <div className="p-5 rounded-xl bg-[#0F1420] border border-white/10 space-y-4">
-                <div className="flex items-center justify-between text-xs font-bold uppercase tracking-wider text-slate-300">
+              <div className="p-5 rounded-xl bg-white border border-slate-200 shadow-xs space-y-4">
+                <div className="flex items-center justify-between text-xs font-bold uppercase tracking-wider text-slate-700">
                   <span>API Ingress Throughput (RPS)</span>
-                  <span className="text-emerald-400 text-[11px]">OpenTelemetry Gateway</span>
+                  <span className="text-emerald-700 text-[11px] font-semibold">OpenTelemetry Gateway</span>
                 </div>
                 <div className="h-44 w-full relative">
                   <svg className="w-full h-full" viewBox="0 0 500 160" preserveAspectRatio="none">
-                    <line x1="0" y1="40" x2="500" y2="40" stroke="#1F2937" strokeDasharray="3 3" />
-                    <line x1="0" y1="80" x2="500" y2="80" stroke="#1F2937" strokeDasharray="3 3" />
-                    <line x1="0" y1="120" x2="500" y2="120" stroke="#1F2937" strokeDasharray="3 3" />
-                    <path d={activeFault?.key === 'TRAFFIC_OVERLOAD' ? "M0,85 Q120,80 240,10 T380,15 T500,20 L500,160 L0,160 Z" : "M0,80 Q120,75 240,82 T380,78 T500,80 L500,160 L0,160 Z"} fill="#10B981" fillOpacity="0.25" className="transition-all duration-500" />
-                    <path d={activeFault?.key === 'TRAFFIC_OVERLOAD' ? "M0,85 Q120,80 240,10 T380,15 T500,20" : "M0,80 Q120,75 240,82 T380,78 T500,80"} fill="none" stroke="#10B981" strokeWidth="2.5" className="transition-all duration-500" />
+                    <line x1="0" y1="40" x2="500" y2="40" stroke="#F1F5F9" strokeDasharray="3 3" />
+                    <line x1="0" y1="80" x2="500" y2="80" stroke="#F1F5F9" strokeDasharray="3 3" />
+                    <line x1="0" y1="120" x2="500" y2="120" stroke="#F1F5F9" strokeDasharray="3 3" />
+                    <path d={activeFault?.key === 'TRAFFIC_OVERLOAD' ? "M0,85 Q120,80 240,10 T380,15 T500,20 L500,160 L0,160 Z" : "M0,80 Q120,75 240,82 T380,78 T500,80 L500,160 L0,160 Z"} fill="#D1FAE5" fillOpacity="0.5" className="transition-all duration-500" />
+                    <path d={activeFault?.key === 'TRAFFIC_OVERLOAD' ? "M0,85 Q120,80 240,10 T380,15 T500,20" : "M0,80 Q120,75 240,82 T380,78 T500,80"} fill="none" stroke="#059669" strokeWidth="2.5" className="transition-all duration-500" />
                   </svg>
-                  <div className="flex justify-between text-[10px] text-slate-500 font-mono mt-1">
+                  <div className="flex justify-between text-[10px] text-slate-400 font-mono mt-1">
                     <span>10:00</span><span>10:05</span><span>10:10</span><span>10:15</span><span>10:20</span>
                   </div>
                 </div>
@@ -1225,10 +1225,10 @@ export const AdminSrePortal = () => {
         {activeNav === 'microservices' && (
           <div className="space-y-4 font-mono">
             <div className="flex items-center justify-between">
-              <h2 className="text-sm font-bold text-white uppercase tracking-wider">
+              <h2 className="text-sm font-bold text-slate-900 uppercase tracking-wider">
                 Microservices Telemetry & Pod Health Matrix
               </h2>
-              <span className="text-xs text-slate-400">Total: 8 Microservices</span>
+              <span className="text-xs text-slate-500">Total: 8 Microservices</span>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -1236,35 +1236,35 @@ export const AdminSrePortal = () => {
                 const isFailed = p.status !== 'Running';
                 return (
                   <div key={p.service} className={`p-4 rounded-xl border transition-all ${
-                    isFailed ? 'bg-rose-950/40 border-rose-600/70 shadow-[0_0_20px_rgba(244,63,94,0.3)]' : 'bg-[#0F1420] border-white/10'
+                    isFailed ? 'bg-rose-50/70 border-rose-300 shadow-sm' : 'bg-white border-slate-200 shadow-xs hover:border-emerald-300'
                   }`}>
                     <div className="flex items-center justify-between">
-                      <span className="font-bold text-white text-xs">{p.service}</span>
-                      <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${
-                        isFailed ? 'bg-rose-500/20 text-rose-300 border border-rose-500/40 animate-pulse' : 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/40'
+                      <span className="font-bold text-slate-900 text-xs">{p.service}</span>
+                      <span className={`px-2 py-0.5 rounded text-[10px] font-semibold ${
+                        isFailed ? 'bg-rose-100 text-rose-800 border border-rose-300 animate-pulse' : 'bg-emerald-50 text-emerald-800 border border-emerald-200'
                       }`}>
                         {p.status}
                       </span>
                     </div>
 
-                    <div className="text-[10px] text-slate-400 mt-1 truncate">{p.pod_name}</div>
+                    <div className="text-[10px] text-slate-500 mt-1 truncate">{p.pod_name}</div>
 
-                    <div className="grid grid-cols-2 gap-2 mt-3 pt-3 border-t border-white/10 text-xs">
+                    <div className="grid grid-cols-2 gap-2 mt-3 pt-3 border-t border-slate-100 text-xs">
                       <div>
                         <div className="text-[10px] text-slate-400">CPU LOAD</div>
-                        <div className="font-bold text-white">{isFailed && activeFault?.key === 'CPU_SPIKE' ? '98.4%' : `${p.cpu_pct}%`}</div>
+                        <div className="font-bold text-slate-800">{isFailed && activeFault?.key === 'CPU_SPIKE' ? '98.4%' : `${p.cpu_pct}%`}</div>
                       </div>
                       <div>
                         <div className="text-[10px] text-slate-400">MEMORY</div>
-                        <div className="font-bold text-white">{isFailed && activeFault?.key === 'MEMORY_LEAK' ? '512MB' : p.mem}</div>
+                        <div className="font-bold text-slate-800">{isFailed && activeFault?.key === 'MEMORY_LEAK' ? '512MB' : p.mem}</div>
                       </div>
                       <div>
                         <div className="text-[10px] text-slate-400">LATENCY</div>
-                        <div className="font-bold text-white">{isFailed && activeFault?.key === 'NETWORK_PARTITION' ? '1,420ms' : p.latency}</div>
+                        <div className="font-bold text-slate-800">{isFailed && activeFault?.key === 'NETWORK_PARTITION' ? '1,420ms' : p.latency}</div>
                       </div>
                       <div>
                         <div className="text-[10px] text-slate-400">RESTARTS</div>
-                        <div className="font-bold text-amber-400">{p.restarts}</div>
+                        <div className="font-bold text-slate-800">{p.restarts}</div>
                       </div>
                     </div>
                   </div>
@@ -1278,15 +1278,15 @@ export const AdminSrePortal = () => {
         {activeNav === 'incidents' && (
           <div className="space-y-4 font-mono">
             <div className="flex items-center justify-between">
-              <h2 className="text-sm font-bold text-white uppercase tracking-wider">
+              <h2 className="text-sm font-bold text-slate-900 uppercase tracking-wider">
                 Live Incident Tracking & Self-Healing Audit Log
               </h2>
-              <span className="text-xs text-slate-400">Average MTTR: 6.4s</span>
+              <span className="text-xs text-slate-500">Average MTTR: 6.4s</span>
             </div>
 
-            <div className="overflow-x-auto rounded-xl border border-white/10 bg-[#0F1420]">
+            <div className="overflow-x-auto rounded-xl border border-slate-200 bg-white shadow-xs">
               <table className="w-full text-xs text-left">
-                <thead className="bg-white/5 border-b border-white/10 text-slate-400 uppercase text-[10px]">
+                <thead className="bg-slate-50 border-b border-slate-200 text-slate-500 uppercase text-[10px]">
                   <tr>
                     <th className="py-3 px-4">Incident ID</th>
                     <th className="py-3 px-4">Service</th>
@@ -1298,19 +1298,19 @@ export const AdminSrePortal = () => {
                     <th className="py-3 px-4">Status</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-white/5">
+                <tbody className="divide-y divide-slate-100">
                   {incidents.map((inc) => (
-                    <tr key={inc.id} className="hover:bg-white/5">
-                      <td className="py-3 px-4 font-bold text-white">{inc.id}</td>
-                      <td className="py-3 px-4 text-blue-300">{inc.service}</td>
-                      <td className="py-3 px-4 text-amber-300 font-semibold">{inc.error}</td>
-                      <td className="py-3 px-4 text-slate-400">{inc.detectedAt}</td>
-                      <td className="py-3 px-4 text-slate-400">{inc.resolvedAt}</td>
-                      <td className="py-3 px-4 font-bold text-amber-400">{inc.mttr}</td>
-                      <td className="py-3 px-4 text-slate-300 truncate max-w-xs">{inc.action}</td>
+                    <tr key={inc.id} className="hover:bg-slate-50/70">
+                      <td className="py-3 px-4 font-bold text-slate-900">{inc.id}</td>
+                      <td className="py-3 px-4 text-emerald-700 font-semibold">{inc.service}</td>
+                      <td className="py-3 px-4 text-slate-800 font-medium">{inc.error}</td>
+                      <td className="py-3 px-4 text-slate-500">{inc.detectedAt}</td>
+                      <td className="py-3 px-4 text-slate-500">{inc.resolvedAt}</td>
+                      <td className="py-3 px-4 font-bold text-slate-900">{inc.mttr}</td>
+                      <td className="py-3 px-4 text-slate-600 truncate max-w-xs">{inc.action}</td>
                       <td className="py-3 px-4">
-                        <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${
-                          inc.status === 'RESOLVED' ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/40' : 'bg-amber-500/20 text-amber-300 border border-amber-500/40 animate-pulse'
+                        <span className={`px-2 py-0.5 rounded text-[10px] font-semibold ${
+                          inc.status === 'RESOLVED' ? 'bg-emerald-50 text-emerald-700 border border-emerald-200' : 'bg-amber-50 text-amber-800 border border-amber-200 animate-pulse'
                         }`}>
                           {inc.status}
                         </span>
@@ -1347,20 +1347,20 @@ export const AdminSrePortal = () => {
           return (
             <div className="space-y-6 font-mono">
               {/* Header & Fault Selector Bar */}
-              <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 p-4 rounded-xl bg-[#0F1420] border border-white/10">
+              <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 p-4 rounded-xl bg-white border border-slate-200 shadow-xs">
                 <div>
                   <div className="flex items-center gap-2">
-                    <h2 className="text-base font-bold text-white uppercase tracking-wider flex items-center gap-2">
-                      <Search className="w-5 h-5 text-amber-400" />
+                    <h2 className="text-base font-bold text-slate-900 uppercase tracking-wider flex items-center gap-2">
+                      <Search className="w-5 h-5 text-emerald-700" />
                       <span>Root Cause Analysis (RCA) & Multi-Agent Reasoning</span>
                     </h2>
                     {activeFault && (
-                      <span className="text-[10px] px-2 py-0.5 rounded bg-rose-950 text-rose-300 border border-rose-800 font-bold animate-pulse">
+                      <span className="text-[10px] px-2 py-0.5 rounded bg-rose-50 text-rose-800 border border-rose-200 font-bold animate-pulse">
                         LIVE BREACH ACTIVE
                       </span>
                     )}
                   </div>
-                  <p className="text-xs text-slate-400 mt-1">
+                  <p className="text-xs text-slate-500 mt-1">
                     Continuous sequential agent diagnostics: telemetry anomaly breach, root cause deduction, automated kubectl execution, and validation.
                   </p>
                 </div>
@@ -1368,16 +1368,16 @@ export const AdminSrePortal = () => {
                 {/* Live Trigger or SLA Countdown */}
                 <div className="flex items-center gap-3 shrink-0">
                   {countdown > 0 ? (
-                    <div className="px-3.5 py-2 rounded-xl bg-amber-500/20 border border-amber-500/40 text-amber-300 text-xs font-bold flex items-center gap-2 shadow-[0_0_15px_rgba(245,158,11,0.2)]">
-                      <Clock className="w-4 h-4 animate-spin" />
+                    <div className="px-3.5 py-2 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-bold flex items-center gap-2 shadow-xs">
+                      <Clock className="w-4 h-4 text-emerald-600 animate-spin" />
                       <span>Autonomous Healing: {countdown.toFixed(1)}s</span>
                     </div>
                   ) : (
                     <button
                       onClick={() => handleInjectFault(currentFaultKey)}
-                      className="px-4 py-2 rounded-xl bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 text-black font-extrabold text-xs flex items-center gap-2 shadow-lg hover:scale-102 transition-all active:scale-95"
+                      className="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-xs flex items-center gap-2 shadow-xs transition-all active:scale-95"
                     >
-                      <Zap className="w-4 h-4 text-black fill-black" />
+                      <Zap className="w-4 h-4 fill-white" />
                       <span>Simulate This Fault Live ({currentPipeline.sla}s)</span>
                     </button>
                   )}
@@ -1386,7 +1386,7 @@ export const AdminSrePortal = () => {
 
               {/* Fault Selection Switcher Pills */}
               <div className="flex items-center gap-2 overflow-x-auto pb-1 text-xs">
-                <span className="text-slate-400 text-[10px] uppercase font-bold shrink-0 mr-1">
+                <span className="text-slate-500 text-[10px] uppercase font-bold shrink-0 mr-1">
                   Target Service Fault:
                 </span>
                 {Object.entries(RCA_PIPELINE_DETAILS).map(([key, data]) => {
@@ -1397,13 +1397,13 @@ export const AdminSrePortal = () => {
                       onClick={() => {
                         if (!activeFault) setSelectedRcaFault(key);
                       }}
-                      className={`px-3 py-1.5 rounded-lg border font-bold text-xs shrink-0 transition-all ${
+                      className={`px-3 py-1.5 rounded-lg border font-semibold text-xs shrink-0 transition-all ${
                         isSelected
-                          ? 'bg-blue-600/30 border-blue-500 text-blue-300 shadow-[0_0_12px_rgba(59,130,246,0.3)]'
-                          : 'bg-white/5 border-white/10 text-slate-400 hover:text-white hover:bg-white/10'
+                          ? 'bg-emerald-600 text-white border-emerald-600 shadow-xs'
+                          : 'bg-white border-slate-200 text-slate-600 hover:text-slate-900 hover:bg-slate-50'
                       }`}
                     >
-                      {data.title.split(' ')[0]} {data.service}
+                      {data.service}
                     </button>
                   );
                 })}
@@ -1412,36 +1412,36 @@ export const AdminSrePortal = () => {
               {/* CURRENTLY WORKING AGENT SPOTLIGHT CARD */}
               <div className={`p-5 rounded-2xl border transition-all ${
                 activeFault && countdown > 0
-                  ? 'bg-gradient-to-r from-blue-950/70 via-indigo-950/50 to-[#0F1420] border-blue-500 shadow-[0_0_30px_rgba(59,130,246,0.3)]'
-                  : 'bg-[#0F1420] border-emerald-500/50 shadow-lg'
+                  ? 'bg-emerald-50/40 border-emerald-400 ring-2 ring-emerald-500/10 shadow-sm'
+                  : 'bg-white border-slate-200 shadow-xs'
               }`}>
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-white/10">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-100">
                   <div className="flex items-center gap-2.5">
-                    <div className={`w-8 h-8 rounded-xl flex items-center justify-center font-black text-sm ${
-                      activeFault && countdown > 0 ? 'bg-amber-500 text-black animate-bounce' : 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/40'
+                    <div className={`w-8 h-8 rounded-xl flex items-center justify-center font-bold text-sm ${
+                      activeFault && countdown > 0 ? 'bg-emerald-600 text-white' : 'bg-emerald-50 text-emerald-800 border border-emerald-200'
                     }`}>
                       {currentlyWorkingStep.step}
                     </div>
                     <div>
-                      <div className="text-[10px] text-slate-400 uppercase tracking-widest font-bold">
+                      <div className="text-[10px] text-slate-500 uppercase tracking-widest font-semibold">
                         CURRENTLY ACTIVE SRE AGENT
                       </div>
-                      <div className="text-sm md:text-base font-bold text-white flex items-center gap-2">
+                      <div className="text-sm md:text-base font-bold text-slate-900 flex items-center gap-2 font-sans">
                         <span>{currentlyWorkingStep.agent}</span>
-                        <span className="text-xs font-normal text-blue-300">({currentlyWorkingStep.role})</span>
+                        <span className="text-xs font-normal text-slate-500">({currentlyWorkingStep.role})</span>
                       </div>
                     </div>
                   </div>
 
                   <div className="flex items-center gap-2 shrink-0">
                     {activeFault && countdown > 0 ? (
-                      <span className="px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/40 text-xs font-bold flex items-center gap-1.5 animate-pulse">
-                        <span className="w-2 h-2 rounded-full bg-amber-400 animate-ping" />
+                      <span className="px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 text-xs font-bold flex items-center gap-1.5">
+                        <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
                         <span>LIVE REASONING IN PROGRESS</span>
                       </span>
                     ) : (
-                      <span className="px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 text-xs font-bold flex items-center gap-1.5">
-                        <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                      <span className="px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 text-xs font-semibold flex items-center gap-1.5">
+                        <CheckCircle2 className="w-4 h-4 text-emerald-600" />
                         <span>VERIFIED HEALTHY (ALL STEPS COMPLETE)</span>
                       </span>
                     )}
@@ -1450,26 +1450,26 @@ export const AdminSrePortal = () => {
 
                 {/* What it is doing */}
                 <div className="mt-4 space-y-2">
-                  <div className="text-[11px] text-slate-400 uppercase font-bold flex items-center gap-1.5">
-                    <Activity className="w-3.5 h-3.5 text-blue-400" />
+                  <div className="text-[11px] text-slate-500 uppercase font-semibold flex items-center gap-1.5">
+                    <Activity className="w-3.5 h-3.5 text-emerald-600" />
                     <span>What This Agent Is Doing:</span>
                   </div>
-                  <div className="p-3 rounded-xl bg-black/50 border border-white/5 text-xs text-white leading-relaxed font-mono font-semibold">
+                  <div className="p-3 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-800 leading-relaxed font-mono">
                     {currentlyWorkingStep.whatDoing}
                   </div>
                 </div>
 
                 {/* Live Telemetry & Metrics Snapshot Grid */}
                 <div className="mt-4 space-y-2">
-                  <div className="text-[11px] text-slate-400 uppercase font-bold flex items-center gap-1.5">
-                    <TrendingUp className="w-3.5 h-3.5 text-purple-400" />
+                  <div className="text-[11px] text-slate-500 uppercase font-semibold flex items-center gap-1.5">
+                    <TrendingUp className="w-3.5 h-3.5 text-emerald-600" />
                     <span>Real-Time Telemetry & Metric Analysis:</span>
                   </div>
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5">
                     {currentlyWorkingStep.metrics.map((m, idx) => (
-                      <div key={idx} className="p-2.5 rounded-xl bg-black/40 border border-white/5">
-                        <div className="text-[10px] text-slate-400">{m.label}</div>
-                        <div className={`font-bold text-xs mt-1 truncate ${m.color || 'text-white'}`}>
+                      <div key={idx} className="p-2.5 rounded-xl bg-slate-50 border border-slate-200">
+                        <div className="text-[10px] text-slate-500">{m.label}</div>
+                        <div className={`font-bold text-xs mt-1 truncate ${m.color || 'text-slate-900'}`}>
                           {m.val}
                         </div>
                       </div>
@@ -1479,11 +1479,11 @@ export const AdminSrePortal = () => {
 
                 {/* Reasoning Analysis */}
                 <div className="mt-4 space-y-2">
-                  <div className="text-[11px] text-slate-400 uppercase font-bold flex items-center gap-1.5">
-                    <Search className="w-3.5 h-3.5 text-amber-400" />
+                  <div className="text-[11px] text-slate-500 uppercase font-semibold flex items-center gap-1.5">
+                    <Search className="w-3.5 h-3.5 text-emerald-600" />
                     <span>Architectural Reasoning & Root Cause Rationale:</span>
                   </div>
-                  <div className="p-3 rounded-xl bg-amber-950/20 border border-amber-500/30 text-xs text-amber-200/90 leading-relaxed font-mono">
+                  <div className="p-3 rounded-xl bg-emerald-50/70 border border-emerald-200 text-xs text-emerald-900 leading-relaxed font-mono">
                     {currentlyWorkingStep.reasoning}
                   </div>
                 </div>
@@ -1492,11 +1492,11 @@ export const AdminSrePortal = () => {
               {/* SEQUENTIAL STEP-BY-STEP MULTI-AGENT EXECUTION PIPELINE */}
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
-                  <h3 className="text-xs font-bold text-slate-300 uppercase tracking-wider flex items-center gap-2">
-                    <Layers className="w-4 h-4 text-blue-400" />
+                  <h3 className="text-xs font-bold text-slate-700 uppercase tracking-wider flex items-center gap-2">
+                    <Layers className="w-4 h-4 text-emerald-700" />
                     <span>Sequential Multi-Agent Execution Log (All 7 Steps)</span>
                   </h3>
-                  <span className="text-[11px] text-slate-400">
+                  <span className="text-[11px] text-slate-500">
                     Step {activeStepIndex} of 7 Active
                   </span>
                 </div>
@@ -1512,66 +1512,66 @@ export const AdminSrePortal = () => {
                         key={st.step}
                         className={`p-4 rounded-xl border transition-all ${
                           isCurrent
-                            ? 'bg-blue-950/40 border-blue-500 shadow-[0_0_20px_rgba(59,130,246,0.3)] animate-pulse'
+                            ? 'bg-emerald-50/50 border-emerald-500 shadow-xs ring-2 ring-emerald-500/20'
                             : isCompleted
-                            ? 'bg-[#0F1420] border-emerald-500/30'
-                            : 'bg-[#080B11] border-white/5 opacity-60'
+                            ? 'bg-white border-slate-200 shadow-xs hover:border-emerald-300'
+                            : 'bg-slate-50/50 border-slate-200/50 opacity-60'
                         }`}
                       >
                         <div className="flex items-center justify-between gap-3">
                           <div className="flex items-center gap-3">
                             <div className={`w-7 h-7 rounded-lg flex items-center justify-center font-bold text-xs ${
                               isCurrent
-                                ? 'bg-blue-500 text-white animate-ping'
+                                ? 'bg-emerald-600 text-white'
                                 : isCompleted
-                                ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/40'
-                                : 'bg-white/5 text-slate-500'
+                                ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
+                                : 'bg-slate-100 text-slate-400'
                             }`}>
                               {st.step}
                             </div>
                             <div>
-                              <div className="font-bold text-xs text-white flex items-center gap-2">
+                              <div className="font-bold text-xs text-slate-900 flex items-center gap-2 font-sans">
                                 <span>Step {st.step}: {st.agent}</span>
-                                <span className="text-[11px] text-slate-400 font-normal">({st.role})</span>
+                                <span className="text-[11px] text-slate-500 font-normal">({st.role})</span>
                               </div>
                             </div>
                           </div>
 
                           <div>
                             {isCompleted && (
-                              <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 flex items-center gap-1">
+                              <span className="px-2 py-0.5 rounded text-[10px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200 flex items-center gap-1">
                                 <CheckCircle2 className="w-3 h-3" />
                                 <span>COMPLETED</span>
                               </span>
                             )}
                             {isCurrent && (
-                              <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-500/20 text-amber-300 border border-amber-500/40 flex items-center gap-1 animate-pulse">
-                                <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-ping" />
+                              <span className="px-2 py-0.5 rounded text-[10px] font-semibold bg-amber-50 text-amber-800 border border-amber-200 flex items-center gap-1 animate-pulse">
+                                <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-ping" />
                                 <span>WORKING NOW</span>
                               </span>
                             )}
                             {isQueued && (
-                              <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-white/5 text-slate-400 border border-white/10">
+                              <span className="px-2 py-0.5 rounded text-[10px] font-medium bg-slate-100 text-slate-500">
                                 QUEUED
                               </span>
                             )}
                           </div>
                         </div>
 
-                        {/* Step Details: What it's doing, Metrics & Reasoning */}
+                        {/* Step Details */}
                         <div className="mt-3 space-y-2.5 text-xs">
                           {/* What it's doing */}
-                          <div className="p-2.5 rounded-lg bg-black/40 border border-white/5 text-slate-200">
-                            <span className="text-[10px] font-bold text-slate-400 uppercase mr-1.5">Action:</span>
+                          <div className="p-2.5 rounded-lg bg-slate-50 border border-slate-200 text-slate-800">
+                            <span className="text-[10px] font-bold text-slate-500 uppercase mr-1.5">Action:</span>
                             <span>{st.whatDoing}</span>
                           </div>
 
                           {/* Metrics chips */}
                           <div className="grid grid-cols-2 md:grid-cols-4 gap-2 text-[11px]">
                             {st.metrics.map((m, mIdx) => (
-                              <div key={mIdx} className="p-2 rounded bg-black/30 border border-white/5">
+                              <div key={mIdx} className="p-2 rounded bg-slate-50 border border-slate-200">
                                 <div className="text-[9px] text-slate-400 uppercase">{m.label}</div>
-                                <div className={`font-bold truncate mt-0.5 ${m.color || 'text-white'}`}>
+                                <div className={`font-bold truncate mt-0.5 ${m.color || 'text-slate-800'}`}>
                                   {m.val}
                                 </div>
                               </div>
@@ -1579,14 +1579,14 @@ export const AdminSrePortal = () => {
                           </div>
 
                           {/* Reasoning */}
-                          <div className="p-2.5 rounded-lg bg-amber-950/15 border border-amber-500/20 text-amber-200/90 text-[11px]">
-                            <span className="text-[10px] font-bold text-amber-400 uppercase mr-1.5">Reasoning:</span>
+                          <div className="p-2.5 rounded-lg bg-emerald-50/50 border border-emerald-100 text-emerald-900 text-[11px]">
+                            <span className="text-[10px] font-bold text-emerald-800 uppercase mr-1.5">Reasoning:</span>
                             <span>{st.reasoning}</span>
                           </div>
 
                           {/* Terminal command if execution agent */}
                           {st.step === 5 && (
-                            <div className="p-2 rounded-lg bg-black border border-white/10 flex items-center gap-2 text-emerald-400 font-mono text-[11px]">
+                            <div className="p-2.5 rounded-lg bg-slate-900 border border-slate-800 flex items-center gap-2 text-emerald-400 font-mono text-[11px]">
                               <Terminal className="w-3.5 h-3.5 text-slate-400 shrink-0" />
                               <span className="truncate">{st.metrics[0]?.val}</span>
                             </div>
@@ -1605,36 +1605,36 @@ export const AdminSrePortal = () => {
         {activeNav === 'chaos' && (
           <div className="space-y-4 font-mono">
             <div className="flex items-center justify-between">
-              <h2 className="text-sm font-bold text-white uppercase tracking-wider">
+              <h2 className="text-sm font-bold text-slate-900 uppercase tracking-wider">
                 Chaos Simulation Lab (6 Controlled Failure Types)
               </h2>
-              <span className="text-xs text-slate-400">Click to inject failure into targeted service</span>
+              <span className="text-xs text-slate-500">Click to inject failure into targeted service</span>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {Object.entries(FAULT_SPECS_EXPANDED).map(([key, spec]) => {
                 const isThisActive = activeFault?.key === key;
                 return (
-                  <div key={key} className={`p-4 rounded-xl border flex flex-col justify-between gap-3 ${
-                    isThisActive ? 'bg-amber-500/20 border-amber-400 shadow-[0_0_20px_rgba(251,191,36,0.3)]' : 'bg-[#0F1420] border-white/10'
+                  <div key={key} className={`p-4 rounded-xl border flex flex-col justify-between gap-3 transition-all ${
+                    isThisActive ? 'bg-amber-50/60 border-amber-400 shadow-sm ring-2 ring-amber-400/20' : 'bg-white border-slate-200 shadow-xs hover:border-emerald-300 hover:shadow-sm'
                   }`}>
                     <div>
                       <div className="flex items-center justify-between">
-                        <span className="font-bold text-xs text-white">{spec.name}</span>
-                        <span className="text-[10px] px-2 py-0.5 rounded bg-black/40 text-amber-300 border border-white/10">
+                        <span className="font-bold text-xs text-slate-900">{spec.name}</span>
+                        <span className="text-[10px] px-2 py-0.5 rounded bg-emerald-50 text-emerald-800 border border-emerald-200 font-semibold">
                           Heals: {spec.duration}s
                         </span>
                       </div>
 
-                      <div className="text-[11px] text-blue-300 mt-1">
-                        Target: <span className="underline font-bold">{spec.service} (:{spec.port})</span>
+                      <div className="text-[11px] text-emerald-700 mt-1 font-semibold">
+                        Target: <span className="underline">{spec.service} (:{spec.port})</span>
                       </div>
 
-                      <div className="text-[11px] text-rose-300/90 mt-2 font-semibold">
+                      <div className="text-[11px] text-slate-700 mt-2 font-medium">
                         Symptom: {spec.symptom}
                       </div>
 
-                      <div className="text-[10px] text-emerald-300 mt-2 p-2 rounded bg-black/30 border border-white/5">
+                      <div className="text-[10px] text-emerald-800 mt-2 p-2 rounded bg-emerald-50 border border-emerald-200 font-medium">
                         Containment: {spec.containment}
                       </div>
                     </div>
@@ -1642,11 +1642,11 @@ export const AdminSrePortal = () => {
                     <button
                       onClick={() => handleInjectFault(key)}
                       disabled={countdown > 0}
-                      className={`w-full py-2.5 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-1.5 shadow ${
-                        isThisActive ? 'bg-amber-400 text-black animate-pulse' : 'bg-white/10 hover:bg-white/20 text-white active:scale-95 disabled:opacity-40'
+                      className={`w-full py-2.5 rounded-lg text-xs font-semibold transition-all flex items-center justify-center gap-1.5 shadow-xs ${
+                        isThisActive ? 'bg-emerald-600 text-white animate-pulse' : 'bg-slate-900 hover:bg-slate-800 text-white active:scale-95 disabled:opacity-40'
                       }`}
                     >
-                      <Flame className="w-3.5 h-3.5 text-rose-400" />
+                      <Zap className="w-3.5 h-3.5 fill-white" />
                       <span>{isThisActive ? `Self-Healing in ${countdown.toFixed(1)}s...` : `Simulate ${spec.shortName}`}</span>
                     </button>
                   </div>
@@ -1656,23 +1656,23 @@ export const AdminSrePortal = () => {
           </div>
         )}
 
-        {/* VIEW 6: SRE KNOWLEDGE BASE (Continuous Learning) */}
+        {/* VIEW 6: SRE KNOWLEDGE BASE */}
         {activeNav === 'kb' && (
           <div className="space-y-4 font-mono">
             <div className="flex items-center justify-between">
-              <h2 className="text-sm font-bold text-white uppercase tracking-wider">
+              <h2 className="text-sm font-bold text-slate-900 uppercase tracking-wider">
                 SRE Continuous Knowledge Base & Learned Playbooks
               </h2>
-              <span className="text-xs text-emerald-400">Reinforcement Learning Memory</span>
+              <span className="text-xs text-emerald-700 font-semibold">Reinforcement Learning Memory</span>
             </div>
 
-            <div className="p-3.5 rounded-xl bg-blue-950/40 border border-blue-500/30 text-xs text-blue-200">
-              💡 <strong>Continuous Reinforcement Learning:</strong> When recurring anomalies occur, the LangGraph SRE Agent queries this memory bank to immediately execute the playbook with the highest historical accuracy score without repeating trial-and-error diagnosis.
+            <div className="p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 text-xs text-emerald-900 font-medium">
+              <strong>Continuous Reinforcement Learning:</strong> When recurring anomalies occur, the LangGraph SRE Agent queries this memory bank to immediately execute the playbook with the highest historical accuracy score without repeating trial-and-error diagnosis.
             </div>
 
-            <div className="overflow-x-auto rounded-xl border border-white/10 bg-[#0F1420]">
+            <div className="overflow-x-auto rounded-xl border border-slate-200 bg-white shadow-xs">
               <table className="w-full text-xs text-left">
-                <thead className="bg-white/5 border-b border-white/10 text-slate-400 uppercase text-[10px]">
+                <thead className="bg-slate-50 border-b border-slate-200 text-slate-500 uppercase text-[10px]">
                   <tr>
                     <th className="py-3 px-4">Playbook ID</th>
                     <th className="py-3 px-4">Service</th>
@@ -1683,16 +1683,20 @@ export const AdminSrePortal = () => {
                     <th className="py-3 px-4 text-right">Applied</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-white/5">
+                <tbody className="divide-y divide-slate-100">
                   {Object.values(FAULT_SPECS_EXPANDED).map((kb) => (
-                    <tr key={kb.playbookId} className="hover:bg-white/5">
-                      <td className="py-3 px-4 font-bold text-white">{kb.playbookId}</td>
-                      <td className="py-3 px-4 text-blue-300">{kb.service}</td>
-                      <td className="py-3 px-4 text-amber-300 font-semibold">{kb.key}</td>
-                      <td className="py-3 px-4 text-slate-300 max-w-xs">{kb.rca}</td>
-                      <td className="py-3 px-4 text-purple-300 max-w-xs">{kb.plan}</td>
-                      <td className="py-3 px-4 font-bold text-emerald-400">{kb.accuracy}</td>
-                      <td className="py-3 px-4 text-right font-bold text-amber-400">{kb.timesApplied}x</td>
+                    <tr key={kb.playbookId} className="hover:bg-slate-50/70">
+                      <td className="py-3 px-4 font-bold text-slate-900">{kb.playbookId}</td>
+                      <td className="py-3 px-4 text-emerald-700 font-semibold">{kb.service}</td>
+                      <td className="py-3 px-4 text-slate-800 font-medium">{kb.key}</td>
+                      <td className="py-3 px-4 text-slate-600 max-w-xs">{kb.rca}</td>
+                      <td className="py-3 px-4 text-slate-600 max-w-xs">{kb.plan}</td>
+                      <td className="py-3 px-4">
+                        <span className="bg-emerald-50 text-emerald-700 font-bold border border-emerald-200 px-2 py-0.5 rounded text-[11px]">
+                          {kb.accuracy}
+                        </span>
+                      </td>
+                      <td className="py-3 px-4 text-right font-bold text-slate-900">{kb.timesApplied}x</td>
                     </tr>
                   ))}
                 </tbody>
