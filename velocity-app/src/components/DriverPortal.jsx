@@ -344,28 +344,68 @@ export const DriverPortal = ({ driverUser, faultActive, activeFaults = [], onHea
     setOtpError('');
   };
 
+  // Auto-clear dutyError when autonomous healing completes or if it was a spurious 404
+  useEffect(() => {
+    if (!dutyError) return;
+
+    if (dutyError.includes('404') || dutyError.includes('status code')) {
+      setDutyError('');
+      return;
+    }
+
+    const checkHealed = setInterval(() => {
+      const activeChaos = localStorage.getItem('rydex_active_chaos');
+      if (!activeChaos) {
+        setDutyError('');
+        setCashoutNotice('✓ [AUTONOMOUS SRE RECOVERY COMPLETED] Pod restored & verified healthy.');
+        setTimeout(() => setCashoutNotice(''), 4000);
+        clearInterval(checkHealed);
+        return;
+      }
+      try {
+        const parsed = JSON.parse(activeChaos);
+        if (parsed.expires_at <= Date.now()) {
+          setDutyError('');
+          setCashoutNotice('✓ [AUTONOMOUS SRE RECOVERY COMPLETED] Pod restored & verified healthy.');
+          setTimeout(() => setCashoutNotice(''), 4000);
+          clearInterval(checkHealed);
+        }
+      } catch (e) {
+        setDutyError('');
+        clearInterval(checkHealed);
+      }
+    }, 500);
+
+    return () => clearInterval(checkHealed);
+  }, [dutyError]);
+
   const handleInstantCashout = async () => {
     setDutyError('');
-    try {
-      const activeF = await chaosApi.getActiveFaults();
-      const fault = Array.isArray(activeF) && activeF.find((f) => f.service_name === 'trip-service' || f.service_name === 'auth-service');
-      if (fault) {
-        if (fault.failure_type === 'MEMORY_LEAK') {
-          setDutyError("500 Internal Server Error: Unbounded heap memory leak. Pod for 'trip-service' OOMKilled (Exit Code 137). Instant IMPS payout aborted. Autonomous SRE Canary Rollback in progress (10.0s)...");
-          return;
+
+    // Check if Memory Leak or DB fault is currently active on trip-service
+    const activeChaos = localStorage.getItem('rydex_active_chaos');
+    if (activeChaos) {
+      try {
+        const parsed = JSON.parse(activeChaos);
+        if (parsed.expires_at > Date.now()) {
+          if (parsed.fault_type === 'MEMORY_LEAK') {
+            const remaining = Math.max(1, Math.ceil((parsed.expires_at - Date.now()) / 1000));
+            setDutyError(`500 Internal Server Error: Pod for 'trip-service' OOMKilled (Exit Code 137). Unbounded heap memory leak. Autonomous SRE Canary Rollback in progress (${remaining}s remaining)...`);
+            return;
+          }
+          if (parsed.fault_type === 'DB_BOTTLENECK') {
+            const remaining = Math.max(1, Math.ceil((parsed.expires_at - Date.now()) / 1000));
+            setDutyError(`500 Internal Server Error: Database Lock Contention on 'trips' table. Connection pool exhausted (max 100 reached). Payout settlement blocked. Autonomous SRE recycling pool (${remaining}s remaining)...`);
+            return;
+          }
         }
-        if (fault.failure_type === 'DB_BOTTLENECK') {
-          setDutyError("500 Internal Server Error: Database Lock Contention on 'trips' table. Connection pool exhausted (max 100 reached). Payout settlement blocked. Autonomous SRE recycling pool (9.4s)...");
-          return;
-        }
-      }
-      const balance = captainStats?.wallet_balance || 0;
-      setCashoutNotice(`₹${balance.toFixed(2)} transferred to Bank A/C (HDFC **4921) via IMPS!`);
-      setTimeout(() => setCashoutNotice(''), 4500);
-      setCaptainStats((prev) => ({ ...prev, wallet_balance: 0 }));
-    } catch (err) {
-      setDutyError(err.message || 'Payout processing error');
+      } catch (err) {}
     }
+
+    const balance = captainStats?.wallet_balance || 0;
+    setCashoutNotice(`₹${balance.toFixed(2)} transferred to Bank A/C (HDFC **4921) via IMPS!`);
+    setTimeout(() => setCashoutNotice(''), 4500);
+    setCaptainStats((prev) => ({ ...prev, wallet_balance: 0 }));
   };
 
   // Manual Trigger to simulate a passenger ride request if user tests driver screen alone
@@ -379,8 +419,18 @@ export const DriverPortal = ({ driverUser, faultActive, activeFaults = [], onHea
         payment_method: 'UPI',
       });
     } catch (e) {
-      const msg = e.response?.data?.detail || e.message;
-      setDutyError(msg);
+      // Standalone Vercel fallback: create local ride in localStorage
+      const demoRide = {
+        ride_id: `RYD-${Math.floor(1000 + Math.random() * 9000)}`,
+        status: 'REQUESTED',
+        ride_type: 'BIKE',
+        fare: 78.0,
+        pickup_location: { address: 'Indiranagar 100ft Road', lat: 12.9784, lng: 77.6408 },
+        dropoff_location: { address: 'Koramangala Sony Signal', lat: 12.9352, lng: 77.6245 },
+        otp: '4821',
+        created_at: new Date().toISOString()
+      };
+      localStorage.setItem('rydex_active_ride', JSON.stringify(demoRide));
     }
   };
 
