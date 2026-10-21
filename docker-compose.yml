@@ -1,0 +1,58 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: sre_postgres_db
+    environment:
+      POSTGRES_USER: cloud_admin
+      POSTGRES_PASSWORD: CloudAdminPassword2026!
+      POSTGRES_DB: cloud_sre_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U cloud_admin -d cloud_sre_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: sre_cloud_backend
+    environment:
+      ENV: production
+      DATABASE_URL: postgresql://cloud_admin:CloudAdminPassword2026!@postgres:5432/cloud_sre_db
+      SECRET_KEY: self_healing_cloud_secret_key_jwt_super_secure_2026
+      K8S_SIMULATION_MODE: "true"
+    ports:
+      - "8000:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: sre_cloud_dashboard
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+
+  prometheus:
+    image: prom/prometheus:v2.50.1
+    container_name: sre_prometheus
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - "9090:9090"
+    depends_on:
+      - backend
+
+volumes:
+  postgres_data:

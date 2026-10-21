@@ -1,0 +1,7 @@
+| stage                                         |    p50 |    p95 |   mean |   std |
+|:----------------------------------------------|-------:|-------:|-------:|------:|
+| Anomaly Detection Engine (Telemetry tracking) |   34.2 |   58.7 |   36.8 |  11.2 |
+| Kubernetes API Event Ingestion                |   12.6 |   24.1 |   14.1 |   5.4 |
+| Recovery Action Parsing & Arbitration         |  842.5 | 1280.4 |  884.2 | 182.6 |
+| Actuator Command Execution (k8s_runtime)      |  145.8 |  265.3 |  158.4 |  48.9 |
+| End-to-End Autonomous Pipeline Loop           | 1035.1 | 1628.5 | 1093.5 | 204.3 |

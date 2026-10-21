@@ -1,0 +1,20 @@
+\begin{table*}[t]
+\caption{Non-Parametric Statistical Inferencing: Mann-Whitney $U$, Cliff's Delta ($\delta$), and Percentile Bootstrap 95\% CIs}
+\label{tab:statistical_inference}
+\centering
+\small
+\setlength{\tabcolsep}{4.5pt}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{lcccccc}
+\hline
+\textbf{Fault Scenario} & \textbf{Arm 3 MTTR} & \textbf{Arm 1 MTTR} & \textbf{Arm 3 vs Arm 1} & \textbf{Arm 3 vs Arm 1} & \textbf{Arm 2 MTTR} & \textbf{Arm 3 vs Arm 2} \\
+ & \textbf{Median [95\% CI]} & \textbf{Median [95\% CI]} & \textbf{$p$-value ($U$ Stat)} & \textbf{Cliff's Delta $\delta$} & \textbf{Median [95\% CI]} & \textbf{$p$-value ($U$ Stat)} \\
+\hline
+Pod Crash & 6.63\,s [6.37, 6.89] & 61.69\,s [59.33, 65.30] & $p < 10^{-30}$ ($U=0$) & -1.00 (Large) & 24.06\,s [22.51, 24.94] & $p < 10^{-30}$ ($U=0$) \\
+Ingress Network Burst & 11.39\,s [10.85, 11.71] & 180.41\,s [173.49, 191.14] & $p < 10^{-30}$ ($U=0$) & -1.00 (Large) & 47.46\,s [43.63, 49.78] & $p < 10^{-30}$ ($U=0$) \\
+Resource & 12.84\,s [12.44, 13.34] & 230.47\,s [221.46, 239.51] & $p < 10^{-30}$ ($U=0$) & -1.00 (Large) & 67.00\,s [63.35, 71.21] & $p < 10^{-30}$ ($U=0$) \\
+Service Dependency Disconnection & 16.65\,s [15.69, 17.84] & 317.18\,s [304.11, 324.66] & $p < 10^{-30}$ ($U=0$) & -1.00 (Large) & 136.27\,s [126.10, 141.72] & $p < 10^{-30}$ ($U=0$) \\
+\hline
+\multicolumn{7}{l}{\footnotesize Ordinal effect magnitude interpretation: $|\delta| < 0.147$ Negligible; $< 0.33$ Small; $< 0.474$ Medium; $\ge 0.474$ Large (Romano et al.).}
+\end{tabular}
+\end{table*}

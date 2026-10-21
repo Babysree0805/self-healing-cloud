@@ -1,0 +1,380 @@
+# ==========================================
+# 1. Auth Service
+# ==========================================
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auth-deployment
+  namespace: ride-hailing-system
+  labels:
+    app: auth-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: auth-service
+  template:
+    metadata:
+      labels:
+        app: auth-service
+    spec:
+      containers:
+      - name: auth-service
+        image: ride-hailing/backend:latest
+        command: ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8001"]
+        ports:
+        - containerPort: 8001
+        envFrom:
+        - configMapRef:
+            name: cloud-platform-config
+        - secretRef:
+            name: cloud-platform-secrets
+        resources:
+          requests:
+            cpu: 100m
+            memory: 128Mi
+          limits:
+            cpu: 500m
+            memory: 512Mi
+        livenessProbe:
+          httpGet:
+            path: /api/v1/gateway/health
+            port: 8001
+          initialDelaySeconds: 5
+          periodSeconds: 10
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: auth-service
+  namespace: ride-hailing-system
+spec:
+  selector:
+    app: auth-service
+  ports:
+  - port: 8001
+    targetPort: 8001
+
+# ==========================================
+# 2. Ride Service
+# ==========================================
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ride-deployment
+  namespace: ride-hailing-system
+  labels:
+    app: ride-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ride-service
+  template:
+    metadata:
+      labels:
+        app: ride-service
+    spec:
+      containers:
+      - name: ride-service
+        image: ride-hailing/backend:latest
+        command: ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8002"]
+        ports:
+        - containerPort: 8002
+        envFrom:
+        - configMapRef:
+            name: cloud-platform-config
+        - secretRef:
+            name: cloud-platform-secrets
+        resources:
+          requests:
+            cpu: 150m
+            memory: 256Mi
+          limits:
+            cpu: 800m
+            memory: 1Gi
+        livenessProbe:
+          httpGet:
+            path: /api/v1/rides/list
+            port: 8002
+          initialDelaySeconds: 5
+          periodSeconds: 10
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ride-service
+  namespace: ride-hailing-system
+spec:
+  selector:
+    app: ride-service
+  ports:
+  - port: 8002
+    targetPort: 8002
+
+# ==========================================
+# 3. Driver Service
+# ==========================================
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: driver-deployment
+  namespace: ride-hailing-system
+  labels:
+    app: driver-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: driver-service
+  template:
+    metadata:
+      labels:
+        app: driver-service
+    spec:
+      containers:
+      - name: driver-service
+        image: ride-hailing/backend:latest
+        command: ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8003"]
+        ports:
+        - containerPort: 8003
+        envFrom:
+        - configMapRef:
+            name: cloud-platform-config
+        - secretRef:
+            name: cloud-platform-secrets
+        resources:
+          requests:
+            cpu: 100m
+            memory: 128Mi
+          limits:
+            cpu: 500m
+            memory: 512Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: driver-service
+  namespace: ride-hailing-system
+spec:
+  selector:
+    app: driver-service
+  ports:
+  - port: 8003
+    targetPort: 8003
+
+# ==========================================
+# 4. Trip Service
+# ==========================================
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: trip-deployment
+  namespace: ride-hailing-system
+  labels:
+    app: trip-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: trip-service
+  template:
+    metadata:
+      labels:
+        app: trip-service
+    spec:
+      containers:
+      - name: trip-service
+        image: ride-hailing/backend:latest
+        command: ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8004"]
+        ports:
+        - containerPort: 8004
+        envFrom:
+        - configMapRef:
+            name: cloud-platform-config
+        - secretRef:
+            name: cloud-platform-secrets
+        resources:
+          requests:
+            cpu: 150m
+            memory: 256Mi
+          limits:
+            cpu: 1000m
+            memory: 1Gi
+        livenessProbe:
+          httpGet:
+            path: /api/v1/trips/list
+            port: 8004
+          initialDelaySeconds: 5
+          periodSeconds: 10
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: trip-service
+  namespace: ride-hailing-system
+spec:
+  selector:
+    app: trip-service
+  ports:
+  - port: 8004
+    targetPort: 8004
+
+# ==========================================
+# 5. Pricing Service
+# ==========================================
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pricing-deployment
+  namespace: ride-hailing-system
+  labels:
+    app: pricing-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pricing-service
+  template:
+    metadata:
+      labels:
+        app: pricing-service
+    spec:
+      containers:
+      - name: pricing-service
+        image: ride-hailing/backend:latest
+        command: ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8005"]
+        ports:
+        - containerPort: 8005
+        envFrom:
+        - configMapRef:
+            name: cloud-platform-config
+        - secretRef:
+            name: cloud-platform-secrets
+        resources:
+          requests:
+            cpu: 100m
+            memory: 128Mi
+          limits:
+            cpu: 500m
+            memory: 512Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: pricing-service
+  namespace: ride-hailing-system
+spec:
+  selector:
+    app: pricing-service
+  ports:
+  - port: 8005
+    targetPort: 8005
+
+# ==========================================
+# 6. Location Service
+# ==========================================
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: location-deployment
+  namespace: ride-hailing-system
+  labels:
+    app: location-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: location-service
+  template:
+    metadata:
+      labels:
+        app: location-service
+    spec:
+      containers:
+      - name: location-service
+        image: ride-hailing/backend:latest
+        command: ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8006"]
+        ports:
+        - containerPort: 8006
+        envFrom:
+        - configMapRef:
+            name: cloud-platform-config
+        - secretRef:
+            name: cloud-platform-secrets
+        resources:
+          requests:
+            cpu: 100m
+            memory: 128Mi
+          limits:
+            cpu: 600m
+            memory: 512Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: location-service
+  namespace: ride-hailing-system
+spec:
+  selector:
+    app: location-service
+  ports:
+  - port: 8006
+    targetPort: 8006
+
+# ==========================================
+# 7. Notification Service
+# ==========================================
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: notification-deployment
+  namespace: ride-hailing-system
+  labels:
+    app: notification-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: notification-service
+  template:
+    metadata:
+      labels:
+        app: notification-service
+    spec:
+      containers:
+      - name: notification-service
+        image: ride-hailing/backend:latest
+        command: ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8007"]
+        ports:
+        - containerPort: 8007
+        envFrom:
+        - configMapRef:
+            name: cloud-platform-config
+        - secretRef:
+            name: cloud-platform-secrets
+        resources:
+          requests:
+            cpu: 50m
+            memory: 96Mi
+          limits:
+            cpu: 300m
+            memory: 256Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: notification-service
+  namespace: ride-hailing-system
+spec:
+  selector:
+    app: notification-service
+  ports:
+  - port: 8007
+    targetPort: 8007

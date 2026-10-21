@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: ride-hailing-system
+  labels:
+    environment: production
+    managed-by: autonomous-sre-agent

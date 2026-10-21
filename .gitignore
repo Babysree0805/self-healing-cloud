@@ -1,0 +1,27 @@
+# Node dependencies & builds
+**/node_modules/
+**/dist/
+**/build/
+**/.vite/
+package-lock.json
+
+# Python & Virtual Environments
+**/__pycache__/
+*.py[cod]
+*$py.class
+**/.venv/
+**/venv/
+**/env/
+**/.pytest_cache/
+
+# Databases & local logs
+*.sqlite3
+*.db
+*.log
+backend/app/cloud_platform.db
+
+# OS & Editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

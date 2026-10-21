@@ -1,0 +1,47 @@
+services:
+  # 1. FastAPI Backend + Simulated K8s Pods Runtime
+  - type: web
+    name: rydex-backend
+    env: python
+    region: oregon
+    plan: free
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.10.12
+      - key: ENVIRONMENT
+        value: production
+
+  # 2. SRE Autonomous Healing Dashboard
+  - type: web
+    name: rydex-sre-dashboard
+    env: static
+    region: oregon
+    plan: free
+    rootDir: frontend
+    buildCommand: npm install && npm run build
+    staticPublishPath: dist
+    envVars:
+      - key: VITE_API_URL
+        fromService:
+          type: web
+          name: rydex-backend
+          property: host
+
+  # 3. Rydex Ride-Hailing App (Passenger & Driver Portals)
+  - type: web
+    name: rydex-app
+    env: static
+    region: oregon
+    plan: free
+    rootDir: velocity-app
+    buildCommand: npm install && npm run build
+    staticPublishPath: dist
+    envVars:
+      - key: VITE_API_URL
+        fromService:
+          type: web
+          name: rydex-backend
+          property: host

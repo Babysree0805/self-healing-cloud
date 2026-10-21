@@ -1,0 +1,20 @@
+\begin{table}[t]
+\caption{Internal System Execution Latency Breakdown Across Control Pipeline}
+\label{tab:latency_profiling}
+\centering
+\small
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{lcccc}
+\hline
+\textbf{Autonomous Control Subsystem} & \textbf{Median ($p_{50}$)} & \textbf{Tail ($p_{95}$)} & \textbf{Mean} & \textbf{Std Dev} \\
+ & \textbf{[ms]} & \textbf{[ms]} & \textbf{[ms]} & \textbf{[ms]} \\
+\hline
+1. Anomaly Detection Engine (Telemetry) & 34.2 & 58.7 & 36.8 & 11.2 \\
+2. Kubernetes API Event Ingestion & 12.6 & 24.1 & 14.1 & 5.4 \\
+3. Recovery Action Parsing \& Arbitration & 842.5 & 1280.4 & 884.2 & 182.6 \\
+4. Actuator Command Exec (\texttt{k8s\_runtime}) & 145.8 & 265.3 & 158.4 & 48.9 \\
+\hline
+\textbf{Total End-to-End Pipeline Loop} & \textbf{1035.1} & \textbf{1628.5} & \textbf{1093.5} & \textbf{204.3} \\
+\hline
+\end{tabular}
+\end{table}

@@ -1,0 +1,133 @@
+\relax 
+\providecommand\hyper@newdestlabel[2]{}
+\providecommand\HyField@AuxAddToFields[1]{}
+\providecommand\HyField@AuxAddToCoFields[2]{}
+\citation{burns2016borg}
+\citation{ford2010availability}
+\citation{ibidunmoye2015performance}
+\citation{weng2022oncall}
+\citation{iqbal2023cost}
+\citation{samir2019self}
+\citation{ibidunmoye2015performance}
+\citation{yao2022react}
+\citation{guo2024agents,wang2024survey}
+\@writefile{toc}{\contentsline {section}{\numberline {I}Introduction}{1}{section.1}\protected@file@percent }
+\newlabel{sec:intro}{{I}{1}{Introduction}{section.1}{}}
+\citation{kephart2003vision}
+\citation{cheng2009run}
+\citation{ibidunmoye2015performance}
+\citation{tuli2021tranad}
+\citation{weng2018root}
+\citation{ma2020automap}
+\citation{luo2021microrank}
+\citation{soldani2022anomaly}
+\citation{samir2019self}
+\citation{balla2020adapting}
+\citation{wang2024survey}
+\citation{guo2024agents}
+\citation{qian2024chatdev}
+\citation{yao2022react}
+\citation{shinn2023reflexion}
+\@writefile{toc}{\contentsline {section}{\numberline {II}Related Work}{2}{section.2}\protected@file@percent }
+\newlabel{sec:related}{{II}{2}{Related Work}{section.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {II-A}}Autonomic Computing and MAPE-K}{2}{subsection.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {II-B}}Performance Anomaly Detection}{2}{subsection.2.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {II-C}}Root Cause Analysis in Microservice Systems}{2}{subsection.2.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {II-D}}Kubernetes-Specific Self-Healing}{2}{subsection.2.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {II-E}}LLM-Based Multi-Agent Systems}{2}{subsection.2.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {II-F}}ReAct and Reflexion}{2}{subsection.2.6}\protected@file@percent }
+\citation{k8sclient2024}
+\citation{langchain2024}
+\@writefile{toc}{\contentsline {section}{\numberline {III}System Architecture}{3}{section.3}\protected@file@percent }
+\newlabel{sec:arch}{{III}{3}{System Architecture}{section.3}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {IV}Implementation}{3}{section.4}\protected@file@percent }
+\newlabel{sec:impl}{{IV}{3}{Implementation}{section.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-A}}Agent Roles and Responsibilities}{3}{subsection.4.1}\protected@file@percent }
+\newlabel{eq:causal}{{1}{3}{Agent Roles and Responsibilities}{equation.1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces The \textsc  {HealOps}{} seven-layer cloud architecture. Layers L1 (Container Runtime) through L7 (User \& API Gateway) form a strict dependency hierarchy. Bidirectional arrows between adjacent layers represent the Kubernetes API, Prometheus HTTP API, and gRPC channels through which the six agents exchange telemetry observations, diagnostic queries, and remediation commands. All agent-to-infrastructure interactions are mediated through the Layer~5 ToolRouter, which enforces PolicyGuard constraints before forwarding any mutating command to Layer~4.}}{4}{figure.1}\protected@file@percent }
+\newlabel{fig:arch}{{1}{4}{The \HealOps {} seven-layer cloud architecture. Layers L1 (Container Runtime) through L7 (User \& API Gateway) form a strict dependency hierarchy. Bidirectional arrows between adjacent layers represent the Kubernetes API, Prometheus HTTP API, and gRPC channels through which the six agents exchange telemetry observations, diagnostic queries, and remediation commands. All agent-to-infrastructure interactions are mediated through the Layer~5 ToolRouter, which enforces PolicyGuard constraints before forwarding any mutating command to Layer~4}{figure.1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces HealOps cognitive agent state-machine. Solid arrows represent the happy-path healing flow. The RETRY branch returns to ActionAgent for up to three attempts before EscalationAgent is activated. The PolicyGuard block path bypasses all retry attempts and escalates immediately.}}{5}{figure.2}\protected@file@percent }
+\newlabel{fig:statemachine}{{2}{5}{HealOps cognitive agent state-machine. Solid arrows represent the happy-path healing flow. The RETRY branch returns to ActionAgent for up to three attempts before EscalationAgent is activated. The PolicyGuard block path bypasses all retry attempts and escalates immediately}{figure.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-B}}Tool Registry}{5}{subsection.4.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {V}Control Algorithm}{5}{section.5}\protected@file@percent }
+\newlabel{sec:algo}{{V}{5}{Control Algorithm}{section.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-A}}The HealOps Control Tick}{5}{subsection.5.1}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {I}{\ignorespaces HealOps Tool Registry --- 14 Registered Tools by Category}}{5}{table.1}\protected@file@percent }
+\newlabel{tab:tools}{{I}{5}{HealOps Tool Registry --- 14 Registered Tools by Category}{table.1}{}}
+\@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces One \textsc  {HealOps}{} Control Tick}}{5}{algorithm.1}\protected@file@percent }
+\newlabel{alg:healops}{{1}{5}{The HealOps Control Tick}{algorithm.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-B}}PolicyGuard Constraint Enforcement}{5}{subsection.5.2}\protected@file@percent }
+\citation{romano2006exploring}
+\@writefile{toc}{\contentsline {section}{\numberline {VI}Experimental Methodology}{6}{section.6}\protected@file@percent }
+\newlabel{sec:eval}{{VI}{6}{Experimental Methodology}{section.6}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {VI-A}}Testbed Configuration}{6}{subsection.6.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {VI-B}}Fault Injection Protocol}{6}{subsection.6.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {VI-C}}Baseline Experimental Arms}{6}{subsection.6.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {VI-D}}Measurement Protocol and Statistical Methodology}{6}{subsection.6.4}\protected@file@percent }
+\citation{romano2006exploring}
+\@writefile{toc}{\contentsline {section}{\numberline {VII}Experimental Results}{7}{section.7}\protected@file@percent }
+\newlabel{sec:results}{{VII}{7}{Experimental Results}{section.7}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {VII-A}}Multi-Arm MTTR Benchmark}{7}{subsection.7.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {VII-B}}Statistical Significance and Effect Sizes}{7}{subsection.7.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {VII-C}}Subsystem Latency Profiling}{7}{subsection.7.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {VII-D}}Economic Break-Even Analysis}{7}{subsection.7.4}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {II}{\ignorespaces Multi-Arm MTTR Benchmark Across Fault Scenarios (n\,=\,100 Replicates per Cell). Bold denotes best in each scenario.}}{8}{table.2}\protected@file@percent }
+\newlabel{tab:benchmark}{{II}{8}{Multi-Arm MTTR Benchmark Across Fault Scenarios (n\,=\,100 Replicates per Cell). Bold denotes best in each scenario}{table.2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces MTTR distributions across the four fault scenarios plotted on a log scale. Notched box-plots display the median, IQR, Tukey whiskers at $1.5\!\times $\,IQR, and individual outliers as dots. \textbf  {HO} = \textsc  {HealOps}{} (blue); \textbf  {Heur} = Heuristic Script (salmon); \textbf  {K8s} = Native Kubernetes (red). Note the y-axis is independently scaled per scenario to maximize within-scenario resolution. \textsc  {HealOps}{} achieves complete stochastic dominance across all four scenarios; not a single \textsc  {HealOps}{} trial overlaps with the Native Kubernetes distribution.}}{8}{figure.3}\protected@file@percent }
+\newlabel{fig:mttr}{{3}{8}{MTTR distributions across the four fault scenarios plotted on a log scale. Notched box-plots display the median, IQR, Tukey whiskers at $1.5\!\times $\,IQR, and individual outliers as dots. \textbf {HO} = \HealOps {} (blue); \textbf {Heur} = Heuristic Script (salmon); \textbf {K8s} = Native Kubernetes (red). Note the y-axis is independently scaled per scenario to maximize within-scenario resolution. \HealOps {} achieves complete stochastic dominance across all four scenarios; not a single \HealOps {} trial overlaps with the Native Kubernetes distribution}{figure.3}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {VIII}Production-Hardening Lessons}{8}{section.8}\protected@file@percent }
+\newlabel{sec:lessons}{{VIII}{8}{Production-Hardening Lessons}{section.8}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {III}{\ignorespaces Non-Parametric Statistical Test Results (Mann-Whitney $U$, Bonferroni Correction, $\alpha _{\mathrm  {adj}}=0.00625$)}}{9}{table.3}\protected@file@percent }
+\newlabel{tab:stats}{{III}{9}{Non-Parametric Statistical Test Results (Mann-Whitney $U$, Bonferroni Correction, $\alpha _{\mathrm {adj}}=0.00625$)}{table.3}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Cliff's $\delta $ effect sizes with 95\% bootstrap confidence intervals (2{,}000 bootstrap iterations). Negative $\delta $ indicates \textsc  {HealOps}{} is faster. All point estimates cluster at $\delta = -1.00$, indicating complete stochastic dominance. Error bars are narrow ($<0.02$ width), confirming that the dominance is stable across bootstrap samples.}}{9}{figure.4}\protected@file@percent }
+\newlabel{fig:cliffs}{{4}{9}{Cliff's $\delta $ effect sizes with 95\% bootstrap confidence intervals (2{,}000 bootstrap iterations). Negative $\delta $ indicates \HealOps {} is faster. All point estimates cluster at $\delta = -1.00$, indicating complete stochastic dominance. Error bars are narrow ($<0.02$ width), confirming that the dominance is stable across bootstrap samples}{figure.4}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {IV}{\ignorespaces HealOps Subsystem Latency Profile (milliseconds, n\,=\,400 Events Across All Scenarios)}}{9}{table.4}\protected@file@percent }
+\newlabel{tab:latency}{{IV}{9}{HealOps Subsystem Latency Profile (milliseconds, n\,=\,400 Events Across All Scenarios)}{table.4}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Per-subsystem latency at $p_{50}$ (blue bars) and $p_{95}$ (orange bars). Cognitive Arbitration (the LangChain ReAct LLM forward pass) dominates at 62.2\% of total loop time. Diagnostic Traversal (Prometheus range-query + graph BFS) is the second largest contributor at 19.2\%.}}{9}{figure.5}\protected@file@percent }
+\newlabel{fig:latency}{{5}{9}{Per-subsystem latency at $p_{50}$ (blue bars) and $p_{95}$ (orange bars). Cognitive Arbitration (the LangChain ReAct LLM forward pass) dominates at 62.2\% of total loop time. Diagnostic Traversal (Prometheus range-query + graph BFS) is the second largest contributor at 19.2\%}{figure.5}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Break-even sensitivity analysis as a function of MTTA (min). Left axis (blue): probability that \textsc  {HealOps}{} resolves the fault before on-call SRE acknowledgment. Right axis (orange): estimated operational cost reduction based on \$200/hr SRE cost, 4 incidents/week, 3-person rotation. The 95\% probability threshold is crossed at MTTA $\approx $ 2\,min.}}{9}{figure.6}\protected@file@percent }
+\newlabel{fig:breakeven}{{6}{9}{Break-even sensitivity analysis as a function of MTTA (min). Left axis (blue): probability that \HealOps {} resolves the fault before on-call SRE acknowledgment. Right axis (orange): estimated operational cost reduction based on \$200/hr SRE cost, 4 incidents/week, 3-person rotation. The 95\% probability threshold is crossed at MTTA $\approx $ 2\,min}{figure.6}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {V}{\ignorespaces Break-Even Sensitivity at Selected MTTA Values}}{9}{table.5}\protected@file@percent }
+\newlabel{tab:breakeven}{{V}{9}{Break-Even Sensitivity at Selected MTTA Values}{table.5}{}}
+\citation{reimers2019sbert}
+\@writefile{toc}{\contentsline {section}{\numberline {IX}Threats to Validity}{10}{section.9}\protected@file@percent }
+\newlabel{sec:threats}{{IX}{10}{Threats to Validity}{section.9}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {X}Conclusion}{10}{section.10}\protected@file@percent }
+\newlabel{sec:conclusion}{{X}{10}{Conclusion}{section.10}{}}
+\bibcite{kephart2003vision}{1}
+\bibcite{burns2016borg}{2}
+\bibcite{ford2010availability}{3}
+\bibcite{cheng2009run}{4}
+\bibcite{ibidunmoye2015performance}{5}
+\bibcite{weng2018root}{6}
+\bibcite{samir2019self}{7}
+\bibcite{yao2022react}{8}
+\bibcite{shinn2023reflexion}{9}
+\bibcite{wang2024survey}{10}
+\bibcite{guo2024agents}{11}
+\bibcite{qian2024chatdev}{12}
+\bibcite{ma2020automap}{13}
+\bibcite{schroeder2010large}{14}
+\bibcite{levy2020observability}{15}
+\bibcite{romano2006exploring}{16}
+\bibcite{reimers2019sbert}{17}
+\bibcite{langchain2024}{18}
+\bibcite{k8sclient2024}{19}
+\bibcite{weng2022oncall}{20}
+\bibcite{iqbal2023cost}{21}
+\bibcite{tuli2021tranad}{22}
+\bibcite{luo2021microrank}{23}
+\bibcite{soldani2022anomaly}{24}
+\bibcite{balla2020adapting}{25}
+\bibcite{lin2023evolutionary}{26}
+\bibcite{zhang2024aiops}{27}
+\bibcite{deng2023empirical}{28}
+\bibcite{he2021deberta}{29}
+\@writefile{toc}{\contentsline {section}{References}{11}{section*.1}\protected@file@percent }
+\bibcite{sun2023llmops}{30}
+\@writefile{toc}{\contentsline {section}{Biographies}{12}{IEEEbiography.0}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{Baby Sree Gangarapu}{12}{IEEEbiography.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{Hindupur Raghavender Vardhan}{12}{IEEEbiography.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{Yeddula Likitha Reddy}{12}{IEEEbiography.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{Chintakunta Sai Jagruth}{12}{IEEEbiography.4}\protected@file@percent }
+\gdef \@abspage@last{12}

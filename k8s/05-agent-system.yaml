@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sre-agent-system-deployment
+  namespace: ride-hailing-system
+  labels:
+    app: sre-agent-system
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sre-agent-system
+  template:
+    metadata:
+      labels:
+        app: sre-agent-system
+    spec:
+      serviceAccountName: sre-agent-controller-sa
+      containers:
+      - name: sre-agent-engine
+        image: ride-hailing/agent-system:latest
+        command: ["python", "-m", "app.agents.workflow"]
+        envFrom:
+        - configMapRef:
+            name: cloud-platform-config
+        - secretRef:
+            name: cloud-platform-secrets
+        resources:
+          requests:
+            cpu: 300m
+            memory: 512Mi
+          limits:
+            cpu: 1500m
+            memory: 2Gi
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: sre-agent-controller-sa
+  namespace: ride-hailing-system
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: sre-agent-cluster-role
+rules:
+- apiGroups: ["", "apps", "autoscaling"]
+  resources: ["pods", "pods/log", "deployments", "deployments/scale", "services", "horizontalpodautoscalers", "events"]
+  verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: sre-agent-role-binding
+subjects:
+- kind: ServiceAccount
+  name: sre-agent-controller-sa
+  namespace: ride-hailing-system
+roleRef:
+  kind: ClusterRole
+  name: sre-agent-cluster-role
+  apiGroup: rbac.authorization.k8s.io

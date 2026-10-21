@@ -1,0 +1,1201 @@
+replicate_id,scenario,experimental_arm,mttr_seconds,decision_correctness,manual_interventions,sla_freshness_lag_ms,control_cpu_overhead_mcpu,control_ram_overhead_mib
+1,Pod Crash / Container Failure,Arm 1 (Static Orchestration),70.76,1,3,1146.9,1.66,5.33
+2,Pod Crash / Container Failure,Arm 1 (Static Orchestration),61.53,1,1,759.5,1.36,4.09
+3,Pod Crash / Container Failure,Arm 1 (Static Orchestration),73.15,1,1,556.5,0.89,4.28
+4,Pod Crash / Container Failure,Arm 1 (Static Orchestration),88.68,1,1,1198.1,1.14,3.72
+5,Pod Crash / Container Failure,Arm 1 (Static Orchestration),60.25,0,4,829.9,0.94,4.14
+6,Pod Crash / Container Failure,Arm 1 (Static Orchestration),60.25,1,5,1163.8,0.79,4.8
+7,Pod Crash / Container Failure,Arm 1 (Static Orchestration),89.79,1,2,573.3,1.48,5.11
+8,Pod Crash / Container Failure,Arm 1 (Static Orchestration),75.1,1,0,735.2,1.77,3.76
+9,Pod Crash / Container Failure,Arm 1 (Static Orchestration),57.21,1,4,855.2,0.78,5.2
+10,Pod Crash / Container Failure,Arm 1 (Static Orchestration),71.48,0,2,864.1,1.37,5.58
+11,Pod Crash / Container Failure,Arm 1 (Static Orchestration),57.29,0,4,763.2,1.0,4.83
+12,Pod Crash / Container Failure,Arm 1 (Static Orchestration),57.26,1,1,998.0,1.05,6.0
+13,Pod Crash / Container Failure,Arm 1 (Static Orchestration),66.9,1,5,654.0,1.02,3.88
+14,Pod Crash / Container Failure,Arm 1 (Static Orchestration),41.64,1,5,824.2,0.94,3.5
+15,Pod Crash / Container Failure,Arm 1 (Static Orchestration),43.4,1,1,880.1,1.21,3.08
+16,Pod Crash / Container Failure,Arm 1 (Static Orchestration),56.05,1,1,971.3,0.95,5.7
+17,Pod Crash / Container Failure,Arm 1 (Static Orchestration),50.76,1,2,1020.4,1.28,5.02
+18,Pod Crash / Container Failure,Arm 1 (Static Orchestration),67.97,1,1,644.7,1.18,4.46
+19,Pod Crash / Container Failure,Arm 1 (Static Orchestration),51.95,1,0,582.0,1.13,4.72
+20,Pod Crash / Container Failure,Arm 1 (Static Orchestration),46.49,1,2,1175.5,0.93,3.6
+21,Pod Crash / Container Failure,Arm 1 (Static Orchestration),87.57,0,2,928.0,1.03,6.46
+22,Pod Crash / Container Failure,Arm 1 (Static Orchestration),60.36,1,1,708.3,1.43,4.6
+23,Pod Crash / Container Failure,Arm 1 (Static Orchestration),64.38,1,0,1258.6,1.35,4.59
+24,Pod Crash / Container Failure,Arm 1 (Static Orchestration),46.37,1,3,879.1,0.91,5.08
+25,Pod Crash / Container Failure,Arm 1 (Static Orchestration),56.27,0,2,1146.9,1.23,4.88
+26,Pod Crash / Container Failure,Arm 1 (Static Orchestration),65.0,1,2,868.6,1.43,4.68
+27,Pod Crash / Container Failure,Arm 1 (Static Orchestration),49.24,1,0,1429.7,0.7,3.87
+28,Pod Crash / Container Failure,Arm 1 (Static Orchestration),68.9,0,0,1324.6,1.36,4.88
+29,Pod Crash / Container Failure,Arm 1 (Static Orchestration),55.58,1,4,802.5,1.0,6.01
+30,Pod Crash / Container Failure,Arm 1 (Static Orchestration),59.49,0,0,1088.9,1.37,5.58
+31,Pod Crash / Container Failure,Arm 1 (Static Orchestration),55.57,1,1,1003.6,0.97,5.77
+32,Pod Crash / Container Failure,Arm 1 (Static Orchestration),95.34,1,2,1202.5,0.66,4.09
+33,Pod Crash / Container Failure,Arm 1 (Static Orchestration),63.25,1,4,671.0,0.71,3.71
+34,Pod Crash / Container Failure,Arm 1 (Static Orchestration),50.26,1,1,1013.9,1.21,4.4
+35,Pod Crash / Container Failure,Arm 1 (Static Orchestration),76.02,1,1,1112.8,1.28,4.54
+36,Pod Crash / Container Failure,Arm 1 (Static Orchestration),48.49,0,0,550.2,0.93,5.38
+37,Pod Crash / Container Failure,Arm 1 (Static Orchestration),66.42,1,0,635.4,1.39,3.15
+38,Pod Crash / Container Failure,Arm 1 (Static Orchestration),41.22,1,0,513.0,0.7,5.72
+39,Pod Crash / Container Failure,Arm 1 (Static Orchestration),47.36,1,3,798.4,1.18,4.37
+40,Pod Crash / Container Failure,Arm 1 (Static Orchestration),66.24,1,2,1021.9,0.84,4.16
+41,Pod Crash / Container Failure,Arm 1 (Static Orchestration),74.62,1,1,1243.4,1.0,3.69
+42,Pod Crash / Container Failure,Arm 1 (Static Orchestration),65.87,1,2,870.0,1.21,3.18
+43,Pod Crash / Container Failure,Arm 1 (Static Orchestration),61.84,1,2,1283.3,0.94,5.16
+44,Pod Crash / Container Failure,Arm 1 (Static Orchestration),59.37,1,2,604.8,1.08,4.56
+45,Pod Crash / Container Failure,Arm 1 (Static Orchestration),45.82,1,0,557.9,1.5,3.47
+46,Pod Crash / Container Failure,Arm 1 (Static Orchestration),54.14,1,1,842.3,1.03,3.46
+47,Pod Crash / Container Failure,Arm 1 (Static Orchestration),57.32,1,3,940.1,1.45,4.23
+48,Pod Crash / Container Failure,Arm 1 (Static Orchestration),80.04,1,2,847.1,0.86,5.84
+49,Pod Crash / Container Failure,Arm 1 (Static Orchestration),68.42,0,4,509.4,1.36,4.29
+50,Pod Crash / Container Failure,Arm 1 (Static Orchestration),43.04,1,0,835.2,1.63,3.3
+51,Pod Crash / Container Failure,Arm 1 (Static Orchestration),68.12,1,0,616.4,0.5,4.3
+52,Pod Crash / Container Failure,Arm 1 (Static Orchestration),58.28,1,0,1009.7,0.96,4.28
+53,Pod Crash / Container Failure,Arm 1 (Static Orchestration),54.66,0,0,936.0,1.37,2.34
+54,Pod Crash / Container Failure,Arm 1 (Static Orchestration),72.57,0,1,675.2,1.14,4.46
+55,Pod Crash / Container Failure,Arm 1 (Static Orchestration),79.58,1,2,751.1,1.31,4.32
+56,Pod Crash / Container Failure,Arm 1 (Static Orchestration),77.86,1,2,655.4,1.02,5.06
+57,Pod Crash / Container Failure,Arm 1 (Static Orchestration),52.74,0,5,840.8,1.23,5.98
+58,Pod Crash / Container Failure,Arm 1 (Static Orchestration),59.26,1,1,1084.4,1.15,5.4
+59,Pod Crash / Container Failure,Arm 1 (Static Orchestration),68.23,1,3,667.5,1.55,4.28
+60,Pod Crash / Container Failure,Arm 1 (Static Orchestration),78.62,1,4,968.8,1.28,3.61
+61,Pod Crash / Container Failure,Arm 1 (Static Orchestration),57.09,1,2,748.0,1.3,6.56
+62,Pod Crash / Container Failure,Arm 1 (Static Orchestration),60.9,0,3,700.5,1.08,4.55
+63,Pod Crash / Container Failure,Arm 1 (Static Orchestration),49.73,0,2,831.5,1.05,4.51
+64,Pod Crash / Container Failure,Arm 1 (Static Orchestration),48.76,1,1,659.3,1.07,4.48
+65,Pod Crash / Container Failure,Arm 1 (Static Orchestration),75.85,1,3,743.7,1.32,4.66
+66,Pod Crash / Container Failure,Arm 1 (Static Orchestration),85.49,1,2,633.0,1.07,4.38
+67,Pod Crash / Container Failure,Arm 1 (Static Orchestration),62.44,0,2,1395.7,1.29,4.04
+68,Pod Crash / Container Failure,Arm 1 (Static Orchestration),79.11,0,2,861.6,1.82,4.06
+69,Pod Crash / Container Failure,Arm 1 (Static Orchestration),68.69,0,1,717.0,1.46,4.47
+70,Pod Crash / Container Failure,Arm 1 (Static Orchestration),55.04,0,3,901.0,1.1,4.07
+71,Pod Crash / Container Failure,Arm 1 (Static Orchestration),68.68,1,0,830.4,1.56,3.93
+72,Pod Crash / Container Failure,Arm 1 (Static Orchestration),88.98,1,0,808.2,1.08,4.59
+73,Pod Crash / Container Failure,Arm 1 (Static Orchestration),62.94,1,2,995.8,0.59,4.3
+74,Pod Crash / Container Failure,Arm 1 (Static Orchestration),89.5,0,0,1032.1,0.9,5.7
+75,Pod Crash / Container Failure,Arm 1 (Static Orchestration),35.65,1,1,748.0,0.64,2.38
+76,Pod Crash / Container Failure,Arm 1 (Static Orchestration),76.01,1,2,739.6,1.09,5.37
+77,Pod Crash / Container Failure,Arm 1 (Static Orchestration),64.66,1,0,797.3,1.21,5.5
+78,Pod Crash / Container Failure,Arm 1 (Static Orchestration),59.4,1,2,480.4,1.7,2.84
+79,Pod Crash / Container Failure,Arm 1 (Static Orchestration),64.73,1,5,584.8,1.3,4.23
+80,Pod Crash / Container Failure,Arm 1 (Static Orchestration),40.97,1,3,1202.0,1.13,4.2
+81,Pod Crash / Container Failure,Arm 1 (Static Orchestration),60.44,1,0,1288.5,1.45,3.37
+82,Pod Crash / Container Failure,Arm 1 (Static Orchestration),68.62,1,1,802.5,0.54,3.88
+83,Pod Crash / Container Failure,Arm 1 (Static Orchestration),87.81,1,1,986.5,1.27,3.61
+84,Pod Crash / Container Failure,Arm 1 (Static Orchestration),56.6,1,0,923.2,1.43,5.9
+85,Pod Crash / Container Failure,Arm 1 (Static Orchestration),53.1,1,0,1844.1,0.76,5.25
+86,Pod Crash / Container Failure,Arm 1 (Static Orchestration),56.8,1,4,1129.9,1.54,5.52
+87,Pod Crash / Container Failure,Arm 1 (Static Orchestration),77.59,1,2,827.2,1.3,5.08
+88,Pod Crash / Container Failure,Arm 1 (Static Orchestration),68.19,0,1,672.6,1.08,3.6
+89,Pod Crash / Container Failure,Arm 1 (Static Orchestration),56.46,1,1,571.6,1.39,4.08
+90,Pod Crash / Container Failure,Arm 1 (Static Orchestration),71.02,0,3,898.6,1.88,4.89
+91,Pod Crash / Container Failure,Arm 1 (Static Orchestration),64.8,1,4,706.9,1.25,3.52
+92,Pod Crash / Container Failure,Arm 1 (Static Orchestration),78.5,1,2,598.5,1.27,5.07
+93,Pod Crash / Container Failure,Arm 1 (Static Orchestration),54.36,1,1,726.6,1.06,4.31
+94,Pod Crash / Container Failure,Arm 1 (Static Orchestration),59.02,1,3,651.7,0.95,4.2
+95,Pod Crash / Container Failure,Arm 1 (Static Orchestration),58.19,1,1,1302.2,1.45,5.07
+96,Pod Crash / Container Failure,Arm 1 (Static Orchestration),45.97,1,1,1064.7,0.94,4.86
+97,Pod Crash / Container Failure,Arm 1 (Static Orchestration),67.7,0,2,852.4,1.22,4.21
+98,Pod Crash / Container Failure,Arm 1 (Static Orchestration),67.18,1,4,1236.4,1.06,5.43
+99,Pod Crash / Container Failure,Arm 1 (Static Orchestration),63.51,0,2,870.7,1.34,3.64
+100,Pod Crash / Container Failure,Arm 1 (Static Orchestration),60.24,1,5,688.6,1.3,4.99
+1,Pod Crash / Container Failure,Arm 2 (Heuristic Automation),27.23,0,0,322.0,15.16,42.17
+2,Pod Crash / Container Failure,Arm 2 (Heuristic Automation),21.53,1,0,339.0,16.42,44.42
+3,Pod Crash / Container Failure,Arm 2 (Heuristic Automation),25.4,1,4,330.3,16.69,45.85
+4,Pod Crash / Container Failure,Arm 2 (Heuristic Automation),16.86,1,1,282.9,17.35,44.69
+5,Pod Crash / Container Failure,Arm 2 (Heuristic Automation),29.67,0,0,366.8,16.12,48.42
+6,Pod Crash / Container Failure,Arm 2 (Heuristic Automation),22.24,0,0,257.9,18.68,45.54
+7,Pod Crash / Container Failure,Arm 2 (Heuristic Automation),20.37,0,0,458.0,11.99,43.21
+8,Pod Crash / Container Failure,Arm 2 (Heuristic Automation),30.65,1,1,413.4,22.57,45.6
+9,Pod Crash / Container Failure,Arm 2 (Heuristic Automation),19.43,0,0,302.4,14.57,45.95
+10,Pod Crash / Container Failure,Arm 2 (Heuristic Automation),16.18,0,0,306.6,17.25,39.66
+11,Pod Crash / Container Failure,Arm 2 (Heuristic Automation),15.57,1,1,375.1,14.43,48.22
+12,Pod Crash / Container Failure,Arm 2 (Heuristic Automation),27.32,1,1,277.7,17.75,43.15
+13,Pod Crash / Container Failure,Arm 2 (Heuristic Automation),16.73,1,0,576.7,16.98,43.24
+14,Pod Crash / Container Failure,Arm 2 (Heuristic Automation),36.83,1,1,383.8,15.03,46.83
+15,Pod Crash / Container Failure,Arm 2 (Heuristic Automation),13.58,1,0,387.7,18.65,46.82
+16,Pod Crash / Container Failure,Arm 2 (Heuristic Automation),36.27,1,1,420.2,16.06,41.75
+17,Pod Crash / Container Failure,Arm 2 (Heuristic Automation),24.65,1,0,295.2,17.55,47.01
+18,Pod Crash / Container Failure,Arm 2 (Heuristic Automation),22.76,1,2,471.0,14.47,42.24
+19,Pod Crash / Container Failure,Arm 2 (Heuristic Automation),20.25,1,2,358.6,16.34,50.57
+20,Pod Crash / Container Failure,Arm 2 (Heuristic Automation),25.89,1,2,453.1,20.61,41.3
+21,Pod Crash / Container Failure,Arm 2 (Heuristic Automation),23.11,1,1,328.5,18.42,45.04
+22,Pod Crash / Container Failure,Arm 2 (Heuristic Automation),31.09,1,0,502.1,17.05,41.46
+23,Pod Crash / Container Failure,Arm 2 (Heuristic Automation),24.04,1,2,388.5,15.46,51.98
+24,Pod Crash / Container Failure,Arm 2 (Heuristic Automation),24.27,1,1,639.8,16.54,39.87
+25,Pod Crash / Container Failure,Arm 2 (Heuristic Automation),21.23,1,0,313.1,16.81,46.04
+26,Pod Crash / Container Failure,Arm 2 (Heuristic Automation),22.99,1,1,367.7,17.34,41.63
+27,Pod Crash / Container Failure,Arm 2 (Heuristic Automation),25.28,0,2,260.1,14.14,42.96
+28,Pod Crash / Container Failure,Arm 2 (Heuristic Automation),14.96,1,0,299.4,17.8,45.79
+29,Pod Crash / Container Failure,Arm 2 (Heuristic Automation),16.44,1,0,412.9,14.11,48.49
+30,Pod Crash / Container Failure,Arm 2 (Heuristic Automation),28.31,1,2,476.4,19.83,49.88
+31,Pod Crash / Container Failure,Arm 2 (Heuristic Automation),24.4,0,0,796.5,14.78,38.82
+32,Pod Crash / Container Failure,Arm 2 (Heuristic Automation),22.25,1,1,338.0,17.02,45.14
+33,Pod Crash / Container Failure,Arm 2 (Heuristic Automation),23.45,0,1,267.4,18.51,49.31
+34,Pod Crash / Container Failure,Arm 2 (Heuristic Automation),25.54,1,1,428.8,15.87,38.3
+35,Pod Crash / Container Failure,Arm 2 (Heuristic Automation),20.28,0,1,253.2,17.12,45.3
+36,Pod Crash / Container Failure,Arm 2 (Heuristic Automation),19.06,1,2,406.7,19.41,44.19
+37,Pod Crash / Container Failure,Arm 2 (Heuristic Automation),24.56,0,2,301.7,17.59,45.65
+38,Pod Crash / Container Failure,Arm 2 (Heuristic Automation),18.09,1,0,368.4,17.15,41.5
+39,Pod Crash / Container Failure,Arm 2 (Heuristic Automation),25.95,1,1,471.3,12.86,39.18
+40,Pod Crash / Container Failure,Arm 2 (Heuristic Automation),14.99,1,1,336.6,14.44,37.5
+41,Pod Crash / Container Failure,Arm 2 (Heuristic Automation),30.5,1,1,450.9,18.6,47.62
+42,Pod Crash / Container Failure,Arm 2 (Heuristic Automation),26.39,1,4,443.4,17.6,48.06
+43,Pod Crash / Container Failure,Arm 2 (Heuristic Automation),24.94,0,1,206.0,17.92,45.26
+44,Pod Crash / Container Failure,Arm 2 (Heuristic Automation),30.13,0,0,269.8,17.73,42.33
+45,Pod Crash / Container Failure,Arm 2 (Heuristic Automation),35.98,1,0,224.2,19.11,38.52
+46,Pod Crash / Container Failure,Arm 2 (Heuristic Automation),30.38,1,0,608.2,15.85,46.17
+47,Pod Crash / Container Failure,Arm 2 (Heuristic Automation),14.46,1,1,337.1,16.65,40.35
+48,Pod Crash / Container Failure,Arm 2 (Heuristic Automation),16.73,1,0,571.7,14.24,41.71
+49,Pod Crash / Container Failure,Arm 2 (Heuristic Automation),19.84,1,0,219.8,13.72,42.15
+50,Pod Crash / Container Failure,Arm 2 (Heuristic Automation),23.49,1,1,295.8,12.95,43.51
+51,Pod Crash / Container Failure,Arm 2 (Heuristic Automation),26.7,1,0,434.5,14.54,41.54
+52,Pod Crash / Container Failure,Arm 2 (Heuristic Automation),19.32,1,0,365.1,19.66,44.32
+53,Pod Crash / Container Failure,Arm 2 (Heuristic Automation),24.5,1,2,403.1,13.14,42.02
+54,Pod Crash / Container Failure,Arm 2 (Heuristic Automation),19.17,1,0,244.4,15.76,46.65
+55,Pod Crash / Container Failure,Arm 2 (Heuristic Automation),19.91,1,1,510.6,13.68,47.81
+56,Pod Crash / Container Failure,Arm 2 (Heuristic Automation),16.19,1,0,431.6,15.14,44.58
+57,Pod Crash / Container Failure,Arm 2 (Heuristic Automation),18.36,0,1,388.6,16.76,45.82
+58,Pod Crash / Container Failure,Arm 2 (Heuristic Automation),16.42,1,0,286.6,14.93,51.61
+59,Pod Crash / Container Failure,Arm 2 (Heuristic Automation),18.11,1,1,380.2,18.69,40.1
+60,Pod Crash / Container Failure,Arm 2 (Heuristic Automation),30.69,1,1,320.0,19.62,39.88
+61,Pod Crash / Container Failure,Arm 2 (Heuristic Automation),18.23,1,0,218.7,11.68,46.63
+62,Pod Crash / Container Failure,Arm 2 (Heuristic Automation),46.27,0,1,342.4,14.97,51.01
+63,Pod Crash / Container Failure,Arm 2 (Heuristic Automation),26.53,1,1,332.3,16.52,43.29
+64,Pod Crash / Container Failure,Arm 2 (Heuristic Automation),24.48,1,0,467.5,18.76,50.24
+65,Pod Crash / Container Failure,Arm 2 (Heuristic Automation),18.67,1,0,185.7,15.45,44.54
+66,Pod Crash / Container Failure,Arm 2 (Heuristic Automation),28.0,0,1,370.9,16.36,41.82
+67,Pod Crash / Container Failure,Arm 2 (Heuristic Automation),20.09,0,1,251.2,13.97,40.73
+68,Pod Crash / Container Failure,Arm 2 (Heuristic Automation),24.09,1,1,379.7,13.18,46.4
+69,Pod Crash / Container Failure,Arm 2 (Heuristic Automation),45.4,1,2,385.6,19.44,41.0
+70,Pod Crash / Container Failure,Arm 2 (Heuristic Automation),22.76,1,2,338.9,12.57,44.48
+71,Pod Crash / Container Failure,Arm 2 (Heuristic Automation),31.46,0,0,435.3,21.29,49.74
+72,Pod Crash / Container Failure,Arm 2 (Heuristic Automation),19.44,1,0,245.0,17.92,43.13
+73,Pod Crash / Container Failure,Arm 2 (Heuristic Automation),23.12,0,2,473.5,17.83,48.8
+74,Pod Crash / Container Failure,Arm 2 (Heuristic Automation),36.98,1,0,284.8,17.61,39.95
+75,Pod Crash / Container Failure,Arm 2 (Heuristic Automation),19.83,1,0,224.6,15.87,42.33
+76,Pod Crash / Container Failure,Arm 2 (Heuristic Automation),37.38,1,0,321.7,17.22,39.27
+77,Pod Crash / Container Failure,Arm 2 (Heuristic Automation),28.05,1,1,193.1,16.0,44.46
+78,Pod Crash / Container Failure,Arm 2 (Heuristic Automation),20.16,1,0,372.8,17.56,46.93
+79,Pod Crash / Container Failure,Arm 2 (Heuristic Automation),27.51,1,0,322.9,16.33,44.46
+80,Pod Crash / Container Failure,Arm 2 (Heuristic Automation),30.05,1,0,490.5,14.4,48.49
+81,Pod Crash / Container Failure,Arm 2 (Heuristic Automation),27.43,1,1,416.4,14.57,41.58
+82,Pod Crash / Container Failure,Arm 2 (Heuristic Automation),15.51,1,1,235.2,14.33,44.99
+83,Pod Crash / Container Failure,Arm 2 (Heuristic Automation),19.32,1,0,274.6,18.44,42.35
+84,Pod Crash / Container Failure,Arm 2 (Heuristic Automation),21.88,0,0,401.7,15.1,45.47
+85,Pod Crash / Container Failure,Arm 2 (Heuristic Automation),22.89,0,0,440.2,12.38,45.96
+86,Pod Crash / Container Failure,Arm 2 (Heuristic Automation),27.42,0,0,489.0,17.23,46.24
+87,Pod Crash / Container Failure,Arm 2 (Heuristic Automation),24.44,0,0,487.9,19.58,40.45
+88,Pod Crash / Container Failure,Arm 2 (Heuristic Automation),16.49,1,1,338.6,18.02,41.09
+89,Pod Crash / Container Failure,Arm 2 (Heuristic Automation),25.76,1,2,384.3,15.13,41.73
+90,Pod Crash / Container Failure,Arm 2 (Heuristic Automation),27.35,1,0,499.5,13.07,43.36
+91,Pod Crash / Container Failure,Arm 2 (Heuristic Automation),26.99,1,0,319.0,16.12,44.51
+92,Pod Crash / Container Failure,Arm 2 (Heuristic Automation),30.91,1,0,386.2,16.07,46.68
+93,Pod Crash / Container Failure,Arm 2 (Heuristic Automation),28.99,1,0,316.9,14.36,41.23
+94,Pod Crash / Container Failure,Arm 2 (Heuristic Automation),26.3,1,1,297.6,17.56,38.6
+95,Pod Crash / Container Failure,Arm 2 (Heuristic Automation),22.91,1,0,352.0,20.28,51.75
+96,Pod Crash / Container Failure,Arm 2 (Heuristic Automation),15.15,1,1,286.4,16.87,40.24
+97,Pod Crash / Container Failure,Arm 2 (Heuristic Automation),26.09,1,1,334.7,16.74,47.13
+98,Pod Crash / Container Failure,Arm 2 (Heuristic Automation),24.63,1,0,259.9,14.43,44.31
+99,Pod Crash / Container Failure,Arm 2 (Heuristic Automation),25.04,1,0,329.2,19.33,45.08
+100,Pod Crash / Container Failure,Arm 2 (Heuristic Automation),16.74,0,0,393.7,16.24,44.19
+1,Pod Crash / Container Failure,Arm 3 (Proposed Autonomous System),6.36,1,0,70.4,90.61,211.65
+2,Pod Crash / Container Failure,Arm 3 (Proposed Autonomous System),7.42,1,0,71.6,90.9,218.73
+3,Pod Crash / Container Failure,Arm 3 (Proposed Autonomous System),6.3,1,0,91.9,92.52,221.6
+4,Pod Crash / Container Failure,Arm 3 (Proposed Autonomous System),8.41,1,0,81.9,89.53,229.1
+5,Pod Crash / Container Failure,Arm 3 (Proposed Autonomous System),7.56,1,0,72.4,91.04,220.84
+6,Pod Crash / Container Failure,Arm 3 (Proposed Autonomous System),7.6,1,0,71.2,89.24,224.31
+7,Pod Crash / Container Failure,Arm 3 (Proposed Autonomous System),6.23,1,0,80.6,96.16,224.41
+8,Pod Crash / Container Failure,Arm 3 (Proposed Autonomous System),6.54,1,0,117.2,97.81,243.13
+9,Pod Crash / Container Failure,Arm 3 (Proposed Autonomous System),5.51,1,0,77.1,82.6,201.75
+10,Pod Crash / Container Failure,Arm 3 (Proposed Autonomous System),6.4,1,0,85.4,88.02,212.07
+11,Pod Crash / Container Failure,Arm 3 (Proposed Autonomous System),5.66,1,0,87.4,89.69,231.96
+12,Pod Crash / Container Failure,Arm 3 (Proposed Autonomous System),8.64,1,0,68.3,87.95,215.16
+13,Pod Crash / Container Failure,Arm 3 (Proposed Autonomous System),6.88,1,0,60.2,99.9,226.55
+14,Pod Crash / Container Failure,Arm 3 (Proposed Autonomous System),7.03,1,0,69.7,90.8,220.52
+15,Pod Crash / Container Failure,Arm 3 (Proposed Autonomous System),6.55,1,0,90.0,84.83,237.77
+16,Pod Crash / Container Failure,Arm 3 (Proposed Autonomous System),7.07,1,0,87.1,92.96,208.16
+17,Pod Crash / Container Failure,Arm 3 (Proposed Autonomous System),10.63,1,0,98.5,91.07,229.64
+18,Pod Crash / Container Failure,Arm 3 (Proposed Autonomous System),6.46,1,1,87.3,91.26,234.5
+19,Pod Crash / Container Failure,Arm 3 (Proposed Autonomous System),6.07,1,0,83.8,99.99,209.07
+20,Pod Crash / Container Failure,Arm 3 (Proposed Autonomous System),7.5,1,0,75.9,91.53,225.6
+21,Pod Crash / Container Failure,Arm 3 (Proposed Autonomous System),4.33,1,0,102.2,87.74,209.52
+22,Pod Crash / Container Failure,Arm 3 (Proposed Autonomous System),6.9,1,0,71.2,78.16,218.68
+23,Pod Crash / Container Failure,Arm 3 (Proposed Autonomous System),6.38,1,0,68.6,88.54,216.04
+24,Pod Crash / Container Failure,Arm 3 (Proposed Autonomous System),5.71,1,0,95.9,97.07,196.29
+25,Pod Crash / Container Failure,Arm 3 (Proposed Autonomous System),7.47,1,0,65.6,88.97,222.3
+26,Pod Crash / Container Failure,Arm 3 (Proposed Autonomous System),6.89,1,0,138.8,76.51,219.72
+27,Pod Crash / Container Failure,Arm 3 (Proposed Autonomous System),4.93,1,0,87.0,86.61,232.01
+28,Pod Crash / Container Failure,Arm 3 (Proposed Autonomous System),6.07,1,0,91.8,95.26,224.02
+29,Pod Crash / Container Failure,Arm 3 (Proposed Autonomous System),4.06,1,0,72.8,92.67,239.48
+30,Pod Crash / Container Failure,Arm 3 (Proposed Autonomous System),7.19,1,0,80.4,84.63,219.38
+31,Pod Crash / Container Failure,Arm 3 (Proposed Autonomous System),7.18,1,0,78.6,86.22,217.43
+32,Pod Crash / Container Failure,Arm 3 (Proposed Autonomous System),5.91,1,0,76.8,87.12,216.7
+33,Pod Crash / Container Failure,Arm 3 (Proposed Autonomous System),7.52,1,0,97.2,85.66,214.36
+34,Pod Crash / Container Failure,Arm 3 (Proposed Autonomous System),5.41,1,0,78.3,77.73,198.09
+35,Pod Crash / Container Failure,Arm 3 (Proposed Autonomous System),5.73,1,0,105.0,93.93,216.37
+36,Pod Crash / Container Failure,Arm 3 (Proposed Autonomous System),7.35,1,0,145.9,96.79,199.38
+37,Pod Crash / Container Failure,Arm 3 (Proposed Autonomous System),6.03,1,0,80.7,80.69,222.56
+38,Pod Crash / Container Failure,Arm 3 (Proposed Autonomous System),6.74,1,0,88.3,96.71,206.99
+39,Pod Crash / Container Failure,Arm 3 (Proposed Autonomous System),6.16,1,0,92.4,88.9,210.17
+40,Pod Crash / Container Failure,Arm 3 (Proposed Autonomous System),6.33,1,0,123.0,96.61,212.24
+41,Pod Crash / Container Failure,Arm 3 (Proposed Autonomous System),6.38,1,0,84.2,89.72,216.51
+42,Pod Crash / Container Failure,Arm 3 (Proposed Autonomous System),6.01,1,0,72.5,90.29,218.46
+43,Pod Crash / Container Failure,Arm 3 (Proposed Autonomous System),7.2,1,0,66.5,91.66,228.38
+44,Pod Crash / Container Failure,Arm 3 (Proposed Autonomous System),6.09,1,0,84.6,84.92,213.09
+45,Pod Crash / Container Failure,Arm 3 (Proposed Autonomous System),6.84,1,0,78.3,96.43,222.82
+46,Pod Crash / Container Failure,Arm 3 (Proposed Autonomous System),5.98,1,0,128.0,83.0,243.52
+47,Pod Crash / Container Failure,Arm 3 (Proposed Autonomous System),5.17,1,0,122.0,87.17,221.87
+48,Pod Crash / Container Failure,Arm 3 (Proposed Autonomous System),8.04,1,0,69.6,92.54,216.74
+49,Pod Crash / Container Failure,Arm 3 (Proposed Autonomous System),7.46,1,0,74.3,86.55,211.23
+50,Pod Crash / Container Failure,Arm 3 (Proposed Autonomous System),10.3,1,0,86.9,94.01,216.61
+51,Pod Crash / Container Failure,Arm 3 (Proposed Autonomous System),5.65,1,0,113.2,97.48,210.25
+52,Pod Crash / Container Failure,Arm 3 (Proposed Autonomous System),6.57,1,0,86.6,95.37,220.87
+53,Pod Crash / Container Failure,Arm 3 (Proposed Autonomous System),6.66,1,0,75.2,78.27,219.35
+54,Pod Crash / Container Failure,Arm 3 (Proposed Autonomous System),8.15,1,0,84.6,90.23,198.51
+55,Pod Crash / Container Failure,Arm 3 (Proposed Autonomous System),6.23,1,0,75.5,95.47,218.23
+56,Pod Crash / Container Failure,Arm 3 (Proposed Autonomous System),5.52,1,0,96.6,81.86,228.3
+57,Pod Crash / Container Failure,Arm 3 (Proposed Autonomous System),8.48,1,0,74.3,93.7,214.73
+58,Pod Crash / Container Failure,Arm 3 (Proposed Autonomous System),6.44,1,0,77.3,93.37,212.39
+59,Pod Crash / Container Failure,Arm 3 (Proposed Autonomous System),7.99,1,1,108.0,82.47,205.73
+60,Pod Crash / Container Failure,Arm 3 (Proposed Autonomous System),7.82,1,0,73.4,94.34,201.31
+61,Pod Crash / Container Failure,Arm 3 (Proposed Autonomous System),6.78,1,0,64.1,91.08,226.05
+62,Pod Crash / Container Failure,Arm 3 (Proposed Autonomous System),6.61,1,0,87.3,93.27,216.73
+63,Pod Crash / Container Failure,Arm 3 (Proposed Autonomous System),6.36,1,0,79.7,83.9,225.5
+64,Pod Crash / Container Failure,Arm 3 (Proposed Autonomous System),6.8,1,0,94.8,90.37,232.49
+65,Pod Crash / Container Failure,Arm 3 (Proposed Autonomous System),7.97,1,0,91.2,79.61,226.88
+66,Pod Crash / Container Failure,Arm 3 (Proposed Autonomous System),5.91,1,0,85.1,76.29,213.41
+67,Pod Crash / Container Failure,Arm 3 (Proposed Autonomous System),6.96,1,0,84.6,90.32,219.73
+68,Pod Crash / Container Failure,Arm 3 (Proposed Autonomous System),5.58,1,0,73.9,95.88,212.74
+69,Pod Crash / Container Failure,Arm 3 (Proposed Autonomous System),5.7,1,0,87.1,90.97,211.88
+70,Pod Crash / Container Failure,Arm 3 (Proposed Autonomous System),6.78,0,0,102.1,89.13,221.55
+71,Pod Crash / Container Failure,Arm 3 (Proposed Autonomous System),4.79,1,0,70.5,88.41,210.74
+72,Pod Crash / Container Failure,Arm 3 (Proposed Autonomous System),9.88,1,0,85.5,84.03,198.08
+73,Pod Crash / Container Failure,Arm 3 (Proposed Autonomous System),5.5,1,0,105.4,88.21,210.23
+74,Pod Crash / Container Failure,Arm 3 (Proposed Autonomous System),6.77,1,0,94.7,91.95,215.58
+75,Pod Crash / Container Failure,Arm 3 (Proposed Autonomous System),8.42,1,0,111.3,86.98,232.4
+76,Pod Crash / Container Failure,Arm 3 (Proposed Autonomous System),5.84,1,0,76.4,93.85,213.88
+77,Pod Crash / Container Failure,Arm 3 (Proposed Autonomous System),4.51,1,0,59.4,90.64,223.11
+78,Pod Crash / Container Failure,Arm 3 (Proposed Autonomous System),6.3,1,0,89.1,91.34,216.85
+79,Pod Crash / Container Failure,Arm 3 (Proposed Autonomous System),5.83,1,0,92.1,94.65,229.68
+80,Pod Crash / Container Failure,Arm 3 (Proposed Autonomous System),4.53,1,0,112.6,86.44,229.05
+81,Pod Crash / Container Failure,Arm 3 (Proposed Autonomous System),7.18,1,0,108.6,93.32,229.22
+82,Pod Crash / Container Failure,Arm 3 (Proposed Autonomous System),7.08,1,0,95.3,87.26,202.45
+83,Pod Crash / Container Failure,Arm 3 (Proposed Autonomous System),8.38,1,0,99.8,91.47,220.3
+84,Pod Crash / Container Failure,Arm 3 (Proposed Autonomous System),5.57,1,0,82.4,85.75,225.38
+85,Pod Crash / Container Failure,Arm 3 (Proposed Autonomous System),5.11,1,0,67.1,84.22,221.91
+86,Pod Crash / Container Failure,Arm 3 (Proposed Autonomous System),6.34,1,0,87.7,90.03,224.26
+87,Pod Crash / Container Failure,Arm 3 (Proposed Autonomous System),6.71,1,0,104.2,78.57,218.94
+88,Pod Crash / Container Failure,Arm 3 (Proposed Autonomous System),8.05,1,0,97.6,87.78,211.55
+89,Pod Crash / Container Failure,Arm 3 (Proposed Autonomous System),8.79,1,0,101.2,80.18,202.79
+90,Pod Crash / Container Failure,Arm 3 (Proposed Autonomous System),8.49,1,0,78.6,94.02,212.46
+91,Pod Crash / Container Failure,Arm 3 (Proposed Autonomous System),7.17,1,0,81.2,95.59,243.04
+92,Pod Crash / Container Failure,Arm 3 (Proposed Autonomous System),7.88,1,0,94.3,84.49,213.93
+93,Pod Crash / Container Failure,Arm 3 (Proposed Autonomous System),6.08,1,0,76.8,91.98,200.37
+94,Pod Crash / Container Failure,Arm 3 (Proposed Autonomous System),7.03,1,0,77.2,94.71,225.14
+95,Pod Crash / Container Failure,Arm 3 (Proposed Autonomous System),5.5,0,0,90.9,94.73,226.27
+96,Pod Crash / Container Failure,Arm 3 (Proposed Autonomous System),6.9,1,0,99.7,90.74,230.24
+97,Pod Crash / Container Failure,Arm 3 (Proposed Autonomous System),6.93,1,0,82.3,93.76,222.73
+98,Pod Crash / Container Failure,Arm 3 (Proposed Autonomous System),9.3,1,0,67.9,85.73,226.18
+99,Pod Crash / Container Failure,Arm 3 (Proposed Autonomous System),6.55,1,0,73.9,89.98,235.33
+100,Pod Crash / Container Failure,Arm 3 (Proposed Autonomous System),6.93,1,0,89.2,86.79,211.54
+1,Ingress Network Burst,Arm 1 (Static Orchestration),156.04,0,1,1984.5,1.26,5.13
+2,Ingress Network Burst,Arm 1 (Static Orchestration),151.86,1,1,1235.6,1.22,4.77
+3,Ingress Network Burst,Arm 1 (Static Orchestration),176.3,1,2,2167.7,0.98,4.96
+4,Ingress Network Burst,Arm 1 (Static Orchestration),239.37,0,1,1380.8,1.25,5.27
+5,Ingress Network Burst,Arm 1 (Static Orchestration),203.38,1,2,1580.5,1.04,4.23
+6,Ingress Network Burst,Arm 1 (Static Orchestration),201.94,0,1,1817.2,1.12,4.01
+7,Ingress Network Burst,Arm 1 (Static Orchestration),133.29,0,2,2667.9,1.7,3.63
+8,Ingress Network Burst,Arm 1 (Static Orchestration),163.24,1,6,3409.0,1.6,3.84
+9,Ingress Network Burst,Arm 1 (Static Orchestration),132.9,0,3,1965.5,0.81,6.86
+10,Ingress Network Burst,Arm 1 (Static Orchestration),228.34,1,1,1651.9,1.45,5.5
+11,Ingress Network Burst,Arm 1 (Static Orchestration),246.02,1,2,1934.5,1.44,3.42
+12,Ingress Network Burst,Arm 1 (Static Orchestration),212.79,0,5,2090.8,0.86,3.44
+13,Ingress Network Burst,Arm 1 (Static Orchestration),154.84,0,2,1602.7,1.45,4.89
+14,Ingress Network Burst,Arm 1 (Static Orchestration),241.47,1,3,2552.8,1.66,4.94
+15,Ingress Network Burst,Arm 1 (Static Orchestration),176.69,1,2,1809.2,0.86,4.94
+16,Ingress Network Burst,Arm 1 (Static Orchestration),148.62,0,1,1918.9,0.92,4.3
+17,Ingress Network Burst,Arm 1 (Static Orchestration),155.46,0,4,1991.2,1.51,4.4
+18,Ingress Network Burst,Arm 1 (Static Orchestration),171.16,0,3,1887.0,1.28,4.76
+19,Ingress Network Burst,Arm 1 (Static Orchestration),186.59,1,3,2068.5,1.37,4.57
+20,Ingress Network Burst,Arm 1 (Static Orchestration),179.64,1,4,1501.5,1.3,2.72
+21,Ingress Network Burst,Arm 1 (Static Orchestration),143.41,1,3,1521.1,1.32,4.32
+22,Ingress Network Burst,Arm 1 (Static Orchestration),230.07,0,1,1350.1,0.8,3.82
+23,Ingress Network Burst,Arm 1 (Static Orchestration),179.99,1,1,1894.5,1.51,4.64
+24,Ingress Network Burst,Arm 1 (Static Orchestration),162.64,1,2,2041.3,1.55,6.89
+25,Ingress Network Burst,Arm 1 (Static Orchestration),225.85,0,2,1902.1,1.13,4.79
+26,Ingress Network Burst,Arm 1 (Static Orchestration),149.45,1,1,2485.9,1.19,4.25
+27,Ingress Network Burst,Arm 1 (Static Orchestration),137.94,0,3,1717.7,0.74,5.24
+28,Ingress Network Burst,Arm 1 (Static Orchestration),232.54,0,0,1992.5,1.35,4.89
+29,Ingress Network Burst,Arm 1 (Static Orchestration),259.94,0,4,1352.7,1.37,4.84
+30,Ingress Network Burst,Arm 1 (Static Orchestration),170.17,1,4,1579.5,1.18,4.99
+31,Ingress Network Burst,Arm 1 (Static Orchestration),183.41,1,0,2004.2,1.54,6.15
+32,Ingress Network Burst,Arm 1 (Static Orchestration),150.45,0,2,2073.1,1.1,3.6
+33,Ingress Network Burst,Arm 1 (Static Orchestration),185.12,0,1,1612.2,1.37,4.88
+34,Ingress Network Burst,Arm 1 (Static Orchestration),169.76,0,3,1693.0,0.89,3.76
+35,Ingress Network Burst,Arm 1 (Static Orchestration),181.57,1,1,1231.6,1.19,4.94
+36,Ingress Network Burst,Arm 1 (Static Orchestration),199.07,0,4,1589.9,1.15,3.77
+37,Ingress Network Burst,Arm 1 (Static Orchestration),151.77,0,5,2092.0,1.27,4.17
+38,Ingress Network Burst,Arm 1 (Static Orchestration),173.27,0,0,1951.9,1.09,4.26
+39,Ingress Network Burst,Arm 1 (Static Orchestration),133.66,0,1,1920.1,1.16,5.28
+40,Ingress Network Burst,Arm 1 (Static Orchestration),173.49,0,3,1738.8,1.45,5.23
+41,Ingress Network Burst,Arm 1 (Static Orchestration),181.85,0,6,1722.5,1.07,3.5
+42,Ingress Network Burst,Arm 1 (Static Orchestration),192.72,1,1,1487.3,0.72,4.54
+43,Ingress Network Burst,Arm 1 (Static Orchestration),193.08,1,1,2005.7,1.72,3.93
+44,Ingress Network Burst,Arm 1 (Static Orchestration),217.61,1,3,1886.8,1.61,3.49
+45,Ingress Network Burst,Arm 1 (Static Orchestration),140.17,1,4,1916.5,0.81,4.33
+46,Ingress Network Burst,Arm 1 (Static Orchestration),141.52,1,3,1531.9,1.41,4.25
+47,Ingress Network Burst,Arm 1 (Static Orchestration),203.41,1,2,1070.9,1.05,6.44
+48,Ingress Network Burst,Arm 1 (Static Orchestration),128.12,1,1,2189.4,1.28,4.85
+49,Ingress Network Burst,Arm 1 (Static Orchestration),191.14,1,2,1547.9,1.29,3.4
+50,Ingress Network Burst,Arm 1 (Static Orchestration),149.54,0,3,1422.5,1.13,4.05
+51,Ingress Network Burst,Arm 1 (Static Orchestration),245.45,0,1,2003.3,0.96,5.32
+52,Ingress Network Burst,Arm 1 (Static Orchestration),193.46,1,3,1577.8,0.99,6.17
+53,Ingress Network Burst,Arm 1 (Static Orchestration),177.78,0,1,2171.5,0.93,3.23
+54,Ingress Network Burst,Arm 1 (Static Orchestration),230.67,1,1,1969.9,0.95,3.0
+55,Ingress Network Burst,Arm 1 (Static Orchestration),152.72,1,1,1999.0,1.18,6.0
+56,Ingress Network Burst,Arm 1 (Static Orchestration),158.03,1,6,1273.5,0.99,4.81
+57,Ingress Network Burst,Arm 1 (Static Orchestration),147.37,1,6,2245.4,1.4,3.81
+58,Ingress Network Burst,Arm 1 (Static Orchestration),158.27,0,1,1821.6,1.65,4.93
+59,Ingress Network Burst,Arm 1 (Static Orchestration),186.98,0,4,1585.7,1.03,2.39
+60,Ingress Network Burst,Arm 1 (Static Orchestration),202.13,1,5,1775.0,1.27,4.5
+61,Ingress Network Burst,Arm 1 (Static Orchestration),219.87,1,2,1163.5,1.35,4.76
+62,Ingress Network Burst,Arm 1 (Static Orchestration),133.16,1,2,1881.6,1.34,5.24
+63,Ingress Network Burst,Arm 1 (Static Orchestration),179.3,1,3,1371.3,1.22,3.69
+64,Ingress Network Burst,Arm 1 (Static Orchestration),151.49,1,0,1277.2,1.42,4.57
+65,Ingress Network Burst,Arm 1 (Static Orchestration),178.23,1,2,1230.4,1.34,3.76
+66,Ingress Network Burst,Arm 1 (Static Orchestration),281.5,0,2,2196.9,0.83,4.7
+67,Ingress Network Burst,Arm 1 (Static Orchestration),194.91,0,2,1497.5,1.46,3.78
+68,Ingress Network Burst,Arm 1 (Static Orchestration),217.44,1,1,2410.1,1.47,4.17
+69,Ingress Network Burst,Arm 1 (Static Orchestration),263.2,0,2,1528.6,0.97,3.7
+70,Ingress Network Burst,Arm 1 (Static Orchestration),226.54,1,4,1181.3,1.21,5.02
+71,Ingress Network Burst,Arm 1 (Static Orchestration),170.61,1,3,1345.3,1.4,5.19
+72,Ingress Network Burst,Arm 1 (Static Orchestration),146.99,1,5,2257.2,1.14,4.31
+73,Ingress Network Burst,Arm 1 (Static Orchestration),183.93,0,3,1661.9,1.52,4.53
+74,Ingress Network Burst,Arm 1 (Static Orchestration),166.97,0,2,1524.4,1.91,3.34
+75,Ingress Network Burst,Arm 1 (Static Orchestration),140.55,0,2,1781.5,0.96,4.26
+76,Ingress Network Burst,Arm 1 (Static Orchestration),193.13,1,0,1920.6,0.79,4.46
+77,Ingress Network Burst,Arm 1 (Static Orchestration),194.0,0,2,2199.2,1.29,6.6
+78,Ingress Network Burst,Arm 1 (Static Orchestration),254.28,1,4,2365.3,1.42,3.61
+79,Ingress Network Burst,Arm 1 (Static Orchestration),173.28,0,2,1589.0,1.13,5.67
+80,Ingress Network Burst,Arm 1 (Static Orchestration),194.5,1,6,1284.7,1.64,5.3
+81,Ingress Network Burst,Arm 1 (Static Orchestration),164.06,1,2,1570.3,0.8,4.72
+82,Ingress Network Burst,Arm 1 (Static Orchestration),216.41,0,2,1821.2,1.41,5.91
+83,Ingress Network Burst,Arm 1 (Static Orchestration),180.83,0,0,1391.3,1.02,4.8
+84,Ingress Network Burst,Arm 1 (Static Orchestration),149.74,1,0,1393.3,1.72,4.81
+85,Ingress Network Burst,Arm 1 (Static Orchestration),184.49,0,5,1855.0,1.8,4.46
+86,Ingress Network Burst,Arm 1 (Static Orchestration),198.4,1,3,1701.6,0.97,5.48
+87,Ingress Network Burst,Arm 1 (Static Orchestration),193.63,0,3,1732.3,1.04,5.38
+88,Ingress Network Burst,Arm 1 (Static Orchestration),223.24,0,0,1455.5,1.46,4.0
+89,Ingress Network Burst,Arm 1 (Static Orchestration),142.5,0,2,1634.9,1.08,3.44
+90,Ingress Network Burst,Arm 1 (Static Orchestration),158.9,1,2,1403.4,1.19,4.34
+91,Ingress Network Burst,Arm 1 (Static Orchestration),207.51,1,2,2091.9,1.21,3.86
+92,Ingress Network Burst,Arm 1 (Static Orchestration),162.3,1,1,2159.8,0.62,4.45
+93,Ingress Network Burst,Arm 1 (Static Orchestration),193.11,0,0,1145.8,1.2,5.49
+94,Ingress Network Burst,Arm 1 (Static Orchestration),119.64,1,4,1401.8,0.99,4.13
+95,Ingress Network Burst,Arm 1 (Static Orchestration),301.53,1,3,1237.4,1.05,4.47
+96,Ingress Network Burst,Arm 1 (Static Orchestration),176.17,1,3,1490.7,1.63,4.55
+97,Ingress Network Burst,Arm 1 (Static Orchestration),229.27,1,6,1688.6,0.82,5.18
+98,Ingress Network Burst,Arm 1 (Static Orchestration),174.05,0,0,1250.2,1.44,2.7
+99,Ingress Network Burst,Arm 1 (Static Orchestration),199.27,1,2,1404.2,1.12,4.01
+100,Ingress Network Burst,Arm 1 (Static Orchestration),241.91,0,3,1379.0,1.12,4.67
+1,Ingress Network Burst,Arm 2 (Heuristic Automation),59.38,1,0,970.4,16.34,44.54
+2,Ingress Network Burst,Arm 2 (Heuristic Automation),40.93,1,0,982.4,15.32,42.44
+3,Ingress Network Burst,Arm 2 (Heuristic Automation),30.18,0,0,565.1,13.99,45.41
+4,Ingress Network Burst,Arm 2 (Heuristic Automation),52.27,1,1,537.7,15.74,43.94
+5,Ingress Network Burst,Arm 2 (Heuristic Automation),39.66,0,0,729.1,16.74,38.13
+6,Ingress Network Burst,Arm 2 (Heuristic Automation),35.1,1,0,609.2,16.51,45.39
+7,Ingress Network Burst,Arm 2 (Heuristic Automation),39.75,0,0,605.9,20.02,40.63
+8,Ingress Network Burst,Arm 2 (Heuristic Automation),43.79,1,3,541.7,17.45,47.47
+9,Ingress Network Burst,Arm 2 (Heuristic Automation),39.92,1,0,664.0,16.12,43.35
+10,Ingress Network Burst,Arm 2 (Heuristic Automation),28.07,1,1,555.5,14.92,46.93
+11,Ingress Network Burst,Arm 2 (Heuristic Automation),55.55,0,0,564.1,16.96,41.99
+12,Ingress Network Burst,Arm 2 (Heuristic Automation),60.37,1,0,810.4,14.5,44.44
+13,Ingress Network Burst,Arm 2 (Heuristic Automation),52.63,1,0,739.3,16.78,48.44
+14,Ingress Network Burst,Arm 2 (Heuristic Automation),35.51,0,0,850.7,17.42,43.26
+15,Ingress Network Burst,Arm 2 (Heuristic Automation),43.63,1,1,488.5,15.95,42.13
+16,Ingress Network Burst,Arm 2 (Heuristic Automation),45.54,1,0,751.9,15.08,46.49
+17,Ingress Network Burst,Arm 2 (Heuristic Automation),52.03,1,0,1286.5,11.81,46.42
+18,Ingress Network Burst,Arm 2 (Heuristic Automation),52.83,1,1,680.8,18.8,42.28
+19,Ingress Network Burst,Arm 2 (Heuristic Automation),38.8,1,1,929.3,17.25,37.25
+20,Ingress Network Burst,Arm 2 (Heuristic Automation),46.43,1,0,927.2,17.3,42.06
+21,Ingress Network Burst,Arm 2 (Heuristic Automation),50.43,0,0,939.1,13.12,46.57
+22,Ingress Network Burst,Arm 2 (Heuristic Automation),62.82,0,1,783.2,19.3,41.49
+23,Ingress Network Burst,Arm 2 (Heuristic Automation),53.25,1,2,868.9,15.42,44.16
+24,Ingress Network Burst,Arm 2 (Heuristic Automation),54.25,1,1,899.4,15.79,41.9
+25,Ingress Network Burst,Arm 2 (Heuristic Automation),46.45,1,0,884.7,14.15,37.44
+26,Ingress Network Burst,Arm 2 (Heuristic Automation),62.2,0,1,560.9,12.65,41.84
+27,Ingress Network Burst,Arm 2 (Heuristic Automation),49.91,0,1,481.1,18.83,46.56
+28,Ingress Network Burst,Arm 2 (Heuristic Automation),37.73,1,1,500.7,19.1,35.9
+29,Ingress Network Burst,Arm 2 (Heuristic Automation),62.1,0,1,699.1,16.05,45.08
+30,Ingress Network Burst,Arm 2 (Heuristic Automation),53.17,1,1,875.2,14.97,40.05
+31,Ingress Network Burst,Arm 2 (Heuristic Automation),41.37,1,2,562.8,15.61,46.33
+32,Ingress Network Burst,Arm 2 (Heuristic Automation),41.04,1,2,953.6,15.67,46.7
+33,Ingress Network Burst,Arm 2 (Heuristic Automation),48.68,1,4,658.1,13.88,43.6
+34,Ingress Network Burst,Arm 2 (Heuristic Automation),50.5,1,0,659.8,15.79,43.61
+35,Ingress Network Burst,Arm 2 (Heuristic Automation),47.63,1,2,603.4,16.72,41.38
+36,Ingress Network Burst,Arm 2 (Heuristic Automation),48.84,1,2,459.4,18.54,39.49
+37,Ingress Network Burst,Arm 2 (Heuristic Automation),66.29,0,2,796.0,16.43,50.14
+38,Ingress Network Burst,Arm 2 (Heuristic Automation),57.73,1,2,1170.6,13.09,41.17
+39,Ingress Network Burst,Arm 2 (Heuristic Automation),47.56,1,0,737.8,17.14,49.69
+40,Ingress Network Burst,Arm 2 (Heuristic Automation),56.1,1,1,463.5,15.86,41.19
+41,Ingress Network Burst,Arm 2 (Heuristic Automation),36.34,1,1,918.6,19.28,46.04
+42,Ingress Network Burst,Arm 2 (Heuristic Automation),49.78,1,1,491.5,19.4,40.22
+43,Ingress Network Burst,Arm 2 (Heuristic Automation),67.9,1,0,547.7,19.48,46.03
+44,Ingress Network Burst,Arm 2 (Heuristic Automation),43.47,1,1,704.9,15.22,43.06
+45,Ingress Network Burst,Arm 2 (Heuristic Automation),37.85,1,1,774.3,20.58,43.11
+46,Ingress Network Burst,Arm 2 (Heuristic Automation),39.51,1,1,576.9,17.14,46.34
+47,Ingress Network Burst,Arm 2 (Heuristic Automation),35.88,1,0,697.8,19.82,42.56
+48,Ingress Network Burst,Arm 2 (Heuristic Automation),38.37,1,0,903.2,15.34,39.2
+49,Ingress Network Burst,Arm 2 (Heuristic Automation),42.03,1,0,936.0,15.77,46.86
+50,Ingress Network Burst,Arm 2 (Heuristic Automation),33.47,1,1,1038.3,16.98,40.19
+51,Ingress Network Burst,Arm 2 (Heuristic Automation),45.76,0,3,1232.1,16.72,46.01
+52,Ingress Network Burst,Arm 2 (Heuristic Automation),55.62,1,1,925.7,19.04,47.61
+53,Ingress Network Burst,Arm 2 (Heuristic Automation),37.35,1,1,708.9,15.91,42.89
+54,Ingress Network Burst,Arm 2 (Heuristic Automation),63.7,0,3,937.7,18.85,48.34
+55,Ingress Network Burst,Arm 2 (Heuristic Automation),51.03,1,1,846.7,17.94,45.89
+56,Ingress Network Burst,Arm 2 (Heuristic Automation),57.21,1,0,855.5,15.95,41.76
+57,Ingress Network Burst,Arm 2 (Heuristic Automation),39.46,0,1,785.3,17.77,49.11
+58,Ingress Network Burst,Arm 2 (Heuristic Automation),55.04,0,0,591.6,15.41,40.2
+59,Ingress Network Burst,Arm 2 (Heuristic Automation),35.87,0,0,574.0,21.34,42.88
+60,Ingress Network Burst,Arm 2 (Heuristic Automation),55.47,1,3,731.2,10.8,43.48
+61,Ingress Network Burst,Arm 2 (Heuristic Automation),47.36,1,0,779.5,17.81,46.32
+62,Ingress Network Burst,Arm 2 (Heuristic Automation),51.51,1,1,628.5,12.69,48.1
+63,Ingress Network Burst,Arm 2 (Heuristic Automation),35.21,1,0,837.2,15.93,47.88
+64,Ingress Network Burst,Arm 2 (Heuristic Automation),37.45,1,2,1288.2,16.22,44.98
+65,Ingress Network Burst,Arm 2 (Heuristic Automation),52.01,1,0,476.5,19.57,43.22
+66,Ingress Network Burst,Arm 2 (Heuristic Automation),37.02,0,0,872.5,14.95,37.81
+67,Ingress Network Burst,Arm 2 (Heuristic Automation),50.5,1,0,737.2,19.15,39.6
+68,Ingress Network Burst,Arm 2 (Heuristic Automation),33.76,1,2,843.2,13.92,50.38
+69,Ingress Network Burst,Arm 2 (Heuristic Automation),54.96,1,1,670.5,19.23,37.77
+70,Ingress Network Burst,Arm 2 (Heuristic Automation),34.77,1,1,722.0,15.4,41.45
+71,Ingress Network Burst,Arm 2 (Heuristic Automation),51.5,1,3,775.6,16.55,48.21
+72,Ingress Network Burst,Arm 2 (Heuristic Automation),52.33,1,1,693.4,15.69,44.93
+73,Ingress Network Burst,Arm 2 (Heuristic Automation),39.12,1,0,505.1,19.09,47.45
+74,Ingress Network Burst,Arm 2 (Heuristic Automation),51.83,1,0,705.7,18.68,46.1
+75,Ingress Network Burst,Arm 2 (Heuristic Automation),48.29,0,1,518.9,17.33,49.34
+76,Ingress Network Burst,Arm 2 (Heuristic Automation),40.51,0,2,888.8,13.98,45.23
+77,Ingress Network Burst,Arm 2 (Heuristic Automation),36.53,1,1,461.7,14.9,46.52
+78,Ingress Network Burst,Arm 2 (Heuristic Automation),29.61,1,0,979.9,14.24,41.67
+79,Ingress Network Burst,Arm 2 (Heuristic Automation),49.25,0,1,838.6,11.68,46.25
+80,Ingress Network Burst,Arm 2 (Heuristic Automation),32.32,0,1,839.4,19.05,42.81
+81,Ingress Network Burst,Arm 2 (Heuristic Automation),46.57,1,0,427.2,15.71,42.61
+82,Ingress Network Burst,Arm 2 (Heuristic Automation),43.04,1,1,688.5,15.69,47.33
+83,Ingress Network Burst,Arm 2 (Heuristic Automation),52.95,1,0,1012.2,19.54,47.36
+84,Ingress Network Burst,Arm 2 (Heuristic Automation),42.67,0,1,655.3,15.4,50.11
+85,Ingress Network Burst,Arm 2 (Heuristic Automation),42.42,0,1,566.6,14.64,49.88
+86,Ingress Network Burst,Arm 2 (Heuristic Automation),53.57,1,0,635.5,15.93,47.41
+87,Ingress Network Burst,Arm 2 (Heuristic Automation),49.09,0,1,736.7,14.02,38.18
+88,Ingress Network Burst,Arm 2 (Heuristic Automation),48.89,1,1,601.0,17.12,50.6
+89,Ingress Network Burst,Arm 2 (Heuristic Automation),50.56,0,0,1033.6,15.62,47.41
+90,Ingress Network Burst,Arm 2 (Heuristic Automation),32.53,1,1,737.4,15.33,41.52
+91,Ingress Network Burst,Arm 2 (Heuristic Automation),53.87,0,3,649.1,15.15,46.75
+92,Ingress Network Burst,Arm 2 (Heuristic Automation),52.18,1,0,534.7,16.18,40.57
+93,Ingress Network Burst,Arm 2 (Heuristic Automation),36.46,1,0,850.6,16.58,46.37
+94,Ingress Network Burst,Arm 2 (Heuristic Automation),43.22,1,3,845.6,15.31,39.59
+95,Ingress Network Burst,Arm 2 (Heuristic Automation),45.21,0,1,610.3,15.65,41.37
+96,Ingress Network Burst,Arm 2 (Heuristic Automation),44.27,0,3,419.3,16.23,46.68
+97,Ingress Network Burst,Arm 2 (Heuristic Automation),49.08,0,2,834.5,16.02,47.96
+98,Ingress Network Burst,Arm 2 (Heuristic Automation),62.48,0,4,714.4,16.47,45.34
+99,Ingress Network Burst,Arm 2 (Heuristic Automation),57.86,1,0,818.4,14.98,43.2
+100,Ingress Network Burst,Arm 2 (Heuristic Automation),34.17,1,1,1247.5,18.51,36.8
+1,Ingress Network Burst,Arm 3 (Proposed Autonomous System),10.88,1,0,138.9,96.69,230.13
+2,Ingress Network Burst,Arm 3 (Proposed Autonomous System),12.25,1,0,123.0,87.2,217.0
+3,Ingress Network Burst,Arm 3 (Proposed Autonomous System),10.69,1,0,154.6,95.7,223.31
+4,Ingress Network Burst,Arm 3 (Proposed Autonomous System),11.21,1,0,157.8,93.0,226.12
+5,Ingress Network Burst,Arm 3 (Proposed Autonomous System),10.92,1,0,179.3,102.86,229.61
+6,Ingress Network Burst,Arm 3 (Proposed Autonomous System),10.68,1,0,149.0,80.92,228.13
+7,Ingress Network Burst,Arm 3 (Proposed Autonomous System),11.38,1,0,179.8,96.8,226.42
+8,Ingress Network Burst,Arm 3 (Proposed Autonomous System),10.77,1,0,232.4,96.15,215.5
+9,Ingress Network Burst,Arm 3 (Proposed Autonomous System),14.17,1,1,190.0,83.85,213.14
+10,Ingress Network Burst,Arm 3 (Proposed Autonomous System),7.9,1,0,162.6,95.34,221.46
+11,Ingress Network Burst,Arm 3 (Proposed Autonomous System),10.31,1,0,158.7,91.45,226.98
+12,Ingress Network Burst,Arm 3 (Proposed Autonomous System),9.78,1,0,153.8,88.18,216.35
+13,Ingress Network Burst,Arm 3 (Proposed Autonomous System),11.65,1,0,202.9,84.72,228.2
+14,Ingress Network Burst,Arm 3 (Proposed Autonomous System),11.39,1,0,146.5,85.33,231.76
+15,Ingress Network Burst,Arm 3 (Proposed Autonomous System),14.58,1,0,165.4,101.39,209.97
+16,Ingress Network Burst,Arm 3 (Proposed Autonomous System),15.37,1,0,165.5,89.5,210.7
+17,Ingress Network Burst,Arm 3 (Proposed Autonomous System),9.94,1,0,149.9,94.04,217.11
+18,Ingress Network Burst,Arm 3 (Proposed Autonomous System),11.25,1,0,128.1,84.91,221.23
+19,Ingress Network Burst,Arm 3 (Proposed Autonomous System),11.6,1,0,173.8,84.98,213.57
+20,Ingress Network Burst,Arm 3 (Proposed Autonomous System),9.9,1,0,162.2,95.78,230.84
+21,Ingress Network Burst,Arm 3 (Proposed Autonomous System),12.44,1,0,179.5,81.67,222.3
+22,Ingress Network Burst,Arm 3 (Proposed Autonomous System),10.82,1,0,149.0,87.09,218.76
+23,Ingress Network Burst,Arm 3 (Proposed Autonomous System),9.48,1,0,204.3,89.7,205.19
+24,Ingress Network Burst,Arm 3 (Proposed Autonomous System),10.75,1,0,140.1,90.15,206.29
+25,Ingress Network Burst,Arm 3 (Proposed Autonomous System),9.59,1,0,223.2,88.46,220.99
+26,Ingress Network Burst,Arm 3 (Proposed Autonomous System),13.27,1,0,119.8,91.8,198.78
+27,Ingress Network Burst,Arm 3 (Proposed Autonomous System),15.24,1,0,177.4,93.52,227.72
+28,Ingress Network Burst,Arm 3 (Proposed Autonomous System),11.7,1,0,178.7,93.76,216.94
+29,Ingress Network Burst,Arm 3 (Proposed Autonomous System),11.45,1,0,142.1,83.78,248.24
+30,Ingress Network Burst,Arm 3 (Proposed Autonomous System),11.52,1,0,177.0,87.85,239.63
+31,Ingress Network Burst,Arm 3 (Proposed Autonomous System),13.59,0,0,206.5,96.43,216.73
+32,Ingress Network Burst,Arm 3 (Proposed Autonomous System),13.54,1,0,110.1,94.69,217.42
+33,Ingress Network Burst,Arm 3 (Proposed Autonomous System),11.04,1,0,179.6,81.54,227.56
+34,Ingress Network Burst,Arm 3 (Proposed Autonomous System),11.71,1,1,104.7,91.54,234.07
+35,Ingress Network Burst,Arm 3 (Proposed Autonomous System),12.48,1,0,137.9,78.03,203.33
+36,Ingress Network Burst,Arm 3 (Proposed Autonomous System),9.37,1,0,219.9,89.77,201.97
+37,Ingress Network Burst,Arm 3 (Proposed Autonomous System),13.65,1,0,147.7,100.51,212.68
+38,Ingress Network Burst,Arm 3 (Proposed Autonomous System),14.84,0,0,132.8,84.0,223.76
+39,Ingress Network Burst,Arm 3 (Proposed Autonomous System),13.55,1,0,158.3,84.66,222.97
+40,Ingress Network Burst,Arm 3 (Proposed Autonomous System),9.21,1,0,238.0,93.93,228.24
+41,Ingress Network Burst,Arm 3 (Proposed Autonomous System),8.21,1,0,118.0,80.55,207.36
+42,Ingress Network Burst,Arm 3 (Proposed Autonomous System),12.6,1,0,135.7,85.83,197.09
+43,Ingress Network Burst,Arm 3 (Proposed Autonomous System),9.96,1,0,214.8,92.96,226.29
+44,Ingress Network Burst,Arm 3 (Proposed Autonomous System),11.77,1,0,229.2,85.82,210.78
+45,Ingress Network Burst,Arm 3 (Proposed Autonomous System),14.38,1,0,161.0,88.13,199.83
+46,Ingress Network Burst,Arm 3 (Proposed Autonomous System),10.12,1,0,131.2,93.82,219.73
+47,Ingress Network Burst,Arm 3 (Proposed Autonomous System),10.59,1,0,239.2,91.94,225.7
+48,Ingress Network Burst,Arm 3 (Proposed Autonomous System),11.75,1,0,218.5,91.05,217.28
+49,Ingress Network Burst,Arm 3 (Proposed Autonomous System),9.14,1,0,185.3,87.53,214.19
+50,Ingress Network Burst,Arm 3 (Proposed Autonomous System),9.96,1,0,141.7,91.65,216.93
+51,Ingress Network Burst,Arm 3 (Proposed Autonomous System),11.29,1,0,162.6,88.78,214.99
+52,Ingress Network Burst,Arm 3 (Proposed Autonomous System),10.72,1,0,159.4,92.16,206.0
+53,Ingress Network Burst,Arm 3 (Proposed Autonomous System),12.4,1,0,174.1,86.62,211.82
+54,Ingress Network Burst,Arm 3 (Proposed Autonomous System),17.51,1,0,213.0,88.44,223.2
+55,Ingress Network Burst,Arm 3 (Proposed Autonomous System),11.43,1,0,192.2,83.76,221.36
+56,Ingress Network Burst,Arm 3 (Proposed Autonomous System),9.83,1,0,135.1,89.3,219.95
+57,Ingress Network Burst,Arm 3 (Proposed Autonomous System),14.11,1,0,210.1,84.8,209.24
+58,Ingress Network Burst,Arm 3 (Proposed Autonomous System),8.72,1,0,173.5,83.04,216.73
+59,Ingress Network Burst,Arm 3 (Proposed Autonomous System),9.0,1,0,185.6,91.0,198.37
+60,Ingress Network Burst,Arm 3 (Proposed Autonomous System),10.22,1,0,213.6,90.73,220.04
+61,Ingress Network Burst,Arm 3 (Proposed Autonomous System),10.75,1,0,134.3,94.04,231.55
+62,Ingress Network Burst,Arm 3 (Proposed Autonomous System),10.19,1,0,163.0,87.0,204.84
+63,Ingress Network Burst,Arm 3 (Proposed Autonomous System),11.19,1,0,149.1,91.87,213.01
+64,Ingress Network Burst,Arm 3 (Proposed Autonomous System),11.75,1,0,123.7,92.69,221.43
+65,Ingress Network Burst,Arm 3 (Proposed Autonomous System),13.34,1,0,174.6,92.08,229.93
+66,Ingress Network Burst,Arm 3 (Proposed Autonomous System),11.41,1,1,257.8,84.71,214.28
+67,Ingress Network Burst,Arm 3 (Proposed Autonomous System),10.28,1,0,117.8,90.37,212.03
+68,Ingress Network Burst,Arm 3 (Proposed Autonomous System),13.23,1,0,163.1,91.61,200.29
+69,Ingress Network Burst,Arm 3 (Proposed Autonomous System),9.87,1,0,184.1,89.54,219.35
+70,Ingress Network Burst,Arm 3 (Proposed Autonomous System),8.66,1,0,167.7,77.4,237.19
+71,Ingress Network Burst,Arm 3 (Proposed Autonomous System),13.64,1,0,160.7,90.43,220.95
+72,Ingress Network Burst,Arm 3 (Proposed Autonomous System),13.5,1,0,129.8,102.33,218.2
+73,Ingress Network Burst,Arm 3 (Proposed Autonomous System),9.91,1,0,171.0,87.41,221.36
+74,Ingress Network Burst,Arm 3 (Proposed Autonomous System),10.55,1,0,143.1,85.28,218.3
+75,Ingress Network Burst,Arm 3 (Proposed Autonomous System),9.71,1,0,110.6,91.67,210.92
+76,Ingress Network Burst,Arm 3 (Proposed Autonomous System),11.85,1,0,203.4,91.31,225.97
+77,Ingress Network Burst,Arm 3 (Proposed Autonomous System),14.84,1,0,194.9,96.42,220.48
+78,Ingress Network Burst,Arm 3 (Proposed Autonomous System),12.58,1,0,165.6,82.2,218.56
+79,Ingress Network Burst,Arm 3 (Proposed Autonomous System),13.27,1,0,170.9,93.74,209.43
+80,Ingress Network Burst,Arm 3 (Proposed Autonomous System),12.82,1,0,199.0,92.92,230.39
+81,Ingress Network Burst,Arm 3 (Proposed Autonomous System),11.25,1,0,170.8,88.68,224.52
+82,Ingress Network Burst,Arm 3 (Proposed Autonomous System),13.37,1,0,193.0,91.46,213.31
+83,Ingress Network Burst,Arm 3 (Proposed Autonomous System),12.67,1,1,155.5,95.47,227.62
+84,Ingress Network Burst,Arm 3 (Proposed Autonomous System),14.16,1,0,207.7,94.56,213.82
+85,Ingress Network Burst,Arm 3 (Proposed Autonomous System),10.45,1,0,173.8,82.87,211.21
+86,Ingress Network Burst,Arm 3 (Proposed Autonomous System),8.52,1,0,169.9,94.26,211.41
+87,Ingress Network Burst,Arm 3 (Proposed Autonomous System),13.29,1,0,130.5,89.12,202.11
+88,Ingress Network Burst,Arm 3 (Proposed Autonomous System),11.89,1,0,172.7,89.92,222.74
+89,Ingress Network Burst,Arm 3 (Proposed Autonomous System),10.73,1,0,141.2,89.92,201.55
+90,Ingress Network Burst,Arm 3 (Proposed Autonomous System),10.82,1,0,146.2,88.63,207.1
+91,Ingress Network Burst,Arm 3 (Proposed Autonomous System),16.92,1,0,141.6,96.41,199.3
+92,Ingress Network Burst,Arm 3 (Proposed Autonomous System),10.15,1,0,135.4,89.01,217.61
+93,Ingress Network Burst,Arm 3 (Proposed Autonomous System),9.81,1,0,240.4,83.01,217.02
+94,Ingress Network Burst,Arm 3 (Proposed Autonomous System),11.4,1,0,208.4,87.22,215.39
+95,Ingress Network Burst,Arm 3 (Proposed Autonomous System),13.58,1,0,231.8,90.54,208.81
+96,Ingress Network Burst,Arm 3 (Proposed Autonomous System),16.19,0,0,131.6,96.63,207.62
+97,Ingress Network Burst,Arm 3 (Proposed Autonomous System),12.49,1,0,166.1,93.0,222.67
+98,Ingress Network Burst,Arm 3 (Proposed Autonomous System),9.18,1,0,130.0,84.57,213.33
+99,Ingress Network Burst,Arm 3 (Proposed Autonomous System),15.41,1,1,144.7,103.91,221.31
+100,Ingress Network Burst,Arm 3 (Proposed Autonomous System),11.21,1,0,139.0,91.04,210.26
+1,Resource / CPU Contention,Arm 1 (Static Orchestration),248.69,1,7,2593.7,1.14,4.6
+2,Resource / CPU Contention,Arm 1 (Static Orchestration),311.27,1,5,3131.5,1.55,4.57
+3,Resource / CPU Contention,Arm 1 (Static Orchestration),269.68,1,3,2691.4,1.38,5.72
+4,Resource / CPU Contention,Arm 1 (Static Orchestration),220.86,1,4,4301.8,0.59,3.41
+5,Resource / CPU Contention,Arm 1 (Static Orchestration),252.51,0,6,1553.4,1.26,3.12
+6,Resource / CPU Contention,Arm 1 (Static Orchestration),228.58,0,3,2440.9,1.1,2.95
+7,Resource / CPU Contention,Arm 1 (Static Orchestration),240.23,1,3,2500.4,0.82,5.36
+8,Resource / CPU Contention,Arm 1 (Static Orchestration),224.73,0,5,1803.4,1.3,3.88
+9,Resource / CPU Contention,Arm 1 (Static Orchestration),232.09,1,1,1887.7,1.05,4.61
+10,Resource / CPU Contention,Arm 1 (Static Orchestration),250.24,1,3,2032.8,1.05,4.41
+11,Resource / CPU Contention,Arm 1 (Static Orchestration),196.63,1,3,1912.3,1.24,3.79
+12,Resource / CPU Contention,Arm 1 (Static Orchestration),195.75,1,1,2426.2,1.01,5.18
+13,Resource / CPU Contention,Arm 1 (Static Orchestration),181.69,1,2,2154.4,1.23,4.4
+14,Resource / CPU Contention,Arm 1 (Static Orchestration),174.16,1,4,2687.3,1.02,4.31
+15,Resource / CPU Contention,Arm 1 (Static Orchestration),188.02,0,4,2909.9,1.04,4.69
+16,Resource / CPU Contention,Arm 1 (Static Orchestration),247.62,0,2,2863.0,1.5,5.08
+17,Resource / CPU Contention,Arm 1 (Static Orchestration),200.63,0,8,2256.5,1.53,3.73
+18,Resource / CPU Contention,Arm 1 (Static Orchestration),265.79,1,5,2665.8,0.69,5.2
+19,Resource / CPU Contention,Arm 1 (Static Orchestration),241.52,0,5,3192.1,1.42,5.66
+20,Resource / CPU Contention,Arm 1 (Static Orchestration),161.79,1,3,2770.9,1.62,3.36
+21,Resource / CPU Contention,Arm 1 (Static Orchestration),273.42,0,0,3890.0,1.67,4.72
+22,Resource / CPU Contention,Arm 1 (Static Orchestration),282.07,1,3,3151.8,1.36,4.26
+23,Resource / CPU Contention,Arm 1 (Static Orchestration),196.61,0,5,3760.9,0.88,5.06
+24,Resource / CPU Contention,Arm 1 (Static Orchestration),260.87,1,5,1369.0,1.39,3.53
+25,Resource / CPU Contention,Arm 1 (Static Orchestration),202.09,0,5,2548.4,0.94,5.8
+26,Resource / CPU Contention,Arm 1 (Static Orchestration),244.58,0,3,2303.7,1.1,3.21
+27,Resource / CPU Contention,Arm 1 (Static Orchestration),186.25,0,1,2416.3,1.31,4.3
+28,Resource / CPU Contention,Arm 1 (Static Orchestration),167.57,1,2,2052.5,0.96,4.85
+29,Resource / CPU Contention,Arm 1 (Static Orchestration),222.17,0,3,2738.3,0.86,3.95
+30,Resource / CPU Contention,Arm 1 (Static Orchestration),233.98,0,3,1613.2,1.34,3.83
+31,Resource / CPU Contention,Arm 1 (Static Orchestration),221.51,1,1,2743.0,1.76,4.68
+32,Resource / CPU Contention,Arm 1 (Static Orchestration),189.27,1,5,2068.9,1.57,4.56
+33,Resource / CPU Contention,Arm 1 (Static Orchestration),221.41,1,6,2208.1,1.41,4.5
+34,Resource / CPU Contention,Arm 1 (Static Orchestration),253.12,0,6,2766.2,1.49,5.19
+35,Resource / CPU Contention,Arm 1 (Static Orchestration),237.7,0,3,2537.4,1.39,4.18
+36,Resource / CPU Contention,Arm 1 (Static Orchestration),248.76,1,6,3206.5,1.33,4.76
+37,Resource / CPU Contention,Arm 1 (Static Orchestration),209.76,0,5,1973.0,1.47,4.09
+38,Resource / CPU Contention,Arm 1 (Static Orchestration),303.19,1,5,2442.1,0.79,3.82
+39,Resource / CPU Contention,Arm 1 (Static Orchestration),189.57,0,1,3081.9,1.26,4.27
+40,Resource / CPU Contention,Arm 1 (Static Orchestration),264.41,0,2,2715.4,1.18,4.1
+41,Resource / CPU Contention,Arm 1 (Static Orchestration),303.8,0,2,2757.7,1.22,4.14
+42,Resource / CPU Contention,Arm 1 (Static Orchestration),264.06,0,5,3248.4,1.06,5.43
+43,Resource / CPU Contention,Arm 1 (Static Orchestration),230.33,0,3,2258.6,1.36,4.3
+44,Resource / CPU Contention,Arm 1 (Static Orchestration),215.8,0,2,2147.3,0.95,3.97
+45,Resource / CPU Contention,Arm 1 (Static Orchestration),295.07,1,7,2859.0,1.04,4.52
+46,Resource / CPU Contention,Arm 1 (Static Orchestration),180.44,0,6,2402.2,1.0,4.58
+47,Resource / CPU Contention,Arm 1 (Static Orchestration),197.55,1,3,3259.5,1.46,3.55
+48,Resource / CPU Contention,Arm 1 (Static Orchestration),221.51,1,5,2721.0,1.2,4.26
+49,Resource / CPU Contention,Arm 1 (Static Orchestration),307.21,0,5,2143.9,1.06,4.23
+50,Resource / CPU Contention,Arm 1 (Static Orchestration),258.77,0,1,2700.6,1.09,4.36
+51,Resource / CPU Contention,Arm 1 (Static Orchestration),197.63,1,3,2004.9,1.2,5.08
+52,Resource / CPU Contention,Arm 1 (Static Orchestration),225.41,1,3,3125.2,1.69,4.61
+53,Resource / CPU Contention,Arm 1 (Static Orchestration),212.12,1,5,1780.6,0.83,5.48
+54,Resource / CPU Contention,Arm 1 (Static Orchestration),208.1,1,2,3338.6,1.4,4.49
+55,Resource / CPU Contention,Arm 1 (Static Orchestration),291.72,1,3,2689.2,1.34,5.92
+56,Resource / CPU Contention,Arm 1 (Static Orchestration),182.3,1,0,2393.5,0.94,4.13
+57,Resource / CPU Contention,Arm 1 (Static Orchestration),330.88,0,4,2990.5,1.64,3.88
+58,Resource / CPU Contention,Arm 1 (Static Orchestration),283.06,1,1,2815.0,1.36,4.94
+59,Resource / CPU Contention,Arm 1 (Static Orchestration),298.32,0,0,3426.5,1.05,5.59
+60,Resource / CPU Contention,Arm 1 (Static Orchestration),218.64,1,7,3418.8,0.64,3.4
+61,Resource / CPU Contention,Arm 1 (Static Orchestration),232.76,0,6,2709.6,1.27,4.34
+62,Resource / CPU Contention,Arm 1 (Static Orchestration),180.07,0,3,2019.8,1.19,4.01
+63,Resource / CPU Contention,Arm 1 (Static Orchestration),215.95,1,3,2186.5,0.89,4.61
+64,Resource / CPU Contention,Arm 1 (Static Orchestration),264.74,1,2,2447.5,0.89,4.51
+65,Resource / CPU Contention,Arm 1 (Static Orchestration),310.82,0,3,3228.0,1.46,5.58
+66,Resource / CPU Contention,Arm 1 (Static Orchestration),192.21,0,2,2231.6,0.61,4.41
+67,Resource / CPU Contention,Arm 1 (Static Orchestration),222.94,1,4,2276.7,1.29,5.6
+68,Resource / CPU Contention,Arm 1 (Static Orchestration),232.7,0,3,3880.1,1.14,4.25
+69,Resource / CPU Contention,Arm 1 (Static Orchestration),181.42,1,2,2428.4,1.35,5.24
+70,Resource / CPU Contention,Arm 1 (Static Orchestration),269.96,0,5,2138.1,1.11,4.68
+71,Resource / CPU Contention,Arm 1 (Static Orchestration),207.51,1,3,3000.1,1.29,5.88
+72,Resource / CPU Contention,Arm 1 (Static Orchestration),230.65,1,6,2456.6,0.98,3.32
+73,Resource / CPU Contention,Arm 1 (Static Orchestration),219.12,0,5,1783.8,1.19,3.57
+74,Resource / CPU Contention,Arm 1 (Static Orchestration),204.82,0,4,3196.5,1.35,5.97
+75,Resource / CPU Contention,Arm 1 (Static Orchestration),239.51,0,5,2081.2,1.25,3.91
+76,Resource / CPU Contention,Arm 1 (Static Orchestration),229.72,1,2,2516.1,1.31,3.96
+77,Resource / CPU Contention,Arm 1 (Static Orchestration),222.66,0,6,2449.5,0.92,3.8
+78,Resource / CPU Contention,Arm 1 (Static Orchestration),207.33,1,5,2631.3,1.02,5.42
+79,Resource / CPU Contention,Arm 1 (Static Orchestration),255.67,0,6,1471.7,1.03,3.5
+80,Resource / CPU Contention,Arm 1 (Static Orchestration),333.86,0,5,2297.5,1.12,4.52
+81,Resource / CPU Contention,Arm 1 (Static Orchestration),246.65,0,3,3261.6,1.61,4.29
+82,Resource / CPU Contention,Arm 1 (Static Orchestration),292.72,0,1,3373.5,1.09,5.33
+83,Resource / CPU Contention,Arm 1 (Static Orchestration),181.63,0,3,1962.7,0.86,4.05
+84,Resource / CPU Contention,Arm 1 (Static Orchestration),247.54,1,3,3105.5,1.36,4.83
+85,Resource / CPU Contention,Arm 1 (Static Orchestration),192.58,1,6,2074.0,1.6,3.56
+86,Resource / CPU Contention,Arm 1 (Static Orchestration),178.5,0,2,2275.9,0.82,6.32
+87,Resource / CPU Contention,Arm 1 (Static Orchestration),206.88,1,4,2304.7,1.79,4.31
+88,Resource / CPU Contention,Arm 1 (Static Orchestration),304.41,1,3,2555.8,1.32,4.51
+89,Resource / CPU Contention,Arm 1 (Static Orchestration),290.04,1,2,3166.3,1.51,5.82
+90,Resource / CPU Contention,Arm 1 (Static Orchestration),251.79,0,3,2653.1,1.64,4.03
+91,Resource / CPU Contention,Arm 1 (Static Orchestration),176.52,0,2,2415.7,1.49,5.83
+92,Resource / CPU Contention,Arm 1 (Static Orchestration),230.61,0,3,3140.6,1.17,4.17
+93,Resource / CPU Contention,Arm 1 (Static Orchestration),254.76,1,5,2053.6,1.57,5.04
+94,Resource / CPU Contention,Arm 1 (Static Orchestration),248.42,0,5,2444.2,1.28,4.04
+95,Resource / CPU Contention,Arm 1 (Static Orchestration),165.88,0,3,3162.1,1.53,3.42
+96,Resource / CPU Contention,Arm 1 (Static Orchestration),200.73,0,1,2827.2,1.56,4.83
+97,Resource / CPU Contention,Arm 1 (Static Orchestration),236.79,1,4,2226.3,0.87,5.01
+98,Resource / CPU Contention,Arm 1 (Static Orchestration),267.0,1,6,1731.8,1.44,3.45
+99,Resource / CPU Contention,Arm 1 (Static Orchestration),154.59,0,5,2682.8,1.15,4.25
+100,Resource / CPU Contention,Arm 1 (Static Orchestration),232.19,0,3,1704.7,1.24,5.46
+1,Resource / CPU Contention,Arm 2 (Heuristic Automation),78.89,1,1,810.3,17.73,42.8
+2,Resource / CPU Contention,Arm 2 (Heuristic Automation),59.7,1,1,1085.5,15.09,47.06
+3,Resource / CPU Contention,Arm 2 (Heuristic Automation),56.41,0,0,1639.9,15.51,42.29
+4,Resource / CPU Contention,Arm 2 (Heuristic Automation),115.07,1,3,892.4,18.62,41.84
+5,Resource / CPU Contention,Arm 2 (Heuristic Automation),44.47,1,2,1038.6,16.8,38.86
+6,Resource / CPU Contention,Arm 2 (Heuristic Automation),65.59,1,3,607.6,18.92,42.44
+7,Resource / CPU Contention,Arm 2 (Heuristic Automation),44.25,1,1,854.7,18.08,41.35
+8,Resource / CPU Contention,Arm 2 (Heuristic Automation),96.37,0,0,588.8,13.93,42.8
+9,Resource / CPU Contention,Arm 2 (Heuristic Automation),66.55,0,0,1186.5,16.19,46.34
+10,Resource / CPU Contention,Arm 2 (Heuristic Automation),70.1,0,4,1338.7,18.48,38.16
+11,Resource / CPU Contention,Arm 2 (Heuristic Automation),144.79,1,1,976.0,13.83,37.29
+12,Resource / CPU Contention,Arm 2 (Heuristic Automation),56.48,1,3,1136.6,17.28,41.58
+13,Resource / CPU Contention,Arm 2 (Heuristic Automation),108.81,0,0,946.0,16.32,45.81
+14,Resource / CPU Contention,Arm 2 (Heuristic Automation),59.78,1,0,1302.7,12.71,45.21
+15,Resource / CPU Contention,Arm 2 (Heuristic Automation),62.47,1,4,1084.5,16.65,41.52
+16,Resource / CPU Contention,Arm 2 (Heuristic Automation),139.59,1,1,575.0,14.64,48.29
+17,Resource / CPU Contention,Arm 2 (Heuristic Automation),63.75,1,2,1383.0,13.95,41.9
+18,Resource / CPU Contention,Arm 2 (Heuristic Automation),45.38,1,4,928.1,16.42,45.82
+19,Resource / CPU Contention,Arm 2 (Heuristic Automation),72.16,0,1,712.6,12.35,42.93
+20,Resource / CPU Contention,Arm 2 (Heuristic Automation),63.54,0,0,914.4,14.98,41.16
+21,Resource / CPU Contention,Arm 2 (Heuristic Automation),73.91,1,1,589.6,21.76,42.08
+22,Resource / CPU Contention,Arm 2 (Heuristic Automation),64.24,1,2,717.0,17.77,46.77
+23,Resource / CPU Contention,Arm 2 (Heuristic Automation),124.01,1,1,1088.9,14.55,45.46
+24,Resource / CPU Contention,Arm 2 (Heuristic Automation),77.94,0,1,1116.6,19.35,47.59
+25,Resource / CPU Contention,Arm 2 (Heuristic Automation),49.35,1,1,1143.6,14.32,45.46
+26,Resource / CPU Contention,Arm 2 (Heuristic Automation),69.05,0,3,1044.2,15.24,38.56
+27,Resource / CPU Contention,Arm 2 (Heuristic Automation),53.31,1,0,847.4,13.99,51.6
+28,Resource / CPU Contention,Arm 2 (Heuristic Automation),62.22,1,0,1026.2,16.94,45.51
+29,Resource / CPU Contention,Arm 2 (Heuristic Automation),51.68,1,1,914.9,19.27,46.0
+30,Resource / CPU Contention,Arm 2 (Heuristic Automation),120.3,0,3,640.5,14.3,42.88
+31,Resource / CPU Contention,Arm 2 (Heuristic Automation),54.95,1,1,827.4,12.07,48.1
+32,Resource / CPU Contention,Arm 2 (Heuristic Automation),80.84,0,2,1362.2,18.69,40.37
+33,Resource / CPU Contention,Arm 2 (Heuristic Automation),60.91,1,0,1679.9,19.66,46.33
+34,Resource / CPU Contention,Arm 2 (Heuristic Automation),48.21,0,1,1268.2,12.21,36.92
+35,Resource / CPU Contention,Arm 2 (Heuristic Automation),70.48,0,3,1657.6,17.37,46.57
+36,Resource / CPU Contention,Arm 2 (Heuristic Automation),74.6,1,1,1070.2,16.88,40.42
+37,Resource / CPU Contention,Arm 2 (Heuristic Automation),77.98,0,4,1759.4,14.75,45.17
+38,Resource / CPU Contention,Arm 2 (Heuristic Automation),32.0,1,2,1932.1,13.47,48.95
+39,Resource / CPU Contention,Arm 2 (Heuristic Automation),47.19,1,0,620.1,18.48,47.08
+40,Resource / CPU Contention,Arm 2 (Heuristic Automation),87.19,1,4,1114.8,16.78,48.49
+41,Resource / CPU Contention,Arm 2 (Heuristic Automation),51.49,1,2,1070.6,16.93,48.12
+42,Resource / CPU Contention,Arm 2 (Heuristic Automation),70.59,0,1,918.5,15.09,42.37
+43,Resource / CPU Contention,Arm 2 (Heuristic Automation),46.89,0,1,1209.0,14.72,46.29
+44,Resource / CPU Contention,Arm 2 (Heuristic Automation),81.85,1,1,1056.1,11.24,38.16
+45,Resource / CPU Contention,Arm 2 (Heuristic Automation),86.55,1,2,836.6,15.92,41.8
+46,Resource / CPU Contention,Arm 2 (Heuristic Automation),81.85,0,1,1034.9,19.42,49.07
+47,Resource / CPU Contention,Arm 2 (Heuristic Automation),89.04,0,1,1497.2,14.53,42.85
+48,Resource / CPU Contention,Arm 2 (Heuristic Automation),103.33,1,1,1101.9,13.2,37.66
+49,Resource / CPU Contention,Arm 2 (Heuristic Automation),48.0,0,1,1259.0,17.31,51.25
+50,Resource / CPU Contention,Arm 2 (Heuristic Automation),53.47,1,1,960.0,17.7,46.17
+51,Resource / CPU Contention,Arm 2 (Heuristic Automation),85.74,1,5,1194.7,15.17,46.88
+52,Resource / CPU Contention,Arm 2 (Heuristic Automation),91.51,0,1,725.8,15.67,40.77
+53,Resource / CPU Contention,Arm 2 (Heuristic Automation),55.21,1,6,897.9,16.95,45.19
+54,Resource / CPU Contention,Arm 2 (Heuristic Automation),54.15,1,4,1011.5,16.07,45.1
+55,Resource / CPU Contention,Arm 2 (Heuristic Automation),55.56,1,2,711.3,18.5,41.32
+56,Resource / CPU Contention,Arm 2 (Heuristic Automation),42.55,0,1,813.2,21.52,43.61
+57,Resource / CPU Contention,Arm 2 (Heuristic Automation),46.71,0,1,1145.9,12.81,38.95
+58,Resource / CPU Contention,Arm 2 (Heuristic Automation),47.03,1,2,1084.6,18.98,42.99
+59,Resource / CPU Contention,Arm 2 (Heuristic Automation),61.41,1,2,1328.6,16.62,47.61
+60,Resource / CPU Contention,Arm 2 (Heuristic Automation),71.94,1,0,871.2,19.32,41.59
+61,Resource / CPU Contention,Arm 2 (Heuristic Automation),75.29,1,1,1061.3,17.92,50.88
+62,Resource / CPU Contention,Arm 2 (Heuristic Automation),57.84,1,4,852.7,16.53,39.17
+63,Resource / CPU Contention,Arm 2 (Heuristic Automation),58.23,0,2,1289.3,18.0,43.29
+64,Resource / CPU Contention,Arm 2 (Heuristic Automation),69.04,1,1,1491.0,15.57,41.9
+65,Resource / CPU Contention,Arm 2 (Heuristic Automation),43.86,1,3,1205.9,14.77,43.57
+66,Resource / CPU Contention,Arm 2 (Heuristic Automation),87.24,1,2,1434.2,18.1,49.0
+67,Resource / CPU Contention,Arm 2 (Heuristic Automation),95.57,1,4,1053.4,14.63,40.75
+68,Resource / CPU Contention,Arm 2 (Heuristic Automation),55.97,0,4,1328.3,17.75,42.62
+69,Resource / CPU Contention,Arm 2 (Heuristic Automation),59.65,1,1,1067.0,16.46,46.49
+70,Resource / CPU Contention,Arm 2 (Heuristic Automation),94.46,1,4,767.0,11.51,44.53
+71,Resource / CPU Contention,Arm 2 (Heuristic Automation),64.43,1,0,1123.3,15.19,44.81
+72,Resource / CPU Contention,Arm 2 (Heuristic Automation),78.63,1,3,773.9,17.1,40.82
+73,Resource / CPU Contention,Arm 2 (Heuristic Automation),64.98,1,3,2104.3,15.55,43.95
+74,Resource / CPU Contention,Arm 2 (Heuristic Automation),103.11,1,1,943.7,11.05,48.16
+75,Resource / CPU Contention,Arm 2 (Heuristic Automation),76.49,1,3,1265.9,19.17,38.57
+76,Resource / CPU Contention,Arm 2 (Heuristic Automation),77.74,1,2,1039.3,16.76,41.76
+77,Resource / CPU Contention,Arm 2 (Heuristic Automation),78.14,1,4,720.5,17.33,37.85
+78,Resource / CPU Contention,Arm 2 (Heuristic Automation),57.09,1,3,590.2,15.41,46.08
+79,Resource / CPU Contention,Arm 2 (Heuristic Automation),58.57,0,0,1306.0,17.52,48.49
+80,Resource / CPU Contention,Arm 2 (Heuristic Automation),82.71,1,2,1660.4,20.25,43.56
+81,Resource / CPU Contention,Arm 2 (Heuristic Automation),69.09,1,1,836.8,14.86,40.68
+82,Resource / CPU Contention,Arm 2 (Heuristic Automation),47.96,1,0,634.6,19.9,40.78
+83,Resource / CPU Contention,Arm 2 (Heuristic Automation),112.67,1,3,946.2,17.24,43.16
+84,Resource / CPU Contention,Arm 2 (Heuristic Automation),87.69,0,1,787.5,14.57,43.15
+85,Resource / CPU Contention,Arm 2 (Heuristic Automation),67.39,1,1,858.3,21.05,47.39
+86,Resource / CPU Contention,Arm 2 (Heuristic Automation),61.77,0,1,1252.8,17.22,41.86
+87,Resource / CPU Contention,Arm 2 (Heuristic Automation),70.5,1,4,1027.5,17.82,45.72
+88,Resource / CPU Contention,Arm 2 (Heuristic Automation),77.08,1,3,813.3,15.83,43.13
+89,Resource / CPU Contention,Arm 2 (Heuristic Automation),37.74,0,0,1244.6,14.73,41.59
+90,Resource / CPU Contention,Arm 2 (Heuristic Automation),120.48,1,1,1274.2,16.75,43.04
+91,Resource / CPU Contention,Arm 2 (Heuristic Automation),53.45,1,4,942.8,19.72,45.38
+92,Resource / CPU Contention,Arm 2 (Heuristic Automation),66.65,1,2,1087.2,15.75,47.4
+93,Resource / CPU Contention,Arm 2 (Heuristic Automation),67.34,0,1,1219.4,16.34,43.32
+94,Resource / CPU Contention,Arm 2 (Heuristic Automation),116.64,1,2,1185.4,19.46,39.99
+95,Resource / CPU Contention,Arm 2 (Heuristic Automation),65.06,0,1,1055.9,15.77,47.7
+96,Resource / CPU Contention,Arm 2 (Heuristic Automation),104.04,1,3,1603.2,17.47,41.06
+97,Resource / CPU Contention,Arm 2 (Heuristic Automation),74.73,0,3,1242.4,18.24,45.11
+98,Resource / CPU Contention,Arm 2 (Heuristic Automation),50.94,1,6,911.2,15.99,44.11
+99,Resource / CPU Contention,Arm 2 (Heuristic Automation),69.25,0,1,912.9,17.05,43.65
+100,Resource / CPU Contention,Arm 2 (Heuristic Automation),64.51,1,3,882.3,17.79,42.5
+1,Resource / CPU Contention,Arm 3 (Proposed Autonomous System),15.11,1,0,181.7,79.04,209.7
+2,Resource / CPU Contention,Arm 3 (Proposed Autonomous System),7.4,1,1,209.3,91.05,220.79
+3,Resource / CPU Contention,Arm 3 (Proposed Autonomous System),16.5,1,0,176.3,90.25,218.89
+4,Resource / CPU Contention,Arm 3 (Proposed Autonomous System),11.64,1,0,168.2,87.5,210.85
+5,Resource / CPU Contention,Arm 3 (Proposed Autonomous System),14.58,1,0,207.2,88.73,232.74
+6,Resource / CPU Contention,Arm 3 (Proposed Autonomous System),14.45,1,1,217.7,90.33,202.71
+7,Resource / CPU Contention,Arm 3 (Proposed Autonomous System),16.89,1,0,307.6,91.6,217.1
+8,Resource / CPU Contention,Arm 3 (Proposed Autonomous System),14.06,1,0,193.1,91.35,210.65
+9,Resource / CPU Contention,Arm 3 (Proposed Autonomous System),11.81,1,0,208.6,88.24,235.27
+10,Resource / CPU Contention,Arm 3 (Proposed Autonomous System),10.35,1,0,166.1,91.73,223.91
+11,Resource / CPU Contention,Arm 3 (Proposed Autonomous System),12.82,1,0,236.6,87.85,212.43
+12,Resource / CPU Contention,Arm 3 (Proposed Autonomous System),9.75,1,0,227.2,93.22,215.83
+13,Resource / CPU Contention,Arm 3 (Proposed Autonomous System),12.22,1,0,279.4,85.86,235.52
+14,Resource / CPU Contention,Arm 3 (Proposed Autonomous System),12.94,1,0,260.1,89.92,209.69
+15,Resource / CPU Contention,Arm 3 (Proposed Autonomous System),12.09,1,0,225.2,80.08,202.17
+16,Resource / CPU Contention,Arm 3 (Proposed Autonomous System),13.7,1,0,192.6,87.35,221.08
+17,Resource / CPU Contention,Arm 3 (Proposed Autonomous System),13.06,1,0,219.0,92.79,221.29
+18,Resource / CPU Contention,Arm 3 (Proposed Autonomous System),12.86,1,0,206.2,83.5,224.53
+19,Resource / CPU Contention,Arm 3 (Proposed Autonomous System),9.01,1,0,252.4,87.64,224.59
+20,Resource / CPU Contention,Arm 3 (Proposed Autonomous System),10.91,1,0,246.4,75.55,234.69
+21,Resource / CPU Contention,Arm 3 (Proposed Autonomous System),15.17,1,0,199.1,81.57,202.59
+22,Resource / CPU Contention,Arm 3 (Proposed Autonomous System),15.59,1,0,159.5,83.08,207.33
+23,Resource / CPU Contention,Arm 3 (Proposed Autonomous System),9.95,1,0,271.3,90.09,224.49
+24,Resource / CPU Contention,Arm 3 (Proposed Autonomous System),11.84,1,0,235.2,91.43,208.23
+25,Resource / CPU Contention,Arm 3 (Proposed Autonomous System),16.32,1,0,198.2,89.17,205.0
+26,Resource / CPU Contention,Arm 3 (Proposed Autonomous System),12.04,1,0,233.5,87.28,235.57
+27,Resource / CPU Contention,Arm 3 (Proposed Autonomous System),13.34,1,0,213.6,87.3,203.5
+28,Resource / CPU Contention,Arm 3 (Proposed Autonomous System),17.38,1,0,270.6,93.65,215.17
+29,Resource / CPU Contention,Arm 3 (Proposed Autonomous System),12.79,1,0,146.0,90.73,217.85
+30,Resource / CPU Contention,Arm 3 (Proposed Autonomous System),12.48,1,0,195.3,87.56,230.44
+31,Resource / CPU Contention,Arm 3 (Proposed Autonomous System),13.24,1,0,285.4,97.0,201.21
+32,Resource / CPU Contention,Arm 3 (Proposed Autonomous System),18.64,1,0,234.4,100.81,222.22
+33,Resource / CPU Contention,Arm 3 (Proposed Autonomous System),14.67,1,0,294.9,82.27,210.21
+34,Resource / CPU Contention,Arm 3 (Proposed Autonomous System),13.64,1,0,167.0,92.53,224.17
+35,Resource / CPU Contention,Arm 3 (Proposed Autonomous System),12.44,1,0,258.2,107.42,210.06
+36,Resource / CPU Contention,Arm 3 (Proposed Autonomous System),14.9,1,0,255.3,91.13,232.87
+37,Resource / CPU Contention,Arm 3 (Proposed Autonomous System),15.21,1,0,153.0,90.17,210.11
+38,Resource / CPU Contention,Arm 3 (Proposed Autonomous System),11.33,1,1,199.1,89.18,195.75
+39,Resource / CPU Contention,Arm 3 (Proposed Autonomous System),15.28,0,0,206.4,92.34,211.14
+40,Resource / CPU Contention,Arm 3 (Proposed Autonomous System),13.25,1,0,154.8,93.88,216.0
+41,Resource / CPU Contention,Arm 3 (Proposed Autonomous System),13.66,1,0,199.9,82.28,228.36
+42,Resource / CPU Contention,Arm 3 (Proposed Autonomous System),11.7,0,0,248.6,89.35,206.82
+43,Resource / CPU Contention,Arm 3 (Proposed Autonomous System),12.71,1,0,195.5,76.34,207.0
+44,Resource / CPU Contention,Arm 3 (Proposed Autonomous System),11.41,1,0,220.5,88.29,227.24
+45,Resource / CPU Contention,Arm 3 (Proposed Autonomous System),11.32,1,0,220.8,84.26,205.75
+46,Resource / CPU Contention,Arm 3 (Proposed Autonomous System),14.5,1,0,210.1,91.47,216.75
+47,Resource / CPU Contention,Arm 3 (Proposed Autonomous System),12.8,1,0,184.2,79.89,216.94
+48,Resource / CPU Contention,Arm 3 (Proposed Autonomous System),10.9,1,0,238.7,86.53,220.4
+49,Resource / CPU Contention,Arm 3 (Proposed Autonomous System),19.69,1,0,155.8,95.11,211.5
+50,Resource / CPU Contention,Arm 3 (Proposed Autonomous System),11.23,1,0,211.0,85.58,209.87
+51,Resource / CPU Contention,Arm 3 (Proposed Autonomous System),16.37,1,0,274.0,78.45,221.48
+52,Resource / CPU Contention,Arm 3 (Proposed Autonomous System),10.58,1,0,193.4,90.99,210.16
+53,Resource / CPU Contention,Arm 3 (Proposed Autonomous System),14.7,1,0,183.4,86.1,205.89
+54,Resource / CPU Contention,Arm 3 (Proposed Autonomous System),13.03,1,0,241.7,88.42,229.7
+55,Resource / CPU Contention,Arm 3 (Proposed Autonomous System),12.22,1,0,217.3,85.27,222.89
+56,Resource / CPU Contention,Arm 3 (Proposed Autonomous System),14.06,1,0,242.7,100.95,234.66
+57,Resource / CPU Contention,Arm 3 (Proposed Autonomous System),13.74,1,0,212.2,80.46,225.61
+58,Resource / CPU Contention,Arm 3 (Proposed Autonomous System),11.84,1,0,133.8,105.93,206.73
+59,Resource / CPU Contention,Arm 3 (Proposed Autonomous System),11.75,1,0,263.5,87.23,219.29
+60,Resource / CPU Contention,Arm 3 (Proposed Autonomous System),10.41,1,0,312.1,90.56,209.06
+61,Resource / CPU Contention,Arm 3 (Proposed Autonomous System),14.32,1,0,268.8,86.17,203.21
+62,Resource / CPU Contention,Arm 3 (Proposed Autonomous System),10.99,1,0,107.5,85.92,214.29
+63,Resource / CPU Contention,Arm 3 (Proposed Autonomous System),13.61,1,0,229.5,84.95,227.43
+64,Resource / CPU Contention,Arm 3 (Proposed Autonomous System),15.04,1,0,192.7,92.99,220.93
+65,Resource / CPU Contention,Arm 3 (Proposed Autonomous System),14.09,1,0,171.4,81.32,205.6
+66,Resource / CPU Contention,Arm 3 (Proposed Autonomous System),12.03,1,0,215.6,91.61,213.96
+67,Resource / CPU Contention,Arm 3 (Proposed Autonomous System),15.87,1,0,204.7,76.83,217.09
+68,Resource / CPU Contention,Arm 3 (Proposed Autonomous System),12.69,1,0,232.0,91.09,202.86
+69,Resource / CPU Contention,Arm 3 (Proposed Autonomous System),10.84,1,0,212.9,94.43,224.96
+70,Resource / CPU Contention,Arm 3 (Proposed Autonomous System),12.96,1,0,170.2,82.11,216.3
+71,Resource / CPU Contention,Arm 3 (Proposed Autonomous System),15.03,1,0,188.8,93.44,205.61
+72,Resource / CPU Contention,Arm 3 (Proposed Autonomous System),12.13,1,0,183.1,89.8,205.09
+73,Resource / CPU Contention,Arm 3 (Proposed Autonomous System),15.79,1,0,152.0,98.77,228.53
+74,Resource / CPU Contention,Arm 3 (Proposed Autonomous System),11.93,1,0,162.3,84.54,214.9
+75,Resource / CPU Contention,Arm 3 (Proposed Autonomous System),12.21,1,0,202.3,105.83,229.35
+76,Resource / CPU Contention,Arm 3 (Proposed Autonomous System),11.38,1,0,276.0,75.63,232.86
+77,Resource / CPU Contention,Arm 3 (Proposed Autonomous System),15.28,1,0,190.2,87.59,227.81
+78,Resource / CPU Contention,Arm 3 (Proposed Autonomous System),13.48,1,0,182.4,79.65,213.49
+79,Resource / CPU Contention,Arm 3 (Proposed Autonomous System),11.51,1,1,168.3,100.24,195.42
+80,Resource / CPU Contention,Arm 3 (Proposed Autonomous System),12.71,1,0,211.8,87.98,221.28
+81,Resource / CPU Contention,Arm 3 (Proposed Autonomous System),8.07,1,0,263.5,88.5,237.64
+82,Resource / CPU Contention,Arm 3 (Proposed Autonomous System),15.52,1,0,308.1,92.07,218.07
+83,Resource / CPU Contention,Arm 3 (Proposed Autonomous System),13.21,1,0,222.3,89.47,200.09
+84,Resource / CPU Contention,Arm 3 (Proposed Autonomous System),9.03,1,0,216.3,86.06,212.19
+85,Resource / CPU Contention,Arm 3 (Proposed Autonomous System),10.62,1,0,189.9,82.21,216.71
+86,Resource / CPU Contention,Arm 3 (Proposed Autonomous System),12.66,1,0,196.1,90.48,208.3
+87,Resource / CPU Contention,Arm 3 (Proposed Autonomous System),10.88,1,0,237.4,91.7,194.81
+88,Resource / CPU Contention,Arm 3 (Proposed Autonomous System),15.56,1,0,198.4,93.53,217.5
+89,Resource / CPU Contention,Arm 3 (Proposed Autonomous System),14.6,1,0,204.2,100.59,211.18
+90,Resource / CPU Contention,Arm 3 (Proposed Autonomous System),14.46,1,0,209.6,76.89,234.71
+91,Resource / CPU Contention,Arm 3 (Proposed Autonomous System),8.73,1,0,188.2,89.11,219.33
+92,Resource / CPU Contention,Arm 3 (Proposed Autonomous System),12.44,1,0,207.6,96.41,222.72
+93,Resource / CPU Contention,Arm 3 (Proposed Autonomous System),12.08,1,0,143.5,88.78,217.3
+94,Resource / CPU Contention,Arm 3 (Proposed Autonomous System),11.56,1,0,233.8,75.94,219.26
+95,Resource / CPU Contention,Arm 3 (Proposed Autonomous System),12.67,1,0,329.3,82.01,203.2
+96,Resource / CPU Contention,Arm 3 (Proposed Autonomous System),11.23,1,0,189.6,91.41,208.83
+97,Resource / CPU Contention,Arm 3 (Proposed Autonomous System),14.11,1,0,226.1,91.19,228.42
+98,Resource / CPU Contention,Arm 3 (Proposed Autonomous System),15.49,1,0,247.6,93.4,220.33
+99,Resource / CPU Contention,Arm 3 (Proposed Autonomous System),15.27,1,0,268.6,84.97,214.73
+100,Resource / CPU Contention,Arm 3 (Proposed Autonomous System),13.28,1,0,200.3,91.01,222.87
+1,Service Dependency Disconnection,Arm 1 (Static Orchestration),333.89,0,3,2639.9,1.42,4.46
+2,Service Dependency Disconnection,Arm 1 (Static Orchestration),411.05,0,5,2885.0,1.69,4.19
+3,Service Dependency Disconnection,Arm 1 (Static Orchestration),318.25,0,2,4578.4,1.54,5.05
+4,Service Dependency Disconnection,Arm 1 (Static Orchestration),268.07,0,5,2702.5,1.15,5.36
+5,Service Dependency Disconnection,Arm 1 (Static Orchestration),306.07,1,4,3679.5,1.2,5.08
+6,Service Dependency Disconnection,Arm 1 (Static Orchestration),338.68,0,6,4834.1,1.38,4.69
+7,Service Dependency Disconnection,Arm 1 (Static Orchestration),357.59,0,5,4231.2,1.24,4.53
+8,Service Dependency Disconnection,Arm 1 (Static Orchestration),248.12,0,3,3836.1,1.41,4.23
+9,Service Dependency Disconnection,Arm 1 (Static Orchestration),322.31,0,5,3498.8,0.53,4.67
+10,Service Dependency Disconnection,Arm 1 (Static Orchestration),274.34,0,5,3985.6,1.76,5.67
+11,Service Dependency Disconnection,Arm 1 (Static Orchestration),287.34,0,3,4296.0,1.22,3.84
+12,Service Dependency Disconnection,Arm 1 (Static Orchestration),350.17,0,2,3353.7,0.71,4.18
+13,Service Dependency Disconnection,Arm 1 (Static Orchestration),345.32,0,6,4123.0,0.93,4.44
+14,Service Dependency Disconnection,Arm 1 (Static Orchestration),282.89,0,4,4749.0,0.56,5.3
+15,Service Dependency Disconnection,Arm 1 (Static Orchestration),304.27,0,3,3661.0,0.87,4.68
+16,Service Dependency Disconnection,Arm 1 (Static Orchestration),288.57,0,4,3880.1,1.16,5.29
+17,Service Dependency Disconnection,Arm 1 (Static Orchestration),466.3,0,2,4216.5,1.65,5.33
+18,Service Dependency Disconnection,Arm 1 (Static Orchestration),323.43,0,6,4273.8,1.32,4.97
+19,Service Dependency Disconnection,Arm 1 (Static Orchestration),276.57,0,7,4562.8,1.27,3.65
+20,Service Dependency Disconnection,Arm 1 (Static Orchestration),374.32,0,3,3124.8,0.86,5.83
+21,Service Dependency Disconnection,Arm 1 (Static Orchestration),376.17,0,4,3443.4,0.95,5.63
+22,Service Dependency Disconnection,Arm 1 (Static Orchestration),399.75,0,5,3469.0,0.98,4.55
+23,Service Dependency Disconnection,Arm 1 (Static Orchestration),416.68,0,6,3194.6,0.99,3.39
+24,Service Dependency Disconnection,Arm 1 (Static Orchestration),343.46,0,6,2671.3,1.09,3.25
+25,Service Dependency Disconnection,Arm 1 (Static Orchestration),296.2,0,2,1996.4,1.12,4.7
+26,Service Dependency Disconnection,Arm 1 (Static Orchestration),302.36,0,2,4861.4,1.1,3.94
+27,Service Dependency Disconnection,Arm 1 (Static Orchestration),298.6,0,5,2805.2,1.0,3.13
+28,Service Dependency Disconnection,Arm 1 (Static Orchestration),293.97,0,1,5235.9,1.24,3.24
+29,Service Dependency Disconnection,Arm 1 (Static Orchestration),370.03,0,4,4437.7,1.11,4.12
+30,Service Dependency Disconnection,Arm 1 (Static Orchestration),311.1,0,3,3529.3,0.72,4.66
+31,Service Dependency Disconnection,Arm 1 (Static Orchestration),356.38,0,4,4329.8,1.21,5.62
+32,Service Dependency Disconnection,Arm 1 (Static Orchestration),341.97,0,5,4167.3,1.16,4.89
+33,Service Dependency Disconnection,Arm 1 (Static Orchestration),266.72,0,7,3070.7,0.73,4.19
+34,Service Dependency Disconnection,Arm 1 (Static Orchestration),244.59,0,5,3816.2,1.02,4.8
+35,Service Dependency Disconnection,Arm 1 (Static Orchestration),261.61,0,6,3146.5,1.38,4.73
+36,Service Dependency Disconnection,Arm 1 (Static Orchestration),293.03,0,2,4362.6,0.86,5.09
+37,Service Dependency Disconnection,Arm 1 (Static Orchestration),316.97,0,3,3317.5,0.83,4.47
+38,Service Dependency Disconnection,Arm 1 (Static Orchestration),284.07,0,4,3754.4,1.1,5.33
+39,Service Dependency Disconnection,Arm 1 (Static Orchestration),343.24,0,9,3722.1,1.39,5.16
+40,Service Dependency Disconnection,Arm 1 (Static Orchestration),288.91,0,4,3921.8,1.74,4.57
+41,Service Dependency Disconnection,Arm 1 (Static Orchestration),322.46,0,5,5337.5,1.4,4.4
+42,Service Dependency Disconnection,Arm 1 (Static Orchestration),316.23,0,6,3647.5,1.53,5.24
+43,Service Dependency Disconnection,Arm 1 (Static Orchestration),396.56,0,6,4883.3,1.3,3.93
+44,Service Dependency Disconnection,Arm 1 (Static Orchestration),271.37,1,3,4213.3,0.99,3.29
+45,Service Dependency Disconnection,Arm 1 (Static Orchestration),423.76,0,3,5083.1,1.4,3.29
+46,Service Dependency Disconnection,Arm 1 (Static Orchestration),286.23,0,4,3577.1,1.17,3.86
+47,Service Dependency Disconnection,Arm 1 (Static Orchestration),257.85,0,5,4399.4,1.31,5.03
+48,Service Dependency Disconnection,Arm 1 (Static Orchestration),301.76,0,5,3782.5,0.92,4.16
+49,Service Dependency Disconnection,Arm 1 (Static Orchestration),489.62,1,8,2105.1,1.34,4.66
+50,Service Dependency Disconnection,Arm 1 (Static Orchestration),352.6,0,3,3078.0,1.16,4.1
+51,Service Dependency Disconnection,Arm 1 (Static Orchestration),338.46,0,5,4300.5,1.27,4.11
+52,Service Dependency Disconnection,Arm 1 (Static Orchestration),347.7,1,6,4244.0,1.17,3.68
+53,Service Dependency Disconnection,Arm 1 (Static Orchestration),279.29,0,7,2954.3,1.12,4.43
+54,Service Dependency Disconnection,Arm 1 (Static Orchestration),325.59,0,7,4000.1,1.35,4.36
+55,Service Dependency Disconnection,Arm 1 (Static Orchestration),311.17,0,6,4232.9,1.08,4.83
+56,Service Dependency Disconnection,Arm 1 (Static Orchestration),400.72,0,3,3801.2,0.72,4.73
+57,Service Dependency Disconnection,Arm 1 (Static Orchestration),306.37,0,5,4428.3,0.64,4.34
+58,Service Dependency Disconnection,Arm 1 (Static Orchestration),295.02,0,4,4309.2,1.26,3.3
+59,Service Dependency Disconnection,Arm 1 (Static Orchestration),264.26,0,3,3800.8,1.07,5.36
+60,Service Dependency Disconnection,Arm 1 (Static Orchestration),317.22,0,6,3455.9,0.68,4.43
+61,Service Dependency Disconnection,Arm 1 (Static Orchestration),324.09,0,6,4715.0,1.23,4.56
+62,Service Dependency Disconnection,Arm 1 (Static Orchestration),262.9,0,5,4199.1,1.17,5.78
+63,Service Dependency Disconnection,Arm 1 (Static Orchestration),331.44,1,7,2903.6,1.05,5.23
+64,Service Dependency Disconnection,Arm 1 (Static Orchestration),321.39,0,3,4000.5,1.27,4.86
+65,Service Dependency Disconnection,Arm 1 (Static Orchestration),358.48,0,7,3040.6,1.59,4.5
+66,Service Dependency Disconnection,Arm 1 (Static Orchestration),368.61,1,5,3156.1,1.59,4.49
+67,Service Dependency Disconnection,Arm 1 (Static Orchestration),315.2,0,5,3359.7,1.24,4.69
+68,Service Dependency Disconnection,Arm 1 (Static Orchestration),269.05,0,7,3862.1,1.17,4.83
+69,Service Dependency Disconnection,Arm 1 (Static Orchestration),276.92,0,6,4125.3,1.25,5.87
+70,Service Dependency Disconnection,Arm 1 (Static Orchestration),398.1,0,4,3527.0,1.29,6.48
+71,Service Dependency Disconnection,Arm 1 (Static Orchestration),318.36,0,1,3558.0,1.12,4.73
+72,Service Dependency Disconnection,Arm 1 (Static Orchestration),397.21,1,7,3461.1,1.25,2.78
+73,Service Dependency Disconnection,Arm 1 (Static Orchestration),333.55,0,5,4719.7,0.73,3.74
+74,Service Dependency Disconnection,Arm 1 (Static Orchestration),345.68,0,5,2163.3,1.22,5.95
+75,Service Dependency Disconnection,Arm 1 (Static Orchestration),354.75,0,6,3598.5,1.34,5.07
+76,Service Dependency Disconnection,Arm 1 (Static Orchestration),262.11,0,8,5213.4,1.05,4.84
+77,Service Dependency Disconnection,Arm 1 (Static Orchestration),324.72,0,4,4244.8,1.17,4.37
+78,Service Dependency Disconnection,Arm 1 (Static Orchestration),261.6,0,6,4931.4,0.87,3.55
+79,Service Dependency Disconnection,Arm 1 (Static Orchestration),298.9,0,4,2548.2,0.82,5.84
+80,Service Dependency Disconnection,Arm 1 (Static Orchestration),340.23,0,1,2985.6,1.26,3.84
+81,Service Dependency Disconnection,Arm 1 (Static Orchestration),269.47,0,3,4242.1,0.98,5.08
+82,Service Dependency Disconnection,Arm 1 (Static Orchestration),336.4,0,4,5219.3,0.67,3.46
+83,Service Dependency Disconnection,Arm 1 (Static Orchestration),252.2,0,5,3046.5,0.87,4.33
+84,Service Dependency Disconnection,Arm 1 (Static Orchestration),365.06,0,3,3542.0,0.91,5.29
+85,Service Dependency Disconnection,Arm 1 (Static Orchestration),283.43,0,5,4147.6,1.43,4.3
+86,Service Dependency Disconnection,Arm 1 (Static Orchestration),269.4,0,1,2862.6,1.25,4.21
+87,Service Dependency Disconnection,Arm 1 (Static Orchestration),254.44,1,3,4248.6,0.94,4.51
+88,Service Dependency Disconnection,Arm 1 (Static Orchestration),286.83,0,2,2241.4,1.02,3.43
+89,Service Dependency Disconnection,Arm 1 (Static Orchestration),238.16,1,6,4223.6,1.59,3.28
+90,Service Dependency Disconnection,Arm 1 (Static Orchestration),288.08,0,4,3136.9,1.48,5.07
+91,Service Dependency Disconnection,Arm 1 (Static Orchestration),362.83,1,3,3499.9,0.86,4.16
+92,Service Dependency Disconnection,Arm 1 (Static Orchestration),302.95,0,5,4360.7,1.55,5.07
+93,Service Dependency Disconnection,Arm 1 (Static Orchestration),263.79,1,5,4185.8,1.18,5.39
+94,Service Dependency Disconnection,Arm 1 (Static Orchestration),321.08,0,7,3821.5,1.44,5.46
+95,Service Dependency Disconnection,Arm 1 (Static Orchestration),317.13,0,2,4646.2,1.15,3.2
+96,Service Dependency Disconnection,Arm 1 (Static Orchestration),409.09,1,6,2724.3,1.56,3.94
+97,Service Dependency Disconnection,Arm 1 (Static Orchestration),347.48,0,2,3987.4,0.85,4.93
+98,Service Dependency Disconnection,Arm 1 (Static Orchestration),324.66,0,2,3268.1,1.12,4.94
+99,Service Dependency Disconnection,Arm 1 (Static Orchestration),353.09,0,4,4599.1,1.56,6.3
+100,Service Dependency Disconnection,Arm 1 (Static Orchestration),305.27,1,4,4391.4,0.5,3.77
+1,Service Dependency Disconnection,Arm 2 (Heuristic Automation),186.86,0,2,1138.9,14.58,42.29
+2,Service Dependency Disconnection,Arm 2 (Heuristic Automation),154.37,0,2,1104.6,15.31,44.97
+3,Service Dependency Disconnection,Arm 2 (Heuristic Automation),95.23,0,3,2708.6,13.41,47.62
+4,Service Dependency Disconnection,Arm 2 (Heuristic Automation),123.78,0,1,1632.9,15.36,43.86
+5,Service Dependency Disconnection,Arm 2 (Heuristic Automation),150.36,0,5,2276.5,13.45,43.55
+6,Service Dependency Disconnection,Arm 2 (Heuristic Automation),93.78,0,4,1209.1,16.74,46.26
+7,Service Dependency Disconnection,Arm 2 (Heuristic Automation),85.82,0,3,1063.7,13.82,43.25
+8,Service Dependency Disconnection,Arm 2 (Heuristic Automation),92.51,1,2,1148.5,16.46,48.2
+9,Service Dependency Disconnection,Arm 2 (Heuristic Automation),150.23,1,2,1341.9,18.84,51.29
+10,Service Dependency Disconnection,Arm 2 (Heuristic Automation),125.67,0,2,1525.7,18.04,41.07
+11,Service Dependency Disconnection,Arm 2 (Heuristic Automation),121.66,0,5,1447.7,16.23,39.82
+12,Service Dependency Disconnection,Arm 2 (Heuristic Automation),122.66,0,1,1216.2,14.32,45.5
+13,Service Dependency Disconnection,Arm 2 (Heuristic Automation),100.3,0,3,1547.8,16.73,39.7
+14,Service Dependency Disconnection,Arm 2 (Heuristic Automation),126.53,0,2,1586.2,14.94,39.64
+15,Service Dependency Disconnection,Arm 2 (Heuristic Automation),91.2,1,2,1838.4,16.82,37.03
+16,Service Dependency Disconnection,Arm 2 (Heuristic Automation),187.74,0,9,2279.5,12.8,42.86
+17,Service Dependency Disconnection,Arm 2 (Heuristic Automation),211.91,1,3,1363.9,18.1,44.08
+18,Service Dependency Disconnection,Arm 2 (Heuristic Automation),80.78,0,5,2122.5,16.47,42.39
+19,Service Dependency Disconnection,Arm 2 (Heuristic Automation),126.14,1,0,1538.3,21.04,49.07
+20,Service Dependency Disconnection,Arm 2 (Heuristic Automation),128.13,1,4,984.7,19.14,48.81
+21,Service Dependency Disconnection,Arm 2 (Heuristic Automation),135.39,0,1,2488.2,17.59,50.95
+22,Service Dependency Disconnection,Arm 2 (Heuristic Automation),179.53,0,3,2853.5,16.14,44.36
+23,Service Dependency Disconnection,Arm 2 (Heuristic Automation),126.23,0,3,1796.1,14.87,48.34
+24,Service Dependency Disconnection,Arm 2 (Heuristic Automation),138.22,0,4,1548.7,18.38,45.28
+25,Service Dependency Disconnection,Arm 2 (Heuristic Automation),288.58,0,6,1399.7,15.92,44.93
+26,Service Dependency Disconnection,Arm 2 (Heuristic Automation),137.45,0,3,1326.2,18.85,42.56
+27,Service Dependency Disconnection,Arm 2 (Heuristic Automation),215.7,0,3,2119.6,17.24,36.28
+28,Service Dependency Disconnection,Arm 2 (Heuristic Automation),159.25,1,5,1502.9,17.26,46.43
+29,Service Dependency Disconnection,Arm 2 (Heuristic Automation),123.61,0,0,2413.2,17.65,48.24
+30,Service Dependency Disconnection,Arm 2 (Heuristic Automation),118.75,1,5,1525.0,14.47,38.86
+31,Service Dependency Disconnection,Arm 2 (Heuristic Automation),140.93,0,2,1345.5,14.25,44.17
+32,Service Dependency Disconnection,Arm 2 (Heuristic Automation),107.73,1,1,1276.2,14.18,47.67
+33,Service Dependency Disconnection,Arm 2 (Heuristic Automation),114.74,0,4,1226.3,18.6,42.94
+34,Service Dependency Disconnection,Arm 2 (Heuristic Automation),127.54,0,4,1744.0,14.41,48.38
+35,Service Dependency Disconnection,Arm 2 (Heuristic Automation),151.47,1,5,1051.0,14.68,43.71
+36,Service Dependency Disconnection,Arm 2 (Heuristic Automation),218.82,0,2,1200.9,17.53,42.36
+37,Service Dependency Disconnection,Arm 2 (Heuristic Automation),125.66,1,2,2188.2,15.87,48.58
+38,Service Dependency Disconnection,Arm 2 (Heuristic Automation),157.71,0,5,1156.0,15.6,40.93
+39,Service Dependency Disconnection,Arm 2 (Heuristic Automation),95.52,0,3,1922.8,15.42,41.66
+40,Service Dependency Disconnection,Arm 2 (Heuristic Automation),182.08,0,4,847.6,11.52,41.07
+41,Service Dependency Disconnection,Arm 2 (Heuristic Automation),93.39,1,1,2266.6,14.37,40.2
+42,Service Dependency Disconnection,Arm 2 (Heuristic Automation),170.99,0,1,1058.2,18.88,44.74
+43,Service Dependency Disconnection,Arm 2 (Heuristic Automation),138.46,1,2,1181.6,15.27,42.4
+44,Service Dependency Disconnection,Arm 2 (Heuristic Automation),137.15,1,4,1827.1,12.41,45.91
+45,Service Dependency Disconnection,Arm 2 (Heuristic Automation),131.36,0,3,1629.0,14.28,38.13
+46,Service Dependency Disconnection,Arm 2 (Heuristic Automation),103.31,0,4,1940.3,17.16,40.27
+47,Service Dependency Disconnection,Arm 2 (Heuristic Automation),104.63,1,3,1055.8,17.11,44.38
+48,Service Dependency Disconnection,Arm 2 (Heuristic Automation),172.56,0,3,1393.7,15.78,49.34
+49,Service Dependency Disconnection,Arm 2 (Heuristic Automation),141.58,0,3,1270.6,14.95,45.52
+50,Service Dependency Disconnection,Arm 2 (Heuristic Automation),131.13,0,0,1106.7,13.46,42.14
+51,Service Dependency Disconnection,Arm 2 (Heuristic Automation),157.03,0,6,1784.4,17.17,38.99
+52,Service Dependency Disconnection,Arm 2 (Heuristic Automation),144.65,0,4,1966.6,18.16,41.93
+53,Service Dependency Disconnection,Arm 2 (Heuristic Automation),116.71,0,3,1374.3,19.11,44.05
+54,Service Dependency Disconnection,Arm 2 (Heuristic Automation),254.84,1,4,2313.1,14.07,35.95
+55,Service Dependency Disconnection,Arm 2 (Heuristic Automation),168.64,0,1,1212.0,19.27,39.95
+56,Service Dependency Disconnection,Arm 2 (Heuristic Automation),145.55,0,3,2297.5,16.28,41.62
+57,Service Dependency Disconnection,Arm 2 (Heuristic Automation),124.8,1,6,1767.7,16.46,43.3
+58,Service Dependency Disconnection,Arm 2 (Heuristic Automation),177.45,1,3,1072.1,18.28,44.01
+59,Service Dependency Disconnection,Arm 2 (Heuristic Automation),116.86,1,2,2630.2,15.26,42.06
+60,Service Dependency Disconnection,Arm 2 (Heuristic Automation),114.52,0,4,1333.5,11.86,45.97
+61,Service Dependency Disconnection,Arm 2 (Heuristic Automation),211.96,1,5,2116.3,17.88,44.64
+62,Service Dependency Disconnection,Arm 2 (Heuristic Automation),142.22,0,5,1573.1,17.13,42.9
+63,Service Dependency Disconnection,Arm 2 (Heuristic Automation),117.54,0,1,1677.1,15.64,46.45
+64,Service Dependency Disconnection,Arm 2 (Heuristic Automation),141.37,0,2,1943.7,17.71,46.17
+65,Service Dependency Disconnection,Arm 2 (Heuristic Automation),173.13,0,5,1913.8,18.14,39.11
+66,Service Dependency Disconnection,Arm 2 (Heuristic Automation),163.87,1,9,1372.2,13.22,44.09
+67,Service Dependency Disconnection,Arm 2 (Heuristic Automation),178.36,0,5,1752.6,16.45,47.32
+68,Service Dependency Disconnection,Arm 2 (Heuristic Automation),104.6,1,5,1716.2,11.62,47.9
+69,Service Dependency Disconnection,Arm 2 (Heuristic Automation),177.29,1,3,1603.3,16.14,45.5
+70,Service Dependency Disconnection,Arm 2 (Heuristic Automation),135.24,0,4,1426.6,15.62,43.38
+71,Service Dependency Disconnection,Arm 2 (Heuristic Automation),144.23,0,3,1602.4,17.43,45.67
+72,Service Dependency Disconnection,Arm 2 (Heuristic Automation),188.72,0,2,2620.0,14.15,47.03
+73,Service Dependency Disconnection,Arm 2 (Heuristic Automation),167.11,0,2,1390.5,15.51,44.61
+74,Service Dependency Disconnection,Arm 2 (Heuristic Automation),153.58,0,7,2117.2,9.65,45.0
+75,Service Dependency Disconnection,Arm 2 (Heuristic Automation),87.69,1,4,1269.7,17.57,43.33
+76,Service Dependency Disconnection,Arm 2 (Heuristic Automation),139.64,0,3,1180.0,16.21,39.52
+77,Service Dependency Disconnection,Arm 2 (Heuristic Automation),116.94,0,1,3779.7,16.58,43.59
+78,Service Dependency Disconnection,Arm 2 (Heuristic Automation),167.44,1,2,1756.7,13.26,41.83
+79,Service Dependency Disconnection,Arm 2 (Heuristic Automation),179.08,0,1,1770.3,17.24,41.84
+80,Service Dependency Disconnection,Arm 2 (Heuristic Automation),131.3,1,2,1784.1,19.87,49.22
+81,Service Dependency Disconnection,Arm 2 (Heuristic Automation),120.29,0,4,2239.6,16.01,47.53
+82,Service Dependency Disconnection,Arm 2 (Heuristic Automation),205.1,0,3,1692.9,17.77,38.27
+83,Service Dependency Disconnection,Arm 2 (Heuristic Automation),122.15,0,6,1898.0,14.57,40.4
+84,Service Dependency Disconnection,Arm 2 (Heuristic Automation),105.99,0,6,1122.8,16.24,42.93
+85,Service Dependency Disconnection,Arm 2 (Heuristic Automation),115.6,0,6,1989.2,13.18,41.96
+86,Service Dependency Disconnection,Arm 2 (Heuristic Automation),123.57,1,1,1413.3,18.06,45.31
+87,Service Dependency Disconnection,Arm 2 (Heuristic Automation),114.81,0,4,1822.7,16.74,39.85
+88,Service Dependency Disconnection,Arm 2 (Heuristic Automation),172.93,1,2,934.3,13.84,47.55
+89,Service Dependency Disconnection,Arm 2 (Heuristic Automation),83.3,0,5,1801.6,14.72,44.05
+90,Service Dependency Disconnection,Arm 2 (Heuristic Automation),114.23,0,3,806.1,16.53,43.01
+91,Service Dependency Disconnection,Arm 2 (Heuristic Automation),139.57,0,3,1397.9,18.34,44.15
+92,Service Dependency Disconnection,Arm 2 (Heuristic Automation),148.48,1,2,936.8,19.51,42.74
+93,Service Dependency Disconnection,Arm 2 (Heuristic Automation),211.88,0,6,1803.1,16.12,37.09
+94,Service Dependency Disconnection,Arm 2 (Heuristic Automation),204.56,0,2,1539.8,13.53,44.24
+95,Service Dependency Disconnection,Arm 2 (Heuristic Automation),96.14,1,1,1217.0,16.9,43.08
+96,Service Dependency Disconnection,Arm 2 (Heuristic Automation),89.31,0,3,2256.6,20.15,40.86
+97,Service Dependency Disconnection,Arm 2 (Heuristic Automation),142.02,1,2,1174.9,12.99,48.04
+98,Service Dependency Disconnection,Arm 2 (Heuristic Automation),120.11,0,2,646.3,14.4,46.54
+99,Service Dependency Disconnection,Arm 2 (Heuristic Automation),106.05,1,3,1743.8,17.68,52.74
+100,Service Dependency Disconnection,Arm 2 (Heuristic Automation),141.72,1,2,920.9,16.72,47.12
+1,Service Dependency Disconnection,Arm 3 (Proposed Autonomous System),15.3,1,0,176.7,85.4,218.79
+2,Service Dependency Disconnection,Arm 3 (Proposed Autonomous System),14.55,1,0,239.7,102.32,242.66
+3,Service Dependency Disconnection,Arm 3 (Proposed Autonomous System),15.74,0,1,362.4,91.4,229.01
+4,Service Dependency Disconnection,Arm 3 (Proposed Autonomous System),15.23,1,0,263.3,84.66,229.1
+5,Service Dependency Disconnection,Arm 3 (Proposed Autonomous System),17.65,1,0,201.4,99.09,222.41
+6,Service Dependency Disconnection,Arm 3 (Proposed Autonomous System),12.91,1,0,243.0,101.55,219.93
+7,Service Dependency Disconnection,Arm 3 (Proposed Autonomous System),19.55,1,0,194.9,89.31,196.36
+8,Service Dependency Disconnection,Arm 3 (Proposed Autonomous System),17.59,1,0,211.1,86.58,212.15
+9,Service Dependency Disconnection,Arm 3 (Proposed Autonomous System),19.13,1,0,294.6,88.5,213.98
+10,Service Dependency Disconnection,Arm 3 (Proposed Autonomous System),13.91,1,0,208.9,93.65,201.15
+11,Service Dependency Disconnection,Arm 3 (Proposed Autonomous System),18.12,1,0,345.4,96.91,207.75
+12,Service Dependency Disconnection,Arm 3 (Proposed Autonomous System),22.13,1,0,266.2,92.81,200.18
+13,Service Dependency Disconnection,Arm 3 (Proposed Autonomous System),14.68,1,0,275.6,90.09,218.05
+14,Service Dependency Disconnection,Arm 3 (Proposed Autonomous System),14.6,1,0,254.4,98.19,225.93
+15,Service Dependency Disconnection,Arm 3 (Proposed Autonomous System),19.79,1,0,320.5,87.69,228.58
+16,Service Dependency Disconnection,Arm 3 (Proposed Autonomous System),14.38,1,0,321.3,95.48,222.22
+17,Service Dependency Disconnection,Arm 3 (Proposed Autonomous System),16.54,1,0,291.1,87.83,209.54
+18,Service Dependency Disconnection,Arm 3 (Proposed Autonomous System),22.88,1,0,306.2,92.0,200.63
+19,Service Dependency Disconnection,Arm 3 (Proposed Autonomous System),14.64,0,0,258.1,88.84,202.24
+20,Service Dependency Disconnection,Arm 3 (Proposed Autonomous System),23.18,1,0,304.7,89.18,206.73
+21,Service Dependency Disconnection,Arm 3 (Proposed Autonomous System),16.22,1,0,251.1,87.31,210.22
+22,Service Dependency Disconnection,Arm 3 (Proposed Autonomous System),13.97,1,0,270.6,97.3,216.93
+23,Service Dependency Disconnection,Arm 3 (Proposed Autonomous System),19.39,1,0,254.6,85.25,209.07
+24,Service Dependency Disconnection,Arm 3 (Proposed Autonomous System),17.65,1,0,244.5,85.21,221.52
+25,Service Dependency Disconnection,Arm 3 (Proposed Autonomous System),17.33,1,0,232.4,101.8,216.26
+26,Service Dependency Disconnection,Arm 3 (Proposed Autonomous System),14.94,1,0,299.7,95.17,218.5
+27,Service Dependency Disconnection,Arm 3 (Proposed Autonomous System),17.62,1,0,360.8,75.67,228.89
+28,Service Dependency Disconnection,Arm 3 (Proposed Autonomous System),11.67,0,0,349.9,86.22,207.54
+29,Service Dependency Disconnection,Arm 3 (Proposed Autonomous System),18.02,1,0,205.1,78.99,222.25
+30,Service Dependency Disconnection,Arm 3 (Proposed Autonomous System),22.12,1,0,359.1,83.99,218.27
+31,Service Dependency Disconnection,Arm 3 (Proposed Autonomous System),12.36,1,0,252.1,71.3,215.33
+32,Service Dependency Disconnection,Arm 3 (Proposed Autonomous System),16.0,1,0,308.6,88.71,226.54
+33,Service Dependency Disconnection,Arm 3 (Proposed Autonomous System),14.64,1,0,221.5,82.88,226.49
+34,Service Dependency Disconnection,Arm 3 (Proposed Autonomous System),12.97,0,1,279.0,89.85,209.69
+35,Service Dependency Disconnection,Arm 3 (Proposed Autonomous System),11.7,1,0,289.8,80.07,216.72
+36,Service Dependency Disconnection,Arm 3 (Proposed Autonomous System),13.81,1,0,195.1,89.98,220.99
+37,Service Dependency Disconnection,Arm 3 (Proposed Autonomous System),16.51,1,0,309.1,87.09,215.89
+38,Service Dependency Disconnection,Arm 3 (Proposed Autonomous System),21.51,1,0,363.6,98.21,223.78
+39,Service Dependency Disconnection,Arm 3 (Proposed Autonomous System),12.94,1,0,260.2,97.69,220.99
+40,Service Dependency Disconnection,Arm 3 (Proposed Autonomous System),18.28,1,0,364.8,94.06,235.26
+41,Service Dependency Disconnection,Arm 3 (Proposed Autonomous System),18.02,1,0,259.4,87.61,204.32
+42,Service Dependency Disconnection,Arm 3 (Proposed Autonomous System),23.75,1,0,326.0,101.02,217.27
+43,Service Dependency Disconnection,Arm 3 (Proposed Autonomous System),19.27,1,0,166.0,80.49,210.04
+44,Service Dependency Disconnection,Arm 3 (Proposed Autonomous System),19.48,1,0,460.4,81.36,223.96
+45,Service Dependency Disconnection,Arm 3 (Proposed Autonomous System),19.74,1,1,375.8,89.01,203.52
+46,Service Dependency Disconnection,Arm 3 (Proposed Autonomous System),14.5,1,0,254.0,102.57,221.59
+47,Service Dependency Disconnection,Arm 3 (Proposed Autonomous System),15.51,1,0,175.2,88.33,212.6
+48,Service Dependency Disconnection,Arm 3 (Proposed Autonomous System),21.37,1,0,288.1,88.44,211.65
+49,Service Dependency Disconnection,Arm 3 (Proposed Autonomous System),11.71,1,0,196.8,81.14,205.09
+50,Service Dependency Disconnection,Arm 3 (Proposed Autonomous System),15.19,1,0,298.2,94.99,214.12
+51,Service Dependency Disconnection,Arm 3 (Proposed Autonomous System),13.43,1,0,296.1,95.03,228.38
+52,Service Dependency Disconnection,Arm 3 (Proposed Autonomous System),18.07,1,0,219.8,94.08,218.17
+53,Service Dependency Disconnection,Arm 3 (Proposed Autonomous System),15.96,0,0,346.1,85.85,224.17
+54,Service Dependency Disconnection,Arm 3 (Proposed Autonomous System),19.47,1,0,322.9,85.4,233.71
+55,Service Dependency Disconnection,Arm 3 (Proposed Autonomous System),16.93,1,0,335.2,82.0,220.83
+56,Service Dependency Disconnection,Arm 3 (Proposed Autonomous System),12.89,1,0,271.0,89.99,213.26
+57,Service Dependency Disconnection,Arm 3 (Proposed Autonomous System),13.0,1,1,198.1,83.23,222.7
+58,Service Dependency Disconnection,Arm 3 (Proposed Autonomous System),17.27,1,0,335.3,82.67,213.39
+59,Service Dependency Disconnection,Arm 3 (Proposed Autonomous System),14.93,1,0,254.8,87.04,213.76
+60,Service Dependency Disconnection,Arm 3 (Proposed Autonomous System),15.62,1,0,199.2,86.66,204.42
+61,Service Dependency Disconnection,Arm 3 (Proposed Autonomous System),20.66,0,0,364.1,86.38,226.92
+62,Service Dependency Disconnection,Arm 3 (Proposed Autonomous System),19.97,1,0,429.2,92.21,214.85
+63,Service Dependency Disconnection,Arm 3 (Proposed Autonomous System),24.33,1,0,268.0,89.96,220.08
+64,Service Dependency Disconnection,Arm 3 (Proposed Autonomous System),16.28,1,0,434.9,87.83,208.87
+65,Service Dependency Disconnection,Arm 3 (Proposed Autonomous System),15.31,1,0,275.9,90.56,222.41
+66,Service Dependency Disconnection,Arm 3 (Proposed Autonomous System),18.72,1,0,248.7,83.75,211.39
+67,Service Dependency Disconnection,Arm 3 (Proposed Autonomous System),15.54,1,0,235.4,90.11,217.1
+68,Service Dependency Disconnection,Arm 3 (Proposed Autonomous System),15.64,1,0,387.7,90.37,226.48
+69,Service Dependency Disconnection,Arm 3 (Proposed Autonomous System),16.64,1,0,227.8,80.78,225.67
+70,Service Dependency Disconnection,Arm 3 (Proposed Autonomous System),23.67,1,0,317.9,95.28,218.2
+71,Service Dependency Disconnection,Arm 3 (Proposed Autonomous System),19.76,0,0,239.1,84.39,202.13
+72,Service Dependency Disconnection,Arm 3 (Proposed Autonomous System),20.16,1,0,244.4,90.02,245.93
+73,Service Dependency Disconnection,Arm 3 (Proposed Autonomous System),23.46,1,0,339.2,96.25,234.46
+74,Service Dependency Disconnection,Arm 3 (Proposed Autonomous System),20.52,1,0,248.7,94.87,225.05
+75,Service Dependency Disconnection,Arm 3 (Proposed Autonomous System),13.94,1,0,247.4,89.7,211.47
+76,Service Dependency Disconnection,Arm 3 (Proposed Autonomous System),20.46,1,0,347.0,87.4,217.35
+77,Service Dependency Disconnection,Arm 3 (Proposed Autonomous System),20.96,1,0,384.3,95.0,213.4
+78,Service Dependency Disconnection,Arm 3 (Proposed Autonomous System),19.57,1,0,311.6,93.41,230.03
+79,Service Dependency Disconnection,Arm 3 (Proposed Autonomous System),16.66,1,0,234.1,85.91,220.82
+80,Service Dependency Disconnection,Arm 3 (Proposed Autonomous System),19.18,1,0,241.7,84.89,211.19
+81,Service Dependency Disconnection,Arm 3 (Proposed Autonomous System),17.22,1,0,275.2,77.48,214.07
+82,Service Dependency Disconnection,Arm 3 (Proposed Autonomous System),14.36,0,0,290.2,90.39,228.71
+83,Service Dependency Disconnection,Arm 3 (Proposed Autonomous System),15.05,1,0,217.6,89.02,233.12
+84,Service Dependency Disconnection,Arm 3 (Proposed Autonomous System),19.76,1,0,317.1,96.09,232.46
+85,Service Dependency Disconnection,Arm 3 (Proposed Autonomous System),14.55,1,0,275.6,91.58,225.36
+86,Service Dependency Disconnection,Arm 3 (Proposed Autonomous System),14.82,1,0,185.4,97.24,216.08
+87,Service Dependency Disconnection,Arm 3 (Proposed Autonomous System),19.95,1,2,220.4,85.46,188.58
+88,Service Dependency Disconnection,Arm 3 (Proposed Autonomous System),17.73,1,0,242.0,96.1,221.13
+89,Service Dependency Disconnection,Arm 3 (Proposed Autonomous System),19.29,1,0,266.1,86.43,218.38
+90,Service Dependency Disconnection,Arm 3 (Proposed Autonomous System),13.69,1,0,409.8,94.01,219.69
+91,Service Dependency Disconnection,Arm 3 (Proposed Autonomous System),19.19,1,0,285.0,81.04,218.9
+92,Service Dependency Disconnection,Arm 3 (Proposed Autonomous System),15.25,1,1,224.8,90.86,206.2
+93,Service Dependency Disconnection,Arm 3 (Proposed Autonomous System),14.25,1,0,283.9,77.99,223.53
+94,Service Dependency Disconnection,Arm 3 (Proposed Autonomous System),15.71,1,0,250.3,87.95,224.22
+95,Service Dependency Disconnection,Arm 3 (Proposed Autonomous System),22.39,1,0,290.5,92.05,224.68
+96,Service Dependency Disconnection,Arm 3 (Proposed Autonomous System),16.13,1,0,307.3,86.48,227.11
+97,Service Dependency Disconnection,Arm 3 (Proposed Autonomous System),26.27,1,0,352.8,83.41,223.96
+98,Service Dependency Disconnection,Arm 3 (Proposed Autonomous System),11.68,1,0,269.0,94.41,214.63
+99,Service Dependency Disconnection,Arm 3 (Proposed Autonomous System),12.89,1,0,387.8,88.9,217.75
+100,Service Dependency Disconnection,Arm 3 (Proposed Autonomous System),22.23,1,0,330.2,86.66,219.24
