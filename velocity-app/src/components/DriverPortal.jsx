@@ -114,25 +114,28 @@ export const DriverPortal = ({ driverUser, faultActive, activeFaults = [], onHea
     setDutyError('');
     const targetStatus = !isOnline;
 
-    // Check if Crash GPS fault is actively running on driver-service
-    let isCrashActive = faultActive;
-    if (activeChaosInfo && (activeChaosInfo.fault_type === 'SERVICE_CRASH' || activeChaosInfo.fault_type === 'NETWORK_PARTITION')) {
+    // Check if Container CrashLoopBackOff is actively running on driver-service
+    let isCrashActive = false;
+    let crashRemaining = 7;
+    if (activeChaosInfo && (activeChaosInfo.fault_type === 'SERVICE_CRASH' || activeChaosInfo.service === 'driver-service')) {
       isCrashActive = true;
+      crashRemaining = activeChaosInfo.remaining;
     } else {
       const activeChaos = localStorage.getItem('rydex_active_chaos');
       if (activeChaos) {
         try {
           const parsed = JSON.parse(activeChaos);
-          if (parsed.expires_at > Date.now() && (parsed.fault_type === 'SERVICE_CRASH' || parsed.fault_type === 'NETWORK_PARTITION')) {
+          const rem = (parsed.expires_at - Date.now()) / 1000;
+          if (rem > 0 && (parsed.fault_type === 'SERVICE_CRASH' || parsed.service === 'driver-service')) {
             isCrashActive = true;
+            crashRemaining = Math.max(0.1, Math.round(rem * 10) / 10);
           }
         } catch (err) {}
       }
     }
 
     if (isCrashActive) {
-      const remaining = activeChaosInfo?.remaining || 6;
-      setDutyError(`503 Service Unavailable: Pod for 'driver-service' in CrashLoopBackOff (SIGSEGV Exit Code 137). Autonomous SRE restarting container (${remaining}s remaining)...`);
+      setDutyError(`503 Service Unavailable: Pod for 'driver-service' in CrashLoopBackOff (SIGSEGV Exit Code 137). Autonomous SRE restarting container (${crashRemaining}s remaining)...`);
       setDutyLoading(false);
       setIsOnline(false);
       return;
@@ -431,7 +434,7 @@ export const DriverPortal = ({ driverUser, faultActive, activeFaults = [], onHea
       const isMem = currentChaos.fault_type === 'MEMORY_LEAK';
       const errMsg = isMem
         ? `500 Internal Server Error: Pod for 'trip-service' OOMKilled (Exit Code 137). Unbounded heap memory leak. Autonomous SRE Canary Rollback in progress (${currentChaos.remaining}s remaining)...`
-        : `500 Internal Server Error: Database Lock Contention on 'trips' table. Connection pool exhausted (max 100 reached). Payout settlement blocked. Autonomous SRE recycling pool (${currentChaos.remaining}s remaining)...`;
+        : `500 Database Connection Pool Exhausted (100 max reached): PostgreSQL relational lock contention on auth-service / DB (:8001). Driver IMPS cashout locked. Autonomous SRE recycling pool (${currentChaos.remaining}s remaining)...`;
       
       setCashoutError(errMsg);
       setDutyError(errMsg);

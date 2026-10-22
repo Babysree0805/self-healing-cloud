@@ -44,7 +44,7 @@ export const FAULT_SPECS = {
     badgeBg: 'bg-rose-50 text-rose-800 border-rose-200',
   },
   NETWORK_PARTITION: {
-    service: 'driver-service',
+    service: 'location-service',
     label: 'Net Partition',
     duration: 8.2,
     complexity: 'MED-COMPLEX',

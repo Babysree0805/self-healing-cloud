@@ -71,6 +71,36 @@ export const RealTimeMap = ({
 
   const [mapStyle, setMapStyle] = useState('VOYAGER'); // Default clean light cartography
   const [gpsLocked, setGpsLocked] = useState(true);
+  const [activeChaosInfo, setActiveChaosInfo] = useState(null);
+
+  // Sync active chaos from shared localStorage across tabs
+  useEffect(() => {
+    const syncChaos = () => {
+      try {
+        const stored = localStorage.getItem('rydex_active_chaos');
+        if (stored) {
+          const parsed = JSON.parse(stored);
+          const rem = (parsed.expires_at - Date.now()) / 1000;
+          if (rem > 0) {
+            setActiveChaosInfo({
+              ...parsed,
+              remaining: Math.max(0.1, Math.round(rem * 10) / 10)
+            });
+            return;
+          }
+        }
+      } catch (e) {}
+      setActiveChaosInfo(null);
+    };
+
+    syncChaos();
+    const interval = setInterval(syncChaos, 150);
+    window.addEventListener('storage', syncChaos);
+    return () => {
+      clearInterval(interval);
+      window.removeEventListener('storage', syncChaos);
+    };
+  }, []);
 
   // Active captain live coordinates (Ramesh Gowda near MG Road)
   const [captainCoords, setCaptainCoords] = useState([12.9716, 77.5946]);
@@ -306,9 +336,12 @@ export const RealTimeMap = ({
     }
   }, [pickupLocation, dropoffLocation, activeRide, activeTrip, roamingDrivers, captainCoords, gpsLocked]);
 
-  const mapSpecificFault = Array.isArray(activeFaults)
-    ? activeFaults.find((f) => f.failure_type === 'SERVICE_CRASH' || f.failure_type === 'NETWORK_PARTITION')
-    : null;
+  const activeMapFault = (activeChaosInfo && (activeChaosInfo.fault_type === 'SERVICE_CRASH' || activeChaosInfo.fault_type === 'NETWORK_PARTITION'))
+    ? activeChaosInfo
+    : (Array.isArray(activeFaults) ? activeFaults.find((f) => f.failure_type === 'SERVICE_CRASH' || f.failure_type === 'NETWORK_PARTITION') : null);
+
+  const isServiceCrash = activeMapFault && (activeMapFault.fault_type === 'SERVICE_CRASH' || activeMapFault.failure_type === 'SERVICE_CRASH');
+  const isNetPartition = activeMapFault && (activeMapFault.fault_type === 'NETWORK_PARTITION' || activeMapFault.failure_type === 'NETWORK_PARTITION');
 
   return (
     <div className={`relative w-full h-full min-h-[500px] bg-slate-100 overflow-hidden select-none ${mapStyle === 'DARK' ? 'rydex-dark-map' : 'rydex-light-map'}`}>
@@ -333,7 +366,7 @@ export const RealTimeMap = ({
       {/* Top Floating Telemetry & Map Controls */}
       <div className="absolute top-4 left-4 z-10 flex flex-wrap items-center gap-2">
         <div className="bg-white/95 px-3 py-1.5 rounded-lg border border-slate-200 flex items-center gap-2 text-xs font-mono shadow-xs backdrop-blur-xs">
-          <span className={`w-2 h-2 rounded-full ${mapSpecificFault ? 'bg-rose-500 animate-ping' : 'bg-emerald-500'}`} />
+          <span className={`w-2 h-2 rounded-full ${isServiceCrash ? 'bg-rose-500 animate-ping' : (isNetPartition ? 'bg-amber-500 animate-pulse' : 'bg-emerald-500')}`} />
           <span className="text-slate-800 font-semibold">Bengaluru Mobility Grid</span>
           <span className="text-slate-300">&bull;</span>
           <span className="text-emerald-700 font-medium">{roamingDrivers.length} Captains Active</span>
@@ -345,11 +378,13 @@ export const RealTimeMap = ({
           )}
         </div>
 
-        {mapSpecificFault && (
+        {activeMapFault && (
           <div className="px-2.5 py-1.5 rounded-lg border border-rose-300 bg-rose-50 items-center gap-1.5 text-[11px] font-mono text-rose-800 flex shadow-xs">
             <AlertTriangle className="w-3.5 h-3.5 text-rose-600 shrink-0" />
             <span>
-              {mapSpecificFault.failure_type === 'SERVICE_CRASH' ? 'GPS Socket CrashLoop (7s heal)' : 'Dispatch 45% Packet Drop (8.2s heal)'}
+              {isServiceCrash
+                ? `503 CrashLoopBackOff: driver-service:8003 (${activeMapFault.remaining || 7}s heal)`
+                : `504 Gateway Timeout: 45% Packet Drop on location-service (${activeMapFault.remaining || 8.2}s heal)`}
             </span>
           </div>
         )}

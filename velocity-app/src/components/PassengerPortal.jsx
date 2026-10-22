@@ -129,6 +129,50 @@ export const PassengerPortal = ({
 
   // Payment Method
   const [paymentMethod, setPaymentMethod] = useState('UPI');
+  const [activeChaosInfo, setActiveChaosInfo] = useState(null);
+
+  // Synchronize active chaos faults across all tabs and components
+  useEffect(() => {
+    const syncChaos = () => {
+      try {
+        const stored = localStorage.getItem('rydex_active_chaos');
+        if (stored) {
+          const parsed = JSON.parse(stored);
+          const rem = (parsed.expires_at - Date.now()) / 1000;
+          if (rem > 0) {
+            const remExact = Math.max(0.1, Math.round(rem * 10) / 10);
+            setActiveChaosInfo({ ...parsed, remaining: remExact });
+
+            // CPU_SPIKE on pricing-service
+            if (parsed.fault_type === 'CPU_SPIKE' || parsed.service === 'pricing-service') {
+              setPricingErrorNotice(`504 Gateway Timeout: Pricing computation thread saturated (>95% CPU CFS limit). Showing baseline rates. Autonomous SRE rebalancing quota (${remExact}s remaining)...`);
+            }
+            return;
+          } else {
+            localStorage.removeItem('rydex_active_chaos');
+            window.dispatchEvent(new Event('storage'));
+          }
+        }
+      } catch (e) {}
+
+      // Healed
+      setActiveChaosInfo((prev) => {
+        if (prev) {
+          setPricingErrorNotice('');
+          setBookingError(null);
+        }
+        return null;
+      });
+    };
+
+    syncChaos();
+    const interval = setInterval(syncChaos, 150);
+    window.addEventListener('storage', syncChaos);
+    return () => {
+      clearInterval(interval);
+      window.removeEventListener('storage', syncChaos);
+    };
+  }, []);
 
   // Fetch Pricing Categories on load
   useEffect(() => {
@@ -142,7 +186,9 @@ export const PassengerPortal = ({
       if (data && data.categories) {
         setCategories(data.categories);
         setSelectedCategory((prev) => prev || data.categories[0]);
-        setPricingErrorNotice('');
+        if (!activeChaosInfo || activeChaosInfo.fault_type !== 'CPU_SPIKE') {
+          setPricingErrorNotice('');
+        }
       }
     } catch (err) {
       const errMsg = err.response?.data?.detail || err.message;
@@ -190,6 +236,31 @@ export const PassengerPortal = ({
       dropLocAddress = `Kempegowda Int'l Airport - ${airportTerminal}`;
     }
 
+    // CHECK TRAFFIC_OVERLOAD FAULT ON ride-service (:8002)
+    let chaos = activeChaosInfo;
+    if (!chaos) {
+      try {
+        const stored = localStorage.getItem('rydex_active_chaos');
+        if (stored) {
+          const parsed = JSON.parse(stored);
+          const rem = (parsed.expires_at - Date.now()) / 1000;
+          if (rem > 0) {
+            chaos = { ...parsed, remaining: Math.max(0.1, Math.round(rem * 10) / 10) };
+          }
+        }
+      } catch (e) {}
+    }
+
+    if (chaos && (chaos.fault_type === 'TRAFFIC_OVERLOAD' || chaos.service === 'ride-service')) {
+      if (rideType === 'BIKE') {
+        // Specific Failure: Booking a Bike Taxi fails with 429 Too Many Requests
+        setBookingError(`429 Too Many Requests: Ingress rate limit exceeded on Bike queue (ride-service:8002). Rate limit quota exhausted (820 queued). Autonomous SRE Horizontal Pod Autoscaling (1 -> 3 replicas) (${chaos.remaining}s remaining)... Note: Booking Auto, Cab, or Parcel succeeds immediately!`);
+        setIsBooking(false);
+        return; // STRICT RETURN: Bike Taxi blocked!
+      }
+      // Containment: Booking Auto, Cab, or Parcel succeeds! Background polling stays active.
+    }
+
     const payload = {
       rider_id: currentUser?.username || 'rider-demo',
       pickup_location: { address: pickupAddress, lat: 12.9756, lng: 77.6066 },
@@ -208,7 +279,7 @@ export const PassengerPortal = ({
       const status = err.response?.status;
       const errMsg = err.response?.data?.detail || err.message || 'Server connection timeout';
 
-      if (status === 429 || errMsg.includes('429') || errMsg.includes('Traffic') || errMsg.includes('Rate Limit') || faultActive) {
+      if (status === 429 || errMsg.includes('429') || errMsg.includes('Traffic') || errMsg.includes('Rate Limit')) {
         setBookingError(errMsg);
       } else {
         const demoRide = {
